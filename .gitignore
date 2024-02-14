@@ -1,3 +1,8 @@
+# Minishell
+minishell
+.build/
+.trace/
+
 # Prerequisites
 *.d
 
