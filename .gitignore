@@ -1,4 +1,5 @@
 # Minishell
+.vscode
 minishell
 .build/
 .trace
@@ -52,7 +53,7 @@ minishell
 *.mod*
 *.cmd
 .tmp_versions/
-modules.order
+modules.orderSi je 
 Module.symvers
 Mkfile.old
 dkms.conf
