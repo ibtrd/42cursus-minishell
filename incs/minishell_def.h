@@ -1,0 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell_def.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
+/*   Updated: 2024/02/19 00:46:26 by ibertran         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_DEF_H
+# define MINISHELL_DEF_H
+
+//STATUS
+# define SUCCESS 0
+# define FAILURE -1
+
+//BUILTIN
+# define __ECHO "echo"
+# define __CD "cd"
+# define __PWD "pwd"
+# define __EXPORT "export"
+# define __UNSET "unset"
+# define __ENV "env"
+# define __EXIT "exit"
+
+//OPERATORS
+# define __AND "&&"
+# define __OR "||"
+# define __PIPE "|"
+# define __REDIR_INPUT "<"
+# define __REDIR_OUTPUT ">"
+# define __REDIR_HEREDOC "<<"
+# define __REDIR_APPEND ">>"
+
+//PARSING CHARSETS
+# define __DEFAULT_IFS " \t\n"
+# define __OPERATORS "&|<>"
+
+enum e_parsing
+{
+	DEFAULT,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE
+};
+
+#endif

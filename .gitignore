@@ -1,6 +1,7 @@
 # Minishell
 .vscode
 minishell
+minishell_test
 .build/
 .trace
 *.log
