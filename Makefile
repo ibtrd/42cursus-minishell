@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/15 01:03:29 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/02/19 17:44:57 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,12 @@ BUILD_DIR := .build/
 
 SRCS_DIR = srcs/
 SRC = \
-	main
+	main \
+	ast_test1 \
+	ast_utils \
+	ast_print \
+	dup_cmdline \
+	escape_utils \
 
 SRCS = $(addsuffix .c, $(SRC))
 
@@ -30,13 +35,13 @@ DEPS = $(patsubst %.o,%.d,$(OBJS))
 # *** LIBRARIES && INCLUDES  ************************************************* #
 
 LIBS_PATH = \
-	# libft/libft.a \
+	libft/libft.a \
 		
 LIBS = \
 	$(patsubst lib%.a,%,$(notdir $(LIBS_PATH))) \
+	readline
 
 INCS_DIR = incs/
-
 INCS = \
 	$(INCS_DIR) \
 	$(dir $(LIBS_PATH))$(INCS_DIR) \
@@ -46,7 +51,7 @@ INCS = \
 CFLAGS		=	-Wall -Wextra -Werror $(OFLAGS)
 OFLAGS 		=	-O3
 
-CPPFLAGS 	= 	$(addprefix -I, $(INCLUDES)) \
+CPPFLAGS 	= 	$(addprefix -I, $(INCS)) \
 				$(addprefix -D, $(DEFINES)) \
 				-MMD -MP \
 
@@ -72,6 +77,13 @@ else ifeq ($(MODE),fsanitize)
 CFLAGS := $(filter-out $(OFLAGS),$(CFLAGS)) -g3 -fsanitize=address
 else ifneq ($(MODE),)
 ERROR = MODE
+endif
+
+ifdef TEST
+BUILD_DIR := $(BUILD_DIR)test/
+NAME = minishell_test
+CFLAGS := $(filter-out $(OFLAGS),$(CFLAGS)) -g3
+SRC := $(filter-out main, $(SRC)) tests/main_test
 endif
 
 ifneq ($(LAST_MODE),$(MODE))
@@ -112,8 +124,7 @@ clean :
 .PHONY : fclean
 fclean :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
-	rm -rf $(BUILD_DIR) $(LAST_MODE_FILE)
-	$(RM) $(NAME) $(NAME_BONUS) $(TRACE)
+	rm -rf $(BUILD_DIR) $(LAST_MODE_FILE) $(NAME)
 	echo "$(YELLOW) $(NAME) files removed! $(RESET)"
 
 .PHONY : re
@@ -127,15 +138,11 @@ debug :
 .PHONY : fsanitize
 fsanitize :
 	$(MAKE) MODE=fsanitize
-	
-# .PHONY : %debug
-# %debug :
-# 	$(MAKE) $(patsubst %debug,%,$@) DEBUG=1
 
 .PHONY : norminette
 norminette :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
-	norminette $(HEADERS) $(SRCS_DIR) > norminette.log || true
+	norminette $(INCS_DIR) $(SRCS_DIR) > norminette.log || true
 	if [ $$(< norminette.log grep Error | wc -l) -eq 0 ]; \
 		then echo "$(NAME): \e[32;49;1mOK!\e[0m"; \
 		else echo "$(NAME): \e[31;49;1mKO!\e[0m" \
@@ -146,7 +153,20 @@ norminette :
 print% :
 	@echo $(patsubst print%,%,$@)=
 	@echo $($(patsubst print%,%,$@))
-	
+
+.PHONY : run
+run :	$(NAME)
+	./$(NAME)
+
+.PHONY : valgrind
+valgrind : debug
+	valgrind ./$(NAME)
+
+.PHONY : test
+test :
+	@$(MAKE) TEST=1 MODE=debug
+	@valgrind ./$(NAME)_test
+
 # *** SPECIAL TARGETS ******************************************************** #
 
 .DEFAULT_GOAL := all
@@ -156,6 +176,7 @@ print% :
 .PHONY : FORCE
 FORCE :
 
+.PHONY : ERROR_CHECK
 ERROR_CHECK :
 ifeq ($(ERROR),MODE)
 	$(error Invalid mode: $(MODE))

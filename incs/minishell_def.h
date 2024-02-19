@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/19 00:46:26 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/19 18:53:04 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,5 @@
 //PARSING CHARSETS
 # define __DEFAULT_IFS " \t\n"
 # define __OPERATORS "&|<>"
-
-enum e_parsing
-{
-	DEFAULT,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE
-};
 
 #endif

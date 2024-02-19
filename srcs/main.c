@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_parsing.h                                :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/19 18:56:27 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
+/*   Updated: 2024/02/18 23:03:14 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_PARSING_H
-# define MINISHELL_PARSING_H
+#include "minishell_ast.h"
 
-# include <stdbool.h>
+#include "testing.h" //REMOVE
 
-typedef struct s_escape
+t_astnode	*ast_test1(void);
+
+int	main(void)
 {
-	bool	status;
-	bool	single_quote;
-	bool	double_quote;
-}	t_escape;
+	t_astnode	*root;
+	char		*test;
 
-int		dup_cmdline(char *cmdline, char **dup);
-void	init_escape(t_escape *escape);
-
-#endif
+	dup_cmdline("echo -m|rev | int tab&&true", &test);
+	printf("TEST dup_cmdline=%s\n", test);
+	free(test);
+	root = ast_test1();
+	print_ast(root);
+	free_ast(root);
+	return (0);
+}

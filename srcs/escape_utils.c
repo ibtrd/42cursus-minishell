@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_parsing.h                                :+:      :+:    :+:   */
+/*   escape_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/19 18:56:27 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/02/19 17:43:48 by ibertran          #+#    #+#             */
+/*   Updated: 2024/02/19 17:45:25 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_PARSING_H
-# define MINISHELL_PARSING_H
+#include "minishell_parsing.h"
 
-# include <stdbool.h>
-
-typedef struct s_escape
+void	init_escape(t_escape *escape)
 {
-	bool	status;
-	bool	single_quote;
-	bool	double_quote;
-}	t_escape;
-
-int		dup_cmdline(char *cmdline, char **dup);
-void	init_escape(t_escape *escape);
-
-#endif
+	escape->status = false;
+	escape->single_quote = false;
+	escape->double_quote = false;
+}
