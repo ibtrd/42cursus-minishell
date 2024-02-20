@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/19 18:56:27 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/19 19:39:19 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 
 # include <stdbool.h>
 
+enum e_quote
+{
+	_NONE,
+	_SINGLE,
+	_DOUBLE
+};
+
 typedef struct s_escape
 {
-	bool	status;
-	bool	single_quote;
-	bool	double_quote;
+	enum e_quote	mode;
+	bool			single_quote;
+	bool			double_quote;
 }	t_escape;
 
 int		dup_cmdline(char *cmdline, char **dup);

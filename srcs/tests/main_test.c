@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 23:44:37 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/19 17:41:54 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/20 13:20:27 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	main(void)
 	test_dup_cmdline("<<\"EOF|\" cat|head>>output |\"\"");
 	test_dup_cmdline("<<'\"EOF|\"' cat|head>>output |\"\"");
 	test_dup_cmdline("<<'EOF|' cat|head>>output |\"\"");
+	test_dup_cmdline("Make && (./push_swap 5 4 8 7 | ./checker 5 4 8 7 || true)");
+	test_dup_cmdline("<><>cat || &|head | ||| ls \"|>\" ");
 	return (0);
 }
 
