@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishelldef.h                                     :+:      :+:    :+:   */
+/*   escape_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/15 17:46:16 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/02/19 17:43:48 by ibertran          #+#    #+#             */
+/*   Updated: 2024/02/19 19:39:32 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELLDEF_H
-# define MINISHELLDEF_H
+#include "minishell_parsing.h"
 
-# define _ECHO "echo"
-# define _CD "cd"
-# define _PWD "pwd"
-# define _EXPORT "export"
-# define _UNSET "unset"
-# define _ENV "env"
-# define _EXIT "exit"
-
-#endif
+void	init_escape(t_escape *escape)
+{
+	escape->mode = _NONE;
+	escape->single_quote = false;
+	escape->double_quote = false;
+}
