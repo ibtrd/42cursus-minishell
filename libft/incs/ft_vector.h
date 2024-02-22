@@ -16,7 +16,7 @@
 # include <stddef.h>
 # include <stdbool.h>
 
-# define VECTOR_INIT_CAPACITY 8
+# define VECTOR_INIT_CAPACITY 16
 # define UNDEFINED -1
 # define FAILURE -1
 # define SUCCESS 0
@@ -29,10 +29,13 @@ typedef struct s_vector
 	size_t			total;
 }	t_vector;
 
+int		ft_vector_add_ptr(t_vector *v, void *item);
 int		ft_vector_add(t_vector *v, void *item);
 int		ft_vector_delete(t_vector *v, size_t index);
 int		ft_vector_free(t_vector *v);
 int		ft_vector_init(t_vector *v, size_t item_size);
+int		ft_vector_insert_ptr(t_vector *v, void *item, size_t i);
+int		ft_vector_insert(t_vector *v, void *item, size_t i);
 int		ft_vector_join(t_vector *v, void *items, size_t n);
 int		ft_vector_resize(t_vector *v, size_t capacity);
 int		ft_vector_set(t_vector *v, size_t index, void *item);

@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_vector_set_ptr.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 15:22:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/22 15:59:31 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/01/14 23:55:07 by ibertran          #+#    #+#             */
+/*   Updated: 2024/02/22 18:23:03 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_vector.h"
+#include "ft_mem.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int	ft_vector_set_ptr(t_vector *v, size_t index, void *item)
 {
-	if (dest < src)
-		return (ft_memcpy(dest, src, n));
-	while (n > 0)
+	int	status;
+
+	if (!v)
+		return (FAILURE);
+	status = UNDEFINED;
+	if (index < v->total)
 	{
-		((char *)dest)[n - 1] = ((char *)src)[n - 1];
-		n--;
+		*((char **)v->ptr + index) = item;
+		status = SUCCESS;
 	}
-	return (dest);
+	return (status);
 }
