@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/19 19:39:19 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/20 18:00:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ typedef struct s_escape
 
 int		dup_cmdline(char *cmdline, char **dup);
 void	init_escape(t_escape *escape);
+char	*tokenizer(char *cmdline);
 
 #endif

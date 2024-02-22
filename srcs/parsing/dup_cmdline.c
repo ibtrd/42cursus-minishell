@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:24:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/20 13:44:33 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/20 19:35:46 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ static int	check_operators(char *ptr)
 	const char	c1 = *ptr;
 	const char	c2 = *(ptr + 1);
 
+	if (ft_ischarset(c1, __PARENTHESIS) && ft_ischarset(c2, __METACHARACTER))
+		return (1);
+	if (ft_ischarset(c1, __METACHARACTER) && ft_ischarset(c2, __PARENTHESIS))
+		return (1);
 	if (ft_ischarset(c1, __METACHARACTER) && ft_ischarset(c2, __METACHARACTER))
 		return (0);
 	if (!ft_ischarset(c1, __DEFAULT_IFS) && ft_ischarset(c2, __METACHARACTER))

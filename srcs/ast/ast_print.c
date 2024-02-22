@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:37:35 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/17 23:16:16 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/21 14:35:24 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 
 void	print_ast(t_astnode *root)
 {
-	int	i = 0;
-
 	if (!root)
 		return ;
 	print_ast(root->left);
@@ -35,11 +33,9 @@ void	print_ast(t_astnode *root)
 		printf("<<\n");
 	if (root->type == _APPEND)
 		printf(">>\n");
-	if (root->type == _COMMAND)
+	if (root->type == _CMD)
 	{
-		while (root->argv[i])
-			printf("%s ", root->argv[i++]);
-		printf("\n");
+		printf("%s\n", (char *)root->args->ptr);
 	}
 	print_ast(root->right);
 }
