@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:26:33 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/22 14:30:25 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/22 14:53:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "libft.h"
 
 static int	tokenizer_init(char **str, char **last);
-static int	set_delimiters(char c, char **delimiters);
+static int	tokenizer_set_delimiters(char c, char **delimiters);
 
 char	*tokenizer(char *cmdline)
 {
@@ -28,17 +28,14 @@ char	*tokenizer(char *cmdline)
 	if (tokenizer_init(&cmdline, &last) == 1)
 		return (NULL);
 	token = cmdline;
-	i = set_delimiters(*cmdline, &delimiters);
+	i = tokenizer_set_delimiters(*cmdline, &delimiters);
 	while (cmdline[i] && !ft_ischarset(cmdline[i], delimiters))
 		i++;
 	delimiters = __DEFAULT_IFS;
 	while (cmdline[i] && !ft_ischarset(cmdline[i], delimiters))
 		i++;
 	if (!cmdline[i])
-	{
-		cmdline = NULL;
 		last = NULL;
-	}
 	else
 	{
 		cmdline[i] = '\0';
@@ -69,7 +66,7 @@ static int	tokenizer_init(char **cmd_line, char **last)
 	return (0);
 }
 
-static int	set_delimiters(char c, char **delimiters)
+static int	tokenizer_set_delimiters(char c, char **delimiters)
 {
 	if (c == '\'')
 	{
