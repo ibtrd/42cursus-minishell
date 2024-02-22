@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/19 20:58:34 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/20 19:29:28 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@
 //PARSING CHARSETS
 # define __DEFAULT_IFS " \t\n"
 # define __METACHARACTER "&|<>()"
+# define __PARENTHESIS "()"
 
 #endif

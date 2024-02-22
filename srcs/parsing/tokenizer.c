@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:26:33 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/20 17:29:55 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/22 13:22:07 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,23 @@ char	*tokenizer(char *cmdline)
 		last = NULL;
 		return (NULL);
 	}
-	else if (cmdline[i] == '\'')
+	if (cmdline[i] == '\'')
 	{
 		delimiters = "\'";
+		token = cmdline + i;
 		i++;
 	}
 	else if (cmdline[i] == '\"')
 	{
 		delimiters = "\"";
+		token = cmdline + i;
 		i++;
 	}
 	else
+	{
 		delimiters = __DEFAULT_IFS;
-	token = cmdline;
+		token = cmdline + i;
+	}
 	while (cmdline[i] && !ft_ischarset(cmdline[i], delimiters))
 		i++;
 	delimiters = __DEFAULT_IFS;
