@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_vector_add_ptr.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 15:22:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/22 15:59:31 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/01/14 23:26:30 by ibertran          #+#    #+#             */
+/*   Updated: 2024/02/22 18:23:42 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_vector.h"
+#include "ft_mem.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int	ft_vector_add_ptr(t_vector *v, void *item)
 {
-	if (dest < src)
-		return (ft_memcpy(dest, src, n));
-	while (n > 0)
+	int	status;
+
+	if (!v)
+		return (FAILURE);
+	if (v->total == v->capacity - 1)
 	{
-		((char *)dest)[n - 1] = ((char *)src)[n - 1];
-		n--;
+		status = ft_vector_resize(v, v->capacity << 1);
+		if (status != FAILURE)
+		{
+			*((char **)v->ptr + v->total) = item;
+			v->total++;
+		}
 	}
-	return (dest);
+	else
+	{
+		*((char **)v->ptr + v->total) = item;
+		v->total++;
+		status = SUCCESS;
+	}
+	return (status);
 }

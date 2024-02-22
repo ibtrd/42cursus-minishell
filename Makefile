@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/19 17:44:57 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/02/22 14:02:21 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,29 @@ BUILD_DIR := .build/
 SRCS_DIR = srcs/
 SRC = \
 	main \
+	$(addprefix $(PARSING_DIR),$(PARSING_SRC)) \
+	$(addprefix $(AST_DIR),$(AST_SRC)) \
+	$(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC)) \
+	$(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC)) \
+
+PARSING_DIR = parsing/
+PARSING_SRC = \
+	dup_cmdline \
+	escape_utils \
+	tokenizer \
+
+AST_DIR = ast/
+AST_SRC = \
 	ast_test1 \
 	ast_utils \
 	ast_print \
-	dup_cmdline \
-	escape_utils \
+	ast_addnode \
+
+EXECUTION_DIR = exec/
+EXECUTION_SRC = \
+
+BUILTIN_DIR = builtins/
+BUILTIN_SRC = \
 
 SRCS = $(addsuffix .c, $(SRC))
 
@@ -79,15 +97,17 @@ else ifneq ($(MODE),)
 ERROR = MODE
 endif
 
+ifneq ($(LAST_MODE),$(MODE))
+$(NAME) : FORCE
+endif
+
+# *** TESTING **************************************************************** #
+
 ifdef TEST
 BUILD_DIR := $(BUILD_DIR)test/
 NAME = minishell_test
 CFLAGS := $(filter-out $(OFLAGS),$(CFLAGS)) -g3
-SRC := $(filter-out main, $(SRC)) tests/main_test
-endif
-
-ifneq ($(LAST_MODE),$(MODE))
-$(NAME) : FORCE
+SRC := $(filter-out main, $(SRC)) tests/main_$(TEST)
 endif
 
 # *** TARGETS **************************************************************** #
@@ -162,9 +182,17 @@ run :	$(NAME)
 valgrind : debug
 	valgrind ./$(NAME)
 
-.PHONY : test
-test :
-	@$(MAKE) TEST=1 MODE=debug
+# *** TESTING **************************************************************** #
+
+AVAILABLE_TESTS = \
+	dup_cmdline \
+	vector_insert \
+	tokenizer \
+
+
+.PHONY : $(AVAILABLE_TESTS)
+$(AVAILABLE_TESTS) :
+	$(MAKE) TEST=$@
 	@valgrind ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
