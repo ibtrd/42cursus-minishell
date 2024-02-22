@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell_executor.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/22 19:23:56 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
+/*   Updated: 2024/02/22 18:58:08 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_ast.h"
+#ifndef MINISHELL_EXECUTOR_H
+# define MINISHELL_EXECUTOR_H
 
-#include "testing.h" //REMOVE
-
-t_astnode	*ast_test1(void);
-
-int	main(void)
+typedef struct s_executor
 {
-	t_astnode	*root;
+	int	in;		// stdin dup(0)
+	int	out;	// stdout dup(1)
+	int	pipe[2];	// peut etre pas necessaire
+	int	background;	// 1 if command is not followed by &&
+	int	last_pid;
+	int	last_status;
+	t_astnode	*node;
+}	t_executor;
 
-	root = ast_test1();
-	print_ast(root);
-	executor_test1(root);
-	free_ast(root);
-	return (0);
-}
+#endif

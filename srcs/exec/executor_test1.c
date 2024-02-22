@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   executor_test1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/22 19:23:56 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
+/*   Updated: 2024/02/22 18:48:47 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_ast.h"
+#include "minishell_executor.h"
+#include "minishell_def.h"
 
-#include "testing.h" //REMOVE
-
-t_astnode	*ast_test1(void);
-
-int	main(void)
-{
-	t_astnode	*root;
-
-	root = ast_test1();
-	print_ast(root);
-	executor_test1(root);
-	free_ast(root);
-	return (0);
-}
