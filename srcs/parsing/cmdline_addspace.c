@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dup_cmdline.c                                      :+:      :+:    :+:   */
+/*   cmdline_addspace.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:24:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/20 19:35:46 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/23 00:32:31 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ static void	set_escape_mode(t_escape *escape, char c);
 
 /*
 	DESCRIPTION
-	The dup_cmdline() add a space character before and after
+	The cmdline_addspace() function add a space character before and after
 	each operator or parenthesis if they are are not already prefixed
 	or suffixed by a whitespace character. The resulting string is
 	attached to the string pointed by ptr. Memory for the new string
 	is obtained with malloc(), and can be freed with free().
 	
 	RETURN VALUE
-	The dup_cmdline() function return 0.
-	On error, dup_cmdline() return -1 and the string pointed by ptr
+	The cmdline_addspace() function return 0.
+	On error, cmdline_addspace() return -1 and the string pointed by ptr
 	is set to NULL.
 */
 
-int	dup_cmdline(char *cmdline, char **ptr)
+int	cmdline_addspace(char *cmdline, char **ptr)
 {
 	int			status;
 	t_vector	vector;
@@ -79,7 +79,7 @@ static int	check_operators(char *ptr)
 
 static void	set_escape_mode(t_escape *escape, char c)
 {
-	if (c == '\"' && !escape->double_quote)
+	if (c == '\"' && !escape->single_quote)
 	{
 		if (escape->single_quote)
 			escape->single_quote = false;

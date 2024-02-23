@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:26:33 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/22 14:53:34 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/23 00:03:19 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,19 @@
 static int	tokenizer_init(char **str, char **last);
 static int	tokenizer_set_delimiters(char c, char **delimiters);
 
-char	*tokenizer(char *cmdline)
+/*
+	DESCRIPTION
+	The cmdline_tokenizer() function breaks a string into a sequence of zero
+	or more nonempty tokens. On the first call to cmdline_tokenizer(),
+	the string to be parsed should be specified in str. In each subsequent
+	call that should parse the same string, str must be NULL.
+	
+	RETURN VALUE
+	The cmdline_tokenizer() function return a pointer to the next token,
+	or NULL if there are no more tokens.
+*/
+
+char	*cmdline_tokenizer(char *cmdline)
 {
 	static char	*last = NULL;
 	char		*delimiters;

@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/21 17:59:00 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/02/23 01:22:21 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,9 @@ SRC = \
 
 PARSING_DIR = parsing/
 PARSING_SRC = \
-	dup_cmdline \
+	cmdline_addspace \
+	cmdline_tokenizer \
 	escape_utils \
-	tokenizer \
 
 AST_DIR = ast/
 AST_SRC = \
@@ -185,9 +185,7 @@ valgrind : debug
 # *** TESTING **************************************************************** #
 
 AVAILABLE_TESTS = \
-	dup_cmdline \
-	tokenizer \
-
+	cmdline_addspace \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
