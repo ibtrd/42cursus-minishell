@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/23 01:22:21 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/02/23 20:12:19 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -186,6 +186,7 @@ valgrind : debug
 
 AVAILABLE_TESTS = \
 	cmdline_addspace \
+	vector_insert \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:57:11 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/21 14:32:02 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/22 13:31:48 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

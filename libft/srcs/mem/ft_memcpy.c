@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:05:17 by ibertran          #+#    #+#             */
-/*   Updated: 2023/11/09 11:58:02 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/22 18:18:39 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
