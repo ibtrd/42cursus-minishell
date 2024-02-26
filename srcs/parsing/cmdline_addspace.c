@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:24:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/23 00:32:31 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/26 21:47:01 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include "libft.h"
 
 static int	check_operators(char *ptr);
-static void	set_escape_mode(t_escape *escape, char c);
 
 /*
 	DESCRIPTION
@@ -77,26 +76,3 @@ static int	check_operators(char *ptr)
 	return (0);
 }
 
-static void	set_escape_mode(t_escape *escape, char c)
-{
-	if (c == '\"' && !escape->single_quote)
-	{
-		if (escape->single_quote)
-			escape->single_quote = false;
-		else
-			escape->single_quote = true;
-	}
-	if (c == '\'')
-	{
-		if (escape->double_quote)
-			escape->double_quote = false;
-		else
-			escape->double_quote = true;
-	}
-	if (escape->double_quote)
-		escape->mode = _DOUBLE;
-	else if (escape->single_quote)
-		escape->mode = _SINGLE;
-	else
-		escape->mode = _NONE;
-}
