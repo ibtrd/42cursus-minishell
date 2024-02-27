@@ -5,6 +5,7 @@ minishell_test
 .build/
 .trace
 *.log
+TEST_DIR/*
 
 # Prerequisites
 *.d
