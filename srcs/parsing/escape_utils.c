@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:43:48 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/26 21:46:47 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/27 18:34:09 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	set_escape_mode(t_escape *escape, char c)
 		else
 			escape->double_quote = true;
 	}
-	if (c == '\'')
+	if (c == '\'' && !escape->double_quote)
 	{
 		if (escape->single_quote)
 			escape->single_quote = false;

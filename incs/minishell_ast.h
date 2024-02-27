@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:10:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/22 13:57:50 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/26 21:38:33 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef enum e_nodetype
 
 typedef struct s_astnode
 {
-	enum e_nodetype		type;
+	t_nodetype			type;
 	t_vector			*args;
 	struct s_astnode	*left;
 	struct s_astnode	*right;
@@ -52,4 +52,4 @@ t_astnode	*ast_add_pipe(t_astnode *root, t_astnode *new);
 t_astnode	*ast_add_redirection(t_astnode *root, t_astnode *new);
 t_astnode	*ast_add_command(t_astnode *root, t_astnode *new);
 
-#endif
+#endif //MINISHELL_AST_H
