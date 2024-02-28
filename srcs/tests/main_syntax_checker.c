@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:32:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/27 18:55:31 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 02:01:43 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(void)
 	test_syntax_checker("make && 'make run'", 1);
 	test_syntax_checker("make && ''make run'", 0);
 	test_syntax_checker("mak\"e && 'make run", 0);
+	test_syntax_checker("mak'e && \"make run", 0);
 	test_syntax_checker("m\"ak'\"e' ./minishell", 0);
 	test_syntax_checker("m\"ak'\"e\" && ./minishell", 0);
 	test_syntax_checker("m'ak\"e' && ./minishell", 1);

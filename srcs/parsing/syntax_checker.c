@@ -6,47 +6,54 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:41:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/27 18:33:30 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 01:57:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <unistd.h>
 
+#include "minishell_def.h"
 #include "minishell_parsing.h"
 
 static int	check_quotes(char *cmdline);
+static int	check_parentheses(char *cmdline);
 
 int	syntax_checker(char *cmdline)
 {
-	int	quote;
+	int	status;
 
-	quote = check_quotes(cmdline);
-	if (quote == 1)
+	status = check_quotes(cmdline);
+	if (status == __UNCLOSED_SINGLE_QUOTE)
 	{
-		write(2, "Syntax error: unclosed ' quote\n", 31);
-		return (-1);
+		write(2, "Syntax error: unclosed `'' quote\n", 33);
+		return (FAILURE);
 	}
-	if (quote == 2)
+	else if (status == __UNCLOSED_DOUBLE_QUOTE)
 	{
-		write(2, "Syntax error: unclosed \" quote\n", 31);
-		return (-1);
+		write(2, "Syntax error: unclosed `\"' quote\n", 33);
+		return (FAILURE);
 	}
-	// if (check_parenthesis(cmdline))
-	// {
-	// 	write(2, "Syntax error: Unclosed quote\n", 29);
-	// 	return (-1);		
-	// }
+	status = check_parentheses(cmdline);
+	if (status == __UNCLOSED_PARENTHESIS)
+	{
+		write(2, "Syntax error: unclosed `(' parenthesis\n", 39);
+		return (FAILURE);
+	}
+	else if (status == __UNOPENED_PARENTHESIS)
+	{
+		write(2, "Syntax error near unexpected token `)'\n", 39);
+		return (FAILURE);
+	}
 	return (0);
-
 }
 
 static int	check_quotes(char *cmdline)
 {
 	size_t		i;
 	t_escape	escape;
-	size_t		single_quotes;
-	size_t		double_quotes;
+	int			single_quotes;
+	int			double_quotes;
 
 	init_escape(&escape);
 	single_quotes = 0;
@@ -62,8 +69,30 @@ static int	check_quotes(char *cmdline)
 		i++;
 	}
 	if (single_quotes % 2)
-		return (1);
+		return (__UNCLOSED_SINGLE_QUOTE);
 	if (double_quotes % 2)
-		return (2);
+		return (__UNCLOSED_DOUBLE_QUOTE);
 	return (0);
+}
+
+static int	check_parentheses(char *cmdline)
+{
+	size_t	i;
+	int		parenthesis;
+
+	parenthesis = 0;
+	i = 0;
+	while (cmdline[i])
+	{
+		if (cmdline[i] == '(')
+			parenthesis++;
+		else if (cmdline[i] == ')')
+			parenthesis--;
+		if (parenthesis < 0)
+			return (__UNOPENED_PARENTHESIS);
+		i++;
+	}
+	if (parenthesis)
+		return (__UNCLOSED_PARENTHESIS);
+	return (SUCCESS);
 }

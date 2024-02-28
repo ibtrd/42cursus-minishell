@@ -6,34 +6,40 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:06:57 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/19 00:53:14 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/27 16:23:26 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_def.h"
-#include "minishell_ast.h"
+#include "minishell_parsing.h"
+#include "minishell_lexer.h"
 #include "libft.h"
 
-char	**minishell_lexer(char *str)
-{
-	t_vector	vector;
-	char		*tok;
+static int			compare_operators(char *tok);
 
-	if (FAILURE == ft_vector_init(&vector, sizeof(char *)))
-		return (NULL);
-	tok = ft_strtok(str, __DEFAULT_IFS);
-	while (tok)
+int	minishell_lexer(char *cmdline, t_lex_token **ptr)
+{
+	int			status;
+	t_vector	vector;
+	t_lex_token	tok;
+
+	status = ft_vector_init(&vector, sizeof(t_lex_token));
+	tok.value = cmdline_tokenizer(cmdline);
+	while (status == SUCCESS && tok.value)
 	{
-		if (FAILURE == ft_vector_add(&vector, tok))
-		{
-			ft_vector_free(&vector);
-			return (NULL);
-		}
-		tok = ft_strtok(NULL, __DEFAULT_IFS);
+		tok.type = compare_operators(tok.value);
+		status = ft_vector_add(&vector, &tok);
+		tok.value = cmdline_tokenizer(NULL);
 	}
+	if (status == SUCCESS)
+		ft_vector_trim(&vector, vector.total);
+	else
+		ft_vector_free(&vector);
+	*ptr = vector.ptr;
+	return (status);
 }
 
-int	is_operator(char *tok)
+static int	compare_operators(char *tok)
 {
 	int			i;
 	const char	*operator[] = {
@@ -51,7 +57,7 @@ int	is_operator(char *tok)
 	while (operator[i])
 	{
 		if (!ft_strcmp(tok, operator[i++]))
-			return (1);
+			return (i);
 	}
-	return (0);
+	return (_CMD_TOK);
 }

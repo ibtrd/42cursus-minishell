@@ -6,18 +6,18 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:43:48 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/27 18:34:09 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/27 22:05:25 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_parsing.h"
 
-void	init_escape(t_escape *escape)
-{
-	escape->mode = _NONE;
-	escape->single_quote = false;
-	escape->double_quote = false;
-}
+/*
+	DESCRIPTION
+	The set_escape_mode() function defines wether a character should be
+	escaped while parsing a command line.
+	 
+*/
 
 void	set_escape_mode(t_escape *escape, char c)
 {
@@ -41,4 +41,11 @@ void	set_escape_mode(t_escape *escape, char c)
 		escape->mode = _SINGLE;
 	else
 		escape->mode = _NONE;
+}
+
+void	init_escape(t_escape *escape)
+{
+	escape->mode = _NONE;
+	escape->single_quote = false;
+	escape->double_quote = false;
 }

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/22 13:44:45 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 01:05:49 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 //STATUS
 # define SUCCESS 0
 # define FAILURE -1
+
+# define __UNCLOSED_SINGLE_QUOTE -1
+# define __UNCLOSED_DOUBLE_QUOTE -2
+
+# define __UNCLOSED_PARENTHESIS -1
+# define __UNOPENED_PARENTHESIS -2
 
 //BUILTIN
 # define __ECHO "echo"
