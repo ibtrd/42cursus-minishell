@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:32:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 02:01:43 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 19:33:01 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ int	main(void)
 	test_syntax_checker("make \" ' \"", 1);
 	test_syntax_checker("\"'$ARG'\"", 1);
 	test_syntax_checker("'\"$ARG\"'", 1);
+
+	test_syntax_checker("(false || true) || (true || true)", 1);
+	test_syntax_checker("(false |(| true) || (true || true)", 0);
+	test_syntax_checker("(false || 'true)' || (true || true)", 0);
+	test_syntax_checker("(false || '(true)') || (true || true)", 1);
+	test_syntax_checker("(false || '(true)') || (\")\"true || true)", 1);
+	test_syntax_checker("(false || '(true)') || (\")\"true || true))", 0);
 }
 
 void	test_syntax_checker(char *str, bool expected)

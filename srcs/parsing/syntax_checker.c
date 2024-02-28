@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:41:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 01:57:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 19:33:23 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,19 @@ static int	check_quotes(char *cmdline)
 
 static int	check_parentheses(char *cmdline)
 {
-	size_t	i;
-	int		parenthesis;
+	size_t		i;
+	t_escape	escape;
+	int			parenthesis;
 
+	init_escape(&escape);
 	parenthesis = 0;
 	i = 0;
 	while (cmdline[i])
 	{
-		if (cmdline[i] == '(')
+		set_escape_mode(&escape, cmdline[i]);
+		if (!escape.mode && cmdline[i] == '(')
 			parenthesis++;
-		else if (cmdline[i] == ')')
+		else if (!escape.mode && cmdline[i] == ')')
 			parenthesis--;
 		if (parenthesis < 0)
 			return (__UNOPENED_PARENTHESIS);
