@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_def.h                                    :+:      :+:    :+:   */
+/*   minishelldef.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/20 19:29:28 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:44:38 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_DEF_H
-# define MINISHELL_DEF_H
+#ifndef MINISHELLDEF_H
+# define MINISHELLDEF_H
 
 //STATUS
 # define SUCCESS 0
 # define FAILURE -1
+
+# define __UNCLOSED_SINGLE_QUOTE -1
+# define __UNCLOSED_DOUBLE_QUOTE -2
+
+# define __UNCLOSED_PARENTHESIS -1
+# define __UNOPENED_PARENTHESIS -2
 
 //BUILTIN
 # define __ECHO "echo"
@@ -42,5 +48,7 @@
 # define __DEFAULT_IFS " \t\n"
 # define __METACHARACTER "&|<>()"
 # define __PARENTHESIS "()"
+# define __SINGLE_QUOTE "\'"
+# define __DOUBLE_QUOTE "\""
 
-#endif
+#endif //MINISHELLDEF_H

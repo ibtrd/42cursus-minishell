@@ -6,11 +6,11 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:40:02 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/21 14:43:13 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:47:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_ast.h"
+#include "ast.h"
 
 #include <stdio.h> //REMOVE
 

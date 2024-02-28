@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/22 14:02:21 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/02/27 16:45:50 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,11 @@ SRC = \
 
 PARSING_DIR = parsing/
 PARSING_SRC = \
-	dup_cmdline \
+	cmdline_addspace \
+	cmdline_tokenizer \
 	escape_utils \
-	tokenizer \
+	lexer \
+	syntax_checker \
 
 AST_DIR = ast/
 AST_SRC = \
@@ -185,10 +187,9 @@ valgrind : debug
 # *** TESTING **************************************************************** #
 
 AVAILABLE_TESTS = \
-	dup_cmdline \
+	cmdline_addspace \
 	vector_insert \
-	tokenizer \
-
+	syntax_checker \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :

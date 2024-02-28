@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_parsing.h                                :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/20 18:00:02 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/02/23 01:52:12 by ibertran          #+#    #+#             */
+/*   Updated: 2024/02/28 20:45:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_PARSING_H
-# define MINISHELL_PARSING_H
+#ifndef LEXER_H
+# define LEXER_H
 
-# include <stdbool.h>
-
-enum e_quote
+enum e_lex_type
 {
-	_NONE,
-	_SINGLE,
-	_DOUBLE
+	_AND_TOK,
+	_OR_TOK,
+	_PIPE_TOK,
+	_REDIR_INPUT_TOK,
+	_REDIR_OUTPUT_TOK,
+	_REDIR_HEREDOC_TOK,
+	_REDIR_APPEND_TOK,
+	_CMD_TOK,
+	_FILE_TOK
 };
 
-typedef struct s_escape
+typedef struct s_lex_token
 {
-	enum e_quote	mode;
-	bool			single_quote;
-	bool			double_quote;
-}	t_escape;
+	enum e_lex_type	type;
+	char			*value;
+}	t_lex_token;
 
-int		dup_cmdline(char *cmdline, char **dup);
-void	init_escape(t_escape *escape);
-char	*tokenizer(char *cmdline);
-
-#endif
+#endif //LEXER_H
