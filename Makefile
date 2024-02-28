@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/27 16:45:50 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/02/28 21:30:00 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,8 @@ EXECUTION_SRC = \
 
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
+	true \
+	false \
 
 SRCS = $(addsuffix .c, $(SRC))
 
