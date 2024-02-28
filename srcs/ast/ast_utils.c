@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:57:11 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/22 13:31:48 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:47:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stddef.h>
 
-#include "minishell_def.h"
-#include "minishell_ast.h"
+#include "minishelldef.h"
+#include "ast.h"
 #include "libft.h"
 
 int	ast_newnode(t_astnode **new, t_nodetype type, t_vector *args)

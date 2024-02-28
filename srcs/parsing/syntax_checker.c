@@ -6,15 +6,15 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:41:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 19:33:23 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:43:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <unistd.h>
 
-#include "minishell_def.h"
-#include "minishell_parsing.h"
+#include "minishelldef.h"
+#include "parsing.h"
 
 static int	check_quotes(char *cmdline);
 static int	check_parentheses(char *cmdline);
@@ -45,7 +45,7 @@ int	syntax_checker(char *cmdline)
 		write(2, "Syntax error near unexpected token `)'\n", 39);
 		return (FAILURE);
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 static int	check_quotes(char *cmdline)

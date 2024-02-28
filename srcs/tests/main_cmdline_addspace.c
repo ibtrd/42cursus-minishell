@@ -6,16 +6,16 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 23:44:37 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/23 00:35:45 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:47:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "minishell_def.h"
-#include "minishell_ast.h"
-#include "minishell_parsing.h"
+#include "minishelldef.h"
+#include "ast.h"
+#include "parsing.h"
 
 void	test_dup_cmdline(char *str);
 

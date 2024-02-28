@@ -6,16 +6,16 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:32:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 19:33:01 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:47:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "minishell_def.h"
-#include "minishell_ast.h"
-#include "minishell_parsing.h"
+#include "minishelldef.h"
+#include "ast.h"
+#include "parsing.h"
 
 void	test_syntax_checker(char *str, bool expected);
 

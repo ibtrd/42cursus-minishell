@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_def.h                                    :+:      :+:    :+:   */
+/*   minishelldef.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 01:05:49 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:44:38 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_DEF_H
-# define MINISHELL_DEF_H
+#ifndef MINISHELLDEF_H
+# define MINISHELLDEF_H
 
 //STATUS
 # define SUCCESS 0
@@ -51,4 +51,4 @@
 # define __SINGLE_QUOTE "\'"
 # define __DOUBLE_QUOTE "\""
 
-#endif
+#endif //MINISHELLDEF_H

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_lexer.h                                  :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 01:52:12 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/27 16:15:59 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:45:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_LEXER_H
-# define MINISHELL_LEXER_H
+#ifndef LEXER_H
+# define LEXER_H
 
 enum e_lex_type
 {
@@ -32,4 +32,4 @@ typedef struct s_lex_token
 	char			*value;
 }	t_lex_token;
 
-#endif //MINISHELL_LEXER_H
+#endif //LEXER_H

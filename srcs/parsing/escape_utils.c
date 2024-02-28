@@ -6,11 +6,11 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:43:48 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/27 22:05:25 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:43:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_parsing.h"
+#include "parsing.h"
 
 /*
 	DESCRIPTION

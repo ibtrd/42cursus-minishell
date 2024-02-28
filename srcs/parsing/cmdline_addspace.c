@@ -6,14 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:24:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/26 21:47:01 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:43:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-#include "minishell_parsing.h"
-#include "minishell_def.h"
+#include "parsing.h"
+#include "minishelldef.h"
 #include "libft.h"
 
 static int	check_operators(char *ptr);

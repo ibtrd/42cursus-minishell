@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	print_ast(t_astnode *root);
-t_astnode	*ast_test1(void);
-int	dup_cmdline(const char *cmdline, char **dup);
+void	print_ast(t_astnode *root); //REMOVE
+t_astnode	*ast_test1(void); //REMOVE
+int	dup_cmdline(const char *cmdline, char **dup); //REMOVE
 
 
-#endif
+#endif //TESTING_H
