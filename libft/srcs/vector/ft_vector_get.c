@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector_get.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 00:07:10 by ibertran          #+#    #+#             */
-/*   Updated: 2024/01/20 15:15:42 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2023/12/31 13:25:48 by kchillon          #+#    #+#             */
+/*   Updated: 2024/02/29 18:19:17 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vector.h"
+#include <stddef.h>
 
 void	*ft_vector_get(t_vector *v, size_t index)
 {

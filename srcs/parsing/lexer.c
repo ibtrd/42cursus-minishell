@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:06:57 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:43:29 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 19:10:17 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	minishell_lexer(char *cmdline, t_lex_token **ptr)
 	t_vector	vector;
 	t_lex_token	tok;
 
-	status = ft_vector_init(&vector, sizeof(t_lex_token));
+	status = ft_vector_init(&vector, sizeof(t_lex_token), 0);
 	tok.value = cmdline_tokenizer(cmdline);
 	while (status == SUCCESS && tok.value)
 	{
@@ -32,9 +32,9 @@ int	minishell_lexer(char *cmdline, t_lex_token **ptr)
 		tok.value = cmdline_tokenizer(NULL);
 	}
 	if (status == SUCCESS)
-		ft_vector_trim(&vector, vector.total);
+		ft_vector_trim(&vector);
 	else
-		ft_vector_free(&vector);
+		ft_vector_free(&vector, NULL);
 	*ptr = vector.ptr;
 	return (status);
 }

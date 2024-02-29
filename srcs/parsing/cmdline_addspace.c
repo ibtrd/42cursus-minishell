@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmdline_addspace.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:24:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:43:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 19:09:26 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	cmdline_addspace(char *cmdline, char **ptr)
 	t_escape	escape;
 	int			i;
 
-	status = ft_vector_init(&vector, sizeof(char));
+	status = ft_vector_init(&vector, sizeof(char), 0);
 	init_escape(&escape);
 	i = 0;
 	while (status == SUCCESS && cmdline[i])
@@ -53,7 +53,7 @@ int	cmdline_addspace(char *cmdline, char **ptr)
 	}
 	status = ft_vector_add(&vector, "\0");
 	if (status == SUCCESS)
-		status = ft_vector_trim(&vector, vector.total);
+		status = ft_vector_trim(&vector);
 	*ptr = vector.ptr;
 	return (status);
 }

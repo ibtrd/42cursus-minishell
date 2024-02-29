@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_test1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:31:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:47:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 19:11:01 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,21 @@ t_astnode	*ast_test1(void)
 	char 		str3[] =  "../push_swap/checker 1 3 2";
 
 	t_vector	*v1 = malloc(sizeof(t_vector));
-	ft_vector_init(v1, sizeof(char));
+	ft_vector_init(v1, sizeof(char), 0);
 	i = 0;
 	while (str1[i])
 		ft_vector_add(v1, str1 + i++);
 	ft_vector_add(v1, "\0");
 
 	t_vector	*v2 = malloc(sizeof(t_vector));
-	ft_vector_init(v2, sizeof(char));
+	ft_vector_init(v2, sizeof(char), 0);
 	i = 0;
 	while (str2[i])
 		ft_vector_add(v2, str2 + i++);
 	ft_vector_add(v2, "\0");
 
 	t_vector	*v3 = malloc(sizeof(t_vector));
-	ft_vector_init(v3, sizeof(char));
+	ft_vector_init(v3, sizeof(char), 0);
 	i = 0;
 	while (str3[i])
 		ft_vector_add(v3, str3 + i++);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/28 21:30:00 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/02/29 19:18:11 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -148,7 +148,7 @@ clean :
 .PHONY : fclean
 fclean :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
-	rm -rf $(BUILD_DIR) $(LAST_MODE_FILE) $(NAME)
+	rm -rf $(BUILD_DIR) $(LAST_MODE_FILE) $(NAME) $(MODE_TRACE) $(NAME)_test
 	echo "$(YELLOW) $(NAME) files removed! $(RESET)"
 
 .PHONY : re
@@ -190,7 +190,6 @@ valgrind : debug
 
 AVAILABLE_TESTS = \
 	cmdline_addspace \
-	vector_insert \
 	syntax_checker \
 
 .PHONY : $(AVAILABLE_TESTS)
