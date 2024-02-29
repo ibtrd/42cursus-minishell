@@ -6,13 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:37:35 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/21 14:35:24 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:47:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-#include "minishell_ast.h"
+#include "ast.h"
 
 void	print_ast(t_astnode *root)
 {

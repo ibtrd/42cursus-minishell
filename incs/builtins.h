@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/29 16:50:33 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/02/28 21:41:18 by ibertran          #+#    #+#             */
+/*   Updated: 2024/02/28 21:42:09 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-#include "testing.h" //REMOVE
+int	builtin_true(void);
+int	builtin_false(void);
 
-t_astnode	*ast_test1(void);
-
-int	main(void)
-{
-	t_astnode	*root;
-
-	root = ast_test1();
-	print_ast(root);
-	//executor_test1(root);
-	free_ast(root);
-	return (0);
-}
+#endif //BUILTINS_H

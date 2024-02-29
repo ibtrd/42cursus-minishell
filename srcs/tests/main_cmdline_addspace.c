@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_dup_cmdline.c                                 :+:      :+:    :+:   */
+/*   main_cmdline_addspace.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 23:44:37 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/22 13:22:19 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:47:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "minishell_def.h"
-#include "minishell_ast.h"
-#include "minishell_parsing.h"
+#include "minishelldef.h"
+#include "ast.h"
+#include "parsing.h"
 
 void	test_dup_cmdline(char *str);
 
@@ -39,6 +39,7 @@ int	main(void)
 	test_dup_cmdline("e'ch'o \"'$VAR'$VAR\" && < input1 >> out1 cat << EOF > out2 && (< Makefile cat -e | head -n 5 || << EOF tail) | rev > out3 >> out2  >> out1 ||./push_swap $ARG|./checker $ARG");
 	test_dup_cmdline("ls && (((>((true||true))) && ls");
 	test_dup_cmdline("ls      \"\"         &&                ls");
+	test_dup_cmdline("<'bib| le'.txt cat|head>test3|tail -8>test2>test");
 	return (0);
 }
 
@@ -48,13 +49,13 @@ void	test_dup_cmdline(char *str)
 	char	*token;
 
 	printf("cmdline| \e[33m%s\e[0m\n", str);
-	dup_cmdline(str, &ptr);
+	cmdline_addspace(str, &ptr);
 	printf("    dup| \e[34m%s\e[0m\n\n", ptr);
-	token = tokenizer(ptr);
+	token = cmdline_tokenizer(ptr);
 	while (token)
 	{
 		printf ("token| %s\n", token);
-		token = tokenizer(NULL);
+		token = cmdline_tokenizer(NULL);
 	}
 	printf("\n\n");
 	free(ptr);

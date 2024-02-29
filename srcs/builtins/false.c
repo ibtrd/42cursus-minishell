@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   false.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/29 16:50:33 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/02/28 21:30:23 by ibertran          #+#    #+#             */
+/*   Updated: 2024/02/28 21:37:26 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
-
-#include "testing.h" //REMOVE
-
-t_astnode	*ast_test1(void);
-
-int	main(void)
+int	builtin_false(void)
 {
-	t_astnode	*root;
-
-	root = ast_test1();
-	print_ast(root);
-	//executor_test1(root);
-	free_ast(root);
-	return (0);
+	return (1);
 }

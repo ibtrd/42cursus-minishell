@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:31:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/21 14:44:07 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/28 20:47:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "minishell_ast.h"
+#include "ast.h"
 #include "libft.h"
 
 t_astnode	*ast_test1(void)
