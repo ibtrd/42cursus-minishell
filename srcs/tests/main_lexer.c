@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 00:30:10 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/29 18:46:28 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 20:04:15 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int	main(void)
 		printf("token-%-3zu %25s %s\n", i , operator[lextok->type], lextok->value);
 		i++;
 	}
-	ft_vector_free(&lexer);
+	ft_vector_free(&lexer, NULL);
 	free(dup);
 }

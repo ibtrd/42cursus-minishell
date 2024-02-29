@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:06:57 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/29 20:02:30 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 23:17:07 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,23 @@
 
 static int			compare_operators(char *tok);
 
-int	minishell_lexer(char *cmdline, t_lex_token **ptr)
+int	build_lexer(char *cmdline, t_vector *vector)
 {
-	int			status;
-	t_vector	vector;
-	t_lex_token	tok;
+	int				status;
+	t_lexer_token	tok;
 
-	status = ft_vector_init(&vector, sizeof(t_lex_token));
+	status = ft_vector_init(vector, sizeof(t_lexer_token), 0);
 	tok.value = cmdline_tokenizer(cmdline);
 	while (status == SUCCESS && tok.value)
 	{
 		tok.type = compare_operators(tok.value);
-		status = ft_vector_add(&vector, &tok);
+		status = ft_vector_add(vector, &tok);
 		tok.value = cmdline_tokenizer(NULL);
 	}
 	if (status == SUCCESS)
-		ft_vector_trim(&vector, vector.total);
+		ft_vector_trim(vector);
 	else
-		ft_vector_free(&vector);
-	*ptr = vector.ptr;
+		ft_vector_free(vector, NULL);
 	return (status);
 }
 
@@ -56,8 +54,9 @@ static int	compare_operators(char *tok)
 	i = 0;
 	while (operator[i])
 	{
-		if (!ft_strcmp(tok, operator[i++]))
+		if (!ft_strcmp(tok, operator[i]))
 			return (i);
+		i++;
 	}
 	return (_CMD_TOK);
 }
