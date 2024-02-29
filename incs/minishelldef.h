@@ -10,21 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef MINISHELLDEF_H
-# define MINISHELLDEF_H
 #ifndef MINISHELLDEF_H
 # define MINISHELLDEF_H
 
 //STATUS
 # define SUCCESS 0
 # define FAILURE -1
-
-# define __UNCLOSED_SINGLE_QUOTE -1
-# define __UNCLOSED_DOUBLE_QUOTE -2
-
-# define __UNCLOSED_PARENTHESIS -1
-# define __UNOPENED_PARENTHESIS -2
 
 # define __UNCLOSED_SINGLE_QUOTE -1
 # define __UNCLOSED_DOUBLE_QUOTE -2
@@ -60,7 +51,6 @@
 # define __SINGLE_QUOTE "\'"
 # define __DOUBLE_QUOTE "\""
 
-#endif //MINISHELLDEF_H
 # define __SINGLE_QUOTE "\'"
 # define __DOUBLE_QUOTE "\""
 
