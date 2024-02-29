@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/29 23:09:48 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 23:32:21 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define PARSING_H
 
 # include <stdbool.h>
-# include <ft_vector.h>
+
+# include "ft_vector.h"
 
 enum e_quote
 {

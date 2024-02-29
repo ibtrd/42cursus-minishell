@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/29 20:02:12 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/01 00:01:03 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -154,13 +154,13 @@ bonus : $(NAME)
 .PHONY : clean
 clean :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
-	rm -rf $(BUILD_DIR) $(LAST_MODE_FILE)
+	rm -rf $(BUILD_DIR)
 	echo "$(YELLOW) $(NAME) building files removed! $(RESET)"
 
 .PHONY : fclean
 fclean :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
-	rm -rf $(BUILD_DIR) $(LAST_MODE_FILE) $(NAME) $(MODE_TRACE) $(NAME)_test
+	rm -rf $(BUILD_DIR) $(NAME) $(MODE_TRACE) $(NAME)_test
 	echo "$(YELLOW) $(NAME) files removed! $(RESET)"
 
 .PHONY : re

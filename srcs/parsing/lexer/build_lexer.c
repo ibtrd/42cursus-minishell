@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:06:57 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/29 23:17:07 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/01 00:07:58 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include "lexer.h"
 #include "libft.h"
 
-static int			compare_operators(char *tok);
+static int	compare_operators(char *tok);
+static int	is_invalid_operator(char *tok);
 
 int	build_lexer(char *cmdline, t_vector *vector)
 {
@@ -58,5 +59,24 @@ static int	compare_operators(char *tok)
 			return (i);
 		i++;
 	}
+	if (is_invalid_operator(tok))
+		return (_INVALID_TOK);
 	return (_CMD_TOK);
+}
+
+static int	is_invalid_operator(char *tok)
+{
+	t_escape	escape;
+	char		c;
+
+	init_escape(&escape);
+	c = *tok++;
+	while (!escape.mode && c)
+	{
+		set_escape_mode(&escape, c);
+		if (ft_ischarset(c, __METACHARACTER))
+			return (FAILURE);
+		c = *tok++;
+	}
+	return (SUCCESS);
 }
