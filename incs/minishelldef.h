@@ -6,12 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:44:38 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 18:42:31 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELLDEF_H
 # define MINISHELLDEF_H
+
+# define __PRGM_NAME "minishell"
 
 //STATUS
 # define SUCCESS 0

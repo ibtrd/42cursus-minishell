@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:45:41 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 18:46:16 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSING_H
 
 # include <stdbool.h>
+# include <ft_vector.h>
 
 enum e_quote
 {
@@ -28,6 +29,9 @@ typedef struct s_escape
 	bool			single_quote;
 	bool			double_quote;
 }	t_escape;
+
+
+int	build_lexer(char *cmdline, t_vector *ptr);
 
 int		cmdline_addspace(char *cmdline, char **dup);
 char	*cmdline_tokenizer(char *cmdline);

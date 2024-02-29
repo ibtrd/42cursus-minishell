@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/28 21:30:00 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/02/29 18:45:33 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,21 @@ SRC = \
 	$(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC)) \
 	$(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC)) \
 
+## PARSING ##
+
 PARSING_DIR = parsing/
 PARSING_SRC = \
-	cmdline_addspace \
-	cmdline_tokenizer \
+	$(addprefix $(LEXER_DIR),$(LEXER_SRC)) \
 	escape_utils \
-	lexer \
 	syntax_checker \
+
+LEXER_DIR = lexer/
+LEXER_SRC = \
+		build_lexer \
+		cmdline_addspace \
+		cmdline_tokenizer \
+
+## AST ##
 
 AST_DIR = ast/
 AST_SRC = \
@@ -39,8 +47,12 @@ AST_SRC = \
 	ast_print \
 	ast_addnode \
 
+## EXEC ##
+
 EXECUTION_DIR = exec/
 EXECUTION_SRC = \
+
+## BUILTINS ##
 
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
@@ -182,9 +194,11 @@ print% :
 run :	$(NAME)
 	./$(NAME)
 
+VALGRIND = valgrind --suppressions=.valgrindignore.txt --leak-check=full
+
 .PHONY : valgrind
 valgrind : debug
-	valgrind ./$(NAME)
+	$(VALGRIND) ./$(NAME)
 
 # *** TESTING **************************************************************** #
 
@@ -192,11 +206,12 @@ AVAILABLE_TESTS = \
 	cmdline_addspace \
 	vector_insert \
 	syntax_checker \
+	lexer \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
-	$(MAKE) TEST=$@
-	@valgrind ./$(NAME)_test
+	@$(MAKE) TEST=$@
+	@$(VALGRIND) ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
 

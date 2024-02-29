@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:43:48 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:43:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 00:28:04 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 	DESCRIPTION
 	The set_escape_mode() function defines wether a character should be
 	escaped while parsing a command line.
-	 
+
+	RETURN VALUE
+	the set_escape_mode() function return no value.
 */
 
 void	set_escape_mode(t_escape *escape, char c)

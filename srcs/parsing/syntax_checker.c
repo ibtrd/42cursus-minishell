@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:41:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 23:54:32 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 00:11:51 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	check_parentheses(char *cmdline);
 	It then check that no parenthesis is left open by the end of the string
 	and that no parenthesis is closed while none has been opened.
 	On syntax error, the syntax_checker() function print an error
-	message on STDERR_FILENO.
+	message on standard error.
 	
 	RETURN VALUE
 	The syntax_checker() function return 0 if no syntax error has been
