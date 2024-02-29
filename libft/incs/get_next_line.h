@@ -3,28 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/18 06:09:37 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/20 13:49:05 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2023/11/12 13:35:44 by kchillon          #+#    #+#             */
+/*   Updated: 2024/02/29 19:03:05 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <unistd.h>
-
-# include "libft.h"
-# include "ft_vector.h"
-
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 512
+#  define BUFFER_SIZE 50
 # endif
 
-# define GNL_EOF 2
-# define GNL 1
+# ifndef GNL_VECTOR_SIZE
+#  define GNL_VECTOR_SIZE 32
+# endif
 
-int	get_next_line(int fd, char **line);
+# ifndef GNL_OPEN_MAX
+#  define GNL_OPEN_MAX 1024
+# endif
 
 #endif

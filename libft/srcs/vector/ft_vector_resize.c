@@ -3,34 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector_resize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 20:50:29 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/20 13:42:41 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2023/12/31 13:26:41 by kchillon          #+#    #+#             */
+/*   Updated: 2024/02/29 18:19:37 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "ft_vector.h"
 #include "ft_mem.h"
+#include <stdlib.h>
 
 int	ft_vector_resize(t_vector *v, size_t capacity)
 {
-	int		status;
 	void	*new;
 
-	if (!v)
+	if (!v || capacity < v->total || !capacity)
 		return (FAILURE);
-	status = UNDEFINED;
 	new = malloc(v->size * capacity);
-	if (new)
-	{
-		ft_memcpy(new, v->ptr, v->size * v->total);
-		v->capacity = capacity;
-		status = SUCCESS;
-	}
+	if (!new)
+		return (FAILURE);
+	ft_memcpy(new, v->ptr, v->size * v->total);
 	free(v->ptr);
 	v->ptr = new;
-	return (status);
+	v->capacity = capacity;
+	return (SUCCESS);
 }

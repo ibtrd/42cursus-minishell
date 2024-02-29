@@ -3,26 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector_free.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 02:07:11 by ibertran          #+#    #+#             */
-/*   Updated: 2024/01/20 15:18:14 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
+/*   Updated: 2024/02/29 18:40:39 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "ft_vector.h"
+#include <stdlib.h>
 
-int	ft_vector_free(t_vector *v)
+int	ft_vector_free(t_vector *v, void (*del)(void *))
 {
-	int	status;
+	size_t	i;
 
-	status = UNDEFINED;
-	if (v)
+	if (!v)
+		return (FAILURE);
+	if (del)
 	{
-		free(v->ptr);
-		v->ptr = NULL;
-		status = SUCCESS;
+		i = 0;
+		while (i < v->total)
+			del(*(char **)ft_vector_get(v, i++));
 	}
-	return (status);
+	free(v->ptr);
+	v->ptr = NULL;
+	return (SUCCESS);
 }

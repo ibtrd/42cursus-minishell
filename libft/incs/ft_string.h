@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_string.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:18:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/20 13:50:25 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/23 17:24:30 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STRING_H
 # define FT_STRING_H
+
+# define ALPHANUM "abcdefghijklmnopqrstuvwxyz\
+ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 char	*ft_strchr(const char *s, int c);
 char	*ft_strcpy(char *dst, const char *src);
@@ -34,5 +37,6 @@ size_t	ft_strnlen(const char *str, size_t n);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 int		ft_countwords(const char *str, const char *sep);
 char	**ft_split(char const *s, char c);
+char	*get_random_string(int len, const char *charset);
 
 #endif

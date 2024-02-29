@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_get.c                                    :+:      :+:    :+:   */
+/*   branch_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:25:48 by kchillon          #+#    #+#             */
-/*   Updated: 2024/02/29 18:19:17 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
+/*   Updated: 2024/02/23 18:01:34 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
-#include <stddef.h>
+#include "minishell_executor.h"
+#include "minishell_def.h"
 
-void	*ft_vector_get(t_vector *v, size_t index)
+int	branch_redirection(t_executor *exec)
 {
-	void	*ptr;
+	static const t_open_redirect	open_redirect[4] = {open_input, \
+														open_output, \
+														open_append, \
+														open_heredoc};
 
-	if (!v || index >= v->total)
-		return (NULL);
-	ptr = v->ptr + index * v->size;
-	return (ptr);
+	if (open_redirect[exec->node->type - _INPUT](exec))
+		return (1);
+	exec->node = exec->node->right;
+	return (node_exec(exec));
 }

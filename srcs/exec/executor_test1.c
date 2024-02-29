@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_get.c                                    :+:      :+:    :+:   */
+/*   executor_test1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:25:48 by kchillon          #+#    #+#             */
-/*   Updated: 2024/02/29 18:19:17 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
+/*   Updated: 2024/02/22 18:48:47 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
-#include <stddef.h>
+#include "minishell_ast.h"
+#include "minishell_executor.h"
+#include "minishell_def.h"
 
-void	*ft_vector_get(t_vector *v, size_t index)
-{
-	void	*ptr;
-
-	if (!v || index >= v->total)
-		return (NULL);
-	ptr = v->ptr + index * v->size;
-	return (ptr);
-}

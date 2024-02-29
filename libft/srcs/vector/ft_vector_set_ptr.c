@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 23:55:07 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/22 18:23:03 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2023/12/31 13:26:05 by kchillon          #+#    #+#             */
+/*   Updated: 2024/02/29 18:19:40 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,8 @@
 
 int	ft_vector_set_ptr(t_vector *v, size_t index, void *item)
 {
-	int	status;
-
-	if (!v)
+	if (!v || index >= v->total)
 		return (FAILURE);
-	status = UNDEFINED;
-	if (index < v->total)
-	{
-		*((char **)v->ptr + index) = item;
-		status = SUCCESS;
-	}
-	return (status);
+	*((void **)v->ptr + index) = item;
+	return (SUCCESS);
 }
