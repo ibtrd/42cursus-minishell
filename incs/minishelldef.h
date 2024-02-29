@@ -5,17 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/29 16:49:00 by kchillon         ###   ########lyon.fr   */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/02/29 19:30:47 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+#ifndef MINISHELLDEF_H
+# define MINISHELLDEF_H
 #ifndef MINISHELLDEF_H
 # define MINISHELLDEF_H
 
 //STATUS
 # define SUCCESS 0
 # define FAILURE -1
+
+# define __UNCLOSED_SINGLE_QUOTE -1
+# define __UNCLOSED_DOUBLE_QUOTE -2
+
+# define __UNCLOSED_PARENTHESIS -1
+# define __UNOPENED_PARENTHESIS -2
 
 # define __UNCLOSED_SINGLE_QUOTE -1
 # define __UNCLOSED_DOUBLE_QUOTE -2
@@ -48,6 +57,10 @@
 # define __DEFAULT_IFS " \t\n"
 # define __METACHARACTER "&|<>()"
 # define __PARENTHESIS "()"
+# define __SINGLE_QUOTE "\'"
+# define __DOUBLE_QUOTE "\""
+
+#endif //MINISHELLDEF_H
 # define __SINGLE_QUOTE "\'"
 # define __DOUBLE_QUOTE "\""
 
