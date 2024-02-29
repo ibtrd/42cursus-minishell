@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/22 18:20:12 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/02/29 18:37:43 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,14 +93,18 @@ VECTOR_SRC = \
 	vector_add_ptr \
 	vector_add \
 	vector_delete \
+	vector_deleten \
 	vector_free \
 	vector_get \
 	vector_init \
 	vector_insert_ptr \
 	vector_insert \
+	vector_insertn \
 	vector_join \
 	vector_resize \
+	vector_set_ptr \
 	vector_set \
+	vector_strncat \
 	vector_trim \
 
 # *** LINKED LIST ************************************************************ #

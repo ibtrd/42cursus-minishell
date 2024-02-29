@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_get.c                                    :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:25:48 by kchillon          #+#    #+#             */
-/*   Updated: 2024/02/29 18:19:17 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/02/23 17:24:10 by kchillon          #+#    #+#             */
+/*   Updated: 2024/02/23 17:27:01 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
-#include <stddef.h>
+#include <unistd.h>
 
-void	*ft_vector_get(t_vector *v, size_t index)
+long	ft_putendl_fd(char *s, int fd)
 {
-	void	*ptr;
+	size_t	len;
 
-	if (!v || index >= v->total)
-		return (NULL);
-	ptr = v->ptr + index * v->size;
-	return (ptr);
+	len = 0;
+	while (s[len])
+		len++;
+	if (write(fd, s, len) == -1)
+		return (-1);
+	return (write(fd, "\n", 1));
 }

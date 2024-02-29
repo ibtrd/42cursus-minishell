@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishelldef.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:44:38 by ibertran         ###   ########lyon.fr   */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/02/29 19:30:47 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@
 # define __DEFAULT_IFS " \t\n"
 # define __METACHARACTER "&|<>()"
 # define __PARENTHESIS "()"
+# define __SINGLE_QUOTE "\'"
+# define __DOUBLE_QUOTE "\""
+
 # define __SINGLE_QUOTE "\'"
 # define __DOUBLE_QUOTE "\""
 

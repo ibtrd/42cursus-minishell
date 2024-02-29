@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_delete.c                                 :+:      :+:    :+:   */
+/*   ft_vector_deleten.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 13:25:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/02/29 18:40:17 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 18:40:21 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,24 @@
 #include "ft_mem.h"
 #include <stddef.h>
 
-int	ft_vector_delete(t_vector *v, size_t index, void (*del)(void *))
+int	ft_vector_deleten(t_vector *v, size_t index, size_t n, void (*del)(void *))
 {
-	if (!v || index >= v->total)
+	size_t	i;
+
+	if (!v || index >= v->total || index + n > v->total)
 		return (FAILURE);
 	if (del)
-		del(*(void **)ft_vector_get(v, index));
-	ft_memcpy(v->ptr + index * v->size, v->ptr + (index + 1) * v->size,
-		(v->total - 1 - index) * v->size);
-	v->total--;
+	{
+		i = index;
+		while (i < index + n)
+		{
+			del(*(void **)ft_vector_get(v, i));
+			i++;
+		}
+	}
+	ft_memcpy(v->ptr + index * v->size, v->ptr + (index + n) * v->size,
+		(v->total - n - index) * v->size);
+	v->total -= n;
 	if (v->total > 0 && v->total == (v->capacity >> 2))
 		return (ft_vector_resize(v, v->capacity >> 1));
 	return (SUCCESS);

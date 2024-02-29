@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_get.c                                    :+:      :+:    :+:   */
+/*   open_output.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:25:48 by kchillon          #+#    #+#             */
-/*   Updated: 2024/02/29 18:19:17 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
+/*   Updated: 2024/02/23 14:29:09 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
-#include <stddef.h>
+#include "minishell_executor.h"
+#include "minishell_def.h"
 
-void	*ft_vector_get(t_vector *v, size_t index)
+#include <unistd.h>
+#include <fcntl.h>
+
+int	open_output(t_executor *exec)
 {
-	void	*ptr;
+	int	fd;
 
-	if (!v || index >= v->total)
-		return (NULL);
-	ptr = v->ptr + index * v->size;
-	return (ptr);
+	fd = open(*(char **)ft_vector_get(exec->node->args, 0), O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd == -1)
+		return (1);
+	if (!dup2(fd, 0))
+		return (0);
+	close(fd);
+	return (1);
 }
