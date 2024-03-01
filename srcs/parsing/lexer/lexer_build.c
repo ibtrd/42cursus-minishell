@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:06:57 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/01 22:36:24 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/02 00:02:54 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static int	compare_operators(char *tok)
 		__REDIR_OUTPUT,
 		__REDIR_HEREDOC,
 		__REDIR_APPEND,
+		__OPEN_PARENTHESIS,
+		__CLOSE_PARENTHESIS,
 		NULL
 	};
 

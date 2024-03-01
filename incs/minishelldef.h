@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/01 15:09:25 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/02 00:02:35 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@
 # define __REDIR_HEREDOC "<<"
 # define __REDIR_APPEND ">>"
 
-# define __PRIO_OPEN "("
-# define __PRIO_CLOSE ")"
+# define __OPEN_PARENTHESIS "("
+# define __CLOSE_PARENTHESIS ")"
 
 //PARSING CHARSETS
 # define __DEFAULT_IFS " \t\n"

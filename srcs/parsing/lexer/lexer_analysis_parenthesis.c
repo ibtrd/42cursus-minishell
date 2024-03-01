@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_analysis.c                                   :+:      :+:    :+:   */
+/*   lexer_analysis_parenthesis.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/01 00:11:23 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/02 00:53:46 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/02 00:29:57 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/02 00:53:56 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static int	logical_operator_token(t_vector *vector, size_t index);
 static int	redirection_token(t_vector *vector, size_t index);
 static int	syntax_error(const t_lexer_token *token);
 
-int	lexer_analysis(t_vector *vector, size_t index)
+int	parenthesis_analysis(t_vector *vector, size_t index)
 {
 	const t_lexer_token	*ptr = ft_vector_get(vector, index);
 
-	// printf("normal mode | index = %zu\n", index);
-	if (ptr->type == _END_TOK)
-		return (SUCCESS);
-	if (ptr->type == _INVALID_TOK || ptr->type == _CLOSE_PARENTHESIS_TOK)
+	// printf("parenthesis mode | index = %zu\n", index);
+	if (ptr->type == _CLOSE_PARENTHESIS_TOK)
+		return (index);
+	if (ptr->type == _INVALID_TOK)
 		return (syntax_error(ptr));
 	if (ptr->type >= _REDIR_INPUT_TOK && ptr->type <= _REDIR_APPEND_TOK)
 		return (redirection_token(vector, index + 1));
@@ -43,7 +43,7 @@ int	lexer_analysis(t_vector *vector, size_t index)
 			return (FAILURE);
 		// printf("parenthesis closed, returned OK!\n");
 	}
-	return (lexer_analysis(vector, index + 1));
+	return (parenthesis_analysis(vector, index + 1));
 }
 
 static int	logical_operator_token(t_vector *vector, size_t index)
@@ -62,9 +62,9 @@ static int	logical_operator_token(t_vector *vector, size_t index)
 		index = parenthesis_analysis(vector, index + 1);
 		if (index == (size_t)FAILURE)
 			return (FAILURE);
-		// printf("returned OK!\n");
+		// printf("parenthesis closed, returned OK!\n");
 	}
-	return (lexer_analysis(vector, index + 1));
+	return (parenthesis_analysis(vector, index + 1));
 }
 
 static int	redirection_token(t_vector *vector, size_t index)
@@ -75,7 +75,7 @@ static int	redirection_token(t_vector *vector, size_t index)
 	if (!ptr || ptr->type != _CMD_TOK)
 		return (syntax_error(ptr));
 	ptr->type = _FILE_TOK;
-	return (lexer_analysis(vector, index + 1));
+	return (parenthesis_analysis(vector, index + 1));
 }
 
 static int	syntax_error(const t_lexer_token *token)
@@ -86,3 +86,4 @@ static int	syntax_error(const t_lexer_token *token)
 	write(STDERR_FILENO, "'\n", 2);
 	return (FAILURE);
 }
+
