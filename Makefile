@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/01 00:01:03 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/01 21:02:08 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ PARSING_SRC = \
 
 LEXER_DIR = lexer/
 LEXER_SRC = \
-		build_lexer \
+		lexer_build \
+		lexer_analysis \
 		cmdline_addspace \
 		cmdline_tokenizer \
 

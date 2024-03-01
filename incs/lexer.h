@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 01:52:12 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/29 16:22:12 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/01 22:25:17 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ enum e_token_type
 	_CMD_TOK,
 	_ARG_TOK,
 	_FILE_TOK,
-	_INVALID_TOK
+	_INVALID_TOK,
+	_END_TOK
 };
 
 typedef struct s_lexer_token

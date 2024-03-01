@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/29 20:02:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/01 15:09:25 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELLDEF_H
 
 # define __PRGM_NAME "minishell"
+# define __PRGM_NAME_LEN 9
 
 //STATUS
 # define SUCCESS 0
@@ -55,5 +56,7 @@
 
 # define __SINGLE_QUOTE "\'"
 # define __DOUBLE_QUOTE "\""
+
+# define __SYNTAX_ERROR ": syntax error near unexpected token `"
 
 #endif //MINISHELLDEF_H

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/29 23:32:21 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/01 21:08:45 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,15 @@ typedef struct s_escape
 	bool			double_quote;
 }	t_escape;
 
-int	build_lexer(char *cmdline, t_vector *vector);
+int	lexer_build(char *cmdline, t_vector *vector);
 
 int		cmdline_addspace(char *cmdline, char **dup);
 char	*cmdline_tokenizer(char *cmdline);
 int		syntax_checker(char *cmdline);
+
+
+//LEXER
+int	lexer_analysis(t_vector *vector, size_t index);
 
 //ESCAPE
 void	set_escape_mode(t_escape *escape, char c);

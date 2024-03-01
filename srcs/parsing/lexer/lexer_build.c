@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_lexer.c                                      :+:      :+:    :+:   */
+/*   lexer_build.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:06:57 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/01 00:07:58 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/01 22:36:24 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 static int	compare_operators(char *tok);
 static int	is_invalid_operator(char *tok);
 
-int	build_lexer(char *cmdline, t_vector *vector)
+int	lexer_build(char *cmdline, t_vector *vector)
 {
 	int				status;
 	t_lexer_token	tok;
@@ -31,6 +31,8 @@ int	build_lexer(char *cmdline, t_vector *vector)
 		status = ft_vector_add(vector, &tok);
 		tok.value = cmdline_tokenizer(NULL);
 	}
+	if (status == SUCCESS)
+		ft_vector_add(vector, &(t_lexer_token){_END_TOK, "\\n"});
 	if (status == SUCCESS)
 		ft_vector_trim(vector);
 	else
