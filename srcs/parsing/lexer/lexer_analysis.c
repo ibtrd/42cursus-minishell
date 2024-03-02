@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 00:11:23 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/02 02:45:48 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/02 05:23:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,3 +86,12 @@ static int	syntax_error(const t_lexer_token *token)
 	write(STDERR_FILENO, "'\n", 2);
 	return (FAILURE);
 }
+
+// static int	unsupported_operator(const t_lexer_token *token)
+// {
+// 	write(STDERR_FILENO, __PRGM_NAME, __PRGM_NAME_LEN);
+// 	write(STDERR_FILENO, __UNSUPPORTED_ERROR, ft_strlen(__UNSUPPORTED_ERROR));
+// 	write(STDERR_FILENO, token->value, ft_strlen(token->value));
+// 	write(STDERR_FILENO, "'\n", 2);
+// 	return (FAILURE);
+// }

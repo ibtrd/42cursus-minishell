@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:06:57 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/02 00:02:54 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/02 03:44:00 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	lexer_build(char *cmdline, t_vector *vector)
 		tok.value = cmdline_tokenizer(NULL);
 	}
 	if (status == SUCCESS)
-		ft_vector_add(vector, &(t_lexer_token){_END_TOK, "\\n"});
+		ft_vector_add(vector, &(t_lexer_token){_END_TOK, "newline"});
 	if (status == SUCCESS)
 		ft_vector_trim(vector);
 	else
@@ -42,7 +42,6 @@ int	lexer_build(char *cmdline, t_vector *vector)
 
 static int	compare_operators(char *tok)
 {
-	int			i;
 	const char	*operator[] = {
 		__AND,
 		__OR,
@@ -55,6 +54,7 @@ static int	compare_operators(char *tok)
 		__CLOSE_PARENTHESIS,
 		NULL
 	};
+	int			i;
 
 	i = 0;
 	while (operator[i])

@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/02 00:32:26 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/02 05:12:29 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -211,6 +211,7 @@ AVAILABLE_TESTS = \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
+	$(RM) minishell_test
 	@$(MAKE) TEST=$@
 	@$(VALGRIND) ./$(NAME)_test
 
