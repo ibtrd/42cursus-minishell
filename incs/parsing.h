@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/01 21:08:45 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/02 21:58:28 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		syntax_checker(char *cmdline);
 
 
 //LEXER
-int	lexer_analysis(t_vector *vector, size_t index);
+int	lexer_analysis(t_vector *vector);
 
 //ESCAPE
 void	set_escape_mode(t_escape *escape, char c);

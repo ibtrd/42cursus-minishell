@@ -6,14 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 01:52:12 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/02 00:32:46 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/02 21:59:41 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-#include <ft_vector.h>
+# include <ft_vector.h>
 
 enum e_token_type
 {
@@ -29,7 +29,7 @@ enum e_token_type
 	_CMD_TOK,
 	_ARG_TOK,
 	_FILE_TOK,
-	_INVALID_TOK,
+	_UNSUPPORTED_TOK,
 	_END_TOK
 };
 
@@ -40,5 +40,7 @@ typedef struct s_lexer_token
 }	t_lexer_token;
 
 int	parenthesis_analysis(t_vector *vector, size_t index);
+int	syntax_error(const char *str);
+int	unsupported_token(const char *str);
 
 #endif //LEXER_H

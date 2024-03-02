@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 13:06:57 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/02 03:44:00 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/02 20:24:50 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/02 20:55:41 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	compare_operators(char *tok)
 		i++;
 	}
 	if (is_invalid_operator(tok))
-		return (_INVALID_TOK);
+		return (_UNSUPPORTED_TOK);
 	return (_CMD_TOK);
 }
 

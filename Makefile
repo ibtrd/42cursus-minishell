@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/02 05:12:29 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/02 22:02:21 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ LEXER_DIR = lexer/
 LEXER_SRC = \
 		lexer_build \
 		lexer_analysis \
+		lexer_analysis_utils \
 		lexer_analysis_parenthesis \
 		cmdline_addspace \
 		cmdline_tokenizer \
@@ -213,7 +214,8 @@ AVAILABLE_TESTS = \
 $(AVAILABLE_TESTS) :
 	$(RM) minishell_test
 	@$(MAKE) TEST=$@
-	@$(VALGRIND) ./$(NAME)_test
+#	@$(VALGRIND) ./$(NAME)_test
+	./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
 
