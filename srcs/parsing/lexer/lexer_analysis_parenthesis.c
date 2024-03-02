@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 00:29:57 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/02 00:53:56 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/02 02:52:58 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	parenthesis_analysis(t_vector *vector, size_t index)
 	// printf("parenthesis mode | index = %zu\n", index);
 	if (ptr->type == _CLOSE_PARENTHESIS_TOK)
 		return (index);
-	if (ptr->type == _INVALID_TOK)
+	if (ptr->type == _INVALID_TOK || ptr->type == _END_TOK)
 		return (syntax_error(ptr));
 	if (ptr->type >= _REDIR_INPUT_TOK && ptr->type <= _REDIR_APPEND_TOK)
 		return (redirection_token(vector, index + 1));
@@ -52,7 +52,7 @@ static int	logical_operator_token(t_vector *vector, size_t index)
 
 	if (index == 1)
 		return (syntax_error(ptr - 1));
-	if (ptr->type == _INVALID_TOK)
+	if (ptr->type == _INVALID_TOK || ptr->type == _CLOSE_PARENTHESIS_TOK || ptr->type == _END_TOK)
 		return (syntax_error(ptr));
 	if (ptr->type >= _AND_TOK && ptr->type <= _PIPE_TOK)
 		return (syntax_error(ptr));

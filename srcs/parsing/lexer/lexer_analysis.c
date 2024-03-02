@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 00:11:23 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/02 00:53:46 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/02 02:45:48 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	logical_operator_token(t_vector *vector, size_t index)
 
 	if (index == 1)
 		return (syntax_error(ptr - 1));
-	if (ptr->type == _INVALID_TOK)
+	if (ptr->type == _INVALID_TOK || ptr->type == _CLOSE_PARENTHESIS_TOK)
 		return (syntax_error(ptr));
 	if (ptr->type >= _AND_TOK && ptr->type <= _PIPE_TOK)
 		return (syntax_error(ptr));
