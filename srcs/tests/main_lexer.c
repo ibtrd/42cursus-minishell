@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 00:30:10 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/01 22:25:38 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/02 03:18:26 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ int	main(void)
 	printf("\ninput            | \e[33m%s\e[0m\n\n", input);
 	printf("cmdline_addspace | \e[34m%s\e[0m\n\n", dup);
 	free(input);
+
+	printf("\n\n\e[37;40mUNCLOSED_CHECK  ");
+	if (!syntax_checker(dup))
+		printf("\e[32;1mValid!\e[0m\n\n");
+	else
+	{
+		printf("\e[31;1mInvalid!\e[0m\n\n");
+		printf("\n");
+		free(dup);
+		exit(1);
+	}
+
 	lexer_build(dup, &lexer);
 	
 	t_lexer_token *lextok;
@@ -63,7 +75,6 @@ int	main(void)
 	}
 
 	printf("\n\n\e[37;40mLEXER_ANALYSIS  ");
-	
 	if (!lexer_analysis(&lexer, 0))
 		printf("\e[32;1mValid!\e[0m\n\n");
 	else
