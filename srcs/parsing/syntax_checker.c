@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:41:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/29 00:11:51 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/02 03:26:40 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static int	check_parentheses(char *cmdline);
 	DESCRIPTION
 	The syntax_checker() function analyse the string pointed by cmdline
 	to check if each ' and/or " quote is closed by the the end of the string.
-	It then check that no parenthesis is left open by the end of the string
-	and that no parenthesis is closed while none has been opened.
+	It then check that no parenthesis is left open by the end of the string.
 	On syntax error, the syntax_checker() function print an error
 	message on standard error.
 	
@@ -52,11 +51,6 @@ int	syntax_checker(char *cmdline)
 	if (status == __UNCLOSED_PARENTHESIS)
 	{
 		write(STDERR_FILENO, "Syntax error: unclosed `(' parenthesis\n", 39);
-		return (FAILURE);
-	}
-	else if (status == __UNOPENED_PARENTHESIS)
-	{
-		write(STDERR_FILENO, "Syntax error near unexpected token `)'\n", 39);
 		return (FAILURE);
 	}
 	return (SUCCESS);
@@ -105,11 +99,9 @@ static int	check_parentheses(char *cmdline)
 			parenthesis++;
 		else if (!escape.mode && cmdline[i] == ')')
 			parenthesis--;
-		if (parenthesis < 0)
-			return (__UNOPENED_PARENTHESIS);
 		i++;
 	}
-	if (parenthesis)
+	if (parenthesis > 0)
 		return (__UNCLOSED_PARENTHESIS);
 	return (SUCCESS);
 }
