@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/03 01:50:24 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/03 02:09:35 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -197,7 +197,7 @@ print% :
 run :	$(NAME)
 	./$(NAME)
 
-VALGRIND = valgrind --suppressions=.valgrindignore.txt --leak-check=full
+VALGRIND = valgrind -q --suppressions=.valgrindignore.txt --leak-check=full
 
 .PHONY : valgrind
 valgrind : debug
