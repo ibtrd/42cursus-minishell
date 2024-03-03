@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_lexer_full.c                                  :+:      :+:    :+:   */
+/*   main_lexerfull.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 00:30:10 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 00:38:57 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 18:42:19 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(void)
 			printf("\e[31;1mInvalid!\e[0m\n\n");
 			printf("\n");
 			free(input);
-			continue;;
+			continue ;
 		}
 
 		cmdline_addspace(input, &dup);

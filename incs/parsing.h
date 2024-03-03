@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/02 23:13:31 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 23:41:04 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdbool.h>
 
 # include "ft_vector.h"
+
+# include "ast.h"
 
 enum e_quote
 {
@@ -31,15 +33,16 @@ typedef struct s_escape
 	bool			double_quote;
 }	t_escape;
 
-int	lexer_build(char *cmdline, t_vector *vector);
+//PARSER
+t_astnode	*commandline_parser(char *input);
 
+int		syntax_checker(char *cmdline);
 int		cmdline_addspace(char *cmdline, char **dup);
 char	*cmdline_tokenizer(char *cmdline);
-int		syntax_checker(char *cmdline);
-
 
 //LEXER
-int	lexer_analysis(t_vector *vector, size_t index);
+int		lexer_build(char *cmdline, t_vector *vector);
+int		lexer_analysis(t_vector *vector, size_t index);
 
 //ESCAPE
 void	set_escape_mode(t_escape *escape, char c);

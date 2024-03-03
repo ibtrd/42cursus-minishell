@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 00:30:10 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 03:51:52 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 18:32:11 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	main(void)
 
 	outfile = open("./TEST_DIR/lexer_out", O_WRONLY |O_TRUNC | O_CREAT, 0777);
 	do
-	{
-		rl_on_new_line();
+	{;
 		input = readline("\n> ");
 		if (!input)
 			return (0);

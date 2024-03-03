@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/03 04:58:29 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/03 23:41:35 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ PARSING_SRC = \
 	$(addprefix $(LEXER_DIR),$(LEXER_SRC)) \
 	escape_utils \
 	syntax_checker \
+	commandline_parser \
 
 LEXER_DIR = lexer/
 LEXER_SRC = \
@@ -87,7 +88,7 @@ INCS = \
 # *** CONFIG ***************************************************************** #
 
 CFLAGS		=	-Wall -Wextra -Werror $(OFLAGS)
-OFLAGS 		=	-O3
+OFLAGS 		=	-g3
 
 CPPFLAGS 	= 	$(addprefix -I, $(INCS)) \
 				$(addprefix -D, $(DEFINES)) \

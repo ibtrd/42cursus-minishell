@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 00:29:57 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 05:20:11 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 23:53:28 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	parenthesis_analysis(t_vector *vector, size_t index)
 {
 	const t_lexer_token	*ptr = ft_vector_get(vector, index);
 
+	#ifdef DEBUG
 	printf("parenthesis mode INIT | index = %zu\n", index);
+	#endif
 	if (ptr->type == _END_TOK)
 		return (FAILURE);
 	if (ptr->type == _UNSUPPORTED_TOK)
@@ -32,7 +34,9 @@ int	parenthesis_analysis(t_vector *vector, size_t index)
 		return (syntax_error(ptr->value));
 	if (ptr->type == _OPEN_PARENTHESIS_TOK)
 	{
+		#ifdef DEBUG
 		printf("Opening parenthesis from PARENTHESIS\n");
+		#endif
 		index = parenthesis_analysis(vector, index + 1);
 		if ((int)index == FAILURE)
 			return (FAILURE);
@@ -45,7 +49,9 @@ static int	next_token_parenthesis(t_vector *vector, size_t index)
 {
 	const t_lexer_token	*ptr = ft_vector_get(vector, index);
 
+	#ifdef DEBUG
 	printf("parenthesis mode | index = %zu | tok = %s\n" , index, ptr->value);
+	#endif
 	if (ptr->type == _CLOSE_PARENTHESIS_TOK)
 		return (end_of_parenthesis(vector, index + 1));
 	if (ptr->type == _UNSUPPORTED_TOK || ptr->type == _END_TOK || ptr->type == _OPEN_PARENTHESIS_TOK)
@@ -61,7 +67,9 @@ static int	logical_operator_token(t_vector *vector, size_t index)
 {
 	const t_lexer_token	*ptr = ft_vector_get(vector, index);
 
+	#ifdef DEBUG
 	printf("parenthesis mode | index = %zu | tok = %s\n" , index, ptr->value);
+	#endif
 	if ((ptr - 2)->type == _OPEN_PARENTHESIS_TOK)
 		return (syntax_error((ptr - 1)->value));
 	if (ptr->type == _UNSUPPORTED_TOK || ptr->type == _CLOSE_PARENTHESIS_TOK || ptr->type == _END_TOK)
@@ -72,11 +80,15 @@ static int	logical_operator_token(t_vector *vector, size_t index)
 		return (redirection_token(vector, index + 1));
 	if (ptr->type == _OPEN_PARENTHESIS_TOK)
 	{
+		#ifdef DEBUG
 		printf("Opening parenthesis from LOGICAL PARENTHESIS\n");
+		#endif
 		index = parenthesis_analysis(vector, index + 1);
 		if ((int)index == FAILURE)
 			return (FAILURE);
+		#ifdef DEBUG
 		printf("Parenthesis returning index %zu\n", index);
+		#endif
 		return (next_token_parenthesis(vector, index));
 	}
 	return (next_token_parenthesis(vector, index + 1));
@@ -87,7 +99,9 @@ static int	redirection_token(t_vector *vector, size_t index)
 	t_lexer_token	*ptr;
 
 	ptr = ft_vector_get(vector, index);
+	#ifdef DEBUG
 	printf("parenthesis mode | index = %zu | tok = %s\n" , index, ptr->value);
+	#endif
 	if (ptr->type != _CMD_TOK)
 		return (syntax_error(ptr->value));
 	ptr->type = _FILE_TOK;
