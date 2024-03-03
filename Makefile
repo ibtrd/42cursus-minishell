@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/02 22:02:21 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/03 01:50:24 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -209,13 +209,14 @@ AVAILABLE_TESTS = \
 	cmdline_addspace \
 	syntax_checker \
 	lexer \
+	lexerfull \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
 	$(RM) minishell_test
 	@$(MAKE) TEST=$@
-#	@$(VALGRIND) ./$(NAME)_test
-	./$(NAME)_test
+	@$(VALGRIND) ./$(NAME)_test
+#  ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
 

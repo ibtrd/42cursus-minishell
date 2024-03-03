@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 00:11:23 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 00:18:34 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 01:52:09 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	lexer_analysis(t_vector *vector, size_t index)
 		if (index == (size_t)FAILURE)
 			return (FAILURE);
 		printf("parenthesis closed, returned OK!\n");
-		return (end_of_parenthesis(vector, index + 1));
+		return (end_of_parenthesis(vector, index));
 	}
 	return (next_token(vector, index + 1));
 }
@@ -52,7 +52,7 @@ static int	next_token(t_vector *vector, size_t index)
 {
 	const t_lexer_token	*ptr = ft_vector_get(vector, index);
 
-	printf("normal mode | index = %zu | tok =%s\n" , index, ptr->value);
+	printf("normal mode | index = %zu | tok = %s\n" , index, ptr->value);
 	if (ptr->type == _END_TOK)
 		return (SUCCESS);
 	if (ptr->type == _UNSUPPORTED_TOK)
@@ -70,6 +70,7 @@ static int	logical_operator_token(t_vector *vector, size_t index)
 {
 	const t_lexer_token	*ptr = ft_vector_get(vector, index);
 
+	printf("normal mode | index = %zu | tok = %s\n" , index, ptr->value);
 	if (ptr->type == _UNSUPPORTED_TOK)
 		return (unsupported_token(ptr->value));
 	if (ptr->type == _END_TOK || ptr->type == _CLOSE_PARENTHESIS_TOK)
@@ -84,7 +85,7 @@ static int	logical_operator_token(t_vector *vector, size_t index)
 		index = parenthesis_analysis(vector, index + 1);
 		if (index == (size_t)FAILURE)
 			return (FAILURE);
-		return (end_of_parenthesis(vector, index) + 1);
+		return (end_of_parenthesis(vector, index));
 	}
 	return (next_token(vector, index + 1));
 }
@@ -94,6 +95,7 @@ static int	redirection_token(t_vector *vector, size_t index)
 	t_lexer_token	*ptr;
 
 	ptr = ft_vector_get(vector, index);
+	printf("normal mode | index = %zu | tok = %s\n" , index, ptr->value);
 	if (!ptr || ptr->type != _CMD_TOK)
 		return (syntax_error(ptr->value));
 	ptr->type = _FILE_TOK;
@@ -104,7 +106,7 @@ static int	end_of_parenthesis(t_vector *vector, size_t index)
 {
 	const t_lexer_token	*ptr = ft_vector_get(vector, index);
 
-	printf("returned OK!\n");
+	printf("returned OK! to MAIN\n");
 	if (ptr->type == _END_TOK)
 		return (SUCCESS);
 	if (ptr->type == _CMD_TOK || ptr->type == _OPEN_PARENTHESIS_TOK)

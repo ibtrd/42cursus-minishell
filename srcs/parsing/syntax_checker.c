@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:41:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/02 22:54:02 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 01:03:35 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@ int	syntax_checker(char *cmdline)
 	status = check_quotes(cmdline);
 	if (status == __UNCLOSED_SINGLE_QUOTE)
 	{
-		write(STDERR_FILENO, "Syntax error: unclosed `'' quote\n", 33);
+		write(STDERR_FILENO, "minishell: Syntax error: unclosed `'' quote\n", 44);
 		return (FAILURE);
 	}
 	else if (status == __UNCLOSED_DOUBLE_QUOTE)
 	{
-		write(STDERR_FILENO, "Syntax error: unclosed `\"' quote\n", 33);
+		write(STDERR_FILENO, "minishell: Syntax error: unclosed `\"' quote\n", 44);
 		return (FAILURE);
 	}
 	status = check_parentheses(cmdline);
 	if (status == __UNCLOSED_PARENTHESIS)
 	{
-		write(STDERR_FILENO, "Syntax error: unclosed `(' parenthesis\n", 39);
+		write(STDERR_FILENO, "minishell: Syntax error: unclosed `(' parenthesis\n", 50);
 		return (FAILURE);
 	}
 	return (SUCCESS);
