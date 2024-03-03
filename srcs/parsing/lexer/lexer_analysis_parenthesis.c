@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 00:29:57 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 04:57:41 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 05:20:11 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	parenthesis_analysis(t_vector *vector, size_t index)
 		index = parenthesis_analysis(vector, index + 1);
 		if ((int)index == FAILURE)
 			return (FAILURE);
-		printf("Parenthesis returning index %zu\n", index);
 		return (next_token_parenthesis(vector, index));
 	}
 	return (next_token_parenthesis(vector, index + 1));

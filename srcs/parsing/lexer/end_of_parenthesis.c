@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 04:53:38 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 04:58:37 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 05:37:03 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	end_of_parenthesis(t_vector *vector, size_t index)
 		return (syntax_error(ptr->value));
 	if (ptr->type >= _REDIR_INPUT_TOK && ptr->type <= _REDIR_APPEND_TOK)
 		return(redirection_token(vector, index + 1));
+	printf("Parenthesis returning index %zu\n", index);
 	return (index);
 }
 

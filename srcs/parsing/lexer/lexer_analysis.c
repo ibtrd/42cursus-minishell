@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 00:11:23 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 04:49:16 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 05:46:32 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 static int	next_token(t_vector *vector, size_t index);
 static int	logical_operator_token(t_vector *vector, size_t index);
 static int	redirection_token(t_vector *vector, size_t index);
-static int	end_of_parenthesis(t_vector *vector, size_t index);
 
 int	lexer_analysis(t_vector *vector, size_t index)
 {
@@ -43,7 +42,7 @@ int	lexer_analysis(t_vector *vector, size_t index)
 		if (index == (size_t)FAILURE)
 			return (FAILURE);
 		printf("parenthesis closed, returned OK!\n");
-		return (end_of_parenthesis(vector, index));
+		return (next_token(vector, index));
 	}
 	return (next_token(vector, index + 1));
 }
@@ -85,7 +84,8 @@ static int	logical_operator_token(t_vector *vector, size_t index)
 		index = parenthesis_analysis(vector, index + 1);
 		if (index == (size_t)FAILURE)
 			return (FAILURE);
-		return (end_of_parenthesis(vector, index));
+		printf("parenthesis closed, returned OK!\n");
+		return (next_token(vector, index));
 	}
 	return (next_token(vector, index + 1));
 }
@@ -100,16 +100,4 @@ static int	redirection_token(t_vector *vector, size_t index)
 		return (syntax_error(ptr->value));
 	ptr->type = _FILE_TOK;
 	return (next_token(vector, index + 1));
-}
-
-static int	end_of_parenthesis(t_vector *vector, size_t index)
-{
-	const t_lexer_token	*ptr = ft_vector_get(vector, index);
-
-	printf("returned OK! to MAIN\n");
-	if (ptr->type == _END_TOK)
-		return (SUCCESS);
-	if (ptr->type == _CMD_TOK || ptr->type == _OPEN_PARENTHESIS_TOK)
-		return (syntax_error(ptr->value));
-	return (next_token(vector, index));
 }
