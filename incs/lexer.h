@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 01:52:12 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/02 23:00:19 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 04:58:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_lexer_token
 }	t_lexer_token;
 
 int	parenthesis_analysis(t_vector *vector, size_t index);
+int	end_of_parenthesis(t_vector *vector, size_t index);
 int	syntax_error(const char *str);
 int	unsupported_token(const char *str);
 

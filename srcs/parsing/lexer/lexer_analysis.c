@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 00:11:23 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 01:52:09 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 04:49:16 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static int	redirection_token(t_vector *vector, size_t index)
 
 	ptr = ft_vector_get(vector, index);
 	printf("normal mode | index = %zu | tok = %s\n" , index, ptr->value);
-	if (!ptr || ptr->type != _CMD_TOK)
+	if (ptr->type != _CMD_TOK)
 		return (syntax_error(ptr->value));
 	ptr->type = _FILE_TOK;
 	return (next_token(vector, index + 1));

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 00:30:10 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 02:10:10 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 03:51:52 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <readline/history.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #include "minishelldef.h"
 #include "ast.h"
@@ -30,10 +32,13 @@ int	main(void)
 	char 				*dup = NULL;
 	__pid_t				pid;
 	int					status;
+	int					outfile;
 
+	outfile = open("./TEST_DIR/lexer_out", O_WRONLY |O_TRUNC | O_CREAT, 0777);
 	do
 	{
-		input = readline("\nEnter a command line: ");
+		rl_on_new_line();
+		input = readline("\n> ");
 		if (!input)
 			return (0);
 		add_history(input);
@@ -59,9 +64,17 @@ int	main(void)
 		if (WIFEXITED(status))
 		{
 			if (WEXITSTATUS(status) == 0)
+			{
+				write(outfile, "OK!\n", 4);
 				printf("\e[32;1mValid!\e[0m\n");
+				rl_on_new_line();
+			}
 			else
+			{
+				write(outfile, "KO!\n", 4);
 				printf("\e[31;1mInvalid!\e[0m\n");
+				rl_on_new_line();
+			}
 		}
 		ft_vector_free(&lexer, NULL);
 		free(dup);
