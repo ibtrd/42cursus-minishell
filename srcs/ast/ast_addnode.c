@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:40:02 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:47:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 20:40:47 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,13 @@ t_astnode	*ast_add_command(t_astnode *root, t_astnode *new)
 
 t_astnode	*ast_add_redirection(t_astnode *root, t_astnode *new)
 {
-	(void)root;
-	(void)new;
+	if (new->type == _COMMAND)
+	{
+		if (root->right)
+			root->right = ast_addnode(root->right, new);
+		else
+			root->right = new;
+	}
 	printf("ADD_ON_REDIR FAILED!\n");
 	return (NULL);
 }
