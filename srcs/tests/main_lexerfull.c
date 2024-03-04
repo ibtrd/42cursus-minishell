@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 00:30:10 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 18:42:19 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/04 02:20:09 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int	main(void)
 			i++;
 		}
 
-		printf("\n\n\e[37;40mLEXER_ANALYSIS  ");
-		if (!lexer_analysis(&lexer, 0))
+		printf("\n\n\e[37;40mlexer_launch  ");
+		if (!lexer_launch(&lexer, 0))
 			printf("\e[32;1mValid!\e[0m\n\n");
 		else
 			printf("\e[31;1mInvalid!\e[0m\n\n");

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_analysis_utils.c                             :+:      :+:    :+:   */
+/*   lexer_launch_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -26,7 +26,7 @@ int	syntax_error(const char *str)
 	return (FAILURE);
 }
 
-int	unsupported_token(const char *str)
+int	unsupported_error(const char *str)
 {
 	write(STDERR_FILENO, __PRGM_NAME, __PRGM_NAME_LEN);
 	write(STDERR_FILENO, __UNSUPPORTED_ERROR, ft_strlen(__UNSUPPORTED_ERROR));

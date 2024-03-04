@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 01:52:12 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 05:44:32 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/04 02:24:40 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ enum e_token_type
 	_REDIR_OUTPUT_TOK,
 	_REDIR_HEREDOC_TOK,
 	_REDIR_APPEND_TOK,
-	_OPEN_PARENTHESIS_TOK,
-	_CLOSE_PARENTHESIS_TOK,
+	_OPEN_BRACKETS_TOK,
+	_CLOSE_BRACKETS_TOK,
 	_CMD_TOK,
 	_ARG_TOK,
 	_FILE_TOK,
@@ -39,9 +39,19 @@ typedef struct s_lexer_token
 	char				*value;
 }	t_lexer_token;
 
-int	parenthesis_analysis(t_vector *vector, size_t index);
-int	end_of_parenthesis(t_vector *vector, size_t index);
+typedef enum e_brackets
+{
+	_NO_BRACKETS,
+	_OPENED,
+	_CLOSED,
+}	t_brackets;
+
+int	lexer_close_bracket(t_vector *vector, size_t index);
+int	lexer_next_tok(t_vector *vector, size_t index, t_brackets mode);
+int	lexer_open_bracket(t_vector *vector, size_t index);
+int	lexer_operator_tok(t_vector *vector, size_t index, t_brackets mode);
+int	lexer_redirection_tok(t_vector *vector, size_t index, t_brackets mode);
 int	syntax_error(const char *str);
-int	unsupported_token(const char *str);
+int	unsupported_error(const char *str);
 
 #endif //LEXER_H

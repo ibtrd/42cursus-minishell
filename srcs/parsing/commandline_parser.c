@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 22:49:31 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 23:57:59 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/04 02:20:09 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_astnode	*commandline_parser(char *input)
 	free(input);
 	if (lexer_build(cmdline, &lexer))
 		return (parser_error(cmdline));
-	if (lexer_analysis(&lexer, 0))
+	if (lexer_launch(&lexer, 0))
 	{
 		ft_vector_free(&lexer, NULL);
 		return (parser_error(cmdline));

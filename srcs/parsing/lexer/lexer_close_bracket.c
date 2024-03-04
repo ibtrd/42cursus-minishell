@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end_of_parenthesis.c                               :+:      :+:    :+:   */
+/*   lexer_close_bracket.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/03 04:53:38 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 23:53:18 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/04 01:45:16 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/04 02:07:26 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,21 @@
 
 #include <stdio.h> //REMOVE
 
-static int	redirection_token(t_vector *vector, size_t index);
-
-int	end_of_parenthesis(t_vector *vector, size_t index)
+int	lexer_close_bracket(t_vector *vector, size_t index)
 {
 	const t_lexer_token	*ptr = ft_vector_get(vector, index);
 
 	#ifdef DEBUG
 	printf("Inner parentheis closed!\n");
 	#endif
-	if (ptr->type == _CMD_TOK || ptr->type == _OPEN_PARENTHESIS_TOK)
+	if (ptr->type == _UNSUPPORTED_TOK)
+		return (unsupported_error(ptr->value));
+	if (ptr->type == _CMD_TOK || ptr->type == _OPEN_BRACKETS_TOK)
 		return (syntax_error(ptr->value));
 	if (ptr->type >= _REDIR_INPUT_TOK && ptr->type <= _REDIR_APPEND_TOK)
-		return(redirection_token(vector, index + 1));
+		return(lexer_redirection_tok(vector, index + 1, _CLOSED));
 	#ifdef DEBUG
 	printf("Parenthesis returning index %zu\n", index);
 	#endif
 	return (index);
-}
-
-static int	redirection_token(t_vector *vector, size_t index)
-{
-	t_lexer_token	*ptr;
-
-	ptr = ft_vector_get(vector, index);
-	#ifdef DEBUG
-	printf("end of parenthesis mode | index = %zu | tok = %s\n" , index, ptr->value);
-	#endif
-	if (ptr->type != _CMD_TOK)
-		return (syntax_error(ptr->value));
-	ptr->type = _FILE_TOK;
-	return (end_of_parenthesis(vector, index + 1));
 }

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/02 05:22:28 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/04 02:11:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define __OPEN_PARENTHESIS "("
 # define __CLOSE_PARENTHESIS ")"
 
-# define __UNSUPPORTED_OPERATOR1 ">>>"
+# define __UNSUPPORTED_OPERATOR1 "<<<"
 # define __UNSUPPORTED_OPERATOR2 "<>"
 # define __UNSUPPORTED_OPERATOR3 "&"
 
