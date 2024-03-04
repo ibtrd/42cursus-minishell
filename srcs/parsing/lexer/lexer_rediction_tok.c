@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 00:16:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/04 02:24:40 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/04 18:25:20 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	lexer_redirection_tok(t_vector *vector, size_t index, t_brackets mode)
 
 	ptr = ft_vector_get(vector, index);
 	#ifdef DEBUG
-	printf("normal mode | index = %zu | tok = %s\n" , index, ptr->value);
+	printf("redir_token | index = %zu | tok = %s\n" , index, ptr->value);
 	#endif
 	if (ptr->type == _UNSUPPORTED_TOK)
 		return (unsupported_error(ptr->value));

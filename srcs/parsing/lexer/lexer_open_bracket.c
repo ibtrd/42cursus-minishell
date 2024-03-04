@@ -21,18 +21,23 @@ int	lexer_open_bracket(t_vector *vector, size_t index)
 	#ifdef DEBUG
 	printf("parenthesis mode INIT | index = %zu\n", index);
 	#endif
+
 	if (ptr->type == _UNSUPPORTED_TOK)
 		return (unsupported_error(ptr->value));
 	if (ptr->type == _END_TOK)
 		return (FAILURE);
 	if (ptr->type <= _PIPE_TOK || ptr->type == _CLOSE_BRACKETS_TOK)
 		return (syntax_error(ptr->value));
+	if (ptr->type >= _REDIR_INPUT_TOK && ptr->type <= _REDIR_APPEND_TOK)
+		return (lexer_redirection_tok(vector, index + 1, _OPENED));
 	if (ptr->type == _OPEN_BRACKETS_TOK)
 	{
+
 		#ifdef DEBUG
 		printf("Opening parenthesis from PARENTHESIS\n");
 		#endif
 		index = lexer_open_bracket(vector, index + 1);
+
 		if ((int)index == FAILURE)
 			return (FAILURE);
 		return (lexer_next_tok(vector, index, _OPENED));
