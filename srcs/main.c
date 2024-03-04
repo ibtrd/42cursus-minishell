@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 23:43:33 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/04 17:34:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char **av, char **env)
 	{
 		input = readline("\e[34mminishell$\e[0m ");
 		if (!input)
-			break ;
+			continue ;
 		add_history(input);
 		commandline_parser(input);
 	}
