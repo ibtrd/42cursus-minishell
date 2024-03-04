@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/04 02:20:51 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/05 00:31:08 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,16 +35,17 @@ PARSING_SRC = \
 
 LEXER_DIR = lexer/
 LEXER_SRC = \
-		lexer_build \
-		lexer_launch \
-		lexer_error \
-		lexer_open_bracket \
-		lexer_rediction_tok \
-		lexer_close_bracket \
-		lexer_next_tok \
-		lexer_operator_tok \
 		cmdline_addspace \
 		cmdline_tokenizer \
+		lexer_build \
+		lexer_close_bracket \
+		lexer_error \
+		lexer_launch \
+		lexer_next_tok \
+		lexer_open_bracket \
+		lexer_operator_tok \
+		lexer_rediction_tok \
+		lexer_set_args \
 
 ## AST ##
 

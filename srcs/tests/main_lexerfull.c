@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 00:30:10 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/04 02:20:09 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/05 00:09:54 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(void)
 		else
 			printf("\e[31;1mInvalid!\e[0m\n\n");
 		
-
+		lexer_set_args(&lexer);
 		i = 0;
 		while (i < lexer.total)
 		{

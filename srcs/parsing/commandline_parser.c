@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 22:49:31 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/04 04:11:30 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/05 00:08:36 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_astnode	*commandline_parser(char *input)
 
 	if (commandline_lexer(input, &lexer))
 		return (NULL);
+	lexer_set_args(&lexer);
 
 	//TODO AST BUILDING FUNCTION
 
