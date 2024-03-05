@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:32:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 17:41:43 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/05 18:16:08 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_astnode	*ast_test3(void)
 	// char 		str2[] =  "../push_swap/push_swap 1 3 2";
 	// char 		str3[] =  "../push_swap/checker 1 3 2";
 
-//	ft_vector_init(); -------------------------------------------------------------
+//	ft_vector_init(); ----------------------------------------------------------
 
 	t_vector	*v1 = malloc(sizeof(t_vector));
 	ft_vector_init(v1, sizeof(char *), 0);
