@@ -3,26 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/29 19:29:17 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/04 17:34:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <readline/readline.h>
+#include <readline/history.h>
+
 #include "ast.h"
+#include "parsing.h"
 
 #include "testing.h" //REMOVE
 
 t_astnode	*ast_test1(void);
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
-	t_astnode	*root;
+	char	*input;
 
-	root = ast_test1();
-	print_ast(root);
-	//executor_test1(root);
-	free_ast(root);
+	(void)ac;
+	(void)av;
+	(void)env;
+	while (1)
+	{
+		input = readline("\e[34mminishell$\e[0m ");
+		if (!input)
+			continue ;
+		add_history(input);
+		commandline_parser(input);
+	}
+	rl_clear_history();
 	return (0);
 }

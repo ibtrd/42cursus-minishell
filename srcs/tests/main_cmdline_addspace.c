@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 23:44:37 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:47:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/02 04:08:19 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(void)
 	test_dup_cmdline("ls && (((>((true||true))) && ls");
 	test_dup_cmdline("ls      \"\"         &&                ls");
 	test_dup_cmdline("<'bib| le'.txt cat|head>test3|tail -8>test2>test");
+	test_dup_cmdline("<'bib| le'.txt >>>> cat|head>test3|tail -8>test2>test");
 	return (0);
 }
 

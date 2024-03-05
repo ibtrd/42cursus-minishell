@@ -14,9 +14,9 @@
 # define FT_VECTOR_H
 
 # include <stddef.h>
-# include <stdbool.h>
 
 # define VECTOR_INIT_CAPACITY 16
+
 # define UNDEFINED -1
 # define FAILURE -1
 # define SUCCESS 0

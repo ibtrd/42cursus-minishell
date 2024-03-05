@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/29 19:30:01 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/05 00:31:08 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,30 @@ SRC = \
 	$(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC)) \
 	$(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC)) \
 
+## PARSING ##
+
 PARSING_DIR = parsing/
 PARSING_SRC = \
-	cmdline_addspace \
-	cmdline_tokenizer \
+	$(addprefix $(LEXER_DIR),$(LEXER_SRC)) \
 	escape_utils \
-	lexer \
 	syntax_checker \
+	commandline_parser \
+
+LEXER_DIR = lexer/
+LEXER_SRC = \
+		cmdline_addspace \
+		cmdline_tokenizer \
+		lexer_build \
+		lexer_close_bracket \
+		lexer_error \
+		lexer_launch \
+		lexer_next_tok \
+		lexer_open_bracket \
+		lexer_operator_tok \
+		lexer_rediction_tok \
+		lexer_set_args \
+
+## AST ##
 
 AST_DIR = ast/
 AST_SRC = \
@@ -39,8 +56,12 @@ AST_SRC = \
 	ast_print \
 	ast_addnode \
 
+## EXEC ##
+
 EXECUTION_DIR = exec/
 EXECUTION_SRC = \
+
+## BUILTINS ##
 
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
@@ -71,7 +92,7 @@ INCS = \
 # *** CONFIG ***************************************************************** #
 
 CFLAGS		=	-Wall -Wextra -Werror $(OFLAGS)
-OFLAGS 		=	-O3
+OFLAGS 		=	-g3
 
 CPPFLAGS 	= 	$(addprefix -I, $(INCS)) \
 				$(addprefix -D, $(DEFINES)) \
@@ -142,13 +163,13 @@ bonus : $(NAME)
 .PHONY : clean
 clean :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
-	rm -rf $(BUILD_DIR) $(LAST_MODE_FILE)
+	rm -rf $(BUILD_DIR)
 	echo "$(YELLOW) $(NAME) building files removed! $(RESET)"
 
 .PHONY : fclean
 fclean :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
-	rm -rf $(BUILD_DIR) $(LAST_MODE_FILE) $(NAME) $(MODE_TRACE) $(NAME)_test
+	rm -rf $(BUILD_DIR) $(NAME) $(MODE_TRACE) $(NAME)_test
 	echo "$(YELLOW) $(NAME) files removed! $(RESET)"
 
 .PHONY : re
@@ -182,20 +203,26 @@ print% :
 run :	$(NAME)
 	./$(NAME)
 
+VALGRIND = valgrind -q --suppressions=.valgrindignore.txt --leak-check=full
+
 .PHONY : valgrind
 valgrind : debug
-	valgrind ./$(NAME)
+	$(VALGRIND) ./$(NAME)
 
 # *** TESTING **************************************************************** #
 
 AVAILABLE_TESTS = \
 	cmdline_addspace \
 	syntax_checker \
+	lexer \
+	lexerfull \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
-	$(MAKE) TEST=$@
-	@valgrind ./$(NAME)_test
+	$(RM) minishell_test
+	@$(MAKE) TEST=$@
+	@$(VALGRIND) ./$(NAME)_test
+#  ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
 

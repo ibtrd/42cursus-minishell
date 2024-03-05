@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:32:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:47:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/02/29 01:50:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	main(void)
 	test_syntax_checker("(false || '(true)') || (true || true)", 1);
 	test_syntax_checker("(false || '(true)') || (\")\"true || true)", 1);
 	test_syntax_checker("(false || '(true)') || (\")\"true || true))", 0);
+
+	test_syntax_checker("(<< . cat | head | tail && << * (tac || rev) > test) > test2", 0);
 }
 
 void	test_syntax_checker(char *str, bool expected)
