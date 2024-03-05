@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:10:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 20:13:59 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/05 17:48:13 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 # define AST_H
 
 # include "ft_vector.h"
-
-typedef enum e_tokentype
-{
-	_COMMAND,
-	_OPERATOR,
-	_PRIO,
-	_FILENAME
-}	t_tokentype;
 
 typedef enum e_nodetype
 {
@@ -43,8 +35,8 @@ typedef struct s_astnode
 	struct s_astnode	*right;
 }	t_astnode;
 
-int		ast_newnode(t_astnode **new, t_nodetype type, t_vector *args);
-void	free_ast(t_astnode *root);
+int			ast_newnode(t_astnode **new, t_nodetype type, t_vector *args);
+void		free_ast(t_astnode *root);
 
 t_astnode	*ast_addnode(t_astnode *root, t_astnode *new);
 t_astnode	*ast_add_logicaloperator(t_astnode *root, t_astnode *new);

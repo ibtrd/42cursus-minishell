@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:41:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:43:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/03 01:03:35 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@
 static int	check_quotes(char *cmdline);
 static int	check_parentheses(char *cmdline);
 
+/*
+	DESCRIPTION
+	The syntax_checker() function analyse the string pointed by cmdline
+	to check if each ' and/or " quote is closed by the the end of the string.
+	It then check that no parenthesis is left open by the end of the string.
+	On syntax error, the syntax_checker() function print an error
+	message on standard error.
+	
+	RETURN VALUE
+	The syntax_checker() function return 0 if no syntax error has been
+	detected. On error, syntax_checker() return -1.
+*/
+
 int	syntax_checker(char *cmdline)
 {
 	int	status;
@@ -26,23 +39,18 @@ int	syntax_checker(char *cmdline)
 	status = check_quotes(cmdline);
 	if (status == __UNCLOSED_SINGLE_QUOTE)
 	{
-		write(2, "Syntax error: unclosed `'' quote\n", 33);
+		write(STDERR_FILENO, "minishell: Syntax error: unclosed `'' quote\n", 44);
 		return (FAILURE);
 	}
 	else if (status == __UNCLOSED_DOUBLE_QUOTE)
 	{
-		write(2, "Syntax error: unclosed `\"' quote\n", 33);
+		write(STDERR_FILENO, "minishell: Syntax error: unclosed `\"' quote\n", 44);
 		return (FAILURE);
 	}
 	status = check_parentheses(cmdline);
 	if (status == __UNCLOSED_PARENTHESIS)
 	{
-		write(2, "Syntax error: unclosed `(' parenthesis\n", 39);
-		return (FAILURE);
-	}
-	else if (status == __UNOPENED_PARENTHESIS)
-	{
-		write(2, "Syntax error near unexpected token `)'\n", 39);
+		write(STDERR_FILENO, "minishell: Syntax error: unclosed `(' parenthesis\n", 50);
 		return (FAILURE);
 	}
 	return (SUCCESS);
@@ -91,11 +99,9 @@ static int	check_parentheses(char *cmdline)
 			parenthesis++;
 		else if (!escape.mode && cmdline[i] == ')')
 			parenthesis--;
-		if (parenthesis < 0)
-			return (__UNOPENED_PARENTHESIS);
 		i++;
 	}
-	if (parenthesis)
+	if (parenthesis > 0)
 		return (__UNCLOSED_PARENTHESIS);
 	return (SUCCESS);
 }
