@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_addnode.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:40:02 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 17:40:11 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/05 23:49:27 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

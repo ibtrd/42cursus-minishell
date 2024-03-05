@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:10:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 18:00:11 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/05 23:15:00 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define AST_H
 
 # include "ft_vector.h"
+
+# include "lexer.h"
+
+#include <stdio.h> //REMOVE
 
 typedef enum e_nodetype
 {
@@ -34,6 +38,10 @@ typedef struct s_astnode
 	struct s_astnode	*left;
 	struct s_astnode	*right;
 }	t_astnode;
+
+int	build_operator(t_lexer_token *tok, t_astnode **root);
+int	build_command(t_vector **arg_v, t_lexer_token *tok, t_astnode **root);
+int	build_redirection(t_vector **file_v, t_lexer_token *tok, t_astnode **root);
 
 int			ast_newnode(t_astnode **new, t_nodetype type, t_vector *args);
 t_astnode	*free_ast(t_astnode *root);

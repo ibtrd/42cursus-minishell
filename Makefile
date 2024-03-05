@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/05 18:00:04 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/05 22:36:13 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,11 +52,18 @@ LEXER_SRC = \
 
 AST_DIR = ast/
 AST_SRC = \
+	$(addprefix $(BUILDER_DIR),$(BUILDER_SRC)) \
 	ast_test1 \
 	ast_utils \
 	ast_print \
 	ast_addnode \
-	ast_builder \
+
+BUILDER_DIR = builder/
+BUILDER_SRC = \
+	ast_build_launch \
+	ast_build_command \
+	ast_build_operator \
+	ast_build_redirection \
 
 ## EXEC ##
 
