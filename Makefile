@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/05 05:03:44 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/05 18:00:04 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,8 +62,15 @@ AST_SRC = \
 
 EXECUTION_DIR = exec/
 EXECUTION_SRC = \
-
-## BUILTINS ##
+	branch/branch_command \
+	branch/branch_logicaloperator \
+	branch/branch_pipe \
+	branch/branch_redirection \
+	open/open_input \
+	open/open_output \
+	open/open_append \
+	executor \
+	node_exec \
 
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
@@ -214,6 +221,7 @@ valgrind : debug
 
 AVAILABLE_TESTS = \
 	cmdline_addspace \
+	executor \
 	syntax_checker \
 	lexer \
 	lexerfull \

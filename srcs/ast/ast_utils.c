@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:57:11 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 04:57:16 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/05 18:02:25 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,10 @@ t_astnode	*free_ast(t_astnode *root)
 {
 	if (!root)
 		return (NULL);
-	if (root->type == _CMD)
-	{
-		ft_vector_free(root->args, NULL);
-		free(root->args);
-	}
+	ft_vector_free(root->args, NULL);
+	free(root->args);
 	free_ast(root->left);
 	free_ast(root->right);
 	free(root);
 	return (NULL);
 }
-
