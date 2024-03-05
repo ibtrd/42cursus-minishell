@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/05 00:31:08 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/05 05:03:44 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ PARSING_SRC = \
 	syntax_checker \
 	commandline_parser \
 
+
 LEXER_DIR = lexer/
 LEXER_SRC = \
 		cmdline_addspace \
@@ -55,6 +56,7 @@ AST_SRC = \
 	ast_utils \
 	ast_print \
 	ast_addnode \
+	ast_builder \
 
 ## EXEC ##
 
@@ -91,8 +93,7 @@ INCS = \
 
 # *** CONFIG ***************************************************************** #
 
-CFLAGS		=	-Wall -Wextra -Werror $(OFLAGS)
-OFLAGS 		=	-g3
+CFLAGS		=	-Wall -Wextra -Werror
 
 CPPFLAGS 	= 	$(addprefix -I, $(INCS)) \
 				$(addprefix -D, $(DEFINES)) \

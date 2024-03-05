@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:10:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 23:20:12 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/05 04:23:38 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 typedef enum e_nodetype
 {
-	_CMD,
+	_AND,
+	_OR,
+	_PIPE,
 	_INPUT,
 	_OUTPUT,
 	_HEREDOC,
 	_APPEND,
-	_PIPE,
-	_AND,
-	_OR
+	_CMD
 }	t_nodetype;
 
 typedef struct s_astnode
@@ -36,7 +36,7 @@ typedef struct s_astnode
 }	t_astnode;
 
 int			ast_newnode(t_astnode **new, t_nodetype type, t_vector *args);
-void		free_ast(t_astnode *root);
+t_astnode	*free_ast(t_astnode *root);
 
 t_astnode	*ast_addnode(t_astnode *root, t_astnode *new);
 t_astnode	*ast_add_logicaloperator(t_astnode *root, t_astnode *new);
