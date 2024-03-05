@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:37:35 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:47:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/05 13:13:24 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,30 @@
 
 #include "ast.h"
 
-void	print_ast(t_astnode *root)
+void	dprint_ast(int fd, t_astnode *root)
 {
 	if (!root)
 		return ;
-	print_ast(root->left);
+	dprint_ast(fd, root->left);
 	if (root->type == _AND)
-		printf("&&\n");
+		dprintf(fd, "&&\n");
 	if (root->type == _OR)
-		printf("||\n");
+		dprintf(fd, "||\n");
 	if (root->type == _PIPE)
-		printf("|\n");
+		dprintf(fd, "|\n");
 	if (root->type == _INPUT)
-		printf("<\n");
+	{
+		dprintf(fd, "< %s\n", *(char **)root->args->ptr);
+	}
 	if (root->type == _OUTPUT)
-		printf(">\n");
+		dprintf(fd, "> %s\n", *(char **)root->args->ptr);
 	if (root->type == _HEREDOC)
-		printf("<<\n");
+		dprintf(fd, "<< %s\n", *(char **)root->args->ptr);
 	if (root->type == _APPEND)
-		printf(">>\n");
+		dprintf(fd, ">> %s\n", *(char **)root->args->ptr);
 	if (root->type == _CMD)
 	{
-		printf("%s\n", (char *)root->args->ptr);
+		dprintf(fd, "%s\n", *(char **)root->args->ptr);
 	}
-	print_ast(root->right);
+	dprint_ast(fd, root->right);
 }

@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/29 19:30:01 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/05 13:16:02 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,15 @@ AST_SRC = \
 
 EXECUTION_DIR = exec/
 EXECUTION_SRC = \
+	branch/branch_command \
+	branch/branch_logicaloperator \
+	branch/branch_pipe \
+	branch/branch_redirection \
+	open/open_input \
+	open/open_output \
+	open/open_append \
+	executor \
+	node_exec \
 
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
@@ -190,12 +199,13 @@ valgrind : debug
 
 AVAILABLE_TESTS = \
 	cmdline_addspace \
+	executor \
 	syntax_checker \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
 	$(MAKE) TEST=$@
-	@valgrind ./$(NAME)_test
+	@valgrind  --trace-children=yes --track-fds=yes --leak-check=full ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
 
