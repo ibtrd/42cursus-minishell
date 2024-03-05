@@ -6,6 +6,7 @@ minishell_test
 .trace
 *.log
 TEST_DIR/*
+*.old
 
 # Prerequisites
 *.d

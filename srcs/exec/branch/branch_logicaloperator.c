@@ -6,29 +6,38 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/02/23 19:35:27 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/05 14:25:50 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_executor.h"
-#include "minishell_def.h"
+#include "executor.h"
+#include "minishelldef.h"
 #include <sys/wait.h>
 #include <errno.h>
 #include <unistd.h>
+#include <stdlib.h>
 
+#include <stdio.h>
 
-static int	logop_left(t_executor *exec)
+static int	logop_fork(t_executor *exec, t_astnode *node)
 {
 	pid_t	pid;
 	int		status;
+	int		ret;
 
 	pid = fork();
 	if (pid == -1)
 		return (1);
 	if (pid == 0)
 	{
-		exec->node = exec->node->left;
-		exit(node_exec(exec));
+		exec->node = node;
+		ret = node_exec(exec);
+		close(0);
+		close(1);
+		free_ast(exec->root);
+		dprintf(2, "end of logicaloperator_fork\n");	// DEBUG
+		exit(ret);
+		// exit(node_exec(exec));
 	}
 	pid = waitpid(pid, &status, 0);
 	if (pid == -1 && errno != ECHILD)
@@ -43,12 +52,12 @@ int	branch_logicaloperator(t_executor *exec)
 	t_astnode	*node;
 	int	ret;
 
+	dprintf(2, "logicaloperator\n");	// DEBUG
 	node = exec->node;
-	ret = logop_left(exec);
-	exec->node = node->right;
-	if (node->type == _AND && ret == 0)	// invert _AND and _OR
-		return (node_exec(exec));
-	if (node->type == _OR && ret != 0)
-		return (node_exec(exec));
+	ret = logop_fork(exec, node->left);
+	if (node->type == _AND && !ret)
+		ret = logop_fork(exec, node->right);
+	else if (node->type == _OR && ret)
+		ret = logop_fork(exec, node->right);
 	return (ret);
 }

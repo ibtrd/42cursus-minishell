@@ -6,13 +6,13 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/02/23 18:57:44 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/05 14:24:29 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_ast.h"
-#include "minishell_executor.h"
-#include "minishell_def.h"
+#include "executor.h"
+#include "minishelldef.h"
+#include <unistd.h>
 
 // int	pipe_left(t_executor *exec, int pipefd[2])
 // {
@@ -79,43 +79,42 @@
 
 // }
 
-int	node_exec(t_executor *exec)
-{
-	if (!exec->node)
-		return (1);
-	if (exec->node->type == _AND || exec->node->type == _OR)
-		return (branch_logicaloperator(exec));
-	if (exec->node->type == _PIPE)
-		return (branch_pipe(exec));
-	if (exec->node->type >= _INPUT && exec->node->type <= _APPEND)
-		return (branch_redirection(exec));
-	else
-		return (branch_command(exec));
-	return (1);
-}
-
-int	exec_init(t_executor *exec, t_astnode *root, char **env, char *program)
+int	exec_init(t_executor *exec, t_astnode *root, char **env)
 {
 	exec->env = env;
-	exec->program = program;
 	exec->pipe[0] = -1;
 	exec->pipe[1] = -1;
 	exec->background = 1;
-	exec->last_pid = 0;
+	exec->pid = 0;
 	exec->last_status = 0;
 	exec->node = root;
-	exec->in = dup(0);	// PROTECT
-	exec->out = dup(1);	// PROTECT
+	exec->root = root;
+	// exec->in = dup(0);	// PROTECT
+	// exec->out = dup(1);	// PROTECT
 	return (1);
 }
 
-int	executor(t_astnode *root, char **env, char *program)
+int	exec_cleanup(t_executor *exec)
+{
+	if (exec->pipe[0] != -1)
+		close(exec->pipe[0]);
+	if (exec->pipe[1] != -1)
+		close(exec->pipe[1]);
+	if (dup2(exec->in, 0))
+		return (1);
+	if (dup2(exec->out, 1))
+		return (1);
+	close(exec->in);
+	close(exec->out);
+	return (0);
+}
+
+int	executor(t_astnode *root, char **env)
 {
 	t_executor	exec;
 
-	exec_init(&exec, root, env, program);
-	node_exec(&exec);
-	return (1);
+	exec_init(&exec, root, env);
+	return (node_exec(&exec));
 }
 
 // FORK A CHAQUE NOEUD
