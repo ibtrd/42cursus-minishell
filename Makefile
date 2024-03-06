@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/06 16:20:25 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/06 18:05:03 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ EXECUTION_SRC = \
 	open/open_append \
 	close_fds \
 	executor \
+	exec_utils \
 	node_exec \
 
 BUILTIN_DIR = builtins/

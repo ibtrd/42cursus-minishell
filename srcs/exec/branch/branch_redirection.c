@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 13:34:45 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 18:30:01 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <stdio.h>
 # include <testing.h>
@@ -28,46 +29,53 @@ static int	open_redirect(t_executor *exec)
 														open_append};
 	// int								ret;
 
-	dprintf(2, "open_redirect\n");	// DEBUG
+	// dprintf(2, "open_redirect\n");	// DEBUG
 	return (open_redirect[exec->node->type - _INPUT](exec));	// PROTECT
 }
 
-// static int	redirect_fork(t_executor *exec, t_astnode *node)
-// {
-// 	pid_t	pid;
-// 	int		status;
-// 	int		ret;
-
-// 	if (open_redirect(exec))
-// 	{
-// 		dprintf(2, "open_redirect failed\n");	// DEBUG
-// 		return (1);
-// 		// close(0);
-// 		// close(1);
-// 		// free_ast(exec->root);
-// 		// dprintf(2, "end of redirect_fork\n");	// DEBUG
-// 	}
-// 	dprintf(2, "open_redirect success\n");	// DEBUG
-// 	exec->node = node;
-// 	ret = node_exec(exec);
-// }
+static int	close_redirect(t_executor *exec)
+{
+	if (exec->node->type == _INPUT || exec->node->type == _HEREDOC)
+	{
+		// dprintf(2, "close_redirect input\n");	// DEBUG
+		// dprintf(2, "\tfd = %d\n", *(int *)ft_vector_get(exec->redir + __FDIN, (exec->redir + __FDIN)->total - 1));	// DEBUG
+		close(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1));
+		ft_vector_delete(&exec->infd, exec->infd.total - 1, NULL);
+	}
+	else if (exec->node->type == _OUTPUT || exec->node->type == _APPEND)
+	{
+		// dprintf(2, "close_redirect output\n");	// DEBUG
+		// dprintf(2, "\tfd = %d\n", *(int *)ft_vector_get(exec->redir + __FDOUT, (exec->redir + __FDOUT)->total - 1));	// DEBUG
+		close(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1));
+		ft_vector_delete(&exec->outfd, exec->outfd.total - 1, NULL);
+	}
+	return (0);
+}
 
 int	branch_redirection(t_executor *exec)
 {
 	t_astnode	*node;
 	int			ret;
 
-	dprintf(2, "redirection\n");	// DEBUG
+	// dprintf(2, "redirection\n");	// DEBUG
 	ret = 0;
 	if (open_redirect(exec))
 	{
 		dprintf(2, "open_redirect failed\n");	// DEBUG
+		dprintf(2, "Node Type: %d\n", exec->node->type);	// DEBUG
+		dprintf(2, "%s: %s\n", *(char **)ft_vector_get(exec->node->args, 0), strerror(errno));	// DEBUG
 		return (1);
 	}	
-	dprintf(2, "open_redirect success\n");	// DEBUG
+	// dprintf(2, "open_redirect success\n");	// DEBUG
 	node = exec->node;
 	exec->node = node->right;
 	ret = node_exec(exec);
 	exec->node = node;
+	printf_redir(exec);	// DEBUG
+	if (close_redirect(exec))
+	{
+		dprintf(2, "close_redirect failed\n");	// DEBUG
+		return (1);
+	}
 	return (ret);
 }

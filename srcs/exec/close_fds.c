@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:41:21 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 13:49:11 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 18:21:09 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 #include "minishelldef.h"
 #include <unistd.h>
 
+#include <stdio.h>
+
 void	close_fds(t_executor *exec)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < (exec->redir + __FDIN)->total)
+	// dprintf(2, "FDIN->total: %zu\n", exec->infd.total);	// DEBUG
+	while (i < exec->infd.total)
 	{
-		close(*(int *)ft_vector_get(exec->redir + __FDIN, i));
+		close(*(int *)ft_vector_get(&exec->infd, i));
 		i++;
 	}
-	ft_vector_free(exec->redir + __FDIN, NULL);
+	ft_vector_free(&exec->infd, NULL);
 	i = 0;
-	while (i < (exec->redir + __FDOUT)->total)
+	// dprintf(2, "FDOUT->total: %zu\n", exec->outfd.total);	// DEBUG
+	while (i < exec->outfd.total)
 	{
-		close(*(int *)ft_vector_get(exec->redir + __FDOUT, i));
+		close(*(int *)ft_vector_get(&exec->outfd, i));
 		i++;
 	}
-	ft_vector_free(exec->redir + __FDOUT, NULL);
+	ft_vector_free(&exec->outfd, NULL);
 }

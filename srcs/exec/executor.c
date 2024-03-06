@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 13:49:41 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 18:19:21 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,21 @@ int	exec_init(t_executor *exec, t_astnode *root, char **env)
 	exec->pid = 0;
 	exec->node = root;
 	exec->root = root;
-	exec->redir[__FDIN] = (t_vector){0};
-	exec->redir[__FDOUT] = (t_vector){0};
-	if (ft_vector_init(exec->redir + __FDIN, sizeof(int), 1))
+	exec->infd = (t_vector){0};
+	exec->outfd= (t_vector){0};
+	if (ft_vector_init(&exec->infd, sizeof(int), 1))
 		return (1);
-	if (ft_vector_init(exec->redir + __FDOUT, sizeof(int), 1))
+	if (ft_vector_init(&exec->outfd, sizeof(int), 1))
 		return (1);
 	fd = dup(STDIN_FILENO);
 	if (fd == -1)
 		return (1);
-	if (ft_vector_add(exec->redir + __FDIN, &fd))
+	if (ft_vector_add(&exec->infd, &fd))
 		return (1);
 	fd = dup(STDOUT_FILENO);
 	if (fd == -1)
 		return (1);
-	if (ft_vector_add(exec->redir + __FDOUT, &fd))
+	if (ft_vector_add(&exec->outfd, &fd))
 		return (1);
 	return (0);
 }
@@ -127,7 +127,7 @@ int	executor(t_astnode *root, char **env)
 
 	if (exec_init(&exec, root, env))
 	{
-		dprintf(2, "exec_init failed\n");
+		// dprintf(2, "exec_init failed\n");	// DEBUG
 		exec_cleanup(&exec);
 		return (1);
 	}

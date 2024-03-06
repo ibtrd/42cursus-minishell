@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 13:49:33 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 16:28:48 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	piping(t_executor *exec, int wait, int pipe[2])
 	// error = -1;	// DEBUG
 	if (error == -1)
 	{
-		dprintf(2, "piping failed\n");	// DEBUG
+		// dprintf(2, "piping failed\n");	// DEBUG
 		close(0);
 		close(1);
 	}
@@ -55,7 +55,7 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 		if (piping(exec, wait, pipe) == -1)
 		{
 			free_ast(exec->root);
-			dprintf(2, "end of pipe_fork\n");	// DEBUG
+			// dprintf(2, "end of pipe_fork\n");	// DEBUG
 			exit(1);
 		}
 		exec->node = node;
@@ -64,7 +64,7 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 		close(1);
 		free_ast(exec->root);
 		close_fds(exec);
-		dprintf(2, "end of pipe_fork\n");	// DEBUG
+		// dprintf(2, "end of pipe_fork\n");	// DEBUG
 		exit(ret);
 		// exit(node_exec(exec));
 	}

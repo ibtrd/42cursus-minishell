@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/06 02:43:10 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 16:30:13 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "ast.h"
 #include "parsing.h"
+#include "executor.h"
 
 #include "testing.h" //REMOVE
 
@@ -35,6 +36,8 @@ int	main(int ac, char **av, char **env)
 			break ;
 		add_history(input);
 		root = commandline_parser(input);
+		printf("\n\n-------------------\n\n");
+		executor(root, env);
 		free_ast(root);
 	}
 	rl_clear_history();

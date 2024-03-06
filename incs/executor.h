@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 13:49:53 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 18:15:33 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ typedef struct s_executor
 	int	pid;
 	t_astnode	*node;
 	t_astnode	*root;
-	t_vector	redir[2];
+	t_vector	infd;
+	t_vector	outfd;
 }	t_executor;
 
 typedef int	(*t_branching)(t_executor *exec);
@@ -40,5 +41,6 @@ int		open_output(t_executor *exec);
 int		node_exec(t_executor *exec);
 void	close_fds(t_executor *exec);
 
+void	printf_redir(t_executor *exec);	// DEBUG
 
 #endif

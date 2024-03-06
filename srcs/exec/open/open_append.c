@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 13:35:18 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 18:22:14 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	open_append(t_executor *exec)
 	if (fd == -1)
 		return (1);
 	// error = dup2(fd, 1);
-	error = ft_vector_add(exec->redir + __FDOUT, &fd);	// PROTECT
+	error = ft_vector_add(&exec->outfd, &fd);	// PROTECT
 	return (error);
 }

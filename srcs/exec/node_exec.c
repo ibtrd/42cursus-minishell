@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 17:45:30 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/05 13:21:42 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 16:28:00 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	node_exec(t_executor *exec)
 {
 	if (!exec->node)
 	{
-		dprintf(2, "node_exec null\n");	// DEBUG
+		// dprintf(2, "node_exec null\n");	// DEBUG
 		return (1);
 	}
 	if (exec->node->type == _AND || exec->node->type == _OR)
@@ -30,6 +30,6 @@ int	node_exec(t_executor *exec)
 		return (branch_redirection(exec));
 	else
 		return (branch_command(exec));
-	dprintf(2, "node_exec not found\n");	// DEBUG
+	// dprintf(2, "node_exec not found\n");	// DEBUG
 	return (1);
 }

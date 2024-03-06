@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 13:49:28 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 18:30:44 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static int	get_cmd_path(char *cmd, char **cmd_path)
 
 static int	dup_fd(t_executor *exec)
 {
-	dup2(*(int *)ft_vector_get(exec->redir + __FDIN, exec->redir[__FDIN].total - 1), STDIN_FILENO);		// PROTECT
-	dup2(*(int *)ft_vector_get(exec->redir + __FDOUT, exec->redir[__FDOUT].total - 1), STDOUT_FILENO);	// PROTECT
+	dup2(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1), STDIN_FILENO);		// PROTECT
+	dup2(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1), STDOUT_FILENO);	// PROTECT
 	close_fds(exec);
 	return (0);
 }
@@ -68,9 +68,9 @@ static int	execute_command(t_executor *exec)
 	ret = get_cmd_path(cmd[0], &path);
 	if (ret)
 		return (ret);
-	dprintf(2, "execve command\n");	// DEBUG
+	// dprintf(2, "execve command\n");	// DEBUG
 	execve(path, cmd, exec->env);
-	dprintf(2, "apres commande\n");	// DEBUG
+	// dprintf(2, "apres commande\n");	// DEBUG
 	free(path);
 	return (1);
 }
@@ -90,7 +90,7 @@ static int	command_fork(t_executor *exec)
 		close(0);
 		close(1);
 		free_ast(exec->root);
-		dprintf(2, "end of command_fork (fail)\n");	// DEBUG
+		// dprintf(2, "end of command_fork (fail)\n");	// DEBUG
 		exit(ret);
 		// exit(execute_command(exec));
 	}
@@ -104,6 +104,6 @@ static int	command_fork(t_executor *exec)
 
 int	branch_command(t_executor *exec)
 {
-	dprintf(2, "command\n");	// DEBUG
+	// dprintf(2, "command\n");	// DEBUG
 	return (command_fork(exec));
 }
