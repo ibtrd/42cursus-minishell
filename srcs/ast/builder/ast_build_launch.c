@@ -12,9 +12,9 @@
 
 #include <stdlib.h>
 
-#include "libft.h"
-
 #include "ast.h"
+
+#include "libft.h" //REMOVE
 
 static int	build_from_token(t_lexer_token *tok, t_astnode **root);
 
@@ -47,11 +47,13 @@ static int	build_from_token(t_lexer_token *tok, t_astnode **root)
 	if (tok->type <= _REDIR_APPEND_TOK)
 		return (build_redirection(&file_v, tok, root));
 	if (tok->type == _FILE_TOK)
-		return (ft_vector_add_ptr(file_v, tok->value));
+		return (add_file(file_v, tok->value));
 	if (tok->type == _CMD_TOK)
 		return (build_command(&arg_v, tok, root));
 	if (tok->type == _ARG_TOK)
-		return (ft_vector_insert_ptr(arg_v, tok->value, arg_v->total - 1));
+		return (add_argument(arg_v, tok->value));
 	ft_dprintf(2, "BUILDING BAD TOKEN!\n");
 	return (FAILURE);
 }
+
+

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:10:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 23:15:00 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 03:01:40 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ typedef struct s_astnode
 
 int	build_operator(t_lexer_token *tok, t_astnode **root);
 int	build_command(t_vector **arg_v, t_lexer_token *tok, t_astnode **root);
+int	add_argument(t_vector *arg_v, char *str);
 int	build_redirection(t_vector **file_v, t_lexer_token *tok, t_astnode **root);
+int	add_file(t_vector *file_v, char *str);
 
 int			ast_newnode(t_astnode **new, t_nodetype type, t_vector *args);
 t_astnode	*free_ast(t_astnode *root);

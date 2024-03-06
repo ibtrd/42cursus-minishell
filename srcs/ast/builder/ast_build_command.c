@@ -41,3 +41,13 @@ int	build_command(t_vector **arg_v, t_lexer_token *tok, t_astnode **root)
 	*root = ast_addnode(*root, new);
 	return (SUCCESS);
 }
+
+int	add_argument(t_vector *arg_v, char *str)
+{
+	char	*dup;
+
+	dup = ft_strdup(str);
+	if (!dup)
+		return (FAILURE);
+	return (ft_vector_insert_ptr(arg_v, dup, arg_v->total - 1));
+}
