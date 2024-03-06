@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:32:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/06 13:54:29 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 14:45:55 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_astnode	*ast_test3(void)
 	t_astnode	*d;
 	t_astnode	*e;
 	t_astnode	*f;
+	t_astnode	*g;
+	t_astnode	*h;
 	t_astnode	*root = NULL;
 
 	// char 		str1[] =  "echo oui";
@@ -71,6 +73,20 @@ t_astnode	*ast_test3(void)
 	ft_vector_add_ptr(v5, "tail");
 	ft_vector_add_ptr(v5, NULL);
 
+
+	t_vector	*v6 = malloc(sizeof(t_vector));
+	ft_vector_init(v6, sizeof(char *), 0);
+	
+	ft_vector_add_ptr(v6, "out1");
+	ft_vector_add_ptr(v6, NULL);
+
+
+	t_vector	*v7 = malloc(sizeof(t_vector));
+	ft_vector_init(v7, sizeof(char *), 0);
+	
+	ft_vector_add_ptr(v7, "out2");
+	ft_vector_add_ptr(v7, NULL);
+
 //	ast_newnode(); -------------------------------------------------------------
 
 	ast_newnode(&a, _INPUT, v1);
@@ -79,15 +95,24 @@ t_astnode	*ast_test3(void)
 	ast_newnode(&d, _CMD, v4);
 	ast_newnode(&e, _AND, NULL);
 	ast_newnode(&f, _CMD, v5);
+	ast_newnode(&g, _OUTPUT, v6);
+	ast_newnode(&h, _OUTPUT, v7);
 
 //	ast_addnode(); -------------------------------------------------------------
 
 	root = ast_addnode(root, a);
 	root = ast_addnode(root, b);
 	root = ast_addnode(root, c);
-	root = ast_addnode(root, d);
-	root = ast_addnode(root, e);
-	root = ast_addnode(root, f);
+	g->right = root;
+	root = g;
+
+	h->right = d;
+	e->left = h;
+	e->right = f;
+	c->right = e;
+	// root = ast_addnode(root, d);
+	// root = ast_addnode(root, e);
+	// root = ast_addnode(root, f);
 
 	// a->left = b;
 	// a->right = c;
