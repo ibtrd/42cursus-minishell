@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmdline_addspace.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:24:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/06 14:22:47 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 23:45:56 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,10 @@ static int	compare_operators(char *cmdline, char **ptr)
 {
 	const char	*operator[] = {
 		__UNSUPPORTED_OPERATOR1, __UNSUPPORTED_OPERATOR2,
-		__AND, __OR, __PIPE,
-		__REDIR_HEREDOC, __REDIR_APPEND,
+		__AND, __OR, __REDIR_HEREDOC, __REDIR_APPEND,
 		__REDIR_INPUT, __REDIR_OUTPUT,
 		__OPEN_PARENTHESIS, __CLOSE_PARENTHESIS,
-		__UNSUPPORTED_OPERATOR3, ";", NULL
+		__UNSUPPORTED_OPERATOR3, __UNSUPPORTED_OPERATOR4, NULL
 	};
 	size_t		len;
 	int			i;
