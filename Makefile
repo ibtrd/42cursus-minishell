@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/05 22:36:13 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/06 01:28:35 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ AST_SRC = \
 	ast_test1 \
 	ast_utils \
 	ast_print \
+	ast_print2 \
 	ast_addnode \
 
 BUILDER_DIR = builder/

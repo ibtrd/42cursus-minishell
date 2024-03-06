@@ -51,7 +51,7 @@ static int	build_from_token(t_lexer_token *tok, t_astnode **root)
 	if (tok->type == _CMD_TOK)
 		return (build_command(&arg_v, tok, root));
 	if (tok->type == _ARG_TOK)
-		return (ft_vector_insert_ptr(arg_v, tok->value, arg_v->total));
+		return (ft_vector_insert_ptr(arg_v, tok->value, arg_v->total - 1));
 	ft_dprintf(2, "BUILDING BAD TOKEN!\n");
 	return (FAILURE);
 }

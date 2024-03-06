@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 22:49:31 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 23:05:55 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 01:30:37 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_astnode	*commandline_parser(char *input)
 		return (NULL);
 	lexer_set_args(&lexer);
 	root = ast_build_launch(&lexer);
-	dprint_ast(2, root);
+	print2D(2, root);
 	free(input);
 	return (root);
 }
