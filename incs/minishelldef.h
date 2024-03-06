@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/04 02:11:08 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 23:18:20 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,11 @@
 # define __UNSUPPORTED_OPERATOR1 "<<<"
 # define __UNSUPPORTED_OPERATOR2 "<>"
 # define __UNSUPPORTED_OPERATOR3 "&"
+# define __UNSUPPORTED_OPERATOR4 ";"
 
 //PARSING CHARSETS
 # define __DEFAULT_IFS " \t\n"
-# define __METACHARACTER "&|<>()"
+# define __METACHARACTER "&|<>();"
 # define __PARENTHESIS "()"
 # define __SINGLE_QUOTE "\'"
 # define __DOUBLE_QUOTE "\""
