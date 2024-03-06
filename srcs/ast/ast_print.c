@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:37:35 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 13:13:24 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 00:28:45 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 void	dprint_ast(int fd, t_astnode *root)
 {
+	size_t 	i = 0;
+
 	if (!root)
 		return ;
 	dprint_ast(fd, root->left);
@@ -37,7 +39,10 @@ void	dprint_ast(int fd, t_astnode *root)
 		dprintf(fd, ">> %s\n", *(char **)root->args->ptr);
 	if (root->type == _CMD)
 	{
-		dprintf(fd, "%s\n", *(char **)root->args->ptr);
+
+		while (i < root->args->total)
+			dprintf(fd, "%s ", ((char **)root->args->ptr)[i++]);
+		dprintf(fd, "\n");
 	}
 	dprint_ast(fd, root->right);
 }

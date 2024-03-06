@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    libft_srcs.mk                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/29 18:37:43 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/05 21:16:14 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,20 +90,22 @@ MEM_SRC = \
 
 VECTOR_DIR = vector/
 VECTOR_SRC = \
-	vector_add_ptr \
 	vector_add \
+	vector_add_ptr \
+	vector_allocate \
+	vector_deallocate \
 	vector_delete \
 	vector_deleten \
 	vector_free \
 	vector_get \
 	vector_init \
-	vector_insert_ptr \
 	vector_insert \
+	vector_insert_ptr \
 	vector_insertn \
 	vector_join \
 	vector_resize \
-	vector_set_ptr \
 	vector_set \
+	vector_set_ptr \
 	vector_strncat \
 	vector_trim \
 

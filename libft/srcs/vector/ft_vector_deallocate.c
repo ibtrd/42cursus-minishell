@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_free.c                                   :+:      :+:    :+:   */
+/*   ft_vector_deallocate.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 16:20:43 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/05 20:59:18 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/05 21:10:38 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
 #include <stdlib.h>
 
-int	ft_vector_free(t_vector *v, void (*del)(void *))
-{
-	size_t	i;
+#include "ft_vector.h"
 
-	if (!v)
+int	ft_vector_deallocate(t_vector **ptr, void (*del)(void *))
+{
+	if (!ptr || !*ptr)
 		return (FAILURE);
-	if (del)
-	{
-		i = 0;
-		while (i < v->total)
-			del(*(void **)ft_vector_get(v, i++));
-	}
-	free(v->ptr);
-	v->ptr = NULL;
-	v->total = 0;
+	ft_vector_free(*ptr, del);
+	free(*ptr);
+	*ptr = NULL;
 	return (SUCCESS);
 }

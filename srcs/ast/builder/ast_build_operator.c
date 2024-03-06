@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_free.c                                   :+:      :+:    :+:   */
+/*   ast_build_operator.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 16:20:43 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/05 21:55:05 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/05 22:06:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
-#include <stdlib.h>
+#include "ast.h"
 
-int	ft_vector_free(t_vector *v, void (*del)(void *))
+int	build_operator(t_lexer_token *tok, t_astnode **root)
 {
-	size_t	i;
+	t_astnode	*new;
 
-	if (!v)
+	if (ast_newnode(&new, tok->type, NULL))
 		return (FAILURE);
-	if (del)
-	{
-		i = 0;
-		while (i < v->total)
-			del(*(void **)ft_vector_get(v, i++));
-	}
-	free(v->ptr);
-	v->ptr = NULL;
-	v->total = 0;
+	*root = ast_addnode(*root, new);
 	return (SUCCESS);
 }

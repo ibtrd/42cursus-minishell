@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmdline_addspace.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:24:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/02 05:18:59 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 14:22:47 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	compare_operators(char *cmdline, char **ptr)
 		__REDIR_HEREDOC, __REDIR_APPEND,
 		__REDIR_INPUT, __REDIR_OUTPUT,
 		__OPEN_PARENTHESIS, __CLOSE_PARENTHESIS,
-		__UNSUPPORTED_OPERATOR3, NULL
+		__UNSUPPORTED_OPERATOR3, ";", NULL
 	};
 	size_t		len;
 	int			i;

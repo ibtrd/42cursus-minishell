@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 00:08:36 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/05 22:39:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_escape
 
 //PARSER
 t_astnode	*commandline_parser(char *input);
+t_astnode	*ast_build_launch(t_vector *lexer);
 
 int		syntax_checker(char *cmdline);
 int		cmdline_addspace(char *cmdline, char **dup);

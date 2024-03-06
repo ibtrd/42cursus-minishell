@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/06 15:08:36 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/06 16:20:25 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ PARSING_SRC = \
 	syntax_checker \
 	commandline_parser \
 
+
 LEXER_DIR = lexer/
 LEXER_SRC = \
 		cmdline_addspace \
@@ -51,10 +52,19 @@ LEXER_SRC = \
 
 AST_DIR = ast/
 AST_SRC = \
+	$(addprefix $(BUILDER_DIR),$(BUILDER_SRC)) \
 	ast_test1 \
 	ast_utils \
 	ast_print \
+	ast_print2 \
 	ast_addnode \
+
+BUILDER_DIR = builder/
+BUILDER_SRC = \
+	ast_build_launch \
+	ast_build_command \
+	ast_build_operator \
+	ast_build_redirection \
 
 ## EXEC ##
 
@@ -100,8 +110,7 @@ INCS = \
 
 # *** CONFIG ***************************************************************** #
 
-CFLAGS		=	-Wall -Wextra -Werror $(OFLAGS)
-OFLAGS 		=	-g3
+CFLAGS		=	-Wall -Wextra -Werror
 
 CPPFLAGS 	= 	$(addprefix -I, $(INCS)) \
 				$(addprefix -D, $(DEFINES)) \
