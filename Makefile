@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/05 17:47:43 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/06 13:45:08 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ EXECUTION_SRC = \
 	open/open_input \
 	open/open_output \
 	open/open_append \
+	close_fds \
 	executor \
 	node_exec \
 
@@ -210,7 +211,7 @@ print% :
 run :	$(NAME)
 	./$(NAME)
 
-VALGRIND = valgrind -q --suppressions=.valgrindignore.txt --leak-check=full
+VALGRIND = valgrind -q --suppressions=.valgrindignore.txt --leak-check=full --trace-children=yes --track-fds=yes
 
 .PHONY : valgrind
 valgrind : debug

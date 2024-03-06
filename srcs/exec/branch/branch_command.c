@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/05 17:21:06 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 13:49:28 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,13 @@ static int	get_cmd_path(char *cmd, char **cmd_path)
 	return (127);
 }
 
-// static void	**dup_array(void **src, size_t size)
-// {
-// 	size_t	i;
-// 	void	**dst;
-
-// 	dst = malloc(sizeof(void *) * size);
-// 	if (!dst)
-// 		return (NULL);
-// 	i = 0;
-// 	while (i < size)
-// 	{
-// 		dst[i] = src[i];
-// 		i++;
-// 	}
-// 	return (dst);
-// }
+static int	dup_fd(t_executor *exec)
+{
+	dup2(*(int *)ft_vector_get(exec->redir + __FDIN, exec->redir[__FDIN].total - 1), STDIN_FILENO);		// PROTECT
+	dup2(*(int *)ft_vector_get(exec->redir + __FDOUT, exec->redir[__FDOUT].total - 1), STDOUT_FILENO);	// PROTECT
+	close_fds(exec);
+	return (0);
+}
 
 static int	execute_command(t_executor *exec)
 {
@@ -70,6 +61,8 @@ static int	execute_command(t_executor *exec)
 	char	*path;
 	int		ret;
 
+	if (dup_fd(exec))
+		return (1);
 	path = NULL;
 	cmd = (char **)ft_vector_get(exec->node->args, 0);
 	ret = get_cmd_path(cmd[0], &path);

@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/02/29 18:40:39 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 13:56:09 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_vector_free(t_vector *v, void (*del)(void *))
 	{
 		i = 0;
 		while (i < v->total)
-			del(*(char **)ft_vector_get(v, i++));
+			del(*(void **)ft_vector_get(v, i++));
 	}
 	free(v->ptr);
 	v->ptr = NULL;

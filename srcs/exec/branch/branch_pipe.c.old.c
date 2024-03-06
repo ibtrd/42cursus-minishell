@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   branch_pipe.c                                      :+:      :+:    :+:   */
+/*   branch_pipe.c.old.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 13:49:33 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 12:56:55 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 #include <stdio.h>
 
-static int	piping(t_executor *exec, int wait, int pipe[2])
+static int	piping(int wait, int pipe[2])
 {
 	int	error;
 
@@ -28,13 +28,12 @@ static int	piping(t_executor *exec, int wait, int pipe[2])
 	close(pipe[wait]);	// PROTECT
 	// dprintf(2, "close(%d) = %d\n", pipe[!wait], close(pipe[!wait]));	// DEBUG
 	// dprintf(2, "dup2(%d, %d)\n", pipe[!wait], !wait);	// DEBUG
-	// error = dup2(pipe[!wait], !wait);
-	error = ft_vector_add(exec->redir + !wait, &pipe[!wait]);	// PROTECT
-	// close(pipe[!wait]);	// PROTECT
+	error = dup2(pipe[!wait], !wait);
+	close(pipe[!wait]);	// PROTECT
 	// error = -1;	// DEBUG
 	if (error == -1)
 	{
-		dprintf(2, "piping failed\n");	// DEBUG
+		// dprintf(2, "dup2 failed\n");	// DEBUG
 		close(0);
 		close(1);
 	}
@@ -52,7 +51,7 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 		return (1);
 	if (pid == 0)
 	{
-		if (piping(exec, wait, pipe) == -1)
+		if (piping(wait, pipe) == -1)
 		{
 			free_ast(exec->root);
 			dprintf(2, "end of pipe_fork\n");	// DEBUG
@@ -63,7 +62,6 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 		close(0);
 		close(1);
 		free_ast(exec->root);
-		close_fds(exec);
 		dprintf(2, "end of pipe_fork\n");	// DEBUG
 		exit(ret);
 		// exit(node_exec(exec));

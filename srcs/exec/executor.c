@@ -6,13 +6,15 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/05 14:24:29 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 13:49:41 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 #include "minishelldef.h"
 #include <unistd.h>
+
+#include <stdio.h>
 
 // int	pipe_left(t_executor *exec, int pipefd[2])
 // {
@@ -81,40 +83,57 @@
 
 int	exec_init(t_executor *exec, t_astnode *root, char **env)
 {
+	int	fd;
+
 	exec->env = env;
-	exec->pipe[0] = -1;
-	exec->pipe[1] = -1;
-	exec->background = 1;
 	exec->pid = 0;
-	exec->last_status = 0;
 	exec->node = root;
 	exec->root = root;
-	// exec->in = dup(0);	// PROTECT
-	// exec->out = dup(1);	// PROTECT
-	return (1);
+	exec->redir[__FDIN] = (t_vector){0};
+	exec->redir[__FDOUT] = (t_vector){0};
+	if (ft_vector_init(exec->redir + __FDIN, sizeof(int), 1))
+		return (1);
+	if (ft_vector_init(exec->redir + __FDOUT, sizeof(int), 1))
+		return (1);
+	fd = dup(STDIN_FILENO);
+	if (fd == -1)
+		return (1);
+	if (ft_vector_add(exec->redir + __FDIN, &fd))
+		return (1);
+	fd = dup(STDOUT_FILENO);
+	if (fd == -1)
+		return (1);
+	if (ft_vector_add(exec->redir + __FDOUT, &fd))
+		return (1);
+	return (0);
 }
 
 int	exec_cleanup(t_executor *exec)
 {
-	if (exec->pipe[0] != -1)
-		close(exec->pipe[0]);
-	if (exec->pipe[1] != -1)
-		close(exec->pipe[1]);
-	if (dup2(exec->in, 0))
-		return (1);
-	if (dup2(exec->out, 1))
-		return (1);
-	close(exec->in);
-	close(exec->out);
+	// if (dup2(exec->in, 0))
+	// 	return (1);
+	// if (dup2(exec->out, 1))
+	// 	return (1);
+	// close(exec->in);
+	// close(exec->out);
+	close_fds(exec);
 	return (0);
 }
 
 int	executor(t_astnode *root, char **env)
 {
 	t_executor	exec;
+	int			ret;
 
-	exec_init(&exec, root, env);
-	return (node_exec(&exec));
+	if (exec_init(&exec, root, env))
+	{
+		dprintf(2, "exec_init failed\n");
+		exec_cleanup(&exec);
+		return (1);
+	}
+	ret = node_exec(&exec);
+	exec_cleanup(&exec);
+	return (ret);
 }
 
 // FORK A CHAQUE NOEUD
