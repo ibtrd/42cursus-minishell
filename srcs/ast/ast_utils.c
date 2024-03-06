@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:57:11 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/06 00:02:43 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 14:12:52 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ t_astnode	*free_ast(t_astnode *root)
 {
 	if (!root)
 		return (NULL);
-	if ((root->type >= _INPUT && root->type <= _APPEND) || root->type == _CMD)
-		ft_vector_deallocate(&root->args, free);
-	free(root->args);
+	ft_vector_deallocate(&root->args, free);
 	free_ast(root->left);
 	free_ast(root->right);
 	free(root);

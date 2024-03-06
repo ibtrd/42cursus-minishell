@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector_free.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 02:53:37 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/06 14:11:15 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_vector_free(t_vector *v, void (*del)(void *))
 {
 	size_t	i;
 
-	if (!v || !v->ptr)
+	if (!v)
 		return (FAILURE);
 	if (del)
 	{
@@ -27,5 +27,6 @@ int	ft_vector_free(t_vector *v, void (*del)(void *))
 	}
 	free(v->ptr);
 	v->ptr = NULL;
+	v->total = 0;
 	return (SUCCESS);
 }
