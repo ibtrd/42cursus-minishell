@@ -38,7 +38,7 @@ t_astnode	*ast_build_launch(t_vector *lexer)
 		else if (build_from_token(tok, &root))
 			return (free_ast(root));
 		tok = ft_vector_get(lexer, ++index);
-		print2D(2, root); //REMOVE
+		print2D(2, root, NULL); //REMOVE
 	}
 	return (root);
 }

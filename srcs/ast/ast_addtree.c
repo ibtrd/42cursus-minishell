@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 00:13:10 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/07 04:38:23 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/07 14:36:59 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_astnode	*ast_addtree(t_astnode *root, t_vector *lexer, int *index)
 		else if (build_from_token(tok, &subroot))
 			return (free_ast(subroot));
 		tok = ft_vector_get(lexer, ++(*index));
-		print2D(2, subroot); //REMOVE
+		print2D(2, subroot, "\e[33m"); //REMOVE
 	}
 	printf("inner loop:	index %d (type %d)\n", *index, tok->type);
 	subroot = close_bracket(lexer, index, subroot, mode);
@@ -60,17 +60,11 @@ t_astnode	*close_bracket(t_vector *lexer, int *index, t_astnode *subroot, t_brea
 		// && !(mode == _PIPE_BREAK && tok->type <= _PIPE_TOK))
 	{
 		printf("closing loop:	index %d (type %d)\n", *index, tok->type);
-		// if (tok->type == _OPEN_BRACKETS_TOK)
-		// {
-		// 	subroot = ast_addtree(subroot, lexer, index);
-		// 	if (!subroot)
-		// 		return (NULL);
-		// }
 		if (build_from_token(tok, &link))
 			return (free_ast(link));
+		print2D(2, link, "\e[31m"); //REMOVE
 		if (tok->type == _PIPE_TOK)
 			return (link_roots2(link, subroot));
-		print2D(2, link); //REMOVE
 		tok = ft_vector_get(lexer, ++(*index));
 	}
 	printf("close break index %d (type %d)\n", *index, tok->type);

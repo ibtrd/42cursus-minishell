@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:37:35 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/07 02:14:29 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/07 14:40:35 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ void print2DUtil(int fd, t_astnode* root, int space)
     print2DUtil(fd, root->left, space);
 }
  
-void print2D(int fd, t_astnode* root)
+void print2D(int fd, t_astnode* root, char *color)
 {
-	printf("\n");
+	if (color)
+		dprintf(2, "\n%s", color);
+	else
+		dprintf(2, "\n");
     print2DUtil(fd, root, 0);
-	printf("\n---------------------------------------------\n");
+	dprintf(2,"\e[0m\n---------------------------------------------\n");
 }
 
 void printnode(int fd, t_astnode *node)

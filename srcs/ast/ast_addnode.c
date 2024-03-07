@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:40:02 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/06 20:30:07 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/07 04:53:39 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 #include <stdio.h> //REMOVE
 
-t_astnode *ast_addleft(t_astnode *root, t_astnode *new)
+t_astnode	*ast_addleft(t_astnode *root, t_astnode *new)
 {
 	new->left = root;
 	return (new);
 }
 
-t_astnode *ast_addright(t_astnode *root, t_astnode *new)
+t_astnode	*ast_addright(t_astnode *root, t_astnode *new)
 {
 	if (root->right)
 		root->right = ast_addnode(root->right, new);
