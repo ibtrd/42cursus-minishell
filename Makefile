@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/07 18:36:02 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/07 23:31:56 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,13 +59,14 @@ AST_SRC = \
 	ast_print2 \
 	ast_addnode \
 	ast_addtree \
+	ast_add_utils \
 
 BUILDER_DIR = builder/
 BUILDER_SRC = \
-	ast_build_launch \
-	ast_build_command \
-	ast_build_operator \
-	ast_build_redirection \
+		ast_build_launch \
+		ast_build_command \
+		ast_build_operator \
+		ast_build_redirection \
 
 ## EXEC ##
 
