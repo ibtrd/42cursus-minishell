@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:10:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/07 23:34:50 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 00:39:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ typedef struct s_astnode
 	struct s_astnode	*right;
 }	t_astnode;
 
-typedef enum e_break
-{
-	_LOGIC_BREAK = 0,
-	_PIPE_BREAK = 1
-}	t_break;
-
 int	build_operator(t_lexer_token *tok, t_astnode **root);
 int	build_command(t_vector **arg_v, t_lexer_token *tok, t_astnode **root);
 int	add_argument(t_vector *arg_v, char *str);
@@ -53,7 +47,7 @@ int	add_file(t_vector *file_v, char *str);
 
 t_astnode	*ast_addnode(t_astnode *root, t_astnode *new);
 
-t_astnode	*ast_addtree(t_astnode *root, t_vector *lexer, int *index);
+t_astnode	*ast_build_brackets(t_astnode *root, t_vector *lexer, int *index);
 
 int			build_from_token(t_lexer_token *tok, t_astnode **root);
 

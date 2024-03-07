@@ -28,10 +28,10 @@ t_astnode	*ast_build_launch(t_vector *lexer)
 	tok = ft_vector_get(lexer, index);
 	while (tok->type != _END_TOK)
 	{
-		printf("main loop:	index %d (type %d)\n", index, tok->type);
+		// printf("main loop:	index %d (type %d)\n", index, tok->type);
 		if (tok->type == _OPEN_BRACKETS_TOK)
 		{
-			root = ast_addtree(root, lexer, &index);
+			root = ast_build_brackets(root, lexer, &index);
 			if (!root)
 				return (NULL);
 		}
