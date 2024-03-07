@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/06 18:05:03 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/07 18:45:31 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC = \
 	$(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC)) \
 	$(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC)) \
 
-## PARSING ##
+## PARSING DIRECTORY ##
 
 PARSING_DIR = parsing/
 PARSING_SRC = \
@@ -48,7 +48,7 @@ LEXER_SRC = \
 		lexer_rediction_tok \
 		lexer_set_args \
 
-## AST ##
+## AST DIRECTORY ##
 
 AST_DIR = ast/
 AST_SRC = \
@@ -61,26 +61,36 @@ AST_SRC = \
 
 BUILDER_DIR = builder/
 BUILDER_SRC = \
-	ast_build_launch \
-	ast_build_command \
-	ast_build_operator \
-	ast_build_redirection \
+		ast_build_launch \
+		ast_build_command \
+		ast_build_operator \
+		ast_build_redirection \
 
-## EXEC ##
+## EXEC DIRECTORY ##
 
 EXECUTION_DIR = exec/
 EXECUTION_SRC = \
-	branch/branch_command \
-	branch/branch_logicaloperator \
-	branch/branch_pipe \
-	branch/branch_redirection \
-	open/open_input \
-	open/open_output \
-	open/open_append \
+	$(addprefix $(BRANCH_DIR),$(BRANCH_SRC)) \
+	$(addprefix $(OPEN_DIR),$(OPEN_SRC)) \
 	close_fds \
 	executor \
 	exec_utils \
 	node_exec \
+
+BRANCH_DIR = branch/
+BRANCH_SRC = \
+		branch_command \
+		branch_logicaloperator \
+		branch_pipe \
+		branch_redirection \
+
+OPEN_DIR = open/
+OPEN_SRC = \
+		open_input \
+		open_output \
+		open_append \
+
+## EXEC ##	
 
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
