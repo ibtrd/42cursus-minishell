@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 01:52:12 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/04 03:46:44 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/07 01:07:17 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@
 
 enum e_token_type
 {
-	_AND_TOK,
-	_OR_TOK,
-	_PIPE_TOK,
-	_REDIR_INPUT_TOK,
-	_REDIR_OUTPUT_TOK,
-	_REDIR_HEREDOC_TOK,
-	_REDIR_APPEND_TOK,
-	_OPEN_BRACKETS_TOK,
-	_CLOSE_BRACKETS_TOK,
-	_CMD_TOK,
-	_ARG_TOK,
-	_FILE_TOK,
-	_UNSUPPORTED_TOK,
-	_END_TOK
+	_AND_TOK = 0,
+	_OR_TOK = 1,
+	_PIPE_TOK = 2,
+	_REDIR_INPUT_TOK = 3,
+	_REDIR_OUTPUT_TOK = 4,
+	_REDIR_HEREDOC_TOK = 5,
+	_REDIR_APPEND_TOK = 6,
+	_OPEN_BRACKETS_TOK = 7,
+	_CLOSE_BRACKETS_TOK = 8,
+	_CMD_TOK = 9,
+	_ARG_TOK = 10,
+	_FILE_TOK = 11,
+	_UNSUPPORTED_TOK = 12,
+	_END_TOK = 13
 };
 
 typedef struct s_lexer_token

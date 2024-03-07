@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/06 18:14:25 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/07 00:48:52 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ AST_SRC = \
 	ast_print2 \
 	ast_addnode \
 	ast_addnode_subroot \
+	ast_addtree \
 
 BUILDER_DIR = builder/
 BUILDER_SRC = \
@@ -221,7 +222,7 @@ print% :
 run :	$(NAME)
 	./$(NAME)
 
-VALGRIND = valgrind -q --suppressions=.valgrindignore.txt --leak-check=full
+VALGRIND = valgrind --suppressions=.valgrindignore.txt --leak-check=full
 
 .PHONY : valgrind
 valgrind : debug
