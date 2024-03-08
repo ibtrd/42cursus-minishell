@@ -6,14 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:18:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 04:32:59 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 15:50:53 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_STRING_H
 # define FT_STRING_H
 
-#include "stddef.h"
+# include "stddef.h"
 
 # define ALPHANUM "abcdefghijklmnopqrstuvwxyz\
 ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
