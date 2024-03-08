@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_free.c                                   :+:      :+:    :+:   */
+/*   free_var.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/08 13:32:47 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/06 19:27:27 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/08 13:44:21 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
+#include "env.h"
 #include <stdlib.h>
 
-int	ft_vector_free(t_vector *v, void (*del)(void *))
-{
-	size_t	i;
+#include <stdio.h>
 
-	if (!v)
-		return (FAILURE);
-	if (del)
-	{
-		i = 0;
-		while (i < v->total)
-			del((void **)ft_vector_get(v, i++));
-	}
-	free(v->ptr);
-	v->ptr = NULL;
-	return (SUCCESS);
+void	free_var(void *var)
+{
+	t_env_var	*env_var;
+
+	env_var = var;
+	free(env_var->name);
+	free(env_var->value);
 }
