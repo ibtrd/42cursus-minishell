@@ -14,6 +14,15 @@
 
 #include "minishelldef.h"
 
+/*
+	DESCRIPTION
+	The syntax_error() and unsupported_error() print an error message on
+	standard error.
+
+	RETURN VALUE
+	The syntax_error() and unsupported_error() return -1.
+*/
+
 int	syntax_error(const char *str)
 {
 	ft_printf_err(0, "%s: %s `%s'", __MINISHELL, __SYNTAX_ERROR, str);
