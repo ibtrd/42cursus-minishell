@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:22:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/08 16:16:17 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 19:37:06 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,60 +15,70 @@
 #include "env.h"
 
 # include <stdio.h>
+#include <stdlib.h>
 # include "builtins.h"
 
 static int	make_env(t_vector *envv)
 {
-	t_env_var	env_var;
+	// t_env_var	env_var;
 	int			error;
 
+	(void)envv;
 	error = 0;
-	env_var.name = ft_strdup("PATH");
-	if (!env_var.name)
-		error = 1;
-	env_var.value = ft_strdup("/usr/bin:/bin:/usr/sbin:/sbin");
-	if (!env_var.value)
-		error = 1;
-	if (!error)
-		error = ft_vector_add(envv, &env_var);
-	if (error)
-		ft_vector_free(envv, &free_var);
+	// env_var.name = ft_strdup("PATH");
+	// if (!env_var.name)
+	// 	error = 1;
+	// env_var.value = ft_strdup("/usr/bin:/bin:/usr/sbin:/sbin");
+	// if (!env_var.value)
+	// 	error = 1;
+	// if (!error)
+	// 	error = ft_vector_add(envv, &env_var);
+	// if (error)
+	// 	ft_vector_free(envv, &free_var);
 	return (error);
+}
+
+static int	copy_var(t_env_var *env_var, char *var)
+{
+	char	*tmp;
+
+	tmp = ft_strtok(var, "=");
+	env_var->name = ft_strdup(tmp);
+	if (!env_var->name)
+		return (1);
+	tmp = ft_strtok(NULL, "");
+	env_var->value = ft_strdup(tmp);
+	if (!env_var->value)
+	{
+		free(env_var->name);
+		return (1);
+	}
+	return (0);
 }
 
 static int	copy_env(t_vector *envv, char **env)
 {
 	size_t		i;
-	char		*tmp;
 	t_env_var	env_var;
-	int			error;
 
-	error = 0;
+	env_var = (t_env_var){0};
 	i = 0;
-	while (!error && env[i])
+	while (env[i])
 	{
-		tmp = ft_strtok(env[i], "=");
-		env_var.name = ft_strdup(tmp);
-		if (!env_var.name)
-			error = 1;
-		tmp = ft_strtok(NULL, "");
-		env_var.value = ft_strdup(tmp);
-		error = var_update(&env_var);
-		if (!env_var.value)
-			error = 1;
-		if (!error)
-			error = ft_vector_add(envv, &env_var);
+		if (copy_var(&env_var, env[i]))
+			return (1);
+		if (var_update(&env_var))
+			return (1);
+		if (ft_vector_add(envv, &env_var))
+			return (1);
 		i++;
 	}
-	return (error);
+	return (0);
 }
 
 
 int	init_env(t_vector *envv, char **env)
 {
-	size_t		i;
-	char		*tmp;
-	t_env_var	env_var;
 	int			error;
 
 	if (ft_vector_init(envv, sizeof(t_env_var), 0))

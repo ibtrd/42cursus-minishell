@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/08 16:56:36 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/08 19:33:34 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,6 +95,7 @@ ENV_SRC = \
 	free_var \
 	ft_getenv \
 	init_env \
+	var_update \
 
 SRCS = $(addsuffix .c, $(SRC))
 

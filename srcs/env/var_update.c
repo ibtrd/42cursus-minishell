@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:16:35 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/08 19:20:19 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 19:34:25 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 #include "env.h"
 #include "libft.h"
 
-int	var_update(t_vector *env,t_env_var *var)
+#include <stdlib.h>
+
+int	var_update(t_env_var *var)
 {
-	char	*tmp;
 	int		i;
 
 	if (ft_strcmp(var->name, "SHLVL") == 0)
 	{
-		tmp = var->value;
-		i = ft_atoi(tmp) + 1;
+		i = ft_atoi(var->value) + 1;
 		if (i >= __MAX_SHLVL)
 		{
 			ft_dprintf(
@@ -32,10 +32,13 @@ int	var_update(t_vector *env,t_env_var *var)
 				i);
 			i = 1;
 		}
+		free(var->value);
 		var->value = ft_itoa(i);
-		free(tmp);
 		if (!var->value)
+		{
+			free(var->name);
 			return (FAILURE);
+		}
 	}
 	return (SUCCESS);
 }

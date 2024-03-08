@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:41:08 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/08 15:46:44 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 19:36:35 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av, char **env)
 	(void)env;
 	(void)envv;
 
-	printf("env: %p\n", env);
+	// printf("env: %p\n", env);
 	envv = (t_vector){0};
 	init_env(&envv, env);
 	builtin_env(&envv);
