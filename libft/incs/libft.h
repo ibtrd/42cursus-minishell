@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:36:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 04:45:29 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 15:17:21 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@ int		ft_printf(const char *str, ...) \
 				__attribute__ ((format (printf, 1, 2)));
 int		ft_dprintf(int fd, const char *str, ...) \
 				__attribute__ ((format (printf, 2, 3)));
-int		ft_printf_err(int err, const char *str, ...);
 
 #endif

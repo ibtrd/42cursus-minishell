@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/08 05:12:28 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/08 16:56:36 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC = \
 	$(addprefix $(AST_DIR),$(AST_SRC)) \
 	$(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC)) \
 	$(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC)) \
+	$(addprefix $(ENV_DIR),$(ENV_SRC)) \
 
 ## PARSING ##
 
@@ -83,8 +84,17 @@ EXECUTION_SRC = \
 
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
-	true \
+	env \
 	false \
+	true \
+
+## ENV ##
+
+ENV_DIR = env/
+ENV_SRC = \
+	free_var \
+	ft_getenv \
+	init_env \
 
 SRCS = $(addsuffix .c, $(SRC))
 
@@ -231,16 +241,17 @@ valgrind : debug
 AVAILABLE_TESTS = \
 	cmdline_addspace \
 	executor \
+	init_env \
 	syntax_checker \
 	lexer \
 	lexerfull \
-	printf_err \
+	dprintf \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
 	$(RM) minishell_test
-	@$(MAKE) TEST=$@
-	@$(VALGRIND) ./$(NAME)_test
+	@$(MAKE) TEST=$@ MODE=debug
+#	@$(VALGRIND) ./$(NAME)_test
 #  ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
