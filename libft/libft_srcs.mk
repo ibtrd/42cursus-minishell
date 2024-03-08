@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/05 21:16:14 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/08 05:12:37 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -146,6 +146,8 @@ PRINTF_SRC = \
 	dprintf \
 	format \
 	printf \
+	printf_err \
+	addconversion \
 
 # *** MISCELLANEOUS ********************************************************** #
 

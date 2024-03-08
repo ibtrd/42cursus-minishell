@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/08 03:12:21 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/08 05:12:28 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -234,6 +234,7 @@ AVAILABLE_TESTS = \
 	syntax_checker \
 	lexer \
 	lexerfull \
+	printf_err \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
