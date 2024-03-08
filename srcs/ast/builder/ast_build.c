@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_build_launch.c                                :+:      :+:    :+:   */
+/*   ast_build.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,7 +17,18 @@
 #include "libft.h" //REMOVE
 #include "testing.h" //REMOVE
 
-t_astnode	*ast_build_launch(t_vector *lexer)
+/*
+	DESCRIPTION
+	The ast_build() function creates an Abstract Syntax Tree based on the
+	tokens contained inside the vector pointed to by lexer. Memory for
+	the tree is obtained with malloc(), and can be freed with free_ast().
+
+	RETURN VALUE
+	On succes, a pointer to the root of the tree in returned. On error,
+	NULL is returned and an error message is printed on standard error.
+*/
+
+t_astnode	*ast_build(t_vector *lexer)
 {
 	int				index;
 	t_lexer_token	*tok;
@@ -36,9 +47,9 @@ t_astnode	*ast_build_launch(t_vector *lexer)
 				return (NULL);
 		}
 		else if (build_from_token(tok, &root))
-			return (free_ast(root));
+			return (ast_builderror(root));
 		tok = ft_vector_get(lexer, ++index);
-		print2D(2, root, NULL); //REMOVE
+		dprint_ast(2, root, NULL); //REMOVE
 	}
 	return (root);
 }

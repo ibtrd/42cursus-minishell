@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:24:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/07 00:54:51 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 01:59:14 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	compare_operators(char *cmdline, char **ptr);
 	malloc(), and can be freed with free().
 	
 	RETURN VALUE
-	The cmdline_addspace() function return 0.
+	The cmdline_addspace() function returns 0.
 	On error, cmdline_addspace() return -1 and the string pointed by ptr
 	is set to NULL.
 */

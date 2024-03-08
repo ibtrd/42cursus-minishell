@@ -14,9 +14,24 @@
 
 #include "testing.h" //REMOVE
 
-static t_astnode	*close_bracket(t_vector *lexer, int *index, t_astnode *subroot);
+static t_astnode	*close_bracket(t_vector *lexer, int *index, \
+															t_astnode *subroot);
 static t_astnode	*link_roots(t_astnode *root, t_astnode *subroot);
 static t_astnode	*link_branch(t_astnode *link, t_astnode *subroot);
+
+/*
+	DESCRIPTION
+	The ast_build_brackets() function creates an Abstract Syntax Tree based
+	on the tokens contained inside the vector pointed to by lexer for the
+	ongoing round bracket. It is then linked to the previously built tree
+	pointer by root. Memory for the tree is obtained with malloc(), and can
+	be freed with free_ast(). 
+
+	RETURN VALUE
+	On succes, a pointer to the root of the resulting tree is returned.
+	On error, NULL is returned and a appropriate message is printed on
+	standard error.
+*/
 
 t_astnode	*ast_build_brackets(t_astnode *root, t_vector *lexer, int *index)
 {
@@ -37,15 +52,15 @@ t_astnode	*ast_build_brackets(t_astnode *root, t_vector *lexer, int *index)
 		else if (build_from_token(tok, &subroot))
 		{
 			free_ast(root);
-			return (free_ast(subroot));
+			return (ast_builderror(subroot));
 		}
 		tok = ft_vector_get(lexer, ++(*index));
-		print2D(2, subroot, "\e[33m"); //REMOVE
+		dprint_ast(2, subroot, "\e[33m"); //REMOVE
 	}
 	// printf("inner loop:	index %d (type %d)\n", *index, tok->type); //REMOVE
 	subroot = close_bracket(lexer, index, subroot); //PROTECTION
 	if (!subroot)
-		return (free_ast(root));
+		return (ast_builderror(root));
 	return(link_roots(root, subroot));
 }
 
@@ -64,9 +79,9 @@ static t_astnode	*close_bracket(t_vector *lexer, int *index, t_astnode *subroot)
 		if (build_from_token(tok, &branch))
 		{
 			free_ast(subroot);
-			return (free_ast(branch));
+			return (ast_builderror(branch));
 		}
-		print2D(2, branch, "\e[31m"); //REMOVE
+		dprint_ast(2, branch, "\e[31m"); //REMOVE
 		if (tok->type == _PIPE_TOK)
 			return (link_branch(branch, subroot));
 		tok = ft_vector_get(lexer, ++(*index));

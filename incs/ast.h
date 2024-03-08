@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:10:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 00:39:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 02:24:42 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ t_astnode	*ast_growright(t_astnode *root, t_astnode *new);
 t_astnode	*ast_addright(t_astnode *root, t_astnode *new);
 t_astnode	*ast_addleft(t_astnode *root, t_astnode *new);
 t_astnode	*free_ast(t_astnode *root);
+
+t_astnode	*ast_builderror(t_astnode *root);
 
 #endif //AST_H

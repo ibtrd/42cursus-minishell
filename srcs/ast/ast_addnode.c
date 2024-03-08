@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:40:02 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/07 23:41:04 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 03:07:33 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ static t_astnode	*addto_command(t_astnode *root, t_astnode *new);
 static t_astnode	*addto_redirection(t_astnode *root, t_astnode *new);
 static t_astnode	*addto_pipe(t_astnode *root, t_astnode *new);
 static t_astnode	*addto_logicaloperator(t_astnode *root, t_astnode *new);
+
+/*
+	DESCRIPTION
+	The ast_addnode() function adds the node pointed to by new to the
+	Abstract Syntax Tree pointed to by root, based on it's node type.
+
+	RETURN VALUE
+	The ast_builderror() function returns a pointer to the root of
+	the resulting AST;
+*/
 
 t_astnode	*ast_addnode(t_astnode *root, t_astnode *new)
 {
