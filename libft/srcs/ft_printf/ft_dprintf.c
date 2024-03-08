@@ -5,38 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 19:31:00 by ibertran          #+#    #+#             */
-/*   Updated: 2023/12/15 04:41:27 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/08 03:38:44 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/08 15:17:30 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <unistd.h>
+#include <string.h>
+
+#include "ft_printf_err.h"
+
+static int	build_buffer(const char *str, t_vector *buffer, va_list *args);
+static int	print_buffer(int fd, t_vector *buffer);
 
 int	ft_dprintf(int fd, const char *str, ...)
 {
-	va_list	args;
-	ssize_t	total_wr;
-	ssize_t	wr;
-	size_t	i;
+	va_list		args;
+	t_vector	buffer;
 
-	if (!str)
-		return (-1);
+	if (!str || ft_vector_init(&buffer, sizeof(char), 0))
+		return (FAILURE);
+	va_end(args);
 	va_start(args, str);
-	i = 0;
-	total_wr = 0;
-	while (str[i])
+	if (build_buffer(str, &buffer, &args))
 	{
-		wr = pf_reading_head(fd, str + i, &args);
-		if (wr == -1)
-			break ;
-		total_wr += wr;
-		if (str[i] != '%')
-			i += wr;
-		else
-			i += pf_argument_len(str + i + 1);
+		va_end(args);
+		ft_vector_free(&buffer, NULL);
+		return (FAILURE);
 	}
 	va_end(args);
-	if (wr == -1)
-		return (-1);
-	return (total_wr);
+	return (print_buffer(fd, &buffer));
+}
+
+static int	build_buffer(const char *str, t_vector *buffer, va_list *args)
+{
+	int		status;
+	char	c;
+
+	status = SUCCESS;
+	c = *str++;
+	while (c && !status)
+	{
+		if (c != '%')
+			status = ft_vector_add(buffer, &c);
+		else
+		{
+			status = add_conversion(*str, buffer, args);
+			str++;
+		}
+		c = *str++;
+	}
+	return (status);
+}
+
+static int	print_buffer(int fd, t_vector *buffer)
+{
+	ssize_t	status;
+
+	status = write(fd, buffer->ptr, buffer->total);
+	ft_vector_free(buffer, NULL);
+	return (status);
 }
