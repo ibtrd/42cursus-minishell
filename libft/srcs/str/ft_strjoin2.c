@@ -16,11 +16,11 @@
 #include "ft_string.h"
 #include "ft_mem.h"
 
-char	*ft_strjoin2(char const *s1, char const *s2, char const *token)
+char	*ft_strjoin2(char const *s1, char const *s2, char const *s3)
 {
 	const size_t	len1 = ft_strlen(s1);
 	const size_t	len2 = ft_strlen(s2);
-	const size_t	len3 = ft_strlen(token);
+	const size_t	len3 = ft_strlen(s3);
 	char			*ptr;
 
 	ptr = malloc((len1 + len2 + len3 + 1) * sizeof(char));
@@ -29,6 +29,6 @@ char	*ft_strjoin2(char const *s1, char const *s2, char const *token)
 	ptr[len1 + len2 + len3] = '\0';
 	ft_memcpy(ptr, s1, len1);
 	ft_memcpy(ptr + len1, s2, len2);
-	ft_memcpy(ptr + len1 + len2, token, len3);
+	ft_memcpy(ptr + len1 + len2, s3, len3);
 	return (ptr);
 }
