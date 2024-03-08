@@ -23,13 +23,11 @@ int	builtin_env(t_vector *env)
 	env_var = (t_env_var *)env->ptr;
 	if (!env_var)
 		return (1);
-	// printf("envv.total = %zu\n", env->total);
 	i = 0;
 	while (i < env->total)
 	{
 		printf("%s=%s\n", env_var[i].name, env_var[i].value);
 		i++;
 	}
-	printf("\n");
 	return (0);
 }
