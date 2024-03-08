@@ -6,14 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 03:38:44 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 15:17:30 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 15:33:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <string.h>
 
-#include "ft_printf_err.h"
+#include "ft_printf.h"
 
 static int	build_buffer(const char *str, t_vector *buffer, va_list *args);
 static int	print_buffer(int fd, t_vector *buffer);

@@ -6,13 +6,12 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 04:27:49 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 15:16:34 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 15:33:28 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "ft_string.h"
-
-#include "ft_printf_err.h"
 
 static int	convert_string(t_vector *buffer, va_list *args);
 static int	convert_percent(t_vector *buffer, va_list *args);
