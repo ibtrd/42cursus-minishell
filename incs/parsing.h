@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 01:49:53 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 20:32:46 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,8 @@ void	lexer_set_args(t_vector *lexer);
 //ESCAPE
 void	set_escape_mode(t_escape *escape, char c);
 void	init_escape(t_escape *escape);
+
+//EXPANDER
+int		expander_launch(t_astnode *node, t_astnode *root, t_vector *env);
 
 #endif //PARSING_H

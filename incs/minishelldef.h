@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 17:36:32 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 00:36:55 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,14 @@
 //PARSING CHARSETS
 # define __DEFAULT_IFS " \t\n"
 # define __METACHARACTER "&|<>();"
-# define __PARENTHESIS "()"
+# define __INTERPRETERS "\"\'$*~"
 # define __SINGLE_QUOTE "\'"
 # define __DOUBLE_QUOTE "\""
+
+//EXPANDER
+# define __HOME_ENVAR "$HOME"
+# define __PWD_ENVAR "$PWD"
+# define __OLDPWD_ENVAR "$OLDPWD"
 
 //PRINT
 # define __MINISHELL "minishell"
@@ -60,5 +65,6 @@
 # define __SYNTAX_ERROR "syntax error near unexpected token"
 # define __UNSUPPORTED_ERROR "unsupported operator"
 # define __AST_ERROR "AST building failed"
+
 
 #endif //MINISHELLDEF_H

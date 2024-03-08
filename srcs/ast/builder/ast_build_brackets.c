@@ -47,7 +47,7 @@ t_astnode	*ast_build_brackets(t_astnode *root, t_vector *lexer, int *index)
 		{
 			subroot = ast_build_brackets(subroot, lexer, index);
 			if (!subroot)
-				return (NULL);
+				return (NULL); //CHECK PROTECTION
 		}
 		else if (build_from_token(tok, &subroot))
 		{
@@ -63,7 +63,6 @@ t_astnode	*ast_build_brackets(t_astnode *root, t_vector *lexer, int *index)
 		return (ast_builderror(root));
 	return(link_roots(root, subroot));
 }
-
 
 static t_astnode	*close_bracket(t_vector *lexer, int *index, t_astnode *subroot)
 {

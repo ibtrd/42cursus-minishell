@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/08 16:56:36 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/09 00:11:10 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC = \
 PARSING_DIR = parsing/
 PARSING_SRC = \
 	$(addprefix $(LEXER_DIR),$(LEXER_SRC)) \
+	$(addprefix $(EXPANDER_DIR),$(EXPANDER_SRC)) \
 	escape_utils \
 	syntax_checker \
 	commandline_parser \
@@ -48,6 +49,11 @@ LEXER_SRC = \
 		lexer_operator_tok \
 		lexer_rediction_tok \
 		lexer_set_args \
+
+EXPANDER_DIR = expander/
+EXPANDER_SRC = \
+	00_expander_launch \
+	01_tilde_expansion \
 
 ## AST ##
 

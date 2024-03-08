@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 22:49:31 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 03:10:18 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 00:19:25 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ t_astnode	*commandline_parser(char *input)
 	lexer_set_args(&lexer);
 	root = ast_build(&lexer);
 	ft_vector_free(&lexer, NULL);
+	dprint_ast(2, root, NULL); //REMOVE
+	if (expander_launch(root, root, NULL))
+		return (NULL); //ADD FREE FUNCTION
 	dprint_ast(2, root, NULL); //REMOVE
 	free(input);
 	return (root);
