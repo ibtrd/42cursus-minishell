@@ -6,11 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 02:20:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 03:06:46 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 05:28:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <errno.h>
+
+#include "libft.h"
 
 #include "minishelldef.h"
 #include "ast.h"
@@ -28,6 +31,6 @@
 t_astnode	*ast_builderror(t_astnode *root)
 {
 	free_ast(root);
-	perror("minishell: AST building failed: ");
+	ft_printf_err(errno, "%s: AST building failed", __MINISHELL);
 	return (NULL);
 }

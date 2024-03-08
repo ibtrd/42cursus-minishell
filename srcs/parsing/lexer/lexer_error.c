@@ -10,27 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
 #include "libft.h"
 
 #include "minishelldef.h"
-#include "lexer.h"
 
 int	syntax_error(const char *str)
 {
-	write(STDERR_FILENO, __PRGM_NAME, __PRGM_NAME_LEN);
-	write(STDERR_FILENO, __SYNTAX_ERROR, ft_strlen(__SYNTAX_ERROR));
-	write(STDERR_FILENO, str, ft_strlen(str));
-	write(STDERR_FILENO, "'\n", 2);
+	ft_printf_err(0, "%s: %s `%s'", __MINISHELL, __SYNTAX_ERROR, str);
 	return (FAILURE);
 }
 
 int	unsupported_error(const char *str)
 {
-	write(STDERR_FILENO, __PRGM_NAME, __PRGM_NAME_LEN);
-	write(STDERR_FILENO, __UNSUPPORTED_ERROR, ft_strlen(__UNSUPPORTED_ERROR));
-	write(STDERR_FILENO, str, ft_strlen(str));
-	write(STDERR_FILENO, "'\n", 2);
+	ft_printf_err(0, "%s: %s `%s'", __MINISHELL, __UNSUPPORTED_ERROR, str);
 	return (FAILURE);
 }

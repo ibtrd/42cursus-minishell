@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 03:38:44 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 04:58:33 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 05:33:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int	ft_printf_err(int err, const char *str, ...)
 		return (FAILURE);
 	va_end(args);
 	va_start(args, str);
-	if (build_buffer(str, &buffer, &args) || add_errno(&buffer, err))
+	if (build_buffer(str, &buffer, &args)
+		|| (err && add_errno(&buffer, err))
+		|| ft_vector_join(&buffer, "\n\0", 2))
 	{
 		va_end(args);
 		ft_vector_free(&buffer, NULL);
@@ -73,8 +75,6 @@ static int	add_errno(t_vector *buffer, int err)
 			return (FAILURE);
 		c = *str++;
 	}
-	if (ft_vector_join(buffer, "\n\0", 2))
-		return (FAILURE);
 	return (SUCCESS);
 }
 

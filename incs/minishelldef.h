@@ -6,15 +6,15 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/06 23:45:27 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 05:37:39 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELLDEF_H
 # define MINISHELLDEF_H
 
-# define __PRGM_NAME "minishell"
-# define __PRGM_NAME_LEN 9
+# define __MINISHELL "minishell"
+# define __MINISHELL_LEN 9
 
 //STATUS
 # define SUCCESS 0
@@ -62,7 +62,7 @@
 # define __SINGLE_QUOTE "\'"
 # define __DOUBLE_QUOTE "\""
 
-# define __SYNTAX_ERROR ": syntax error near unexpected token `"
-# define __UNSUPPORTED_ERROR ": unsupported operator `"
+# define __SYNTAX_ERROR "syntax error near unexpected token"
+# define __UNSUPPORTED_ERROR "unsupported operator"
 
 #endif //MINISHELLDEF_H
