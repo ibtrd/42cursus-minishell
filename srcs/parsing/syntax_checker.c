@@ -6,12 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:41:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 01:03:35 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 05:59:38 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <unistd.h>
+
+#include "libft.h"
 
 #include "minishelldef.h"
 #include "parsing.h"
@@ -39,18 +40,18 @@ int	syntax_checker(char *cmdline)
 	status = check_quotes(cmdline);
 	if (status == __UNCLOSED_SINGLE_QUOTE)
 	{
-		write(STDERR_FILENO, "minishell: Syntax error: unclosed `'' quote\n", 44);
+		ft_printf_err(0, "%s: %s `'' quote", __MINISHELL, __UNCLOSED_ERROR);
 		return (FAILURE);
 	}
 	else if (status == __UNCLOSED_DOUBLE_QUOTE)
 	{
-		write(STDERR_FILENO, "minishell: Syntax error: unclosed `\"' quote\n", 44);
+		ft_printf_err(0, "%s: %s `\"' quote", __MINISHELL, __UNCLOSED_ERROR);
 		return (FAILURE);
 	}
 	status = check_parentheses(cmdline);
-	if (status == __UNCLOSED_PARENTHESIS)
+	if (status == FAILURE)
 	{
-		write(STDERR_FILENO, "minishell: Syntax error: unclosed `(' parenthesis\n", 50);
+		ft_printf_err(0, "%s: %s `'' bracket", __MINISHELL, __UNCLOSED_ERROR);
 		return (FAILURE);
 	}
 	return (SUCCESS);
@@ -102,6 +103,6 @@ static int	check_parentheses(char *cmdline)
 		i++;
 	}
 	if (parenthesis > 0)
-		return (__UNCLOSED_PARENTHESIS);
+		return (FAILURE);
 	return (SUCCESS);
 }
