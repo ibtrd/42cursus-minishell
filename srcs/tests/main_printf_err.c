@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   main_printf_err.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/19 14:29:15 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 15:29:51 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/08 04:51:09 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/08 04:53:59 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
+#include "minishelldef.h"
+#include "errno.h"
 
-# include <stdarg.h>
-# include <sys/types.h>
-
-# include "ft_vector.h"
-
-typedef int (*t_convert)(t_vector *, va_list *);
-
-int	add_conversion(char specifier, t_vector *buffer, va_list *args);
-
-#endif //FT_PRINTF_H
+int main(void)
+{
+	ft_printf_err(errno, "%s: Error de machin", __PRGM_NAME);
+	return (0);
+}
