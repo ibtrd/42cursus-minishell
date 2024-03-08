@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    libft_srcs.mk                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/29 18:37:43 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/08 05:03:30 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -144,6 +144,8 @@ PRINTF_SRC = \
 	dprintf \
 	format \
 	printf \
+	printf_err \
+	addconversion \
 
 # *** MISCELLANEOUS ********************************************************** #
 
