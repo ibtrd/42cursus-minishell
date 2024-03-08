@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:18:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 15:50:53 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 18:15:49 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strcpy(char *dst, const char *src);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strjoin2(char const *s1, char const *s2, char const *s3);
+char	*ft_strjoin2(char const *s1, char const *s2, char const *token);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strrchr(const char *s, int c);

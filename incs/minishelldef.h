@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 05:55:52 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 17:36:32 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # define __UNCLOSED_SINGLE_QUOTE -1
 # define __UNCLOSED_DOUBLE_QUOTE -2
+# define __UNCLOSED_BRACKET -3
 
 //BUILTIN
 # define __ECHO "echo"
@@ -58,5 +59,6 @@
 # define __UNCLOSED_ERROR "syntax error: unclosed"
 # define __SYNTAX_ERROR "syntax error near unexpected token"
 # define __UNSUPPORTED_ERROR "unsupported operator"
+# define __AST_ERROR "AST building failed"
 
 #endif //MINISHELLDEF_H

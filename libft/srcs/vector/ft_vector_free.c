@@ -6,14 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/08 16:56:56 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 18:05:18 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vector.h"
 #include <stdlib.h>
 
-int	ft_vector_free(t_vector *v, void (*del)(void *))
+int	ft_vector_free(t_vector *v, void (*del)(void **))
 {
 	size_t	i;
 

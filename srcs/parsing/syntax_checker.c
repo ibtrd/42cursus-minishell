@@ -6,10 +6,11 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:41:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 05:59:38 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 18:14:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <stddef.h>
 
 #include "libft.h"
@@ -35,26 +36,27 @@ static int	check_parentheses(char *cmdline);
 
 int	syntax_checker(char *cmdline)
 {
-	int	status;
+	int			status;
+	char		*str;
 
 	status = check_quotes(cmdline);
 	if (status == __UNCLOSED_SINGLE_QUOTE)
-	{
-		ft_printf_err(0, "%s: %s `'' quote", __MINISHELL, __UNCLOSED_ERROR);
-		return (FAILURE);
-	}
+		str = "`'' quote";
 	else if (status == __UNCLOSED_DOUBLE_QUOTE)
+		str = "`\"' quote";
+	else
 	{
-		ft_printf_err(0, "%s: %s `\"' quote", __MINISHELL, __UNCLOSED_ERROR);
-		return (FAILURE);
+		status = check_parentheses(cmdline);
+		if (status == __UNCLOSED_BRACKET)
+			str = "`(' bracket";
 	}
-	status = check_parentheses(cmdline);
-	if (status == FAILURE)
-	{
-		ft_printf_err(0, "%s: %s `'' bracket", __MINISHELL, __UNCLOSED_ERROR);
-		return (FAILURE);
-	}
-	return (SUCCESS);
+	if (!status)
+		return (SUCCESS);
+	ft_dprintf(STDERR_FILENO, "%s: %s %s\n",
+		__MINISHELL,
+		__UNCLOSED_ERROR,
+		str);
+	return (FAILURE);
 }
 
 static int	check_quotes(char *cmdline)
@@ -103,6 +105,7 @@ static int	check_parentheses(char *cmdline)
 		i++;
 	}
 	if (parenthesis > 0)
-		return (FAILURE);
+		return (__UNCLOSED_BRACKET);
 	return (SUCCESS);
 }
+

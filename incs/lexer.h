@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 01:52:12 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/07 01:07:17 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 18:15:49 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	lexer_open_bracket(t_vector *vector, size_t index);
 int	lexer_close_bracket(t_vector *vector, size_t index);
 
 //LEXER_ERROR
-int	syntax_error(const char *str);
-int	unsupported_error(const char *str);
+int	syntax_error(const char *token);
+int	unsupported_error(const char *token);
 
 #endif //LEXER_H

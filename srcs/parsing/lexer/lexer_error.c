@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "unistd.h"
+
 #include "libft.h"
 
 #include "minishelldef.h"
@@ -23,14 +25,20 @@
 	The syntax_error() and unsupported_error() return -1.
 */
 
-int	syntax_error(const char *str)
+int	syntax_error(const char *token)
 {
-	ft_printf_err(0, "%s: %s `%s'", __MINISHELL, __SYNTAX_ERROR, str);
+	ft_dprintf(STDERR_FILENO, "%s: %s: `%s'\n",
+		__MINISHELL,
+		__SYNTAX_ERROR,
+		token);
 	return (FAILURE);
 }
 
-int	unsupported_error(const char *str)
+int	unsupported_error(const char *token)
 {
-	ft_printf_err(0, "%s: %s `%s'", __MINISHELL, __UNSUPPORTED_ERROR, str);
+	ft_dprintf(STDERR_FILENO, "%s: %s: `%s'\n",
+		__MINISHELL,
+		__SYNTAX_ERROR,
+		token);
 	return (FAILURE);
 }
