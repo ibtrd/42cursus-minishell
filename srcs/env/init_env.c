@@ -30,7 +30,7 @@ int	init_env(t_vector *envv, char **env)
 	{
 		tmp = ft_strtok(env[i], "=");
 		env_var.name = ft_strdup(tmp);
-		tmp = ft_strtok(NULL, "=");
+		tmp = ft_strtok(NULL, "");
 		env_var.value = ft_strdup(tmp);
 		ft_vector_add(envv, &env_var);
 		i++;
