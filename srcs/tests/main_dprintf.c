@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:20:30 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 15:46:59 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 15:57:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int main(void)
 	const char *s1 = __PRGM_NAME;
 	const char *s2 = __SYNTAX_ERROR;
 	const char *s3 = strerror(errno);
+	const char	*null = NULL;
 
 	ft_dprintf(2, "%s: %s: %s %% %c\n", s1, s2, s3, '5');
+	ft_dprintf(2, "%s: %s: %s %% %c\n", s1, s2, null, '5');
 }

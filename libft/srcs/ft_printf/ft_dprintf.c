@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 03:38:44 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 15:33:02 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 15:54:25 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	ft_dprintf(int fd, const char *str, ...)
 
 	if (!str || ft_vector_init(&buffer, sizeof(char), 0))
 		return (FAILURE);
-	va_end(args);
 	va_start(args, str);
 	if (build_buffer(str, &buffer, &args))
 	{
