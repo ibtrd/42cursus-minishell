@@ -31,9 +31,11 @@ typedef struct s_vector
 
 int		ft_vector_add_ptr(t_vector *v, void *item);
 int		ft_vector_add(t_vector *v, void *item);
-int		ft_vector_delete(t_vector *v, size_t index, void (*del)(void *));
-int		ft_vector_deleten(t_vector *v, size_t index, size_t n, void (*del)(void *));
-int		ft_vector_free(t_vector *v, void (*del)(void *));
+int		ft_vector_allocate(t_vector **ptr, size_t data_size, size_t capacity);
+int		ft_vector_deallocate(t_vector **ptr, void (*del)(void **));
+int		ft_vector_delete(t_vector *v, size_t index, void (*del)(void **));
+int		ft_vector_deleten(t_vector *v, size_t index, size_t n, void (*del)(void **));
+int		ft_vector_free(t_vector *v, void (*del)(void **));
 int		ft_vector_init(t_vector *v, size_t data_size, size_t capacity);
 int		ft_vector_insert_ptr(t_vector *v, void *item, size_t index);
 int		ft_vector_insert(t_vector *v, void *item, size_t index);

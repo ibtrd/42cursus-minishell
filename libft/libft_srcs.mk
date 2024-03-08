@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/08 15:32:15 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/08 18:06:36 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,25 +85,28 @@ MEM_SRC = \
 	memcpy2 \
 	memmove \
 	memset \
+	vfree \
 
 # *** VECTOR ***************************************************************** #
 
 VECTOR_DIR = vector/
 VECTOR_SRC = \
-	vector_add_ptr \
 	vector_add \
+	vector_add_ptr \
+	vector_allocate \
+	vector_deallocate \
 	vector_delete \
 	vector_deleten \
 	vector_free \
 	vector_get \
 	vector_init \
-	vector_insert_ptr \
 	vector_insert \
+	vector_insert_ptr \
 	vector_insertn \
 	vector_join \
 	vector_resize \
-	vector_set_ptr \
 	vector_set \
+	vector_set_ptr \
 	vector_strncat \
 	vector_trim \
 
