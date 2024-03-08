@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_init_env.c                                    :+:      :+:    :+:   */
+/*   var_update.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 15:41:08 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/08 15:46:44 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/08 16:16:35 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/08 18:23:45 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishelldef.h"
 #include "env.h"
-#include "builtins.h"
 #include "libft.h"
 
-#include <stdio.h>
-
-int	main(int ac, char **av, char **env)
+void	var_update(t_vector *env,t_env_var *var)
 {
-	t_vector	envv;
-	// size_t		i;
+	char	*tmp;
+	int		i;
 
-	(void)ac;
-	(void)av;
-	(void)env;
-	(void)envv;
-
-	printf("env: %p\n", env);
-	envv = (t_vector){0};
-	init_env(&envv, env);
-	builtin_env(&envv);
-	printf("\n");
-	printf("ft_getenv(envv, \"PATH\") = %s\n", ft_getenv(&envv, "PATH"));
-	ft_vector_free(&envv, &free_var);
-	return (0);
+	if (ft_strcmp(var->name, "SHLVL") == 0)
+	{
+		tmp = var->value;
+		i = ft_atoi(tmp) + 1;
+		if (i >= __MAX_SHLVL)
+			ft_dprintf(2, 
+				"%s: warning: shell level (%d) too high, resetting to 1\n", 
+				i, 
+				i);
+		var->value = ft_itoa(i % __MAX_SHLVL);
+		free(var->value);
+	}
 }
