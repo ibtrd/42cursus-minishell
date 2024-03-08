@@ -1,48 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_utils.c                                        :+:      :+:    :+:   */
+/*   ast_build_redirection.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 16:57:11 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 18:01:35 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/05 21:55:05 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/05 22:06:37 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stddef.h>
-
 #include "libft.h"
 
-#include "minishelldef.h"
 #include "ast.h"
 
-int	ast_newnode(t_astnode **new, t_nodetype type, t_vector *args)
+int	build_redirection(t_vector **file_v, t_lexer_token *tok, t_astnode **root)
 {
-	t_astnode	*ptr;
+	t_astnode	*new;
 
-	ptr = malloc(sizeof(t_astnode));
-	if (!ptr)
+	if (ft_vector_allocate(file_v, sizeof(char *), 1))
+		return (FAILURE);
+	if (ast_newnode(&new, tok->type, *file_v))
 	{
-		*new = NULL;
+		ft_vector_deallocate(file_v, NULL);
 		return (FAILURE);
 	}
-	ptr->args = args;
-	ptr->type = type;
-	ptr->left = NULL;
-	ptr->right = NULL;
-	*new = ptr;
+	*root = ast_addnode(*root, new);
 	return (SUCCESS);
 }
 
-t_astnode	*free_ast(t_astnode *root)
+int	add_file(t_vector *file_v, char *str)
 {
-	if (!root)
-		return (NULL);
-	ft_vector_deallocate(&root->args, ft_vfree);
-	free_ast(root->left);
-	free_ast(root->right);
-	free(root);
-	return (NULL);
+	char	*dup;
+
+	dup = ft_strdup(str);
+	if (!dup)
+		return (FAILURE);
+	return (ft_vector_add_ptr(file_v, dup));
 }

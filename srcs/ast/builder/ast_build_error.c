@@ -1,44 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_launch_utils.c                             :+:      :+:    :+:   */
+/*   ast_build_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/02 20:34:39 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/03 04:17:11 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/08 02:20:06 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/08 18:13:03 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unistd.h"
+#include <unistd.h>
+#include <string.h>
+#include <errno.h>
 
 #include "libft.h"
 
 #include "minishelldef.h"
+#include "ast.h"
 
 /*
 	DESCRIPTION
-	The syntax_error() and unsupported_error() print an error message on
-	standard error.
+	The ast_builderror() function prints a message on standard error
+	describing the last error encountered during a call to a system or
+	library function, then frees the Abstract Syntax Tree pointed to by root
 
 	RETURN VALUE
-	The syntax_error() and unsupported_error() return -1.
+	The ast_builderror() function returns NULL;
 */
 
-int	syntax_error(const char *token)
+t_astnode	*ast_builderror(t_astnode *root)
 {
-	ft_dprintf(STDERR_FILENO, "%s: %s: `%s'\n",
+	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n",
 		__MINISHELL,
-		__SYNTAX_ERROR,
-		token);
-	return (FAILURE);
-}
-
-int	unsupported_error(const char *token)
-{
-	ft_dprintf(STDERR_FILENO, "%s: %s: `%s'\n",
-		__MINISHELL,
-		__SYNTAX_ERROR,
-		token);
-	return (FAILURE);
+		__AST_ERROR,
+		strerror(errno));
+	free_ast(root);
+	return (NULL);
 }

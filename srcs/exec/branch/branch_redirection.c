@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   branch_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/05 14:25:46 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 03:11:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ static int	redirect_fork(t_executor *exec, t_astnode *node)
 int	branch_redirection(t_executor *exec)
 {
 	dprintf(2, "redirection\n");	// DEBUG
-	dprint_ast(2, exec->node);	// DEBUG
+	dprint_ast(2, exec->node, NULL);	// DEBUG
 	return (redirect_fork(exec, exec->node->right));
 }

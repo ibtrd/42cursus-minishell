@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vfree.c                                         :+:      :+:    :+:   */
+/*   ft_vector_allocate.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 13:35:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/08 18:04:44 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/05 20:49:50 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/05 20:50:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void	ft_vfree(void **var)
+#include "ft_vector.h"
+
+int	ft_vector_allocate(t_vector **ptr, size_t data_size, size_t capacity)
 {
-	if (!var)
-		return ;
-	free(*var);
+	t_vector	*new;
+
+	new = malloc(sizeof(t_vector));
+	if (!new)
+		return (FAILURE);
+	if (ft_vector_init(new, data_size, capacity))
+	{
+		free(new);
+		return (FAILURE);
+	}
+	*ptr = new;
+	return (SUCCESS);
 }

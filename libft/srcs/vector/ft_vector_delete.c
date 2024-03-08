@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector_delete.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 13:25:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/08 13:35:09 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 18:05:18 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ft_mem.h"
 #include <stddef.h>
 
-int	ft_vector_delete(t_vector *v, size_t index, void (*del)(void *))
+int	ft_vector_delete(t_vector *v, size_t index, void (*del)(void **))
 {
 	if (!v || index >= v->total)
 		return (FAILURE);

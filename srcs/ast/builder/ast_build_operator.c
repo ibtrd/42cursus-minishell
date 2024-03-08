@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vfree.c                                         :+:      :+:    :+:   */
+/*   ast_build_operator.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 13:35:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/08 18:04:44 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/05 21:55:05 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/05 22:06:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "ast.h"
 
-void	ft_vfree(void **var)
+int	build_operator(t_lexer_token *tok, t_astnode **root)
 {
-	if (!var)
-		return ;
-	free(*var);
+	t_astnode	*new;
+
+	if (ast_newnode(&new, tok->type, NULL))
+		return (FAILURE);
+	*root = ast_addnode(*root, new);
+	return (SUCCESS);
 }

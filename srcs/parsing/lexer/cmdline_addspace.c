@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:24:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/06 23:21:34 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 05:50:04 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	compare_operators(char *cmdline, char **ptr);
 	malloc(), and can be freed with free().
 	
 	RETURN VALUE
-	The cmdline_addspace() function return 0.
+	The cmdline_addspace() function returns 0.
 	On error, cmdline_addspace() return -1 and the string pointed by ptr
 	is set to NULL.
 */
@@ -86,8 +86,8 @@ static int	compare_operators(char *cmdline, char **ptr)
 	const char	*operator[] = {
 		__UNSUPPORTED_OPERATOR1, __UNSUPPORTED_OPERATOR2,
 		__AND, __OR, __REDIR_HEREDOC, __REDIR_APPEND,
-		__REDIR_INPUT, __REDIR_OUTPUT,
-		__OPEN_PARENTHESIS, __CLOSE_PARENTHESIS,
+		__PIPE, __REDIR_INPUT, __REDIR_OUTPUT,
+		__OPEN_RBRACKET, __CLOSE_RBRACKET,
 		__UNSUPPORTED_OPERATOR3, __UNSUPPORTED_OPERATOR4, NULL
 	};
 	size_t		len;
@@ -106,22 +106,3 @@ static int	compare_operators(char *cmdline, char **ptr)
 	}
 	return (0);
 }
-
-// static int	check_operators(char *ptr)
-// {
-// 	const char	c1 = *ptr;
-// 	const char	c2 = *(ptr + 1);
-
-// 	if (ft_ischarset(c1, __PARENTHESIS) && ft_ischarset(c2, __METACHARACTER))
-// 		return (1);
-// 	if (ft_ischarset(c1, __METACHARACTER) && ft_ischarset(c2, __PARENTHESIS))
-// 		return (1);
-// 	if (ft_ischarset(c1, __METACHARACTER) && ft_ischarset(c2, __METACHARACTER))
-// 		return (0);
-// 	if (!ft_ischarset(c1, __DEFAULT_IFS) && ft_ischarset(c2, __METACHARACTER))
-// 		return (1);
-// 	if (ft_ischarset(c1, __METACHARACTER) && !ft_ischarset(c2, __DEFAULT_IFS))
-// 		return (1);
-// 	return (0);
-// }
-
