@@ -6,15 +6,12 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 05:37:39 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 05:50:56 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELLDEF_H
 # define MINISHELLDEF_H
-
-# define __MINISHELL "minishell"
-# define __MINISHELL_LEN 9
 
 //STATUS
 # define SUCCESS 0
@@ -44,8 +41,8 @@
 # define __REDIR_APPEND ">>"
 # define __NEXT_CMD ";"
 
-# define __OPEN_PARENTHESIS "("
-# define __CLOSE_PARENTHESIS ")"
+# define __OPEN_RBRACKET "("
+# define __CLOSE_RBRACKET ")"
 
 # define __UNSUPPORTED_OPERATOR1 "<<<"
 # define __UNSUPPORTED_OPERATOR2 "<>"
@@ -59,9 +56,9 @@
 # define __SINGLE_QUOTE "\'"
 # define __DOUBLE_QUOTE "\""
 
-# define __SINGLE_QUOTE "\'"
-# define __DOUBLE_QUOTE "\""
 
+//PRINT
+# define __MINISHELL "minishell"
 # define __SYNTAX_ERROR "syntax error near unexpected token"
 # define __UNSUPPORTED_ERROR "unsupported operator"
 
