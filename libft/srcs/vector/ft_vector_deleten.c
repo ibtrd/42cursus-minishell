@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 13:25:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/02/29 18:40:21 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 13:35:17 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_vector_deleten(t_vector *v, size_t index, size_t n, void (*del)(void *))
 		i = index;
 		while (i < index + n)
 		{
-			del(*(void **)ft_vector_get(v, i));
+			del((void **)ft_vector_get(v, i));
 			i++;
 		}
 	}

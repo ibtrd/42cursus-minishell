@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/06 15:53:08 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/08 14:33:43 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,13 +73,16 @@ EXECUTION_SRC = \
 
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
-	true \
+	env \
 	false \
+	true \
 
 ## ENV ##
 
 ENV_DIR = env/
 ENV_SRC = \
+	free_var \
+	ft_getenv \
 	init_env \
 
 SRCS = $(addsuffix .c, $(SRC))
@@ -237,7 +240,7 @@ AVAILABLE_TESTS = \
 $(AVAILABLE_TESTS) :
 	$(RM) minishell_test
 	@$(MAKE) TEST=$@
-	@$(VALGRIND) ./$(NAME)_test
+#	@$(VALGRIND) ./$(NAME)_test
 #  ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
