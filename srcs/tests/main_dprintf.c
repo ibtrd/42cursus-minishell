@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_percent.c                               :+:      :+:    :+:   */
+/*   main_dprintf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 02:33:30 by ibertran          #+#    #+#             */
-/*   Updated: 2024/01/08 19:56:10 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/08 15:20:30 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/08 15:57:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
+#include "string.h"
+#include "errno.h"
 
-int	pf_convert_percent(int fd)
+#include "minishelldef.h"
+
+int main(void)
 {
-	return (write(fd, "%", 1));
+	const char *s1 = __PRGM_NAME;
+	const char *s2 = __SYNTAX_ERROR;
+	const char *s3 = strerror(errno);
+	const char	*null = NULL;
+
+	ft_dprintf(2, "%s: %s: %s %% %c\n", s1, s2, s3, '5');
+	ft_dprintf(2, "%s: %s: %s %% %c\n", s1, s2, null, '5');
 }
