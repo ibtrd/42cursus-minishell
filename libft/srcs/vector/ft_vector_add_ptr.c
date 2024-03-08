@@ -14,8 +14,8 @@
 
 int	ft_vector_add_ptr(t_vector *v, void *item)
 {
-	// if (!v)
-	// 	return (FAILURE);
+	if (!v)
+		return (FAILURE);
 	if (v->total == v->capacity)
 		if (ft_vector_resize(v, v->capacity << 1))
 			return (FAILURE);
