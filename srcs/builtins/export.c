@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:17:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/09 19:33:19 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 19:45:49 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,10 @@ int	builtin_export(t_vector *envv, char **argv)
 		if (error)
 			continue ;
 		var = search_var(envv, argv[i]);
-		if (!var)
-			if (add_var(envv, argv[i]))
-				return (FAILURE);
-		if (var)
-			if (update_var(var, argv[i]))
-				return (FAILURE);
+		if (!var && add_var(envv, argv[i]))
+			return (FAILURE);
+		if (var && update_var(var, argv[i]))
+			return (FAILURE);
 	}
 	return (ret & -FAILURE);
 }
