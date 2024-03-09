@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:22:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/09 16:05:58 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 17:51:06 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,42 +38,18 @@ static int	create_env(t_vector *envv)
 	return (error);
 }
 
-static int	copy_var(t_env_var *env_var, char *var)
-{
-	char	*tmp;
-
-	tmp = ft_strtok(var, "=");
-	env_var->name = ft_strdup(tmp);
-	if (!env_var->name)
-		return (1);
-	tmp = ft_strtok(NULL, "");
-	env_var->value = ft_strdup(tmp);
-	if (!env_var->value)
-	{
-		free(env_var->name);
-		return (1);
-	}
-	return (0);
-}
-
 static int	copy_env(t_vector *envv, char **env)
 {
 	size_t		i;
-	t_env_var	env_var;
 
-	env_var = (t_env_var){0};
 	i = 0;
 	while (env[i])
 	{
-		if (copy_var(&env_var, env[i]))
-			return (1);
-		if (var_update(&env_var))
-			return (1);
-		if (ft_vector_add(envv, &env_var))
-			return (1);
+		if (add_var(envv, env[i]))
+			return (FAILURE);
 		i++;
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 

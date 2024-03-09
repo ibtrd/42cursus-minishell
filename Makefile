@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/08 19:33:34 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/09 19:09:00 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,6 +85,7 @@ EXECUTION_SRC = \
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
 	env \
+	export \
 	false \
 	true \
 
@@ -92,10 +93,16 @@ BUILTIN_SRC = \
 
 ENV_DIR = env/
 ENV_SRC = \
+	add_var \
+	check_var \
+	copy_var \
+	del_var \
 	free_var \
 	ft_getenv \
 	init_env \
-	var_update \
+	search_var \
+	update_var \
+	var_processing \
 
 SRCS = $(addsuffix .c, $(SRC))
 
@@ -241,6 +248,7 @@ valgrind : debug
 
 AVAILABLE_TESTS = \
 	cmdline_addspace \
+	env \
 	executor \
 	init_env \
 	syntax_checker \
