@@ -6,12 +6,15 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 03:11:31 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 16:18:36 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELLDEF_H
 # define MINISHELLDEF_H
+
+# define __PRGM_NAME "minishell"
+# define __PRGM_NAME_LEN 9
 
 //STATUS
 # define SUCCESS 0
@@ -20,6 +23,10 @@
 # define __UNCLOSED_SINGLE_QUOTE -1
 # define __UNCLOSED_DOUBLE_QUOTE -2
 # define __UNCLOSED_BRACKET -3
+
+//ENV
+# define __MAX_SHLVL 1000
+# define __DEFAULT_PATH "/usr/bin:/bin:/usr/sbin:/sbin"
 
 //BUILTIN
 # define __ECHO "echo"

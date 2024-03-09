@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/09 03:19:15 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/09 16:18:30 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,6 +102,7 @@ ENV_SRC = \
 	free_var \
 	ft_getenv \
 	init_env \
+	var_update \
 
 SRCS = $(addsuffix .c, $(SRC))
 
