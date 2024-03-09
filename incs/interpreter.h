@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 19:30:43 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 20:05:21 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/09 22:03:23 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/09 22:28:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_escape
 	bool			double_quote;
 }	t_escape;
 
-void		set_escape_mode(t_escape *escape, char c);
-void		init_escape(t_escape *escape);
+void	set_escape_mode(t_escape *escape, char c);
+void	init_escape(t_escape *escape);
 
 void	debug_print_mask(char *arg, char *mask); //REMOVE
 
