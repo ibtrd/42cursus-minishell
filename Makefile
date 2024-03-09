@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/09 00:11:10 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/09 03:19:15 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ EXPANDER_DIR = expander/
 EXPANDER_SRC = \
 	00_expander_launch \
 	01_tilde_expansion \
+	02_envars_expansion \
 
 ## AST ##
 
@@ -252,6 +253,7 @@ AVAILABLE_TESTS = \
 	lexer \
 	lexerfull \
 	dprintf \
+	tilde_expansion \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :

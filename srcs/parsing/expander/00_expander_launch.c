@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 00:18:35 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 03:27:57 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,14 @@ int	expand_node(t_astnode *node, t_vector *env)
 
 int	expand_str(char **ptr, t_vector *env)
 {
-	// t_vector	expanded;
-	char		*str;
-
-	str = *ptr;
-	if (!ft_strpbrk(str, __INTERPRETERS))
+	if (!ft_strpbrk(*ptr, __INTERPRETERS))
 		return (SUCCESS);
-	printf("Need to expand: [%s]\n", str);
+	printf("Need to expand: [%s]\n", *ptr);
 	if (tilde_expansion(ptr))
 		return (FAILURE);
+	if (envars_expansion(ptr, env))
+		return (FAILURE);
 	return (SUCCESS);
-	(void)env;
 }
 
 
