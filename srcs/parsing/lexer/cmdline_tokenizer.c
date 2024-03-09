@@ -6,17 +6,19 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:26:33 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 20:41:21 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 22:20:43 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-#include "minishelldef.h"
 #include "libft.h"
 
-static int	tokenizer_init(char **str, char **last);
-static int	tokenizer_set_delimiters(char c, char **delimiters);
+#include "minishelldef.h"
+#include "interpreter.h"
+
+static int		tokenizer_init(char **str, char **last);
+static size_t	get_word_end(char *cmdline);
 
 /*
 	DESCRIPTION
@@ -33,19 +35,13 @@ static int	tokenizer_set_delimiters(char c, char **delimiters);
 char	*cmdline_tokenizer(char *cmdline)
 {
 	static char	*last = NULL;
-	char		*delimiters;
 	char		*token;
-	int			i;
+	size_t		i;
 
 	if (tokenizer_init(&cmdline, &last) == 1)
 		return (NULL);
 	token = cmdline;
-	i = tokenizer_set_delimiters(*cmdline, &delimiters);
-	while (cmdline[i] && !ft_ischarset(cmdline[i], delimiters))
-		i++;
-	delimiters = __DEFAULT_IFS;
-	while (cmdline[i] && !ft_ischarset(cmdline[i], delimiters))
-		i++;
+	i = get_word_end(cmdline);
 	if (!cmdline[i])
 		last = NULL;
 	else
@@ -58,8 +54,8 @@ char	*cmdline_tokenizer(char *cmdline)
 
 static int	tokenizer_init(char **cmd_line, char **last)
 {
-	int		i;
 	char	*str;
+	size_t	i;
 
 	str = *cmd_line;
 	if (!str)
@@ -78,18 +74,19 @@ static int	tokenizer_init(char **cmd_line, char **last)
 	return (0);
 }
 
-static int	tokenizer_set_delimiters(char c, char **delimiters)
+static size_t	get_word_end(char *cmdline)
 {
-	if (c == '\'')
+	t_escape	interpreter;
+	size_t		i;
+
+	init_escape(&interpreter);
+	i = 0;
+	while (cmdline[i])
 	{
-		*delimiters = __SINGLE_QUOTE;
-		return (1);
+		set_escape_mode(&interpreter, cmdline[i]);
+		if (!interpreter.mode && ft_ischarset(cmdline[i], __DEFAULT_IFS))
+			return (i);
+		i++;
 	}
-	if (c == '\"')
-	{
-		*delimiters = __DOUBLE_QUOTE;
-		return (1);
-	}
-	*delimiters = __DEFAULT_IFS;
-	return (0);
+	return (i);
 }
