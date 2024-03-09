@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/09 16:18:30 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/09 19:57:33 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ EXPANDER_SRC = \
 	00_expander_launch \
 	01_tilde_expansion \
 	02_envars_expansion \
+	expander_mask_utils \
 
 ## AST ##
 

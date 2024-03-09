@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:46:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 03:24:45 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 17:52:18 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,24 @@
 static int	replace_envars(char **ptr, t_vector *env);
 static int	add_envar(t_vector *expanded, char *str, size_t *index, t_vector *env);
 static char	*get_envar_name(char *str);
-static int	search_envars(char *str);
 
 int	envars_expansion(char **ptr, t_vector *env)
 {
-	if (search_envars(*ptr))
-		return (SUCCESS);
-	printf("Expanding envar...\n");
-	return (replace_envars(ptr, env));
+	t_escape	quote;
+	char		*str;
+	size_t		i;
+
+	str = *ptr;
+	init_escape(&quote);
+	i = 0;
+	while (str[i])
+	{
+		set_escape_mode(&quote, str[i]);
+		if (quote.mode != _SINGLE && str[i] == '$')
+			return (replace_envars(ptr, env));
+		i++;
+	}
+	return (SUCCESS);
 }
 
 static int	replace_envars(char **ptr, t_vector *env)
@@ -52,6 +62,9 @@ static int	replace_envars(char **ptr, t_vector *env)
 		else
 			ft_vector_add(&expanded, str + i++);
 	}
+	ft_vector_add(&expanded, "\0");
+	free(*ptr);
+	*ptr = expanded.ptr;
 	return (SUCCESS);
 }
 
@@ -79,26 +92,9 @@ static char	*get_envar_name(char *str)
 	envar = ft_strdup(str);
 	if (!envar)
 		return (NULL);
-	i = 0;
-	while (!ft_ischarset(envar[i], __ENVAR_STOP))
+	i = 1;
+	while (ft_isalnum(str[i]) || str[i] == '_')
 		i++;
 	envar[i] = '\0';
 	return (envar);
-}
-
-static int	search_envars(char *str)
-{
-	t_escape	quote;
-	size_t		i;
-
-	init_escape(&quote);
-	i = 0;
-	while (str[i])
-	{
-		set_escape_mode(&quote, str[i]);
-		if (quote.mode != _SINGLE && str[i] == '$')
-			return (SUCCESS);
-		i++;
-	}
-	return (FAILURE);
 }

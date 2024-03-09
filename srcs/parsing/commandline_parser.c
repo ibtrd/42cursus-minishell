@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 22:49:31 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 00:19:25 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 19:09:37 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,28 @@
 
 #include "libft.h"
 
+#include "minishelldef.h"
 #include "ast.h"
 #include "parsing.h"
 
 #include "testing.h" //REMOVE
 
 static int	commandline_lexer(char **input, t_vector *lexer);
-static int	lexer_failure(char *ptr, char *msg);
+static int	lexer_failure(char *ptr, char *error);
 
-t_astnode	*commandline_parser(char *input)
+t_astnode	*commandline_parser(char *input, t_vector *env)
 {
 	t_vector	lexer;
-	t_astnode	*root = NULL;
+	t_astnode	*root;
 
 	if (commandline_lexer(&input, &lexer))
 		return (NULL);
-	lexer_set_args(&lexer);
 	root = ast_build(&lexer);
 	ft_vector_free(&lexer, NULL);
 	dprint_ast(2, root, NULL); //REMOVE
-	if (expander_launch(root, root, NULL))
+	if (expander_launch(root, env))
 		return (NULL); //ADD FREE FUNCTION
+	printf("AFTER EXPANDER\n");
 	dprint_ast(2, root, NULL); //REMOVE
 	free(input);
 	return (root);
@@ -59,18 +60,15 @@ static int	commandline_lexer(char **input, t_vector *lexer)
 		ft_vector_free(lexer, NULL);
 		return (lexer_failure(cmdline, NULL));
 	}
+	lexer_set_args(lexer);
 	*input = cmdline;
 	return (SUCCESS);
 }
 
-static int	lexer_failure(char *ptr, char *msg)
+static int	lexer_failure(char *ptr, char *error)
 {
 	free(ptr);
-	if (msg)
-	{
-		write(STDERR_FILENO, "minishell: Error: ", 18);
-		write(STDERR_FILENO, msg, ft_strlen(msg));
-		write(STDERR_FILENO, "\n", 1);
-	}
+	if (error)
+		ft_dprintf(STDERR_FILENO, "%s: Error: %s\n", __MINISHELL, error);
 	return (FAILURE);
 }

@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.h                                         :+:      :+:    :+:   */
+/*   interpreter.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 00:12:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 19:56:55 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/09 19:30:43 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/09 20:05:21 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPANDER_H
-# define EXPANDER_H
+#ifndef INTERPRETER_H
+# define INTERPRETER_H
 
-#include "ft_vector.h"
+#include <stdbool.h>
 
-int	tilde_expansion(char **ptr);
-int	envars_expansion(char **ptr, t_vector *env);
+enum e_quote
+{
+	_NONE,
+	_SINGLE,
+	_DOUBLE
+};
 
-int	create_interpreter_mask(t_vector *mask, t_vector *args);
+typedef struct s_escape
+{
+	enum e_quote	mode;
+	bool			single_quote;
+	bool			double_quote;
+}	t_escape;
 
-#endif //EXPANDER_H
+void		set_escape_mode(t_escape *escape, char c);
+void		init_escape(t_escape *escape);
+
+void	debug_print_mask(char *arg, char *mask); //REMOVE
+
+#endif

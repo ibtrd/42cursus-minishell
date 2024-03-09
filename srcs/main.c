@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 16:14:21 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 16:56:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@
 #include "parsing.h"
 #include "env.h"
 
-#include "testing.h" //REMOVE
-
-t_astnode	*ast_test1(void);
-
 int	main(int ac, char **av, char **env)
 {
 	char		*input;
@@ -29,7 +25,6 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	// (void)env;
 	init_env(&envv, env);
 	while (1)
 	{
@@ -37,9 +32,10 @@ int	main(int ac, char **av, char **env)
 		if (!input)
 			break ;
 		add_history(input);
-		root = commandline_parser(input);
+		root = commandline_parser(input, &envv);
 		free_ast(root);
 	}
+	ft_vector_free(&envv, &free_var);
 	rl_clear_history();
 	return (0);
 }

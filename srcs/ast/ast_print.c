@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:37:35 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 20:53:52 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 19:05:30 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	printnode(int fd, t_astnode *node)
 	{
 		i = 0;
 		while (i < node->args->total)
-			dprintf(fd, "%s ", ((char **)node->args->ptr)[i++]);
+			dprintf(fd, "|%s| ", ((char **)node->args->ptr)[i++]);
 		dprintf(fd, "\n");
 	}
 }
