@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 18:47:37 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 11:40:31 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # define __PRGM_NAME "minishell"
 # define __PRGM_NAME_LEN 9
 
-# define __MAX_SHLVL 1000
-
 //STATUS
 # define SUCCESS 0
 # define FAILURE -1
@@ -25,6 +23,10 @@
 # define __UNCLOSED_SINGLE_QUOTE -1
 # define __UNCLOSED_DOUBLE_QUOTE -2
 # define __UNCLOSED_BRACKET -3
+
+//ENV
+# define __MAX_SHLVL 1000
+# define __DEFAULT_PATH "/usr/bin:/bin:/usr/sbin:/sbin"
 
 //BUILTIN
 # define __ECHO "echo"

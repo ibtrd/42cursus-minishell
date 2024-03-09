@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_update.c                                       :+:      :+:    :+:   */
+/*   init_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 16:16:35 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/09 11:28:26 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/09 11:58:16 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/09 12:02:18 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@
 
 #include <stdlib.h>
 
-int	var_update(t_env_var *var)
+int	init_path(t_vector *envv)
 {
-	int		i;
+	t_env_var	env_var;
+	char		*path;
 
-	if (ft_strcmp(var->name, "SHLVL") == 0)
+	path = ft_getenv(envv, "PATH");
+	if (!path)
 	{
-		i = ft_atoi(var->value) + 1;
-		if (i >= __MAX_SHLVL)
+		env_var.name = ft_strdup("PATH");
+		if (!env_var.name)
+			return (FAILURE);
+		env_var.value = ft_strdup(__DEFAULT_PATH);
+		if (!env_var.value)
 		{
-			ft_dprintf(
-				2, 
-				"%s: warning: shell level (%d) too high, resetting to 1\n", 
-				__MINISHELL, 
-				i);
-			i = 1;
+			free(env_var.name);
+			return (FAILURE);
 		}
-		free(var->value);
-		var->value = ft_itoa(i);
-		if (!var->value)
+		if (ft_vector_add(envv, &env_var))
 		{
-			free(var->name);
+			free(env_var.name);
+			free(env_var.value);
 			return (FAILURE);
 		}
 	}
