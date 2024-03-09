@@ -6,11 +6,11 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 20:06:33 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 21:25:54 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 16:59:56 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stddef.h>
 
 char	*ft_strpbrk(const char *str1, const char *str2)
 {
