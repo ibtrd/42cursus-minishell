@@ -18,7 +18,7 @@ int	build_redirection(t_vector **file_v, t_lexer_token *tok, t_astnode **root)
 {
 	t_astnode	*new;
 
-	if (ft_vector_alloc(file_v, (t_vinfos){sizeof(char *), 0, ft_vfree}, 1))
+	if (ft_vector_alloc(file_v, (t_vinfos){sizeof(void *), 0, ft_vfree}, 1))
 		return (FAILURE);
 	if (ast_newnode(&new, tok->type, *file_v))
 	{
