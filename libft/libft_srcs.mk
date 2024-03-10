@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    libft_srcs.mk                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
 #    Updated: 2024/03/10 17:29:01 by kchillon         ###   ########lyon.fr    #
@@ -94,7 +94,7 @@ VECTOR_SRC = \
 	vector_add \
 	vector_add_ptr \
 	vector_alloc \
-	vector_deallocate \
+	vector_dealloc \
 	vector_delete \
 	vector_deleten \
 	vector_free \
