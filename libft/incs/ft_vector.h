@@ -40,7 +40,7 @@ typedef struct s_vinfos
 int		ft_vector_add_ptr(t_vector *v, void *item);
 int		ft_vector_add(t_vector *v, void *item);
 int		ft_vector_alloc(t_vector **ptr, t_vinfos infos, size_t n);
-int		ft_vector_deallocate(t_vector **ptr);
+int		ft_vector_dealloc(t_vector **ptr, size_t n);
 int		ft_vector_delete(t_vector *v, size_t index);
 int		ft_vector_deleten(t_vector *v, size_t index, size_t n);
 int		ft_vector_free(t_vector *v);

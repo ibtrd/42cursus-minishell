@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_deallocate.c                             :+:      :+:    :+:   */
+/*   ft_vector_dealloc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 20:59:18 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 14:55:48 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 17:34:31 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 
 #include "ft_vector.h"
 
-int	ft_vector_deallocate(t_vector **ptr)
+int	ft_vector_dealloc(t_vector **ptr, size_t n)
 {
+	size_t	i;
+
 	if (!ptr || !*ptr)
 		return (FAILURE);
-	ft_vector_free(*ptr);
+	i = 0;
+	while (i < n)
+		ft_vector_free((*ptr) + i++);
 	free(*ptr);
 	*ptr = NULL;
 	return (SUCCESS);
