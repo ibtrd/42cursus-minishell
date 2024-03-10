@@ -22,7 +22,7 @@ int	build_command(t_vector **arg_v, t_lexer_token *tok, t_astnode **root)
 	char		*dup;
 
 
-	if (ft_vector_alloc(arg_v, (t_vinfos){sizeof(char *), 0, NULL}, 1))
+	if (ft_vector_alloc(arg_v, (t_vinfos){sizeof(char *), 0, ft_vfree}, 1))
 		return (FAILURE);
 	dup = ft_strdup(tok->value);
 	if (!dup)
