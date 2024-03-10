@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_vector_test.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:20:30 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 19:12:37 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 17:54:15 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,3 +177,4 @@ int main(void)
 
 	return (0);
 }
+
