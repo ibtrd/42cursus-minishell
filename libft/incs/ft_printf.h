@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:29:15 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 15:29:51 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 14:46:08 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # include "ft_vector.h"
 
-typedef int (*t_convert)(t_vector *, va_list *);
+typedef int	(*t_convert)(t_vector *, va_list *);
 
 int	add_conversion(char specifier, t_vector *buffer, va_list *args);
 

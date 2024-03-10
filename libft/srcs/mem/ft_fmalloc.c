@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_allocate.c                               :+:      :+:    :+:   */
+/*   ft_ffmalloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 20:49:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 18:35:55 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/01/11 00:52:30 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/10 18:35:35 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <errno.h>
+#include <unistd.h>
+#include <time.h>
+#include <stdio.h>
 
-#include "ft_vector.h"
-
-int	ft_vector_alloc(t_vector **ptr, t_vinfos infos, size_t n)
+void	*ft_fmalloc(size_t size)
 {
-	t_vector	*new;
-	size_t		i;
+	static int	i = 0;
+	static int	max = 0;
 
-	new = malloc(sizeof(t_vector) * n);
-	if (!new)
-		return (FAILURE);
-	i = 0;
-	while (i < n)
+	if (!max)
 	{
-		if (ft_vector_init(new + i, infos))
-		{
-			while (i--)
-				ft_vector_free(new + i);
-			free(new);
-			return (FAILURE);
-		}
-		i++;
+		max = size;
+		return (NULL);
 	}
-	*ptr = new;
-	return (SUCCESS);
+	if (i++ > max)
+	{
+		dprintf(2, "Forcing ft_fmalloc() failure! (call^%d)\n", i);
+		errno = ENOMEM;
+		return (NULL);
+	}
+	return (malloc(size));
 }
