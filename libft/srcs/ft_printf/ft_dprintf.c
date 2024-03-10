@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 03:38:44 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 15:54:25 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 16:56:39 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	ft_dprintf(int fd, const char *str, ...)
 	va_list		args;
 	t_vector	buffer;
 
-	if (!str || ft_vector_init(&buffer, sizeof(char), 0))
+	if (!str || ft_vector_init(&buffer, (t_vinfos){sizeof(char), 0, NULL}))
 		return (FAILURE);
 	va_start(args, str);
 	if (build_buffer(str, &buffer, &args))
 	{
 		va_end(args);
-		ft_vector_free(&buffer, NULL);
+		ft_vector_free(&buffer);
 		return (FAILURE);
 	}
 	va_end(args);
@@ -61,6 +61,6 @@ static int	print_buffer(int fd, t_vector *buffer)
 	ssize_t	status;
 
 	status = write(fd, buffer->ptr, buffer->total);
-	ft_vector_free(buffer, NULL);
+	ft_vector_free(buffer);
 	return (status);
 }
