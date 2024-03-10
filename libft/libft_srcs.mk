@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    libft_srcs.mk                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/08 18:06:36 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/10 17:17:07 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,7 @@ VECTOR_DIR = vector/
 VECTOR_SRC = \
 	vector_add \
 	vector_add_ptr \
-	vector_allocate \
+	vector_alloc \
 	vector_deallocate \
 	vector_delete \
 	vector_deleten \

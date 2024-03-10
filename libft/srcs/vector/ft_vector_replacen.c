@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 15:00:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/10 15:51:57 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 16:50:06 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,13 @@ int	ft_vector_replacen(t_vector *v, size_t index, void *new, size_t n[2])
 			i++;
 		}
 	}
-	ft_memcpy(v->ptr + index * v->size, new, n[0] * v->size);
+	ft_memcpy(v->ptr + (index + n[1]) * v->size,
+		v->ptr + (index + n[0]) * v->size,
+		v->total - (index + n[0]) * v->size);
+	ft_memcpy(v->ptr + index * v->size, new, n[1] * v->size);
+	while (v->total > 0 && v->total <= (v->capacity >> 2))
+		if (ft_vector_resize(v, v->capacity >> 1))
+			return (FAILURE);
 	return (SUCCESS);
 }
 
