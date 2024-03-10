@@ -22,12 +22,12 @@ int	build_command(t_vector **arg_v, t_lexer_token *tok, t_astnode **root)
 	char		*dup;
 
 
-	if (ft_vector_allocate(arg_v, sizeof(char *), 2))
+	if (ft_vector_alloc(arg_v, (t_vinfos){sizeof(char *), 0, NULL}, 1))
 		return (FAILURE);
 	dup = ft_strdup(tok->value);
 	if (!dup)
 	{
-		ft_vector_deallocate(arg_v, NULL);
+		ft_vector_dealloc(arg_v, 1);
 		return (FAILURE);
 	}
 	if (ft_vector_add_ptr(*arg_v, dup)
@@ -35,7 +35,7 @@ int	build_command(t_vector **arg_v, t_lexer_token *tok, t_astnode **root)
 		|| ast_newnode(&new, _CMD, *arg_v))
 	{
 		free(dup);
-		ft_vector_deallocate(arg_v, NULL);
+		ft_vector_dealloc(arg_v, 1);
 		return (FAILURE);
 	}
 	*root = ast_addnode(*root, new);
