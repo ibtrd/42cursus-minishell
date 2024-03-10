@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 01:56:48 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 04:19:38 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,19 @@ static int	expand_node(t_astnode *node, t_vector *env)
 	size_t		i;
 
 	i = 0;
-	if (create_interpreter_mask(&mask, node->args))
+	if (create_interpreter_masks(&mask, node->args))
 		return (FAILURE);
 	while (i < node->args->total - (node->type == _CMD))
 	{
 		ptr = ft_vector_get(node->args, i);
 		mask_ptr = ft_vector_get(&mask, i);
-		// if (tilde_expansion(ptr)) //ADD MASK EXPENSION ASWELL
-		// 	return (FAILURE); //PROTECT
+		ft_dprintf(2, "EXPANDING:\nstr  = %s|\nmask = %s|\n\n", *ptr, *mask_ptr);
+		if (tilde_expansion(ptr, mask_ptr))
+			return (FAILURE); //PROTECT
+		ft_dprintf(2, "TILDE_EXPANSION:\nstr  = %s|\nmask = %s|\n\n", *ptr, *mask_ptr);
 		if (envars_expansion(ptr, mask_ptr, env))
 			return (FAILURE); //PROTECT
+		ft_dprintf(2, "ENVARS_ESPANSION:\nstr  = %s|\nmask = %s|\n\n", *ptr, *mask_ptr);
 		// if (word_splitting)
 		i++;
 	}

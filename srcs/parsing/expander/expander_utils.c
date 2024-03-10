@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:05:32 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 02:04:01 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 04:18:07 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	init_expansion_vectors(t_vector expanded[2], char *str, char *mask)
 		ft_vector_free(expanded + 1, NULL);
 		return (FAILURE);
 	}
-	ft_dprintf(2, "expanded str  = %s|\nexpanded mask = %s|\n", (char *)expanded->ptr, (char *)(expanded + 1)->ptr);
 	return (SUCCESS);
 }
 
@@ -74,7 +73,6 @@ int	insert_var_values(t_vector expanded[2], size_t *index, char *value)
 	}
 	free(mask_insert);
 	*index += len;
-	ft_dprintf(2, "expanded str  = %s|\nexpanded mask = %s|\n", (char *)expanded->ptr, (char *)(expanded + 1)->ptr);
 	return (SUCCESS);
 }
 

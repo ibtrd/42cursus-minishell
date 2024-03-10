@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 23:12:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 00:53:16 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 04:10:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,39 @@
 #include "libft.h"
 
 #include "minishelldef.h"
+#include "expander.h"
 
-static int	lone_tilde(char **ptr);
-static int	tilde_plus(char **ptr);
+static int	lone_tilde(char **ptr, char **mask);
+static int	tilde_plus(char **ptr, char **mask);
+static int	tilde_minus(char **ptr, char **mask);
+static int	replace_mask(char **ptr, char **mask);
 
-int	tilde_expansion(char **ptr)
+/*
+	DESCRIPTION
+	The tilde_expansion() expands the '~', '~+' and '~-' word prefixes to
+	$HOME, $PWD and $OLDPWD respectively, frees the old string and links
+	the resulting one to it's pointer. It also updates the associated
+	mask.
+
+	RETURN VALUE
+	On succes, 0 is returned. On error, -1 is returned.
+*/
+
+int	tilde_expansion(char **ptr, char **mask)
 {
 	char		*str;
 
 	str = *ptr;
 	if (!ft_strncmp(str, "~+", 2))
-		return (tilde_plus(ptr));
+		return (tilde_plus(ptr, mask));
+	if (!ft_strncmp(str, "~-", 2))
+		return (tilde_minus(ptr, mask));
 	if (!ft_strncmp(str, "~", 1))
-		return (lone_tilde(ptr));
+		return (lone_tilde(ptr, mask));
 	return (SUCCESS);
 }
 
-static int	lone_tilde(char **ptr)
+static int	lone_tilde(char **ptr, char **mask)
 {
 	const char	c = *(*ptr + 1);
 	char		*str;
@@ -46,10 +62,10 @@ static int	lone_tilde(char **ptr)
 		return (FAILURE);
 	free(*ptr);
 	*ptr = str;
-	return (SUCCESS);
+	return (replace_mask(ptr, mask));
 }
 
-static int	tilde_plus(char **ptr)
+static int	tilde_plus(char **ptr, char **mask)
 {
 	const char	c = *(*ptr + 2);
 	char		*str;
@@ -64,5 +80,35 @@ static int	tilde_plus(char **ptr)
 		return (FAILURE);
 	free(*ptr);
 	*ptr = str;
+	return (replace_mask(ptr, mask));
+}
+
+static int	tilde_minus(char **ptr, char **mask)
+{
+	const char	c = *(*ptr + 2);
+	char		*str;
+
+	if (c == '\0')
+		str = ft_strdup(__OLDPWD_ENVAR);
+	else if (c == '/')
+		str = ft_strjoin(__OLDPWD_ENVAR, *ptr + 2);
+	else
+		return (SUCCESS);
+	if (!str)
+		return (FAILURE);
+	free(*ptr);
+	*ptr = str;
+	return (replace_mask(ptr, mask));
+}
+
+static int	replace_mask(char **ptr, char **mask)
+{
+	char	*str;
+
+	str = create_string_mask(*ptr);
+	if (!str)
+		return (FAILURE);
+	free(*mask);
+	*mask = str;
 	return (SUCCESS);
 }

@@ -6,16 +6,16 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:55:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 03:31:47 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 04:12:55 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "interpreter.h"
 #include "libft.h"
 
-static char	*create_string_mask(char *str);
+#include "interpreter.h"
+#include "expander.h"
 
-int	create_interpreter_mask(t_vector *mask, t_vector *args)
+int	create_interpreter_masks(t_vector *mask, t_vector *args)
 {
 	char	*str_mask;
 	char	**ptr;
@@ -40,7 +40,7 @@ int	create_interpreter_mask(t_vector *mask, t_vector *args)
 	return (SUCCESS);
 }
 
-static char	*create_string_mask(char *str)
+char	*create_string_mask(char *str)
 {
 	char		*mask;
 	t_escape	interpreter;
