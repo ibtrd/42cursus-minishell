@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/10 04:55:35 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/11 00:28:42 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -170,7 +170,7 @@ ifdef TEST
 BUILD_DIR := $(BUILD_DIR)test/
 NAME = minishell_test
 CFLAGS := $(filter-out $(OFLAGS),$(CFLAGS)) -g3
-SRC := $(filter-out main, $(SRC)) tests/main_$(TEST)
+SRC := tests/main_$(TEST) $(filter-out main, $(SRC))
 endif
 
 # *** TARGETS **************************************************************** #
@@ -262,6 +262,8 @@ AVAILABLE_TESTS = \
 	lexer \
 	lexerfull \
 	dprintf \
+	vector_test \
+	vector_alloc \
 	tilde_expansion \
 
 .PHONY : $(AVAILABLE_TESTS)

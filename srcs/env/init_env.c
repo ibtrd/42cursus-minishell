@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:22:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/09 16:05:58 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 00:27:11 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,16 @@ static int	copy_env(t_vector *envv, char **env)
 	size_t		i;
 	t_env_var	env_var;
 
-	env_var = (t_env_var){0};
+	if (ft_vector_init(envv, (t_vinfos){sizeof(t_env_var), 0, free_var}))
+		return (1);
 	i = 0;
 	while (env[i])
 	{
-		if (copy_var(&env_var, env[i]))
-			return (1);
-		if (var_update(&env_var))
-			return (1);
-		if (ft_vector_add(envv, &env_var))
-			return (1);
+		tmp = ft_strtok(env[i], "=");
+		env_var.name = ft_strdup(tmp);
+		tmp = ft_strtok(NULL, "");
+		env_var.value = ft_strdup(tmp);
+		ft_vector_add(envv, &env_var); //PROTECTION
 		i++;
 	}
 	return (0);

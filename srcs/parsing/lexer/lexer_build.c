@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 20:24:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 05:50:04 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 19:33:48 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	lexer_build(char *cmdline, t_vector *vector)
 	int				status;
 	t_lexer_token	tok;
 
-	status = ft_vector_init(vector, sizeof(t_lexer_token), 0);
+	status = ft_vector_init(vector, (t_vinfos){sizeof(t_lexer_token), 0, NULL});
 	tok.value = cmdline_tokenizer(cmdline);
 	while (status == SUCCESS && tok.value)
 	{
@@ -36,7 +36,7 @@ int	lexer_build(char *cmdline, t_vector *vector)
 	if (status == SUCCESS)
 		ft_vector_trim(vector);
 	else
-		ft_vector_free(vector, NULL);
+		ft_vector_free(vector);
 	return (status);
 }
 

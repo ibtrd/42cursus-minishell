@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_allocate.c                               :+:      :+:    :+:   */
+/*   ft_vector_replace.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 20:49:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 20:50:22 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/10 15:00:36 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/10 15:05:38 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "ft_vector.h"
+#include "ft_mem.h"
 
-int	ft_vector_allocate(t_vector **ptr, size_t data_size, size_t capacity)
+int	ft_vector_replace(t_vector *v, size_t index, void *new)
 {
-	t_vector	*new;
-
-	new = malloc(sizeof(t_vector));
-	if (!new)
+	if (!v || index >= v->total)
 		return (FAILURE);
-	if (ft_vector_init(new, data_size, capacity))
-	{
-		free(new);
-		return (FAILURE);
-	}
-	*ptr = new;
+	if (v->del)
+		v->del((void **)ft_vector_get(v, index));
+	ft_memcpy(v->ptr + index * v->size, new, v->size);
 	return (SUCCESS);
 }

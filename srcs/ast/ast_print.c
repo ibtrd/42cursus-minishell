@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:37:35 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 19:05:30 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 00:25:32 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 #include "ast.h"
 
+static void	print_next_node(int fd, t_astnode *root, int space);
 static void	printnode(int fd, t_astnode *node);
-static void	print_nextnode(int fd, t_astnode *root, int space);
 
 void	dprint_ast(int fd, t_astnode *root, char *color)
 {
@@ -23,48 +23,43 @@ void	dprint_ast(int fd, t_astnode *root, char *color)
 		dprintf(2, "\n%s", color);
 	else
 		dprintf(2, "\n");
-	print_nextnode(fd, root, 0);
-	dprintf(2,"\e[0m\n---------------------------------------------\n");
+	print_next_node(fd, root, 0);
+	dprintf(2, "\e[0m\n---------------------------------------------\n");
 }
 
-static void	print_nextnode(int fd, t_astnode *root, int space)
+static void	print_next_node(int fd, t_astnode *root, int space)
 {
 	int	i;
 
 	if (root == NULL)
 		return ;
-	i = 3;
 	space += 3;
-	print_nextnode(fd, root->right, space);
+	print_next_node(fd, root->right, space);
+	i = 3;
 	while (i++ < space)
 		dprintf(fd, " ");
 	printnode(fd, root);
-	print_nextnode(fd, root->left, space);
+	print_next_node(fd, root->left, space);
 }
+
 
 static void	printnode(int fd, t_astnode *node)
 {
-	size_t	i;
+	const char	*operator[] = {"&&", "||", "|", "<", ">", "<<", ">>"};
+	t_vector	*str;
+	size_t		i;
 
-	if (node->type == _AND)
-		dprintf(fd, "&&\n");
-	if (node->type == _OR)
-		dprintf(fd, "||\n");
-	if (node->type == _PIPE)
-		dprintf(fd, "|\n");
-	if (node->type == _INPUT)
-		dprintf(fd, "< %s\n", *(char **)node->args->ptr);
-	if (node->type == _OUTPUT)
-		dprintf(fd, "> %s\n", *(char **)node->args->ptr);
-	if (node->type == _HEREDOC)
-		dprintf(fd, "<< %s\n", *(char **)node->args->ptr);
-	if (node->type == _APPEND)
-		dprintf(fd, ">> %s\n", *(char **)node->args->ptr);
-	if (node->type == _CMD)
+	i = 0;
+	if (node->type >= _AND && node->type <= _APPEND)
+		dprintf(fd, "%s ", operator[node->type]);
+	if (node->type == _CMD || (node->type >= _INPUT && node->type <= _APPEND))
 	{
-		i = 0;
-		while (i < node->args->total)
-			dprintf(fd, "|%s| ", ((char **)node->args->ptr)[i++]);
-		dprintf(fd, "\n");
+		str = ft_vector_get(node->args, i);
+		while (i++ < node->args->total)
+		{
+			dprintf(fd, "%s ", (char *)str->ptr);
+			str = ft_vector_get(node->args, i);
+		}
 	}
+	dprintf(fd, "\n");
 }

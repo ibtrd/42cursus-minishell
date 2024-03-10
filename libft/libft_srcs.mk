@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/08 20:12:31 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/11 00:22:17 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ MEM_DIR = mem/
 MEM_SRC = \
 	bzero \
 	calloc \
+	fmalloc \
 	memchr \
 	memcmp \
 	memcpy \
@@ -94,8 +95,8 @@ VECTOR_DIR = vector/
 VECTOR_SRC = \
 	vector_add \
 	vector_add_ptr \
-	vector_allocate \
-	vector_deallocate \
+	vector_alloc \
+	vector_dealloc \
 	vector_delete \
 	vector_deleten \
 	vector_free \
@@ -105,6 +106,8 @@ VECTOR_SRC = \
 	vector_insert_ptr \
 	vector_insertn \
 	vector_join \
+	vector_replace \
+	vector_replacen \
 	vector_resize \
 	vector_set \
 	vector_set_ptr \
