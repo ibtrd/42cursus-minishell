@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_free.c                                   :+:      :+:    :+:   */
+/*   ft_vector_dealloc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/10 14:47:38 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/05 20:59:18 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/10 19:38:58 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
 #include <stdlib.h>
 
-int	ft_vector_free(t_vector *v)
+#include "ft_vector.h"
+
+int	ft_vector_dealloc(t_vector **ptr, size_t n)
 {
 	size_t	i;
 
-	if (!v)
+	if (!ptr || !*ptr || !n)
 		return (FAILURE);
-	if (v->del)
-	{
-		i = 0;
-		while (i < v->total)
-			v->del((void **)ft_vector_get(v, i++));
-	}
-	free(v->ptr);
-	v->ptr = NULL;
-	v->total = 0;
+	i = 0;
+	while (i < n)
+		ft_vector_free((*ptr) + i++);
+	free(*ptr);
+	*ptr = NULL;
 	return (SUCCESS);
 }

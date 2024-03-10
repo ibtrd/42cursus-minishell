@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:24:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 05:50:04 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 19:32:04 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	cmdline_addspace(char *cmdline, char **ptr)
 	t_escape	escape;
 	int			i;
 
-	status = ft_vector_init(&vector, sizeof(char), 0);
+	status = ft_vector_init(&vector, (t_vinfos){sizeof(char), 0, NULL});
 	init_escape(&escape);
 	i = 0;
 	while (status == SUCCESS && cmdline[i])

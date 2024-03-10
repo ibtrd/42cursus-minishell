@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_init_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:41:08 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/08 14:31:03 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 19:46:42 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	main(int ac, char **av, char **env)
 	init_env(&envv, env);
 	builtin_env(&envv);
 	printf("ft_getenv(envv, \"PATH\") = %s\n", ft_getenv(&envv, "PATH"));
-	ft_vector_free(&envv, &free_var);
+	ft_vector_free(&envv);
 	return (0);
 }
