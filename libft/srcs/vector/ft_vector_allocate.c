@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 20:49:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 20:50:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 16:52:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,25 @@
 
 #include "ft_vector.h"
 
-int	ft_vector_allocate(t_vector **ptr, size_t data_size, size_t capacity)
+int	ft_vector_alloc(t_vector **ptr, t_vinfos infos, size_t n)
 {
 	t_vector	*new;
+	size_t		i;
 
-	new = malloc(sizeof(t_vector));
+	new = malloc(sizeof(t_vector) * n);
 	if (!new)
 		return (FAILURE);
-	if (ft_vector_init(new, data_size, capacity))
+	i = 0;
+	while (i < n)
 	{
-		free(new);
-		return (FAILURE);
+		if (ft_vector_init(new + i, infos))
+		{
+			while (i--)
+				ft_vector_free(new + i);
+			free(new);
+			return (FAILURE);
+		}
+		i++;
 	}
 	*ptr = new;
 	return (SUCCESS);
