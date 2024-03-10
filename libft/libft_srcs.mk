@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/10 17:41:07 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/10 18:33:31 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ MEM_DIR = mem/
 MEM_SRC = \
 	bzero \
 	calloc \
+	fmalloc \
 	memchr \
 	memcmp \
 	memcpy \
