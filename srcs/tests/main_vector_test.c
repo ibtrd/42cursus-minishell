@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:20:30 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 17:10:07 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 17:45:25 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ int main(void)
 
 	print_vector(&v);
 
-	printf("-----\n");
+	printf("\n----------\n");
+
+	printf("vector_insertn\n\n");
 
 	// line = ft_strdup("INSERTqkweijwaie");
 	// vector_insert_ptr(&v, line, 1);
@@ -77,14 +79,37 @@ int main(void)
 
 	print_vector(&v);
 
-	printf("-----\n");
+	printf("\n----------\n");
 
-	// vector_delete(&v, 2, &free);
+	printf("vector_deleten\n\n");
+
 	ft_vector_deleten(&v, 2, 2);
 
 	ft_vector_trim(&v);
 
 	print_vector(&v);
+
+	printf("\n----------\n");
+
+	printf("vector_replace\n\n");
+
+	line = ft_strdup("REPLACE");
+	ft_vector_replace(&v, 1, &line);
+
+	print_vector(&v);
+
+	// printf("\n----------\n");
+
+	// printf("vector_replacen\n\n");
+
+	// line = ft_strdup("b1");
+	// ft_vector_replace(&v, 1, &line);
+
+	// print_vector(&v);
+
+	printf("\n----------\n");
+
+	printf("vector_free\n\n");
 
 	printf("ptr: %p\n", v.ptr);
 	ft_vector_free(&v);
