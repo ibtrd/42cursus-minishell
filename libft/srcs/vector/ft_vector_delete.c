@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector_delete.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 13:25:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/08 18:05:18 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 14:47:58 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "ft_mem.h"
 #include <stddef.h>
 
-int	ft_vector_delete(t_vector *v, size_t index, void (*del)(void **))
+int	ft_vector_delete(t_vector *v, size_t index)
 {
 	if (!v || index >= v->total)
 		return (FAILURE);
-	if (del)
-		del((void **)ft_vector_get(v, index));
+	if (v->del)
+		v->del((void **)ft_vector_get(v, index));
 	ft_memcpy(v->ptr + index * v->size, v->ptr + (index + 1) * v->size,
 		(v->total - 1 - index) * v->size);
 	v->total--;

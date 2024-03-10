@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:43:19 by kchillon          #+#    #+#             */
-/*   Updated: 2024/02/29 19:07:15 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 14:45:31 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static int	gnl_read_line(char *buffer, t_vector *v, int fd)
 	}
 	return (0);
 }
-
 
 int	get_next_line(int fd, char **line)
 {
