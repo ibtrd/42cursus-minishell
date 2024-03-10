@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fmalloc.c                                       :+:      :+:    :+:   */
+/*   ft_ffmalloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,8 +13,8 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <unistd.h>
-
-
+#include <time.h>
+#include <stdio.h>
 
 void	*ft_fmalloc(size_t size)
 {
@@ -22,10 +22,13 @@ void	*ft_fmalloc(size_t size)
 	static int	max = 0;
 
 	if (!max)
-		max = rand() % 1500;
+	{
+		max = size;
+		return (NULL);
+	}
 	if (i++ > max)
 	{
-		write(STDERR_FILENO, "Forcing malloc() failure!\n", 26);
+		dprintf(2, "Forcing ft_fmalloc() failure! (call^%d)\n", i);
 		errno = ENOMEM;
 		return (NULL);
 	}
