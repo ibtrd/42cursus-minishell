@@ -64,7 +64,7 @@ int	build_from_token(t_lexer_token *tok, t_astnode **root)
 	if (tok->type <= _REDIR_APPEND_TOK)
 		return (build_redirection(&file_v, tok, root));
 	if (tok->type == _FILE_TOK)
-		return (add_file(file_v, tok->value));
+		return (add_argument(file_v, tok->value));
 	if (tok->type == _CMD_TOK)
 		return (build_command(&arg_v, tok, root));
 	if (tok->type == _ARG_TOK)

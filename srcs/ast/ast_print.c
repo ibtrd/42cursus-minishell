@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:37:35 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 03:10:18 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 23:38:29 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ void dprint_ast(int fd, t_astnode* root, char *color)
 
 void printnode(int fd, t_astnode *node)
 {
-	size_t i = 0;
+	size_t 		i = 0;
+	t_vector	*str;
 
+	i = 0;
 	if (node->type == _AND)
 		dprintf(fd, "&&\n");
 	if (node->type == _OR)
@@ -55,19 +57,32 @@ void printnode(int fd, t_astnode *node)
 		dprintf(fd, "|\n");
 	if (node->type == _INPUT)
 	{
-		dprintf(fd, "< %s\n", *(char **)node->args->ptr);
+		str = ft_vector_get(node->args, i);
+		dprintf(fd, "< ");
 	}
 	if (node->type == _OUTPUT)
-		dprintf(fd, "> %s\n", *(char **)node->args->ptr);
-	if (node->type == _HEREDOC)
-		dprintf(fd, "<< %s\n", *(char **)node->args->ptr);
-	if (node->type == _APPEND)
-		dprintf(fd, ">> %s\n", *(char **)node->args->ptr);
-	if (node->type == _CMD)
 	{
-
-		while (i < node->args->total)
-			dprintf(fd, "%s ", ((char **)node->args->ptr)[i++]);
+		str = ft_vector_get(node->args, i);
+		dprintf(fd, "> ");
+	}
+	if (node->type == _HEREDOC)
+	{
+		str = ft_vector_get(node->args, i);
+		dprintf(fd, "<< ");
+	}
+	if (node->type == _APPEND)
+	{
+		str = ft_vector_get(node->args, i);
+		dprintf(fd, ">> ");
+	}
+	if (node->type == _CMD || (node->type >= _INPUT && node->type <= _APPEND))
+	{
+		str = ft_vector_get(node->args, i);
+		while (i++ < node->args->total)
+		{
+			dprintf(fd, "%s ", (char *)str->ptr);
+			str = ft_vector_get(node->args, i);
+		}
 		dprintf(fd, "\n");
 	}
 }
