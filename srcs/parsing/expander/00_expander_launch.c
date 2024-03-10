@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 23:33:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 01:56:48 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ static int	expand_node(t_astnode *node, t_vector *env)
 		// if (word_splitting)
 		i++;
 	}
+	ft_vector_free(&mask, ft_vfree);
 	return (SUCCESS);
 }

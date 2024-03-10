@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:46:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 01:43:30 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 03:13:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,19 @@ static int	replace_envars(char **ptr, char **mask, t_vector *env)
 
 	if (init_expansion_vectors(expanded, *ptr, *mask))
 		return (FAILURE);
-	printf("total=%ld\n", expanded->total);
 	init_escape(&interpreter);
 	i = 0;
 	c = ft_vector_get(expanded, i);
 	while (c)
 	{
-		printf("index=%ld\n", i);
 		set_escape_mode(&interpreter, *c);
 		if (interpreter.mode != _SINGLE && *c == '$')
 			add_envar(expanded, &i, env);
 		else
 			i++;
-		printf("\tindex=%ld\n", i);
 		c = ft_vector_get(expanded, i);
 	}
-	free(*ptr);
-	*ptr = expanded->ptr;
-	return (SUCCESS);
+	return (replace_vector_pointers(ptr, mask, expanded));
 }
 
 static int	add_envar(t_vector expanded[2], size_t *index, t_vector *env)
@@ -83,6 +78,8 @@ static int	add_envar(t_vector expanded[2], size_t *index, t_vector *env)
 	if (remove_var_names(expanded, *index, var.name))
 		return (FAILURE);
 	var.value = ft_getenv(env, var.name);
+	if (!var.value && !*var.name)
+		var.value = "$";
 	free(var.name);
 	if (!var.value)
 	{
@@ -94,22 +91,22 @@ static int	add_envar(t_vector expanded[2], size_t *index, t_vector *env)
 
 static int	get_envar_name(char *str, char **ptr)
 {
-	char	*envar;
-	size_t	i;
+	char			*envar;
+	const size_t	len = ft_strlen(str);
+	size_t			i;
 
-	envar = ft_strdup(str);
+	envar = ft_calloc((len + 2), sizeof(char));
 	*ptr = envar;
 	if (!envar)
 		return (FAILURE);
 	i = 0;
-	if (str[i++] == '?')
-	{
-		envar[i] = '\0';
-		*ptr = envar;
-		return (SUCCESS);
-	}
+	envar[i] = str[i];
 	while (ft_isalnum(str[i]) || str[i] == '_')
+	{
+		envar[i] = str[i];
 		i++;
-	envar[i] = '\0';
+	}
+	if (i == 0 && envar[i] != '?')
+		envar[i] = '\0';
 	return (SUCCESS);
 }

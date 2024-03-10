@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 23:05:32 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 01:42:27 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 02:04:01 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,14 @@ int	insert_var_values(t_vector expanded[2], size_t *index, char *value)
 	free(mask_insert);
 	*index += len;
 	ft_dprintf(2, "expanded str  = %s|\nexpanded mask = %s|\n", (char *)expanded->ptr, (char *)(expanded + 1)->ptr);
+	return (SUCCESS);
+}
+
+int	replace_vector_pointers(char **ptr, char **mask, t_vector expanded[2])
+{
+	free(*ptr);
+	*ptr = ft_vector_get(expanded, 0);
+	free(*mask);
+	*mask = ft_vector_get(expanded + 1, 0);
 	return (SUCCESS);
 }
