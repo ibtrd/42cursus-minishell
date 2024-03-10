@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:55:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 23:47:17 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 03:31:47 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,23 @@ int	create_interpreter_mask(t_vector *mask, t_vector *args)
 static char	*create_string_mask(char *str)
 {
 	char		*mask;
-	// t_escape	interpreter;
+	t_escape	interpreter;
 	size_t		i;
 
 	mask = ft_strdup(str);
 	if (!mask)
 		return (NULL);
-	// init_escape(&interpreter);
+	init_escape(&interpreter);
 	i = 0;
 	while (mask[i])
 	{
-		// set_escape_mode(&interpreter, mask[i]);
-		mask[i] = '0';
+		set_escape_mode(&interpreter, mask[i]);
+		if (interpreter.mode == _SINGLE && mask[i] != '\'')
+			mask[i] = '\'';
+		else if (interpreter.mode == _DOUBLE && mask[i] != '\"')
+			mask[i] = '\"';
+		else
+			mask[i] = '.';
 		i++;
 	}
 	return (mask);

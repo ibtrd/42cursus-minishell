@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 16:50:40 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 03:35:52 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@
 # define __HOME_ENVAR "$HOME"
 # define __PWD_ENVAR "$PWD"
 # define __OLDPWD_ENVAR "$OLDPWD"
+
+# define __ENVARS_ESCAPE "\'$"
 
 //PRINT
 # define __MINISHELL "minishell"

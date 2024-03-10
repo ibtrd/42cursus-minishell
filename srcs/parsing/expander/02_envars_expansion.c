@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:46:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 03:13:44 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 03:39:05 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,23 @@ int	envars_expansion(char **ptr, char **mask, t_vector *env)
 static int	replace_envars(char **ptr, char **mask, t_vector *env)
 {
 	t_vector	expanded[2];
-	t_escape	interpreter;
 	char		*c;
+	char		*m;
 	size_t		i;
 
 	if (init_expansion_vectors(expanded, *ptr, *mask))
 		return (FAILURE);
-	init_escape(&interpreter);
 	i = 0;
 	c = ft_vector_get(expanded, i);
+	m = ft_vector_get(expanded + 1, i);
 	while (c)
 	{
-		set_escape_mode(&interpreter, *c);
-		if (interpreter.mode != _SINGLE && *c == '$')
+		if (!ft_ischarset(*m, __ENVARS_ESCAPE) && *c == '$')
 			add_envar(expanded, &i, env);
 		else
 			i++;
 		c = ft_vector_get(expanded, i);
+		m = ft_vector_get(expanded + 1, i);
 	}
 	return (replace_vector_pointers(ptr, mask, expanded));
 }
