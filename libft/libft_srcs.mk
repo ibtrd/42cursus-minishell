@@ -105,6 +105,8 @@ VECTOR_SRC = \
 	vector_insert_ptr \
 	vector_insertn \
 	vector_join \
+	vector_replace \
+	vector_replacen \
 	vector_resize \
 	vector_set \
 	vector_set_ptr \

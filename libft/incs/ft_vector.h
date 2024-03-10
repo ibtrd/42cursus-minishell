@@ -49,6 +49,7 @@ int		ft_vector_insert_ptr(t_vector *v, void *item, size_t index);
 int		ft_vector_insert(t_vector *v, void *item, size_t index);
 int		ft_vector_insertn(t_vector *v, void *item, size_t index, size_t n);
 int		ft_vector_join(t_vector *v, void *items, size_t n);
+int		ft_vector_replace(t_vector *v, size_t index, void *new);
 int		ft_vector_replacen(t_vector *v, size_t index, void *new, size_t n[2]);
 int		ft_vector_resize(t_vector *v, size_t capacity);
 int		ft_vector_set_ptr(t_vector *v, size_t index, void *item);
