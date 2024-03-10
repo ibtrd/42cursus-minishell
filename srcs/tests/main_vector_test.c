@@ -6,13 +6,31 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:20:30 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 16:54:31 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 17:10:07 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "get_next_line.h"
 #include "string.h"
 #include "errno.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+void	print_vector(t_vector *v)
+{
+	size_t	i;
+	char	**ptr;
+
+	i = 0;
+	// printf("str: |%s|\n", (char *)v->ptr);
+	while (i < v->total)
+	{
+		ptr = ft_vector_get(v, i);
+		printf("|%s|\n", *ptr);
+		i++;
+	}
+}
 
 int main(void)
 {
@@ -20,7 +38,7 @@ int main(void)
 	char		*line;
 	char		**more;
 	
-	vector_init(&v, sizeof(char *), 0);
+	ft_vector_init(&v, (t_vinfos){sizeof(char *), 0, &ft_vfree});
 
 	line = NULL;
 	do
@@ -34,7 +52,7 @@ int main(void)
 		// 	// printf("len: %zu\n", ft_strlen(line));
 		// 	vector_strncat(&v, line, ft_strlen(line));
 		// }
-		vector_add_ptr(&v, line);
+		ft_vector_add_ptr(&v, line);
 		// free(line);
 	} while (line);
 
@@ -53,23 +71,23 @@ int main(void)
 	more[1] = ft_strdup("qkweijwaie");
 	// printf("more[1]: %p\n", more[1]);
 	more[2] = NULL;
-	vector_insertn(&v, more, 1, 3);
+	ft_vector_insertn(&v, more, 1, 3);
 
-	vector_trim(&v);
+	ft_vector_trim(&v);
 
 	print_vector(&v);
 
 	printf("-----\n");
 
 	// vector_delete(&v, 2, &free);
-	vector_deleten(&v, 2, 2, &ft_vfree);
+	ft_vector_deleten(&v, 2, 2);
 
-	vector_trim(&v);
+	ft_vector_trim(&v);
 
 	print_vector(&v);
 
 	printf("ptr: %p\n", v.ptr);
-	vector_free(&v, &ft_vfree);
+	ft_vector_free(&v);
 	free(more);
 
 	return (0);

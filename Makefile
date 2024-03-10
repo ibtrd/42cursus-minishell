@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/10 16:55:03 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/10 17:07:17 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -159,7 +159,7 @@ ifdef TEST
 BUILD_DIR := $(BUILD_DIR)test/
 NAME = minishell_test
 CFLAGS := $(filter-out $(OFLAGS),$(CFLAGS)) -g3
-SRC := $(filter-out main, $(SRC)) tests/main_$(TEST)
+SRC := tests/main_$(TEST) #$(filter-out main, $(SRC))
 endif
 
 # *** TARGETS **************************************************************** #
