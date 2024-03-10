@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 19:56:42 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/09 23:33:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static int	expand_node(t_astnode *node, t_vector *env)
 {
 	t_vector	mask;
 	char		**ptr;
+	char		**mask_ptr;
 	size_t		i;
 
 	i = 0;
@@ -60,13 +61,13 @@ static int	expand_node(t_astnode *node, t_vector *env)
 	while (i < node->args->total - (node->type == _CMD))
 	{
 		ptr = ft_vector_get(node->args, i);
-		if (tilde_expansion(ptr))
-			return (FAILURE); //PROTECT
-		if (envars_expansion(ptr, env))
+		mask_ptr = ft_vector_get(&mask, i);
+		// if (tilde_expansion(ptr)) //ADD MASK EXPENSION ASWELL
+		// 	return (FAILURE); //PROTECT
+		if (envars_expansion(ptr, mask_ptr, env))
 			return (FAILURE); //PROTECT
 		// if (word_splitting)
 		i++;
 	}
 	return (SUCCESS);
-	(void)env;
 }

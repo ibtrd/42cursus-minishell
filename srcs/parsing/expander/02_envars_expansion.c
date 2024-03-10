@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:46:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 17:52:18 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 01:43:30 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,83 +18,98 @@
 #include "minishelldef.h"
 #include "parsing.h"
 #include "env.h"
+#include "expander.h"
 
-static int	replace_envars(char **ptr, t_vector *env);
-static int	add_envar(t_vector *expanded, char *str, size_t *index, t_vector *env);
-static char	*get_envar_name(char *str);
+static int	replace_envars(char **ptr, char **mask, t_vector *env);
+static int	add_envar(t_vector expanded[2], size_t *index, t_vector *env);
+static int	get_envar_name(char *str, char **ptr);
 
-int	envars_expansion(char **ptr, t_vector *env)
+int	envars_expansion(char **ptr, char **mask, t_vector *env)
 {
-	t_escape	quote;
+	t_escape	interpreter;
 	char		*str;
 	size_t		i;
 
 	str = *ptr;
-	init_escape(&quote);
+	init_escape(&interpreter);
 	i = 0;
 	while (str[i])
 	{
-		set_escape_mode(&quote, str[i]);
-		if (quote.mode != _SINGLE && str[i] == '$')
-			return (replace_envars(ptr, env));
+		set_escape_mode(&interpreter, str[i]);
+		if (interpreter.mode != _SINGLE && str[i] == '$')
+			return (replace_envars(ptr, mask, env));
 		i++;
 	}
 	return (SUCCESS);
 }
 
-static int	replace_envars(char **ptr, t_vector *env)
+static int	replace_envars(char **ptr, char **mask, t_vector *env)
 {
-	t_vector	expanded;
-	t_escape	quote;
-	char		*str;
+	t_vector	expanded[2];
+	t_escape	interpreter;
+	char		*c;
 	size_t		i;
 
-	if (ft_vector_init(&expanded, sizeof(char), 0))
+	if (init_expansion_vectors(expanded, *ptr, *mask))
 		return (FAILURE);
-	str = *ptr;
-	init_escape(&quote);
+	printf("total=%ld\n", expanded->total);
+	init_escape(&interpreter);
 	i = 0;
-	while (str[i])
+	c = ft_vector_get(expanded, i);
+	while (c)
 	{
-		set_escape_mode(&quote, str[i]);
-		if (quote.mode != _SINGLE && str[i] == '$')
-			add_envar(&expanded, str, &i, env);
+		printf("index=%ld\n", i);
+		set_escape_mode(&interpreter, *c);
+		if (interpreter.mode != _SINGLE && *c == '$')
+			add_envar(expanded, &i, env);
 		else
-			ft_vector_add(&expanded, str + i++);
+			i++;
+		printf("\tindex=%ld\n", i);
+		c = ft_vector_get(expanded, i);
 	}
-	ft_vector_add(&expanded, "\0");
 	free(*ptr);
-	*ptr = expanded.ptr;
+	*ptr = expanded->ptr;
 	return (SUCCESS);
 }
 
-static int	add_envar(t_vector *expanded, char *str, size_t *index, t_vector *env)
+static int	add_envar(t_vector expanded[2], size_t *index, t_vector *env)
 {
 	t_env_var	var;
+	char		*str;
 
-	(*index)++;
-	var.name = get_envar_name(str + *index);
-	if (!var.name)
+	str = ft_vector_get(expanded, *index);
+	if (get_envar_name(str + 1, &var.name))
+		return (FAILURE);
+	if (remove_var_names(expanded, *index, var.name))
 		return (FAILURE);
 	var.value = ft_getenv(env, var.name);
-	*index += ft_strlen(var.name);
 	free(var.name);
 	if (!var.value)
+	{
+		(*index)++;
 		return (SUCCESS);
-	return (ft_vector_join(expanded, var.value, ft_strlen(var.value)));
+	}
+	return (insert_var_values(expanded, index, var.value));
 }
 
-static char	*get_envar_name(char *str)
+static int	get_envar_name(char *str, char **ptr)
 {
 	char	*envar;
 	size_t	i;
 
 	envar = ft_strdup(str);
+	*ptr = envar;
 	if (!envar)
-		return (NULL);
-	i = 1;
+		return (FAILURE);
+	i = 0;
+	if (str[i++] == '?')
+	{
+		envar[i] = '\0';
+		*ptr = envar;
+		return (SUCCESS);
+	}
 	while (ft_isalnum(str[i]) || str[i] == '_')
 		i++;
 	envar[i] = '\0';
-	return (envar);
+	return (SUCCESS);
 }
