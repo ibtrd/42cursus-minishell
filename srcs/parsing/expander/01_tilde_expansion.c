@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 23:12:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 05:35:56 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 05:42:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 #include "libft.h"
 
 #include "minishelldef.h"
-#include "expander.h"
-
-#include <stdio.h> //REMOVE
 
 static int	lone_tilde(t_vector *str, t_vector *mask);
 static int	tilde_sign(t_vector *str, t_vector *mask, char *envar);
@@ -43,7 +40,6 @@ int	tilde_expansion(t_vector *args, t_vector *masks, size_t index)
 		return (tilde_sign((t_vector *)str, (t_vector *)mask, __OLDPWD_ENVAR));
 	if (!ft_strncmp((char *)str->ptr, "~", 1))
 		return (lone_tilde((t_vector *)str, (t_vector *)mask));
-	printf("no tilde:(\n");
 	return (SUCCESS);
 }
 
