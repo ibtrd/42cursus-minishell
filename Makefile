@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/11 00:28:42 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/11 04:07:13 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 # *** FILES ****************************************************************** #
 
-BUILD_DIR := .build/
+BUILD_DIR := .build/$(shell git branch --show-current)/
 
 SRCS_DIR = srcs/
 SRC = \
