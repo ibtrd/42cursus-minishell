@@ -6,12 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:55:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 03:07:38 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 22:09:28 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+#include "minishelldef.h"
 #include "interpreter.h"
 #include "expander.h"
 #include "ast.h"
@@ -67,11 +68,11 @@ static void	set_interpretation_mask(char *mask)
 	{
 		set_escape_mode(&interpreter, c);
 		if (interpreter.mode == _SINGLE && c != '\'')
-			*mask++ = '\'';
+			*mask++ = __SQUOTE_MASK;
 		else if (interpreter.mode == _DOUBLE && c != '\"')
-			*mask++ = '\"';
+			*mask++ = __DQUOTE_MASK;
 		else
-			*mask++ = '.';
+			*mask++ = __NO_MASK;
 		c = *mask;
 	}
 }

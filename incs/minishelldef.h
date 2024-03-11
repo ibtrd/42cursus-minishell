@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 05:42:16 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 00:10:32 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@
 # define __HOME_ENVAR "$HOME"
 # define __PWD_ENVAR "$PWD"
 # define __OLDPWD_ENVAR "$OLDPWD"
+
+# define __NO_MASK 0x0
+# define __DQUOTE_MASK 0x1
+# define __SQUOTE_MASK 0x2
+# define __ENVAR_MASK 0x4
 
 # define __ENVARS_ESCAPE "\'$"
 # define __WORDSPLIT_ESCAPE "\'$"

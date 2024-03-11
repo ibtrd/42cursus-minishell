@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:46:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 07:51:38 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 23:31:25 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "libft.h"
 
+#include "minishelldef.h"
 #include "interpreter.h"
 #include "env.h"
 
@@ -65,8 +66,9 @@ static int	search_envars(t_vector *arg, t_vector *mask, t_vector *env)
 
 static int	replace_envar(t_vector *arg, t_vector *mask, t_env_var envar, size_t *index)
 {
-	size_t	name_len;
-	size_t	value_len;
+	const char	m = *((char *)ft_vector_get(mask, *index)) | __ENVAR_MASK;
+	size_t		name_len;
+	size_t		value_len;
 
 	if (!envar.value && !*envar.name)
 		envar.value = "$";
@@ -76,7 +78,7 @@ static int	replace_envar(t_vector *arg, t_vector *mask, t_env_var envar, size_t 
 		|| ft_vector_insertn(arg, envar.value, *index, value_len)
 		|| ft_vector_deleten(mask, *index, name_len)
 		|| ft_vector_insertn(mask, envar.value, *index, value_len)
-		|| ft_vector_setn(mask, *index, "$", value_len))
+		|| ft_vector_setn(mask, *index, &m, value_len))
 	{
 		free(envar.name);
 		return (FAILURE);

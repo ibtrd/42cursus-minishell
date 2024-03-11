@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 23:12:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 07:04:16 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 00:11:03 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,17 @@ int	tilde_expansion(t_vector *args, t_vector *masks, size_t index)
 
 static int	lone_tilde(t_vector *str, t_vector *mask)
 {
-	const char		c = *((char *)str->ptr + 1);
 	const size_t	len = ft_strlen(__HOME_ENVAR);
+	const char		next = *((char *)str->ptr + 1);
+	const char		m = *((char *)mask->ptr + 1);
 
-	if (c == '\0' || c == '/')
+	if (next == '\0' || next == '/')
 	{
 		if (ft_vector_delete(str, 0)
 			|| ft_vector_insertn(str, __HOME_ENVAR, 0, len)
 			|| ft_vector_delete(mask, 0)
 			|| ft_vector_insertn(mask, __HOME_ENVAR, 0, len)
-			|| ft_vector_setn(mask, 0, ".", len))
+			|| ft_vector_setn(mask, 0, &m, len))
 			return (FAILURE);
 	}
 	return (SUCCESS);
@@ -64,16 +65,17 @@ static int	lone_tilde(t_vector *str, t_vector *mask)
 
 static int	tilde_sign(t_vector *str, t_vector *mask, char *envar)
 {
-	const char		c = *((char *)str->ptr + 2);
 	const size_t	len = ft_strlen(envar);
+	const char		next = *((char *)str->ptr + 2);
+	const char		m = *((char *)mask->ptr + 2);
 
-	if (c == '\0' || c == '/')
+	if (next == '\0' || next == '/')
 	{
 		if (ft_vector_deleten(str, 0, 2)
 			|| ft_vector_insertn(str, envar, 0, len)
 			|| ft_vector_deleten(mask, 0, 2)
 			|| ft_vector_insertn(mask, envar, 0, len)
-			|| ft_vector_setn(mask, 0, ".", len))
+			|| ft_vector_setn(mask, 0, &m, len))
 			return (FAILURE);
 	}
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 06:23:23 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 23:35:05 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,28 @@ static int	expand_string(t_vector *str, t_vector *masks, size_t *index, t_vector
 
 void debug_print_str_mask(t_vector *str, t_vector *masks, size_t *index, char *msg)
 {
-	char *printstr = (char *)((t_vector *)ft_vector_get(str, *index))->ptr;
-	char *printmask = (char *)((t_vector *)ft_vector_get(masks, *index))->ptr;
+	const t_vector	*print = ft_vector_get(str, *index);
+	const t_vector	*mask = ft_vector_get(masks, *index);
+	size_t			i;
+	char			*c;
 
-	ft_dprintf(2, "%s:\nstr  = %s|\nmask = %s|\n\n", msg, printstr, printmask);
+	ft_dprintf(2, "%s:\nstr  |%s|\nmask |", msg, (char *)print->ptr);
+	i = 0;
+	while (i < mask->total - 1)
+	{
+		c = ft_vector_get((t_vector *)mask, i);
+		if (*c & __ENVAR_MASK && *c & __DQUOTE_MASK)
+			printf("&");
+		else if (*c & __ENVAR_MASK)
+			printf("$");
+		else if (*c & __SQUOTE_MASK)
+			printf("\'");
+		else if (*c & __DQUOTE_MASK)
+			printf("\"");
+		else
+			printf(".");
+		i++;
+	}
+	printf("|\n\n");
+
 }
