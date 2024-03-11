@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/11 19:32:41 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/11 19:34:13 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,8 +75,6 @@ ifneq ($(MODE),)
 else
 	@echo "$(BLUE) $(NAME) has been built! $(RESET)"
 endif
-
-ANY_DEPENDENCY_REMADE :=
 
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | ERROR_CHECK
 	@mkdir -p $(@D)
