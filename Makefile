@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/11 04:07:13 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/11 05:02:26 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -179,6 +179,7 @@ endif
 all : $(NAME) 
 
 $(NAME) : $(LIBS_PATH) $(OBJS) | ERROR_CHECK
+	@printf "\n🔗 Linking $(NAME)... 🔗\n"
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "$(MODE)" > $(MODE_TRACE)
 ifneq ($(MODE),)
@@ -190,7 +191,8 @@ endif
 
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | ERROR_CHECK
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	@printf "🛠️  $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@\n"
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(LIBS_PATH): FORCE | ERROR_CHECK
 	@$(MAKE) -C $(@D)
