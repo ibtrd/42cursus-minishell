@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/11 05:01:06 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/11 19:18:48 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,7 +119,8 @@ INCS = \
 
 # *** CONFIG ***************************************************************** #
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror $(OFLAGS)
+OFLAGS 		=
 
 CPPFLAGS 	= 	$(addprefix -I, $(INCS)) \
 				$(addprefix -D, $(DEFINES)) \
@@ -168,7 +169,7 @@ endif
 all : $(NAME) 
 
 $(NAME) : $(LIBS_PATH) $(OBJS) | ERROR_CHECK
-	@printf "\n🔗 Linking $(NAME)... 🔗\n"
+	@printf "\n🔗 Linking $(NAME)...\n"
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "$(MODE)" > $(MODE_TRACE)
 ifneq ($(MODE),)
@@ -180,8 +181,8 @@ endif
 
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | ERROR_CHECK
 	@mkdir -p $(@D)
-	@printf "🛠️  $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@\n"
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	@printf "🔧 $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@\n"
 
 $(LIBS_PATH): FORCE | ERROR_CHECK
 	@$(MAKE) -C $(@D)

@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/18 22:17:10 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/11 19:32:41 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = libft.a
 
 include libft_srcs.mk
 
-BUILD_DIR := .build/
+BUILD_DIR := .build/$(shell git branch --show-current)/
 
 OBJS = $(patsubst %.c,$(BUILD_DIR)%.o,$(SRCS))
 OBJS = $(SRCS:$(SRCS_DIR)%.c=$(BUILD_DIR)%.o)
@@ -29,12 +29,12 @@ INCS_DIR = incs/
 # *** CONFIG ***************************************************************** #
 
 CFLAGS		=	-Wall -Wextra -Werror $(OFLAGS)
-OFLAGS 		=	-O3
+OFLAGS 		=
 
 CPPFLAGS	= 	$(addprefix -I, $(INCS_DIR)) \
 				-MMD -MP \
 
-ARFLAGS 	=	rc
+ARFLAGS 	=	rcs
 
 MAKEFLAGS	=	--no-print-directory
 
@@ -67,7 +67,8 @@ endif
 all : $(NAME)
 
 $(NAME) : $(OBJS) | ERROR_CHECK
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+	@printf "\n📚 Building $(NAME) archive...\n"
+	$(AR) $(ARFLAGS) $(NAME) $(filter %.o,$?)
 	@echo "$(MODE)" > $(MODE_TRACE)
 ifneq ($(MODE),)
 	@echo "$(BLUE) $(NAME)($(MODE)) has been built! $(RESET)"
@@ -75,9 +76,12 @@ else
 	@echo "$(BLUE) $(NAME) has been built! $(RESET)"
 endif
 
+ANY_DEPENDENCY_REMADE :=
+
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | ERROR_CHECK
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	@printf "🔧 $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@\n"
 
 .PHONY : clean
 clean :
@@ -124,7 +128,6 @@ print% :
 .PHONY : FORCE
 FORCE :
 
-.PHONY : ERROR_CHECK
 ERROR_CHECK :
 ifeq ($(ERROR),MODE)
 	$(error Invalid mode: $(MODE))
