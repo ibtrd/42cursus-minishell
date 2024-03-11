@@ -21,11 +21,11 @@ int	build_redirection(t_vector **file_v, t_lexer_token *tok, t_astnode **root)
 {
 	t_astnode	*new;
 
-	if (ft_vector_alloc(file_v, (t_vinfos){sizeof(t_vector), 1, &del_args}, __ARG_VECTOR))
+	if (ft_vector_alloc(file_v, (t_vinfos){sizeof(t_vector), 1, &del_args}, __UNEXPANDED))
 		return (FAILURE);
 	if (ast_newnode(&new, tok->type, *file_v))
 	{
-		ft_vector_dealloc(file_v, __ARG_VECTOR);
+		ft_vector_dealloc(file_v, __UNEXPANDED);
 		return (FAILURE);
 	}
 	*root = ast_addnode(*root, new);

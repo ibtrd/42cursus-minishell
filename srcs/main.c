@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 16:56:34 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 01:04:59 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av, char **env)
 		root = commandline_parser(input, &envv);
 		free_ast(root);
 	}
-	ft_vector_free(&envv, &free_var);
+	ft_vector_free(&envv);
 	rl_clear_history();
 	return (0);
 }

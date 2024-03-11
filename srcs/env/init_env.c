@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:22:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/11 00:27:11 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 01:08:53 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,34 @@ static int	create_env(t_vector *envv)
 	return (error);
 }
 
-static int	copy_var(t_env_var *env_var, char *var)
-{
-	char	*tmp;
+// COMMENTEE PAR IAN DESOLE
 
-	tmp = ft_strtok(var, "=");
-	env_var->name = ft_strdup(tmp);
-	if (!env_var->name)
-		return (1);
-	tmp = ft_strtok(NULL, "");
-	env_var->value = ft_strdup(tmp);
-	if (!env_var->value)
-	{
-		free(env_var->name);
-		return (1);
-	}
-	return (0);
-}
+// static int	copy_var(t_env_var *env_var, char *var)
+// {
+// 	char	*tmp;
+
+// 	tmp = ft_strtok(var, "=");
+// 	env_var->name = ft_strdup(tmp);
+// 	if (!env_var->name)
+// 		return (1);
+// 	tmp = ft_strtok(NULL, "");
+// 	env_var->value = ft_strdup(tmp);
+// 	if (!env_var->value)
+// 	{
+// 		free(env_var->name);
+// 		return (1);
+// 	}
+// 	return (0);
+// } 
 
 static int	copy_env(t_vector *envv, char **env)
 {
 	size_t		i;
 	t_env_var	env_var;
+	char		*tmp;
 
-	if (ft_vector_init(envv, (t_vinfos){sizeof(t_env_var), 0, free_var}))
-		return (1);
+	// if (ft_vector_init(envv, (t_vinfos){sizeof(t_env_var), 0, free_var}))
+	// 	return (1); //IAN VECTOR DOUBLEMENT INITIALISE ?
 	i = 0;
 	while (env[i])
 	{
@@ -81,14 +84,14 @@ int	init_env(t_vector *envv, char **env)
 {
 	int			error;
 
-	if (ft_vector_init(envv, sizeof(t_env_var), 0))
+	if (ft_vector_init(envv, (t_vinfos){sizeof(t_env_var), 0, &free_var}))
 		return (1);
 	if (!env || !*env)
 		error = create_env(envv);
 	else
 		error = copy_env(envv, env);
 	if (error)
-		ft_vector_free(envv, &free_var);
+		ft_vector_free(envv);
 	return (error);
 }
 

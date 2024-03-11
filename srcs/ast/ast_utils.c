@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:57:11 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 22:45:47 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 01:00:47 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_astnode	*free_ast(t_astnode *root)
 {
 	if (!root)
 		return (NULL);
-	ft_vector_dealloc(&root->args, 1);
+	ft_vector_dealloc(&root->args, __UNEXPANDED);
 	free_ast(root->left);
 	free_ast(root->right);
 	free(root);
