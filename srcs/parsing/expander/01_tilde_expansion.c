@@ -6,109 +6,76 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 23:12:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 00:58:57 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 03:33:56 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdlib.h>
+#include <stdlib.h>
 
-// #include "libft.h"
+#include "libft.h"
 
-// #include "minishelldef.h"
-// #include "expander.h"
+#include "minishelldef.h"
+#include "expander.h"
 
-// static int	lone_tilde(char **ptr, char **mask);
-// static int	tilde_plus(char **ptr, char **mask);
-// static int	tilde_minus(char **ptr, char **mask);
-// static int	replace_mask(char **ptr, char **mask);
+#include <stdio.h> //REMOVE
 
-// /*
-// 	DESCRIPTION
-// 	The tilde_expansion() expands the '~', '~+' and '~-' word prefixes to
-// 	$HOME, $PWD and $OLDPWD respectively, frees the old string and links
-// 	the resulting one to it's pointer. It also updates the associated
-// 	mask.
+static int	lone_tilde(t_vector *str, t_vector *mask);
+static int	tilde_sign(t_vector *str, t_vector *mask, char *envar);
 
-// 	RETURN VALUE
-// 	On succes, 0 is returned. On error, -1 is returned.
-// */
+/*
+	DESCRIPTION
+	The tilde_expansion() expands the '~', '~+' and '~-' word prefixes to
+	$HOME, $PWD and $OLDPWD respectively, frees the old string and links
+	the resulting one to it's pointer. It also updates the associated
+	mask.
 
-// int	tilde_expansion(char **ptr, char **mask)
-// {
-// 	char		*str;
+	RETURN VALUE
+	On succes, 0 is returned. On error, -1 is returned.
+*/
 
-// 	str = *ptr;
-// 	if (!ft_strncmp(str, "~+", 2))
-// 		return (tilde_plus(ptr, mask));
-// 	if (!ft_strncmp(str, "~-", 2))
-// 		return (tilde_minus(ptr, mask));
-// 	if (!ft_strncmp(str, "~", 1))
-// 		return (lone_tilde(ptr, mask));
-// 	return (SUCCESS);
-// }
+int	tilde_expansion(t_vector *args, t_vector *masks, size_t index)
+{
+	const t_vector	*str = ft_vector_get(args, index);
+	const t_vector	*mask = ft_vector_get(masks, index);
 
-// static int	lone_tilde(char **ptr, char **mask)
-// {
-// 	const char	c = *(*ptr + 1);
-// 	char		*str;
+	if (!ft_strncmp((char *)str->ptr, "~+", 2))
+		return (tilde_sign((t_vector *)str, (t_vector *)mask, __PWD_ENVAR));
+	if (!ft_strncmp((char *)str->ptr, "~-", 2))
+		return (tilde_sign((t_vector *)str, (t_vector *)mask, __OLDPWD_ENVAR));
+	if (!ft_strncmp((char *)str->ptr, "~", 1))
+		return (lone_tilde((t_vector *)str, (t_vector *)mask));
+	printf("no tilde:(\n");
+	return (SUCCESS);
+}
 
-// 	if (c == '\0')
-// 		str = ft_strdup(__HOME_ENVAR);
-// 	else if (c == '/')
-// 		str = ft_strjoin(__HOME_ENVAR, *ptr + 1);
-// 	else
-// 		return (SUCCESS);
-// 	if (!str)
-// 		return (FAILURE);
-// 	free(*ptr);
-// 	*ptr = str;
-// 	return (replace_mask(ptr, mask));
-// }
+static int	lone_tilde(t_vector *str, t_vector *mask)
+{
+	const char		c = *((char *)str->ptr + 1);
+	const size_t	len = ft_strlen(__HOME_ENVAR);
 
-// static int	tilde_plus(char **ptr, char **mask)
-// {
-// 	const char	c = *(*ptr + 2);
-// 	char		*str;
+	if (c == '\0' || c == '/')
+	{
+		if (ft_vector_delete(str, 0)
+			|| ft_vector_insertn(str, __HOME_ENVAR, 0, len)
+			|| ft_vector_delete(mask, 0)
+			|| ft_vector_insertn(mask, __HOME_MASK, 0, len))
+			return (FAILURE);
+	}
+	return (SUCCESS);
+}
 
-// 	if (c == '\0')
-// 		str = ft_strdup(__PWD_ENVAR);
-// 	else if (c == '/')
-// 		str = ft_strjoin(__PWD_ENVAR, *ptr + 2);
-// 	else
-// 		return (SUCCESS);
-// 	if (!str)
-// 		return (FAILURE);
-// 	free(*ptr);
-// 	*ptr = str;
-// 	return (replace_mask(ptr, mask));
-// }
+static int	tilde_sign(t_vector *str, t_vector *mask, char *envar)
+{
+	const char		c = *((char *)str->ptr + 2);
+	const size_t	len = ft_strlen(envar);
 
-// static int	tilde_minus(char **ptr, char **mask)
-// {
-// 	const char	c = *(*ptr + 2);
-// 	char		*str;
-
-// 	if (c == '\0')
-// 		str = ft_strdup(__OLDPWD_ENVAR);
-// 	else if (c == '/')
-// 		str = ft_strjoin(__OLDPWD_ENVAR, *ptr + 2);
-// 	else
-// 		return (SUCCESS);
-// 	if (!str)
-// 		return (FAILURE);
-// 	free(*ptr);
-// 	*ptr = str;
-// 	return (replace_mask(ptr, mask));
-// }
-
-// static int	replace_mask(char **ptr, char **mask)
-// {
-// 	char	*str;
-
-// 	str = create_string_mask(*ptr);
-// 	if (!str)
-// 		return (FAILURE);
-// 	free(*mask);
-// 	*mask = str;
-// 	return (SUCCESS);
-// }
+	if (c == '\0' || c == '/')
+	{
+		if (ft_vector_deleten(str, 0, 2)
+			|| ft_vector_insertn(str, envar, 0, len)
+			|| ft_vector_deleten(mask, 0, 2)
+			|| ft_vector_insertn(mask, __PWD_MASK, 0, len))
+			return (FAILURE);
+	}
+	return (SUCCESS);
+}

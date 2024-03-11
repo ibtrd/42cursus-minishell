@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 02:33:11 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 03:14:49 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 static int	has_interpreter(t_astnode *node);
 static int	expand_node(t_astnode *node, t_vector *env);
+static int	expand_string(t_vector *str, t_vector *masks, size_t *index, t_vector *env);
+
+void debug_print_str_mask(t_vector *str, t_vector *masks, size_t *index, char *msg); //REMOVE
 
 int	expander_launch(t_astnode *node, t_vector *env)
 {
@@ -51,12 +54,24 @@ static int	has_interpreter(t_astnode *node)
 static int	expand_node(t_astnode *node, t_vector *env)
 {
 	t_vector	mask;
+	size_t		i;
 	// char		**ptr;
 	// char		**mask_ptr;
-	// size_t		i;
 
 	if (init_interpretation_masks(&mask, node->args))
 		return (FAILURE);
+	i = 0;
+	while (i < ((t_vector *)node->args)->total)
+	{
+		expand_string(node->args, &mask, &i, env);
+		i++;
+	}
+	ft_vector_free(&mask);
+	return (SUCCESS);
+	(void)env;
+
+
+
 	// i = 0;
 	// while (i < node->args->total - (node->type == _CMD))
 	// {
@@ -74,7 +89,25 @@ static int	expand_node(t_astnode *node, t_vector *env)
 	// 	i++;
 	// }
 	printf("EXPAND SUCCESS!\n");
-	ft_vector_free(&mask);
-	return (SUCCESS);
+}
+
+static int	expand_string(t_vector *str, t_vector *masks, size_t *index, t_vector *env)
+{
+	// char *printstr = (char *)((t_vector *)ft_vector_get(str, *index))->ptr;
+	// char *printmask = (char *)((t_vector *)ft_vector_get(masks, *index))->ptr;
+
 	(void)env;
+	debug_print_str_mask(str, masks, index, "EXPANDING");
+	if (tilde_expansion(str, masks, *index))
+		return (FAILURE);
+	debug_print_str_mask(str, masks, index, "TILDE");
+	return (SUCCESS);
+}
+
+void debug_print_str_mask(t_vector *str, t_vector *masks, size_t *index, char *msg)
+{
+	char *printstr = (char *)((t_vector *)ft_vector_get(str, *index))->ptr;
+	char *printmask = (char *)((t_vector *)ft_vector_get(masks, *index))->ptr;
+
+	ft_dprintf(2, "%s:\nstr  = %s|\nmask = %s|\n\n", msg, printstr, printmask);
 }

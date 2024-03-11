@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:55:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 02:29:05 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 03:07:38 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "ast.h"
 
 static int	create_interpretation_mask(t_vector *masks, char *str);
-static void set_interpretation_mask(char *mask);
+static void	set_interpretation_mask(char *mask);
 
 int	init_interpretation_masks(t_vector *masks, t_vector *args)
 {
@@ -37,7 +37,6 @@ int	init_interpretation_masks(t_vector *masks, t_vector *args)
 		}
 		i++;
 	}
-	printf("DEBUG\n");
 	return (SUCCESS);
 }
 
@@ -62,9 +61,6 @@ static void	set_interpretation_mask(char *mask)
 	t_escape	interpreter;
 	char		c;
 
-	char	*save = mask;
-
-	printf("STR  |%s|\n", mask);
 	init_escape(&interpreter);
 	c = *mask;
 	while (c)
@@ -78,7 +74,6 @@ static void	set_interpretation_mask(char *mask)
 			*mask++ = '.';
 		c = *mask;
 	}
-	printf("MASK |%s|\n", save);
 }
 
 // char	*create_string_mask(char *str)
