@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 23:12:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 03:33:56 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 05:35:56 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ static int	tilde_sign(t_vector *str, t_vector *mask, char *envar);
 /*
 	DESCRIPTION
 	The tilde_expansion() expands the '~', '~+' and '~-' word prefixes to
-	$HOME, $PWD and $OLDPWD respectively, frees the old string and links
-	the resulting one to it's pointer. It also updates the associated
-	mask.
+	$HOME, $PWD and $OLDPWD respectively. It also updates the associated
+	interpretation mask.
 
 	RETURN VALUE
 	On succes, 0 is returned. On error, -1 is returned.
@@ -58,7 +57,8 @@ static int	lone_tilde(t_vector *str, t_vector *mask)
 		if (ft_vector_delete(str, 0)
 			|| ft_vector_insertn(str, __HOME_ENVAR, 0, len)
 			|| ft_vector_delete(mask, 0)
-			|| ft_vector_insertn(mask, __HOME_MASK, 0, len))
+			|| ft_vector_insertn(mask, __HOME_ENVAR, 0, len)
+			|| ft_vector_setn(mask, 0, "$", len))
 			return (FAILURE);
 	}
 	return (SUCCESS);
@@ -74,7 +74,8 @@ static int	tilde_sign(t_vector *str, t_vector *mask, char *envar)
 		if (ft_vector_deleten(str, 0, 2)
 			|| ft_vector_insertn(str, envar, 0, len)
 			|| ft_vector_deleten(mask, 0, 2)
-			|| ft_vector_insertn(mask, __PWD_MASK, 0, len))
+			|| ft_vector_insertn(mask, envar, 0, len)
+			|| ft_vector_setn(mask, 0, "$", len))
 			return (FAILURE);
 	}
 	return (SUCCESS);
