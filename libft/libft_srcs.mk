@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/10 18:39:30 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/11 05:10:49 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,6 +110,7 @@ VECTOR_SRC = \
 	vector_resize \
 	vector_set \
 	vector_set_ptr \
+	vector_setn \
 	vector_strncat \
 	vector_trim \
 

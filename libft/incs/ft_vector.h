@@ -54,6 +54,7 @@ int		ft_vector_replacen(t_vector *v, size_t index, void *new, size_t n[2]);
 int		ft_vector_resize(t_vector *v, size_t capacity);
 int		ft_vector_set_ptr(t_vector *v, size_t index, void *item);
 int		ft_vector_set(t_vector *v, size_t index, void *item);
+int		ft_vector_setn(t_vector *v, size_t index, void *item, size_t n);
 int		ft_vector_strncat(t_vector *v, char *str, size_t len);
 int		ft_vector_trim(t_vector *v);
 void	*ft_vector_get(t_vector *v, size_t index);
