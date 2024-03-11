@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:10:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 23:23:09 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 01:28:19 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum e_nodetype
 typedef struct s_astnode
 {
 	t_nodetype			type;
-	t_vector			*args;
+	void				*args;
 	struct s_astnode	*left;
 	struct s_astnode	*right;
 }	t_astnode;

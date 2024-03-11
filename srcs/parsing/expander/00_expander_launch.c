@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 00:53:18 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 02:33:11 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,64 +16,65 @@
 #include "expander.h"
 #include "interpreter.h"
 
-// static int	to_expand(t_astnode *node);
-// static int	expand_node(t_astnode *node, t_vector *env);
+static int	has_interpreter(t_astnode *node);
+static int	expand_node(t_astnode *node, t_vector *env);
 
 int	expander_launch(t_astnode *node, t_vector *env)
 {
-	(void)env;
 	if (!node)
 		return (SUCCESS);
-	// if (to_expand(node) && expand_node(node, env))
-	// 	return (FAILURE);
-	// if (expander_launch(node->left, env) || expander_launch(node->right, env))
-	// 	return (FAILURE);
+	if (has_interpreter(node) && expand_node(node, env))
+		return (FAILURE);
+	if (expander_launch(node->left, env) || expander_launch(node->right, env))
+		return (FAILURE);
 	return (SUCCESS);
 }
 
-// static int	to_expand(t_astnode *node)
-// {
-// 	size_t	i;
-// 	char	**ptr;
+static int	has_interpreter(t_astnode *node)
+{
+	t_vector	*str;
+	size_t		i;
 
-// 	if (node->type != _CMD && (node->type < _INPUT || node->type > _APPEND))
-// 		return (0);
-// 	i = 0;
-// 	while (i < node->args->total - (node->type == _CMD))
-// 	{
-// 		ptr = ft_vector_get(node->args, i);
-// 		if (ft_strpbrk(*ptr, __INTERPRETERS))
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+	if (node->type != _CMD && (node->type < _INPUT || node->type > _APPEND))
+		return (!FAILURE);
+	i = 0;
+	while (i < ((t_vector *)node->args)->total)
+	{
+		str = ft_vector_get(node->args, i);
+		if (ft_strpbrk((char *)str->ptr, __INTERPRETERS))
+			return (!SUCCESS);
+		i++;
+	}
+	return (!FAILURE);
+}
 
-// static int	expand_node(t_astnode *node, t_vector *env)
-// {
-// 	t_vector	mask;
-// 	char		**ptr;
-// 	char		**mask_ptr;
-// 	size_t		i;
+static int	expand_node(t_astnode *node, t_vector *env)
+{
+	t_vector	mask;
+	// char		**ptr;
+	// char		**mask_ptr;
+	// size_t		i;
 
-// 	i = 0;
-// 	if (create_interpreter_masks(&mask, node->args))
-// 		return (FAILURE);
-// 	while (i < node->args->total - (node->type == _CMD))
-// 	{
-// 		ptr = ft_vector_get(node->args, i);
-// 		mask_ptr = ft_vector_get(&mask, i);
-// 		ft_dprintf(2, "EXPANDING:\nstr  = %s|\nmask = %s|\n\n", *ptr, *mask_ptr);
-// 		if (tilde_expansion(ptr, mask_ptr))
-// 			return (FAILURE); //PROTECT
-// 		ft_dprintf(2, "TILDE_EXPANSION:\nstr  = %s|\nmask = %s|\n\n", *ptr, *mask_ptr);
-// 		if (envars_expansion(ptr, mask_ptr, env))
-// 			return (FAILURE); //PROTECT
-// 		ft_dprintf(2, "ENVARS_ESPANSION:\nstr  = %s|\nmask = %s|\n\n", *ptr, *mask_ptr);
-// 		if (word_splitting(node->args, &mask, &i))
-// 			return (FAILURE);
-// 		i++;
-// 	}
-// 	ft_vector_free(&mask);
-// 	return (SUCCESS);
-// }
+	if (init_interpretation_masks(&mask, node->args))
+		return (FAILURE);
+	// i = 0;
+	// while (i < node->args->total - (node->type == _CMD))
+	// {
+	// 	ptr = ft_vector_get(node->args, i);
+	// 	mask_ptr = ft_vector_get(&mask, i);
+	// 	ft_dprintf(2, "EXPANDING:\nstr  = %s|\nmask = %s|\n\n", *ptr, *mask_ptr);
+	// 	if (tilde_expansion(ptr, mask_ptr))
+	// 		return (FAILURE); //PROTECT
+	// 	ft_dprintf(2, "TILDE_EXPANSION:\nstr  = %s|\nmask = %s|\n\n", *ptr, *mask_ptr);
+	// 	if (envars_expansion(ptr, mask_ptr, env))
+	// 		return (FAILURE); //PROTECT
+	// 	ft_dprintf(2, "ENVARS_ESPANSION:\nstr  = %s|\nmask = %s|\n\n", *ptr, *mask_ptr);
+	// 	if (word_splitting(node->args, &mask, &i))
+	// 		return (FAILURE);
+	// 	i++;
+	// }
+	printf("EXPAND SUCCESS!\n");
+	ft_vector_free(&mask);
+	return (SUCCESS);
+	(void)env;
+}

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 22:49:31 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 00:28:18 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 01:11:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,13 @@ t_astnode	*commandline_parser(char *input, t_vector *env)
 		return (NULL);
 	root = ast_build(&lexer);
 	ft_vector_free(&lexer);
+
 	dprint_ast(2, root, NULL); //REMOVE
 	if (expander_launch(root, env))
 		return (NULL); //ADD FREE FUNCTION
 	printf("AFTER EXPANDER\n");
 	dprint_ast(2, root, NULL); //REMOVE
+
 	free(input);
 	return (root);
 }

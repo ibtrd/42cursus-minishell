@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:12:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 04:55:16 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 01:44:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		tilde_expansion(char **ptr, char **mask);
 int		envars_expansion(char **ptr, char **mask, t_vector *env);
 int		word_splitting(t_vector *args, t_vector *mask, size_t *index);
 
-int		create_interpreter_masks(t_vector *mask, t_vector *args);
+int		init_interpretation_masks(t_vector *masks, t_vector *args);
 char	*create_string_mask(char *str);
 
 int		init_expansion_vectors(t_vector expanded[2], char *str, char *mask);

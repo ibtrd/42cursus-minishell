@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 00:52:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 01:18:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,5 @@
 # define __SYNTAX_ERROR "syntax error near unexpected token"
 # define __UNSUPPORTED_ERROR "unsupported operator"
 # define __AST_ERROR "AST building failed"
-
-//MISC
-# define __UNEXPANDED 2
-# define __EXPANDED 1
 
 #endif //MINISHELLDEF_H
