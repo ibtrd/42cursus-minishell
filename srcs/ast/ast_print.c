@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:37:35 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 00:25:32 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 03:40:57 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	printnode(int fd, t_astnode *node)
 	if (node->type == _CMD || (node->type >= _INPUT && node->type <= _APPEND))
 	{
 		str = ft_vector_get(node->args, i);
-		while (i++ < node->args->total)
+		while (i++ < ((t_vector *)node->args)->total)
 		{
 			dprintf(fd, "%s ", (char *)str->ptr);
 			str = ft_vector_get(node->args, i);
