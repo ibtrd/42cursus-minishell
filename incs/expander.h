@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:12:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 02:50:56 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 06:24:21 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	init_interpretation_masks(t_vector *masks, t_vector *args);
 
 //EXPAND
 int	tilde_expansion(t_vector *args, t_vector *masks, size_t index);
-
+int	envars_expansion(t_vector *args, t_vector *masks, size_t index, t_vector *env);
 
 
 

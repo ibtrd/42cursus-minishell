@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 23:12:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 05:42:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 07:04:16 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ static int	tilde_sign(t_vector *str, t_vector *mask, char *envar);
 
 int	tilde_expansion(t_vector *args, t_vector *masks, size_t index)
 {
-	const t_vector	*str = ft_vector_get(args, index);
-	const t_vector	*mask = ft_vector_get(masks, index);
+	t_vector	*str;
+	t_vector	*mask;
 
+	str = ft_vector_get(args, index);
+	mask = ft_vector_get(masks, index);
 	if (!ft_strncmp((char *)str->ptr, "~+", 2))
-		return (tilde_sign((t_vector *)str, (t_vector *)mask, __PWD_ENVAR));
+		return (tilde_sign(str, mask, __PWD_ENVAR));
 	if (!ft_strncmp((char *)str->ptr, "~-", 2))
-		return (tilde_sign((t_vector *)str, (t_vector *)mask, __OLDPWD_ENVAR));
+		return (tilde_sign(str, mask, __OLDPWD_ENVAR));
 	if (!ft_strncmp((char *)str->ptr, "~", 1))
-		return (lone_tilde((t_vector *)str, (t_vector *)mask));
+		return (lone_tilde(str, mask));
 	return (SUCCESS);
 }
 
@@ -54,7 +56,7 @@ static int	lone_tilde(t_vector *str, t_vector *mask)
 			|| ft_vector_insertn(str, __HOME_ENVAR, 0, len)
 			|| ft_vector_delete(mask, 0)
 			|| ft_vector_insertn(mask, __HOME_ENVAR, 0, len)
-			|| ft_vector_setn(mask, 0, "$", len))
+			|| ft_vector_setn(mask, 0, ".", len))
 			return (FAILURE);
 	}
 	return (SUCCESS);
@@ -71,7 +73,7 @@ static int	tilde_sign(t_vector *str, t_vector *mask, char *envar)
 			|| ft_vector_insertn(str, envar, 0, len)
 			|| ft_vector_deleten(mask, 0, 2)
 			|| ft_vector_insertn(mask, envar, 0, len)
-			|| ft_vector_setn(mask, 0, "$", len))
+			|| ft_vector_setn(mask, 0, ".", len))
 			return (FAILURE);
 	}
 	return (SUCCESS);

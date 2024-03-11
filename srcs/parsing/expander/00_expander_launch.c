@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 03:14:49 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 06:23:23 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,13 @@ static int	expand_string(t_vector *str, t_vector *masks, size_t *index, t_vector
 	// char *printstr = (char *)((t_vector *)ft_vector_get(str, *index))->ptr;
 	// char *printmask = (char *)((t_vector *)ft_vector_get(masks, *index))->ptr;
 
-	(void)env;
 	debug_print_str_mask(str, masks, index, "EXPANDING");
 	if (tilde_expansion(str, masks, *index))
 		return (FAILURE);
 	debug_print_str_mask(str, masks, index, "TILDE");
+	if (envars_expansion(str, masks, *index, env))
+		return (FAILURE);
+	debug_print_str_mask(str, masks, index, "ENVARS");
 	return (SUCCESS);
 }
 

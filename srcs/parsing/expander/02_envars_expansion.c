@@ -6,106 +6,103 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:46:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 00:59:14 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/11 07:51:38 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdlib.h>
+#include <stdlib.h>
 
-// #include "libft.h"
+#include "libft.h"
 
-// #include "minishelldef.h"
-// #include "parsing.h"
-// #include "env.h"
-// #include "expander.h"
+#include "interpreter.h"
+#include "env.h"
 
-// static int	replace_envars(char **ptr, char **mask, t_vector *env);
-// static int	add_envar(t_vector expanded[2], size_t *index, t_vector *env);
-// static int	get_envar_name(char *str, char **ptr);
+#include <stdio.h> //remove
 
-// int	envars_expansion(char **ptr, char **mask, t_vector *env)
-// {
-// 	t_escape	interpreter;
-// 	char		*str;
-// 	size_t		i;
+static int	search_envars(t_vector *arg, t_vector *mask, t_vector *env);
+static int replace_envar(t_vector *arg, t_vector *mask, t_env_var envar, size_t *index);
+static char	*get_envar_name(const char *str);
 
-// 	str = *ptr;
-// 	init_escape(&interpreter);
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		set_escape_mode(&interpreter, str[i]);
-// 		if (interpreter.mode != _SINGLE && str[i] == '$')
-// 			return (replace_envars(ptr, mask, env));
-// 		i++;
-// 	}
-// 	return (SUCCESS);
-// }
+int	envars_expansion(t_vector *args, t_vector *masks, size_t index, t_vector *env)
+{
+	t_vector	*str;
+	t_vector	*mask;
 
-// static int	replace_envars(char **ptr, char **mask, t_vector *env)
-// {
-// 	t_vector	expanded[2];
-// 	char		*c;
-// 	char		*m;
-// 	size_t		i;
+	str = ft_vector_get(args, index);
+	mask = ft_vector_get(masks, index);
+	if (ft_strchr((char *)str->ptr, '$'))
+		return (search_envars(str, mask, env));
+	return (SUCCESS);
+}
 
-// 	if (init_expansion_vectors(expanded, *ptr, *mask))
-// 		return (FAILURE);
-// 	i = 0;
-// 	c = ft_vector_get(expanded, i);
-// 	m = ft_vector_get(expanded + 1, i);
-// 	while (c)
-// 	{
-// 		if (!ft_ischarset(*m, __ENVARS_ESCAPE) && *c == '$')
-// 			add_envar(expanded, &i, env);
-// 		else
-// 			i++;
-// 		c = ft_vector_get(expanded, i);
-// 		m = ft_vector_get(expanded + 1, i);
-// 	}
-// 	return (replace_vector_pointers(ptr, mask, expanded));
-// }
+static int	search_envars(t_vector *arg, t_vector *mask, t_vector *env)
+{
+	t_escape	interpreter;
+	char		*str;
+	size_t		i;
+	t_env_var	envar;
 
-// static int	add_envar(t_vector expanded[2], size_t *index, t_vector *env)
-// {
-// 	t_env_var	var;
-// 	char		*str;
+	init_escape(&interpreter);
+	i = 0;
+	while (i < arg->total)
+	{
+		str = ft_vector_get(arg, 0);
+		set_escape_mode(&interpreter, str[i]);
+		if (interpreter.mode != _SINGLE && str[i] == '$')
+		{
+			envar.name = get_envar_name(str + i + 1);
+			if (!envar.name)
+				return (FAILURE);
+			envar.value = ft_getenv(env, envar.name);
+			if (replace_envar(arg, mask, envar, &i))
+				return (FAILURE);
+		}
+		else
+			i++;
+	}
+	return (SUCCESS);
+}
 
-// 	str = ft_vector_get(expanded, *index);
-// 	if (get_envar_name(str + 1, &var.name))
-// 		return (FAILURE);
-// 	if (remove_var_names(expanded, *index, var.name))
-// 		return (FAILURE);
-// 	var.value = ft_getenv(env, var.name);
-// 	if (!var.value && !*var.name)
-// 		var.value = "$";
-// 	free(var.name);
-// 	if (!var.value)
-// 	{
-// 		(*index)++;
-// 		return (SUCCESS);
-// 	}
-// 	return (insert_var_values(expanded, index, var.value));
-// }
+static int	replace_envar(t_vector *arg, t_vector *mask, t_env_var envar, size_t *index)
+{
+	size_t	name_len;
+	size_t	value_len;
 
-// static int	get_envar_name(char *str, char **ptr)
-// {
-// 	char			*envar;
-// 	const size_t	len = ft_strlen(str);
-// 	size_t			i;
+	if (!envar.value && !*envar.name)
+		envar.value = "$";
+	name_len = ft_strlen(envar.name) + 1;
+	value_len = ft_strlen(envar.value);
+	if (ft_vector_deleten(arg, *index, name_len)
+		|| ft_vector_insertn(arg, envar.value, *index, value_len)
+		|| ft_vector_deleten(mask, *index, name_len)
+		|| ft_vector_insertn(mask, envar.value, *index, value_len)
+		|| ft_vector_setn(mask, *index, "$", value_len))
+	{
+		free(envar.name);
+		return (FAILURE);
+	}
+	free(envar.name);
+	*index += value_len;
+	return (SUCCESS);
+}
 
-// 	envar = ft_calloc((len + 2), sizeof(char));
-// 	*ptr = envar;
-// 	if (!envar)
-// 		return (FAILURE);
-// 	i = 0;
-// 	envar[i] = str[i];
-// 	while (ft_isalnum(str[i]) || str[i] == '_')
-// 	{
-// 		envar[i] = str[i];
-// 		i++;
-// 	}
-// 	if (i == 0 && envar[i] != '?')
-// 		envar[i] = '\0';
-// 	return (SUCCESS);
-// }
+static char	*get_envar_name(const char *str)
+{
+	const size_t	len = ft_strlen(str);
+	char			*name;
+	size_t			i;
+
+	name = ft_calloc((len + 1), sizeof(char));
+	if (!name)
+		return (NULL);
+	i = 0;
+	name[i] = str[i];
+	while (ft_isalnum(str[i]) || str[i] == '_')
+	{
+		name[i] = str[i];
+		i++;
+	}
+	if (i == 0 && name[i] != '?')
+		name[i] = '\0';
+	return (name);
+}
