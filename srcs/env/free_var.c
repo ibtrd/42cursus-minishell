@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_get.c                                    :+:      :+:    :+:   */
+/*   free_var.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:25:48 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/07 00:29:15 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/06 19:27:27 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/10 19:47:45 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
-#include <stddef.h>
+#include "env.h"
+#include <stdlib.h>
 
-void	*ft_vector_get(t_vector *v, size_t index)
+#include <stdio.h>
+
+void	free_var(void **var)
 {
-	void	*ptr;
+	t_env_var	*env_var;
 
-	if (!v || index >= v->total)
-		return (NULL);
-	ptr = v->ptr + index * v->size;
-	return (ptr);
+	env_var = (t_env_var *)var;
+	free(env_var->name);
+	free(env_var->value);
 }

@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_get.c                                    :+:      :+:    :+:   */
+/*   ft_ffmalloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:25:48 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/07 00:29:15 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/01/11 00:52:30 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/10 18:35:35 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
-#include <stddef.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <unistd.h>
+#include <time.h>
+#include <stdio.h>
 
-void	*ft_vector_get(t_vector *v, size_t index)
+void	*ft_fmalloc(size_t size)
 {
-	void	*ptr;
+	static int	i = 0;
+	static int	max = 0;
 
-	if (!v || index >= v->total)
+	if (!max)
+	{
+		max = size;
 		return (NULL);
-	ptr = v->ptr + index * v->size;
-	return (ptr);
+	}
+	if (i++ > max)
+	{
+		dprintf(2, "Forcing ft_fmalloc() failure! (call^%d)\n", i);
+		errno = ENOMEM;
+		return (NULL);
+	}
+	return (malloc(size));
 }

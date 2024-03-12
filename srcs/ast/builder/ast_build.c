@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_build_launch.c                                :+:      :+:    :+:   */
+/*   ast_build.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,11 +15,20 @@
 #include "ast.h"
 
 #include "libft.h" //REMOVE
+#include "testing.h" //REMOVE
 
-static int	build_from_token(t_lexer_token *tok, t_astnode **root);
-t_astnode	*build_brackets(t_vector *lexer, int *index);
+/*
+	DESCRIPTION
+	The ast_build() function creates an Abstract Syntax Tree based on the
+	tokens contained inside the vector pointed to by lexer. Memory for
+	the tree is obtained with malloc(), and can be freed with free_ast().
 
-t_astnode	*ast_build_launch(t_vector *lexer)
+	RETURN VALUE
+	On succes, a pointer to the root of the tree in returned. On error,
+	NULL is returned and an error message is printed on standard error.
+*/
+
+t_astnode	*ast_build(t_vector *lexer)
 {
 	int				index;
 	t_lexer_token	*tok;
@@ -27,23 +36,25 @@ t_astnode	*ast_build_launch(t_vector *lexer)
 
 	root = NULL;
 	index = 0;
-	tok = ft_vector_get(lexer, index++);
+	tok = ft_vector_get(lexer, index);
 	while (tok->type != _END_TOK)
 	{
+		// printf("main loop:	index %d (type %d)\n", index, tok->type);
 		if (tok->type == _OPEN_BRACKETS_TOK)
 		{
-			root->right = build_brackets(lexer, &index);
-			if (!root->right)
-				return (free_ast(root));
+			root = ast_build_brackets(root, lexer, &index);
+			if (!root)
+				return (NULL);
 		}
 		else if (build_from_token(tok, &root))
-			return (free_ast(root));
-		tok = ft_vector_get(lexer, index++);
+			return (ast_builderror(root));
+		tok = ft_vector_get(lexer, ++index);
+		dprint_ast(2, root, NULL); //REMOVE
 	}
 	return (root);
 }
 
-static int	build_from_token(t_lexer_token *tok, t_astnode **root)
+int	build_from_token(t_lexer_token *tok, t_astnode **root)
 {
 	static t_vector	*arg_v = NULL;
 	static t_vector	*file_v = NULL;
@@ -58,42 +69,6 @@ static int	build_from_token(t_lexer_token *tok, t_astnode **root)
 		return (build_command(&arg_v, tok, root));
 	if (tok->type == _ARG_TOK)
 		return (add_argument(arg_v, tok->value));
-	ft_dprintf(2, "BUILDING BAD TOKEN!\n"); //REMOVE
+	ft_dprintf(2, "BUILDING BAD TOKEN! (Type %d)\n", tok->type); //REMOVE
 	return (FAILURE);
 }
-
-t_astnode	*build_brackets(t_vector *lexer, int *index)
-{
-	t_lexer_token	*tok;
-	t_astnode		*subroot = NULL;
-
-	tok = ft_vector_get(lexer, (*index)++);
-	while (tok->type != _CLOSE_BRACKETS_TOK)
-	{
-		if (tok->type == _OPEN_BRACKETS_TOK)
-		{
-			subroot->right = build_brackets(lexer, index);
-			if (!subroot->right)
-				return (free_ast(subroot));
-		}
-		else if (build_from_token(tok, &subroot))
-			return (free_ast(subroot));
-		tok = ft_vector_get(lexer, (*index)++);
-	}
-	return (subroot);
-}
-
-// t_astnode	*build_brackets_close(t_vector *lexer, int *index, t_astnode **root)
-// {
-// 	t_lexer_token	*tok;
-// 	t_astnode		*subroot;
-
-// 	tok = ft_vector_get(lexer, index++);
-// 	while (tok->type > _PIPE_TOK)
-// 	{
-// 		if (build_from_token(tok, &subroot))
-// 			return (free_subroot(subroot));
-// 		tok = ft_vector_get(lexer, index++);
-// 	}
-// 	return (*root);
-// }

@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_percent.c                               :+:      :+:    :+:   */
+/*   ft_vfree.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 02:33:30 by ibertran          #+#    #+#             */
-/*   Updated: 2024/01/08 19:56:10 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/08 13:35:47 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/08 18:04:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 
-int	pf_convert_percent(int fd)
+void	ft_vfree(void **var)
 {
-	return (write(fd, "%", 1));
+	if (!var)
+		return ;
+	free(*var);
 }

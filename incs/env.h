@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_allocate.c                               :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 20:49:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 20:50:22 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/06 15:34:52 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/10 19:43:29 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef ENV_H
+# define ENV_H
 
-#include "ft_vector.h"
+#include "libft.h"
 
-int	ft_vector_allocate(t_vector **ptr, size_t data_size, size_t capacity)
+typedef struct s_env_var
 {
-	t_vector	*new;
+	char	*name;
+	char	*value;
+}	t_env_var;
 
-	new = malloc(sizeof(t_vector));
-	if (!new)
-		return (FAILURE);
-	if (ft_vector_init(new, data_size, capacity))
-	{
-		free(new);
-		return (FAILURE);
-	}
-	*ptr = new;
-	return (SUCCESS);
-}
+char	*ft_getenv(t_vector *env, char *name);
+int		init_env(t_vector *envv, char **env);
+void	free_var(void **var);
+
+#endif

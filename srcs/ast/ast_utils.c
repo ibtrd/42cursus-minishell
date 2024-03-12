@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:57:11 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/06 14:12:52 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 19:39:55 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stddef.h>
 
+#include "libft.h"
+
 #include "minishelldef.h"
 #include "ast.h"
-#include "libft.h"
 
 int	ast_newnode(t_astnode **new, t_nodetype type, t_vector *args)
 {
@@ -39,7 +40,7 @@ t_astnode	*free_ast(t_astnode *root)
 {
 	if (!root)
 		return (NULL);
-	ft_vector_deallocate(&root->args, free);
+	ft_vector_dealloc(&root->args, 1);
 	free_ast(root->left);
 	free_ast(root->right);
 	free(root);

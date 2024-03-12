@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:37:35 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/06 00:28:45 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/08 03:10:18 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,60 @@
 
 #include "ast.h"
 
-void	dprint_ast(int fd, t_astnode *root)
+#define COUNT 3
+
+void printnode(int fd, t_astnode *node);
+
+void dprint_astUtil(int fd, t_astnode* root, int space)
 {
-	size_t 	i = 0;
+    if (root == NULL)
+        return;
+    space += COUNT;
+ 
+    dprint_astUtil(fd, root->right, space);
+ 
+    for (int i = COUNT; i < space; i++)
+        dprintf(fd, " ");
+    printnode(fd, root);
+ 
+    dprint_astUtil(fd, root->left, space);
+}
+ 
+void dprint_ast(int fd, t_astnode* root, char *color)
+{
+	if (color)
+		dprintf(2, "\n%s", color);
+	else
+		dprintf(2, "\n");
+    dprint_astUtil(fd, root, 0);
+	dprintf(2,"\e[0m\n---------------------------------------------\n");
+}
 
-	if (!root)
-		return ;
-	dprint_ast(fd, root->left);
-	if (root->type == _AND)
+void printnode(int fd, t_astnode *node)
+{
+	size_t i = 0;
+
+	if (node->type == _AND)
 		dprintf(fd, "&&\n");
-	if (root->type == _OR)
+	if (node->type == _OR)
 		dprintf(fd, "||\n");
-	if (root->type == _PIPE)
+	if (node->type == _PIPE)
 		dprintf(fd, "|\n");
-	if (root->type == _INPUT)
+	if (node->type == _INPUT)
 	{
-		dprintf(fd, "< %s\n", *(char **)root->args->ptr);
+		dprintf(fd, "< %s\n", *(char **)node->args->ptr);
 	}
-	if (root->type == _OUTPUT)
-		dprintf(fd, "> %s\n", *(char **)root->args->ptr);
-	if (root->type == _HEREDOC)
-		dprintf(fd, "<< %s\n", *(char **)root->args->ptr);
-	if (root->type == _APPEND)
-		dprintf(fd, ">> %s\n", *(char **)root->args->ptr);
-	if (root->type == _CMD)
+	if (node->type == _OUTPUT)
+		dprintf(fd, "> %s\n", *(char **)node->args->ptr);
+	if (node->type == _HEREDOC)
+		dprintf(fd, "<< %s\n", *(char **)node->args->ptr);
+	if (node->type == _APPEND)
+		dprintf(fd, ">> %s\n", *(char **)node->args->ptr);
+	if (node->type == _CMD)
 	{
 
-		while (i < root->args->total)
-			dprintf(fd, "%s ", ((char **)root->args->ptr)[i++]);
+		while (i < node->args->total)
+			dprintf(fd, "%s ", ((char **)node->args->ptr)[i++]);
 		dprintf(fd, "\n");
 	}
-	dprint_ast(fd, root->right);
 }

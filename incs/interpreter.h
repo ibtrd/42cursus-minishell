@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_deallocate.c                             :+:      :+:    :+:   */
+/*   interpreter.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 20:59:18 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 21:10:38 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/09 22:03:23 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/09 22:04:26 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef INTERPRETER_H
+# define INTERPRETER_H
 
-#include "ft_vector.h"
+#include <stdbool.h>
 
-int	ft_vector_deallocate(t_vector **ptr, void (*del)(void *))
+enum e_quote
 {
-	if (!ptr || !*ptr)
-		return (FAILURE);
-	ft_vector_free(*ptr, del);
-	free(*ptr);
-	*ptr = NULL;
-	return (SUCCESS);
-}
+	_NONE,
+	_SINGLE,
+	_DOUBLE
+};
+
+typedef struct s_escape
+{
+	enum e_quote	mode;
+	bool			single_quote;
+	bool			double_quote;
+}	t_escape;
+
+void	set_escape_mode(t_escape *escape, char c);
+void	init_escape(t_escape *escape);
+
+void	debug_print_mask(char *arg, char *mask); //REMOVE
+
+#endif

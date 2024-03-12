@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_get.c                                    :+:      :+:    :+:   */
+/*   ft_vector_replace.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:25:48 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/07 00:29:15 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/10 15:00:36 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/10 15:05:38 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vector.h"
-#include <stddef.h>
+#include "ft_mem.h"
 
-void	*ft_vector_get(t_vector *v, size_t index)
+int	ft_vector_replace(t_vector *v, size_t index, void *new)
 {
-	void	*ptr;
-
 	if (!v || index >= v->total)
-		return (NULL);
-	ptr = v->ptr + index * v->size;
-	return (ptr);
+		return (FAILURE);
+	if (v->del)
+		v->del((void **)ft_vector_get(v, index));
+	ft_memcpy(v->ptr + index * v->size, new, v->size);
+	return (SUCCESS);
 }

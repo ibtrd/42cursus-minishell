@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/07 18:45:31 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/12 18:55:19 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC = \
 	$(addprefix $(AST_DIR),$(AST_SRC)) \
 	$(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC)) \
 	$(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC)) \
+	$(addprefix $(ENV_DIR),$(ENV_SRC)) \
 
 ## PARSING DIRECTORY ##
 
@@ -53,18 +54,19 @@ LEXER_SRC = \
 AST_DIR = ast/
 AST_SRC = \
 	$(addprefix $(BUILDER_DIR),$(BUILDER_SRC)) \
-	ast_test1 \
 	ast_utils \
 	ast_print \
-	ast_print2 \
 	ast_addnode \
+	ast_addnode_utils \
 
 BUILDER_DIR = builder/
 BUILDER_SRC = \
-		ast_build_launch \
+		ast_build \
 		ast_build_command \
 		ast_build_operator \
 		ast_build_redirection \
+		ast_build_brackets \
+		ast_build_error \
 
 ## EXEC DIRECTORY ##
 
@@ -94,9 +96,18 @@ OPEN_SRC = \
 
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
+	env \
 	echo \
-	true \
 	false \
+	true \
+
+## ENV ##
+
+ENV_DIR = env/
+ENV_SRC = \
+	free_var \
+	ft_getenv \
+	init_env \
 
 SRCS = $(addsuffix .c, $(SRC))
 
@@ -161,7 +172,7 @@ ifdef TEST
 BUILD_DIR := $(BUILD_DIR)test/
 NAME = minishell_test
 CFLAGS := $(filter-out $(OFLAGS),$(CFLAGS)) -g3
-SRC := $(filter-out main, $(SRC)) tests/main_$(TEST)
+SRC := tests/main_$(TEST) $(filter-out main, $(SRC))
 endif
 
 # *** TARGETS **************************************************************** #
@@ -244,15 +255,19 @@ AVAILABLE_TESTS = \
 	builtins \
 	cmdline_addspace \
 	executor \
+	init_env \
 	syntax_checker \
 	lexer \
 	lexerfull \
+	dprintf \
+	vector_test \
+	vector_alloc \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
 	$(RM) minishell_test
-	@$(MAKE) TEST=$@
-	@$(VALGRIND) ./$(NAME)_test
+	@$(MAKE) TEST=$@ MODE=debug
+#	@$(VALGRIND) ./$(NAME)_test
 #  ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #

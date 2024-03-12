@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_free.c                                   :+:      :+:    :+:   */
+/*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 18:57:17 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/08 14:21:50 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/08 14:26:28 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
-#include <stdlib.h>
+#include "env.h"
 
-int	ft_vector_free(t_vector *v)
+char	*ft_getenv(t_vector *env, char *name)
 {
-	size_t	i;
+	size_t		i;
+	t_env_var	*env_var;
 
-	if (!v)
-		return (FAILURE);
-	if (v->del)
+	if (!env)
+		return (NULL);
+	env_var = (t_env_var *)env->ptr;	// ft_vector_get(env, 0);
+	if (!env_var || !name)
+		return (NULL);
+	i = 0;
+	while (i < env->total)
 	{
-		i = 0;
-		while (i < v->total)
-			v->del((void **)ft_vector_get(v, i++));
+		if (!ft_strcmp(env_var[i].name, name))
+			return (env_var[i].value);
+		i++;
 	}
-	free(v->ptr);
-	v->ptr = NULL;
-	v->total = 0;
-	return (SUCCESS);
+	return (NULL);
 }

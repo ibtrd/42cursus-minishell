@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_get.c                                    :+:      :+:    :+:   */
+/*   main_printf_err.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:25:48 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/07 00:29:15 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/08 04:51:09 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/08 05:28:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
-#include <stddef.h>
+#include "libft.h"
+#include "minishelldef.h"
+#include "errno.h"
 
-void	*ft_vector_get(t_vector *v, size_t index)
+int main(void)
 {
-	void	*ptr;
-
-	if (!v || index >= v->total)
-		return (NULL);
-	ptr = v->ptr + index * v->size;
-	return (ptr);
+	ft_printf_err(errno, "%s: Error de machin", __MINISHELL);
+	return (0);
 }

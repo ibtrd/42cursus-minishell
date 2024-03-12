@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_free.c                                   :+:      :+:    :+:   */
+/*   ft_vector_alloc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 18:57:17 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/05 20:49:50 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/10 19:38:29 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
 #include <stdlib.h>
 
-int	ft_vector_free(t_vector *v)
-{
-	size_t	i;
+#include "ft_vector.h"
 
-	if (!v)
+int	ft_vector_alloc(t_vector **ptr, t_vinfos infos, size_t n)
+{
+	t_vector	*new;
+	size_t		i;
+
+	if (!n)
 		return (FAILURE);
-	if (v->del)
+	new = malloc(sizeof(t_vector) * n);
+	if (!new)
+		return (FAILURE);
+	i = 0;
+	while (i < n)
 	{
-		i = 0;
-		while (i < v->total)
-			v->del((void **)ft_vector_get(v, i++));
+		if (ft_vector_init(new + i, infos))
+		{
+			while (i--)
+				ft_vector_free(new + i);
+			free(new);
+			return (FAILURE);
+		}
+		i++;
 	}
-	free(v->ptr);
-	v->ptr = NULL;
-	v->total = 0;
+	*ptr = new;
 	return (SUCCESS);
 }

@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_get.c                                    :+:      :+:    :+:   */
+/*   main_init_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:25:48 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/07 00:29:15 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/06 15:41:08 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/10 19:46:42 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
-#include <stddef.h>
+#include "env.h"
+#include "builtins.h"
+#include "libft.h"
 
-void	*ft_vector_get(t_vector *v, size_t index)
+#include <stdio.h>
+
+int	main(int ac, char **av, char **env)
 {
-	void	*ptr;
+	t_vector	envv;
+	// size_t		i;
 
-	if (!v || index >= v->total)
-		return (NULL);
-	ptr = v->ptr + index * v->size;
-	return (ptr);
+	(void)ac;
+	(void)av;
+	(void)env;
+	(void)envv;
+
+	envv = (t_vector){0};
+	init_env(&envv, env);
+	builtin_env(&envv);
+	printf("ft_getenv(envv, \"PATH\") = %s\n", ft_getenv(&envv, "PATH"));
+	ft_vector_free(&envv);
+	return (0);
 }
