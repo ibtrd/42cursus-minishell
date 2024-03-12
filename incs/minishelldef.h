@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 11:40:31 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 18:11:42 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@
 //PARSING CHARSETS
 # define __DEFAULT_IFS " \t\n"
 # define __METACHARACTER "&|<>();"
-# define __PARENTHESIS "()"
-# define __SINGLE_QUOTE "\'"
-# define __DOUBLE_QUOTE "\""
 
 //PRINT
 # define __MINISHELL "minishell"
