@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/09 19:09:00 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/12 17:30:24 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,6 @@ BUILTIN_SRC = \
 ENV_DIR = env/
 ENV_SRC = \
 	add_var \
-	check_var \
 	copy_var \
 	del_var \
 	free_var \

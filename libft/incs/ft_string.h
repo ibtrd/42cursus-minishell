@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:18:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 18:48:09 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 17:35:33 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		ft_strcmp(const char *str1, const char *str2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t	ft_strlen_charset(const char *str, const char *charset);
 size_t	ft_strlen_protected(const char *str);
 size_t	ft_strlen(const char *str);
 size_t	ft_strnlen(const char *str, size_t n);

@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:22:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/09 17:51:06 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 17:28:33 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int	copy_env(t_vector *envv, char **env)
 	i = 0;
 	while (env[i])
 	{
+		// update value (SHLVL, ...)
 		if (add_var(envv, env[i]))
 			return (FAILURE);
 		i++;
@@ -57,14 +58,14 @@ int	init_env(t_vector *envv, char **env)
 {
 	int			error;
 
-	if (ft_vector_init(envv, sizeof(t_env_var), 0))
+	if (ft_vector_init(envv, sizeof(char *), 0))
 		return (1);
 	if (!env || !*env)
 		error = create_env(envv);
 	else
 		error = copy_env(envv, env);
 	if (error)
-		ft_vector_free(envv, &free_var);
+		ft_vector_free(envv, &ft_vfree);
 	return (error);
 }
 
