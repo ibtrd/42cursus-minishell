@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_deleten.c                                :+:      :+:    :+:   */
+/*   ft_vector_unlinkn.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:25:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/10 19:31:22 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/12 10:45:00 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/12 13:41:40 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vector.h"
 #include "ft_mem.h"
 
-int	ft_vector_deleten(t_vector *v, size_t index, size_t n)
+int	ft_vector_unlinkn(t_vector *v, size_t index, size_t n, void *ptr)
 {
-	size_t	i;
-
-	if (!v || index >= v->total || index + n > v->total)
+	if (!v || index >= v->total || index + n > v->total || !ptr)
 		return (FAILURE);
-	if (v->del)
-	{
-		i = index;
-		while (i < index + n)
-		{
-			v->del((void **)ft_vector_get(v, i));
-			i++;
-		}
-	}
+	if (!n)
+		return (SUCCESS);
+	ft_vector_copyn(v, index, n, ptr);
 	ft_memcpy(v->ptr + index * v->size, v->ptr + (index + n) * v->size,
 		(v->total - n - index) * v->size);
 	v->total -= n;

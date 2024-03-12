@@ -27,25 +27,40 @@ typedef struct s_vector
 	size_t			size;
 	size_t			capacity;
 	size_t			total;
+	void			(*del)(void **);
 }	t_vector;
+
+typedef struct s_vinfos
+{
+	size_t			data_size;
+	size_t			capacity;
+	void			(*del)(void **);
+}	t_vinfos;
 
 int		ft_vector_add_ptr(t_vector *v, void *item);
 int		ft_vector_add(t_vector *v, void *item);
-int		ft_vector_allocate(t_vector **ptr, size_t data_size, size_t capacity);
-int		ft_vector_deallocate(t_vector **ptr, void (*del)(void **));
-int		ft_vector_delete(t_vector *v, size_t index, void (*del)(void **));
-int		ft_vector_deleten(t_vector *v, size_t index, size_t n, void (*del)(void **));
-int		ft_vector_free(t_vector *v, void (*del)(void **));
-int		ft_vector_init(t_vector *v, size_t data_size, size_t capacity);
+int		ft_vector_alloc(t_vector **ptr, t_vinfos infos, size_t n);
+int		ft_vector_copy(t_vector *v, size_t index, void *ptr);
+int		ft_vector_copyn(t_vector *v, size_t index, size_t n, void *ptr);
+int		ft_vector_dealloc(t_vector **ptr, size_t n);
+int		ft_vector_delete(t_vector *v, size_t index);
+int		ft_vector_deleten(t_vector *v, size_t index, size_t n);
+int		ft_vector_free(t_vector *v);
+int		ft_vector_init(t_vector *v, t_vinfos infos);
 int		ft_vector_insert_ptr(t_vector *v, void *item, size_t index);
 int		ft_vector_insert(t_vector *v, void *item, size_t index);
 int		ft_vector_insertn(t_vector *v, void *item, size_t index, size_t n);
 int		ft_vector_join(t_vector *v, void *items, size_t n);
+int		ft_vector_replace(t_vector *v, size_t index, void *new);
+int		ft_vector_replacen(t_vector *v, size_t index, void *new, size_t n[2]);
 int		ft_vector_resize(t_vector *v, size_t capacity);
 int		ft_vector_set_ptr(t_vector *v, size_t index, void *item);
 int		ft_vector_set(t_vector *v, size_t index, void *item);
+int		ft_vector_setn(t_vector *v, size_t index, void *item, size_t n);
 int		ft_vector_strncat(t_vector *v, char *str, size_t len);
 int		ft_vector_trim(t_vector *v);
+int		ft_vector_unlink(t_vector *v, size_t index, void *ptr);
+int		ft_vector_unlinkn(t_vector *v, size_t index, size_t n, void *ptr);
 void	*ft_vector_get(t_vector *v, size_t index);
 
 #endif

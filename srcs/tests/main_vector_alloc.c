@@ -1,33 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_init.c                                   :+:      :+:    :+:   */
+/*   main_vector_alloc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 16:50:49 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/10 16:07:17 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/10 17:54:11 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/10 18:55:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
-#include "ft_mem.h"
+#include "libft.h"
+#include <unistd.h>
 #include <stdlib.h>
+#include <time.h>
 
-int	ft_vector_init(t_vector *v, t_vinfos infos)
+int main(void)
 {
-	if (!v || infos.data_size < 1)
+	t_vector *args;
+	char	*str;
+	int		i;
+	
+	srand(time(NULL));
+	ft_fmalloc(rand() % 2000);
+	if (ft_vector_alloc(&args, (t_vinfos){sizeof(char *), 0, ft_vfree}, 5))
 		return (FAILURE);
-	if (infos.capacity < 1)
-		v->capacity = VECTOR_INIT_CAPACITY;
-	else
-		v->capacity = infos.capacity;
-	v->total = 0;
-	v->size = infos.data_size;
-	v->del = infos.del;
-	v->ptr = malloc(v->size * v->capacity);
-	if (!v->ptr)
-		return (FAILURE);
-	ft_memset(v->ptr, 0, v->size); //REMOVE ?
+ 
+	i = 0;
+	while (i < 2500)
+	{
+		str = ft_itoa(rand());
+		if (!str)
+			break ;
+		if (ft_vector_add_ptr(args + (rand() % 5), str))
+		{
+			free(str);
+			break ;
+		}
+		i++;
+	}
+	ft_vector_dealloc(&args, 5);
 	return (SUCCESS);
 }

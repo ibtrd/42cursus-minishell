@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_deallocate.c                             :+:      :+:    :+:   */
+/*   ft_vector_setn.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 20:59:18 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 18:05:18 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/11 05:07:51 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/11 05:26:30 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "ft_vector.h"
+#include "ft_mem.h"
 
-int	ft_vector_deallocate(t_vector **ptr, void (*del)(void **))
+int	ft_vector_setn(t_vector *v, size_t index, void *item, size_t n)
 {
-	if (!ptr || !*ptr)
+	size_t	i;
+
+	if (!v || index + n > v->total)
 		return (FAILURE);
-	ft_vector_free(*ptr, del);
-	free(*ptr);
-	*ptr = NULL;
+	i = 0;
+	while (i < n)
+	{
+		ft_memcpy(v->ptr + (index + i) * v->size, item, v->size);
+		i++;
+	}
 	return (SUCCESS);
 }

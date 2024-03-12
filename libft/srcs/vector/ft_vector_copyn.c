@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_allocate.c                               :+:      :+:    :+:   */
+/*   ft_vector_copyn.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 20:49:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 20:50:22 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/12 11:23:50 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/12 13:36:05 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "ft_vector.h"
+#include "ft_mem.h"
 
-int	ft_vector_allocate(t_vector **ptr, size_t data_size, size_t capacity)
+int	ft_vector_copyn(t_vector *v, size_t index, size_t n, void *ptr)
 {
-	t_vector	*new;
-
-	new = malloc(sizeof(t_vector));
-	if (!new)
+	if (!v || index >= v->total || index + n > v->total || !ptr)
 		return (FAILURE);
-	if (ft_vector_init(new, data_size, capacity))
-	{
-		free(new);
-		return (FAILURE);
-	}
-	*ptr = new;
+	ft_memcpy(ptr, v->ptr + (index * v->size), v->size * n);
 	return (SUCCESS);
 }
