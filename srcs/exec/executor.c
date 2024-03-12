@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 19:00:20 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 19:11:01 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ int	exec_init(t_executor *exec, t_astnode *root, char **env)
 	exec->root = root;
 	exec->infd = (t_vector){0};
 	exec->outfd= (t_vector){0};
-	if (ft_vector_init(&exec->infd, (t_vinfos){sizeof(int), 1, NULL}))
+	if (ft_vector_init(&exec->infd, (t_vinfos){sizeof(int), 1, &ft_vclose}))
 		return (1);
-	if (ft_vector_init(&exec->outfd, (t_vinfos){sizeof(int), 1, NULL}))
+	if (ft_vector_init(&exec->outfd, (t_vinfos){sizeof(int), 1, &ft_vclose}))
 		return (1);
 	fd = dup(STDIN_FILENO);
 	if (fd == -1)
