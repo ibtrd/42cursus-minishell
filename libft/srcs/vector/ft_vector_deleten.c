@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 13:25:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/10 15:01:20 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/10 19:31:22 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	ft_vector_deleten(t_vector *v, size_t index, size_t n)
 	ft_memcpy(v->ptr + index * v->size, v->ptr + (index + n) * v->size,
 		(v->total - n - index) * v->size);
 	v->total -= n;
-	if (v->total > 0 && v->total == (v->capacity >> 2))
-		return (ft_vector_resize(v, v->capacity >> 1));
+	while (v->capacity > 1 && v->total <= (v->capacity >> 2))
+		if (ft_vector_resize(v, v->capacity >> 1))
+			return (FAILURE);
 	return (SUCCESS);
 }
