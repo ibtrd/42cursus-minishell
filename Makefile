@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/12 03:05:17 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/12 04:18:41 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,9 @@ SRC = \
 	$(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC)) \
 	$(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC)) \
 	$(addprefix $(ENV_DIR),$(ENV_SRC)) \
+	\
+	$(addprefix $(DEBUG_DIR),$(DEBUG_SRC)) \
+	##REMOVE DEBUG
 
 ## PARSING ##
 
@@ -107,6 +110,10 @@ ENV_SRC = \
 	ft_getenv \
 	init_env \
 	var_update \
+
+DEBUG_DIR = debug/
+DEBUG_SRC = \
+	debug_print_str_mask \
 
 SRCS = $(addsuffix .c, $(SRC))
 
