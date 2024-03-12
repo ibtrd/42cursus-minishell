@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 05:10:14 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 09:04:28 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 09:18:10 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ static int	search_words(t_vector *str, t_vector *mask, size_t *insert, t_vector 
 	{
 		while (start < str->total && is_separator(str, mask, start))
 			start++;
-		if (split_word(split, str, mask, &start))
+		if (start < str->total - 1 && split_word(split, str, mask, &start))
 		{
 			ft_vector_dealloc(&split, 2);
 			return (FAILURE);
 		}
+		start++;
 	}
 	vector_merge(args, split, insert);
 	vector_merge(masks, split + 1, insert);
@@ -73,7 +74,7 @@ static int	split_word(t_vector *split, t_vector *str, t_vector *mask, size_t *st
 	if ((split_vector(split, str, *start, end)
 			|| split_vector(split + 1, mask, *start, end)))
 		return (FAILURE);
-	*start = end + 1;
+	*start = end;
 	return (SUCCESS);
 }
 
