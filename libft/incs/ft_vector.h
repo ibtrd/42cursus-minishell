@@ -62,5 +62,7 @@ int		ft_vector_trim(t_vector *v);
 int		ft_vector_unlink(t_vector *v, size_t index, void *ptr);
 int		ft_vector_unlinkn(t_vector *v, size_t index, size_t n, void *ptr);
 void	*ft_vector_get(t_vector *v, size_t index);
+void	ft_vfree(void **var);
+void	ft_vclose(void **var);
 
 #endif
