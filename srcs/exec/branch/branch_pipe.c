@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 16:28:48 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 18:49:29 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ static int	piping(t_executor *exec, int wait, int pipe[2])
 	// dprintf(2, "close(%d) = %d\n", pipe[!wait], close(pipe[!wait]));	// DEBUG
 	// dprintf(2, "dup2(%d, %d)\n", pipe[!wait], !wait);	// DEBUG
 	// error = dup2(pipe[!wait], !wait);
-	error = ft_vector_add(exec->redir + !wait, &pipe[!wait]);	// PROTECT
-	// close(pipe[!wait]);	// PROTECT
+	if (wait)
+		error = ft_vector_add(&exec->outfd, &pipe[STDOUT_FILENO]);	// PROTECT
+	else
+		error = ft_vector_add(&exec->infd, &pipe[STDIN_FILENO]);	// PROTECT
+	close(pipe[!wait]);	// PROTECT
 	// error = -1;	// DEBUG
 	if (error == -1)
 	{
