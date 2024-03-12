@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_addconversion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 04:27:49 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 15:59:56 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 16:58:38 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_string.h"
-
-static int	convert_string(t_vector *buffer, va_list *args);
-static int	convert_percent(t_vector *buffer, va_list *args);
-static int	convert_char(t_vector *buffer, va_list *args);
 
 int	add_conversion(char specifier, t_vector *buffer, va_list *args)
 {
 	const t_convert	converter[] = {
 		convert_string,
 		convert_percent,
-		convert_char
+		convert_char,
+		convert_int,
+		convert_int,
+		convert_uint,
+		convert_hexlow,
+		convert_hexup
 	};
-	const char		cmp[] = {'s', '%', 'c', '\0'};
+	const char		cmp[] = {'s', '%', 'c', 'd', 'i', 'u', 'x', 'X', '\0'};
 	int				i;
 
 	i = 0;
@@ -35,28 +35,4 @@ int	add_conversion(char specifier, t_vector *buffer, va_list *args)
 		i++;
 	}
 	return (FAILURE);
-}
-
-static int	convert_string(t_vector *buffer, va_list *args)
-{
-	char	*str;
-
-	str = va_arg(*args, char *);
-	if (str)
-		return (ft_vector_join(buffer, str, ft_strlen(str)));
-	return (ft_vector_join(buffer, "(null)", 6));
-}
-
-static int	convert_percent(t_vector *buffer, va_list *args)
-{
-	(void)args;
-	return (ft_vector_add(buffer, "%"));
-}
-
-static int	convert_char(t_vector *buffer, va_list *args)
-{
-	char	c;
-
-	c = va_arg(*args, int);
-	return (ft_vector_add(buffer, &c));
 }
