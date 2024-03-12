@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/12 18:55:19 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/12 19:09:17 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -262,6 +262,7 @@ AVAILABLE_TESTS = \
 	dprintf \
 	vector_test \
 	vector_alloc \
+	vectorcpy \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
