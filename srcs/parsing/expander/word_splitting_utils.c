@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 06:16:41 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 08:45:41 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 08:54:01 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	is_separator(t_vector *str, t_vector *mask, size_t index)
 	const char	c = *(char *)(ft_vector_get(str, index));
 	const char	m = *(char *)(ft_vector_get(mask, index));
 
-	printf("c=%c\n",c);
 	if (ft_ischarset(c, __DEFAULT_IFS)
 		&& (m & __ENVAR_MASK)
 		&& !(m & __DQUOTE_MASK))
