@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 05:15:48 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 05:20:26 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,10 @@ static int	expand_string(t_vector *str, t_vector *masks, size_t *index, t_vector
 	if (envars_expansion(str, masks, *index, env))
 		return (FAILURE);
 	debug_print_str_mask(str, masks, index, "ENVARS");
-	if (quote_removal(str, masks, index))
-		return (FAILURE);
 	if (word_splitting(str, masks, index))
+		return (FAILURE);
+	debug_print_str_mask(str, masks, index, "wORD SPLITTING");
+	if (quote_removal(str, masks, index))
 		return (FAILURE);
 	debug_print_str_mask(str, masks, index, "QUOTE REMOVAL");
 	return (SUCCESS);

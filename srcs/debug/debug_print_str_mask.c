@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 04:16:47 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 04:17:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 05:35:56 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include "expander.h"
 #include "interpreter.h"
 
-void debug_print_str_mask(t_vector *str, t_vector *masks, size_t *index, char *msg)
+void debug_print_str_mask(t_vector *args, t_vector *masks, size_t *index, char *msg)
 {
-	const t_vector	*print = ft_vector_get(str, *index);
+	const t_vector	*str = ft_vector_get(args, *index);
 	const t_vector	*mask = ft_vector_get(masks, *index);
 	size_t			i;
 	char			*c;
 
-	ft_dprintf(2, "%s:\nstr  |%s|\nmask |", msg, (char *)print->ptr);
+	ft_dprintf(2, "%s:\nstr  |%s|\nmask |", msg, (char *)str->ptr);
 	i = 0;
 	while (i < mask->total - 1)
 	{
