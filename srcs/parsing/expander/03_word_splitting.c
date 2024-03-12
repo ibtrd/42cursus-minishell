@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 05:10:14 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 09:18:10 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 10:43:10 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 static int	search_words(t_vector *str, t_vector *mask, size_t *insert, t_vector *args, t_vector *masks);
 static int	split_word(t_vector *split, t_vector *str, t_vector *mask, size_t *start);
 static int	split_vector(t_vector *dest, t_vector *src, size_t start, size_t end);
-static	int vector_merge(t_vector *dst, t_vector *src, size_t *insert);
+static int	merge_vectors(t_vector *srcs, t_vector *masks, t_vector *split, size_t *insert);
 
 int	word_splitting(t_vector *args, t_vector *masks, size_t *index)
 {
@@ -56,8 +56,7 @@ static int	search_words(t_vector *str, t_vector *mask, size_t *insert, t_vector 
 		}
 		start++;
 	}
-	vector_merge(args, split, insert);
-	vector_merge(masks, split + 1, insert);
+	merge_vectors(args, masks, split, insert);
 	free(split->ptr);
 	free((split + 1)->ptr);
 	free(split);
@@ -93,9 +92,12 @@ static int	split_vector(t_vector *dest, t_vector *src, size_t start, size_t end)
 	return (SUCCESS);
 }
 
-static	int	vector_merge(t_vector *dst, t_vector *src, size_t *insert)
+static	int	merge_vectors(t_vector *args, t_vector *masks, t_vector *split, size_t *insert)
 {
-	if (ft_vector_delete(dst, *insert) || ft_vector_insertn(dst, src->ptr, *insert, src->total))
+	if (ft_vector_delete(args, *insert)
+		|| ft_vector_insertn(args, split, *insert, split->total)
+		|| ft_vector_delete(masks, *insert)
+		|| ft_vector_insertn(masks, split + 1, *insert, (split + 1)->total))
 		return (FAILURE);
 	return (SUCCESS);
 }
