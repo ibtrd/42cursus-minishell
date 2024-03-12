@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/12 11:34:20 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/12 13:43:37 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ VECTOR_SRC = \
 	vector_add_ptr \
 	vector_alloc \
 	vector_copy \
+	vector_copyn \
 	vector_dealloc \
 	vector_delete \
 	vector_deleten \
@@ -115,6 +116,7 @@ VECTOR_SRC = \
 	vector_strncat \
 	vector_trim \
 	vector_unlink \
+	vector_unlinkn \
 
 # *** LINKED LIST ************************************************************ #
 
