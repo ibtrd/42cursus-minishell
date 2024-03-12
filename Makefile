@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/11 19:53:26 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/12 02:20:47 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ EXPANDER_SRC = \
 	02_envars_expansion \
 	expander_mask_utils \
 	03_word_splitting \
+	args_vectors_to_strings \
 
 ## AST ##
 

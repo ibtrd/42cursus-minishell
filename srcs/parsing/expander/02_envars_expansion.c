@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:46:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 23:31:25 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 02:15:28 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,13 @@ static int	replace_envar(t_vector *arg, t_vector *mask, t_env_var envar, size_t 
 	size_t		name_len;
 	size_t		value_len;
 
-	if (!envar.value && !*envar.name)
-		envar.value = "$";
+	if (!envar.value)
+	{
+		if (!*envar.name)
+			envar.value = "$";
+		else
+			envar.value = "";
+	}
 	name_len = ft_strlen(envar.name) + 1;
 	value_len = ft_strlen(envar.value);
 	if (ft_vector_deleten(arg, *index, name_len)

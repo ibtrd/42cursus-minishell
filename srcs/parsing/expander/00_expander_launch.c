@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 23:35:05 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 00:57:24 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,40 +55,22 @@ static int	expand_node(t_astnode *node, t_vector *env)
 {
 	t_vector	mask;
 	size_t		i;
-	// char		**ptr;
-	// char		**mask_ptr;
 
 	if (init_interpretation_masks(&mask, node->args))
 		return (FAILURE);
 	i = 0;
 	while (i < ((t_vector *)node->args)->total)
 	{
-		expand_string(node->args, &mask, &i, env);
+		if (expand_string(node->args, &mask, &i, env))
+		{
+			ft_vector_free(&mask);
+			return (FAILURE);
+		}
 		i++;
 	}
 	ft_vector_free(&mask);
+	args_vectors_to_stings((t_vector **)&node->args, node->type);
 	return (SUCCESS);
-	(void)env;
-
-
-
-	// i = 0;
-	// while (i < node->args->total - (node->type == _CMD))
-	// {
-	// 	ptr = ft_vector_get(node->args, i);
-	// 	mask_ptr = ft_vector_get(&mask, i);
-	// 	ft_dprintf(2, "EXPANDING:\nstr  = %s|\nmask = %s|\n\n", *ptr, *mask_ptr);
-	// 	if (tilde_expansion(ptr, mask_ptr))
-	// 		return (FAILURE); //PROTECT
-	// 	ft_dprintf(2, "TILDE_EXPANSION:\nstr  = %s|\nmask = %s|\n\n", *ptr, *mask_ptr);
-	// 	if (envars_expansion(ptr, mask_ptr, env))
-	// 		return (FAILURE); //PROTECT
-	// 	ft_dprintf(2, "ENVARS_ESPANSION:\nstr  = %s|\nmask = %s|\n\n", *ptr, *mask_ptr);
-	// 	if (word_splitting(node->args, &mask, &i))
-	// 		return (FAILURE);
-	// 	i++;
-	// }
-	printf("EXPAND SUCCESS!\n");
 }
 
 static int	expand_string(t_vector *str, t_vector *masks, size_t *index, t_vector *env)
