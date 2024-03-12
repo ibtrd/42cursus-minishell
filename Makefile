@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/10 17:56:03 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/12 12:51:12 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -248,6 +248,7 @@ AVAILABLE_TESTS = \
 	dprintf \
 	vector_test \
 	vector_alloc \
+	vectorcpy \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
