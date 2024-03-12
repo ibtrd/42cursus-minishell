@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_delete.c                                 :+:      :+:    :+:   */
+/*   ft_vector_remove.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:25:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 11:36:49 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/12 10:45:00 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/12 11:23:35 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vector.h"
 #include "ft_mem.h"
 
-int	ft_vector_delete(t_vector *v, size_t index)
+int	ft_vector_unlink(t_vector *v, size_t index)
 {
 	if (!v || index >= v->total)
 		return (FAILURE);
-	if (v->del)
-		v->del((void **)ft_vector_get(v, index));
 	ft_memcpy(v->ptr + index * v->size, v->ptr + (index + 1) * v->size,
 		(v->total - 1 - index) * v->size);
 	v->total--;
