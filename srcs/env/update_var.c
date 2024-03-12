@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:00:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/09 19:30:17 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 17:51:10 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,9 @@
 
 #include <stdlib.h>
 
-int	update_var(t_env_var *env_var, char *var)
+int	update_var(char **env_var, char *var)
 {
-	char	*new_value;
-
-	free(env_var->value);
-	new_value = ft_strchr(var, '=');
-	if (!new_value)
-		env_var->value = ft_strdup(var);
-	else
-		env_var->value = ft_strdup(++new_value);
-	return (!env_var->value);
+	free(*env_var);
+	*env_var = ft_strdup(var);
+	return (!*env_var);
 }

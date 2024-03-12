@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 17:10:26 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 17:41:11 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 17:53:05 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,21 @@
 
 #include <stdlib.h>
 
-t_env_var	*search_var(t_vector *envv, char *name)
+char	**search_var(t_vector *envv, char *name)
 {
 	size_t		i;
-	size_t		len;
-	t_env_var	*var;
-	char		*tmp;
+	size_t		name_len;
+	size_t		entry_len;
 
-	len = 0;
-	while (name[len] && name[len] != '=')
-		len++;
-	tmp = ft_strndup(name, len);
+	name_len = ft_strlen_charset(name, "=");
 	i = 0;
 	while (i < envv->total)
 	{
-		var = ft_vector_get(envv, i);
-		if (!var)
-			return (NULL);
-		if (!ft_strcmp(var->name, tmp))
-		{
-			free(tmp);
-			return (var);
-		}
+		entry_len = ft_strlen_charset(*(char **)ft_vector_get(envv, i), "=");
+		if (entry_len == name_len
+			&& !ft_strncmp(*(char **)ft_vector_get(envv, i), name, entry_len))
+			return ((char **)ft_vector_get(envv, i));
 		i++;
 	}
-	free(tmp);
 	return (NULL);
 }

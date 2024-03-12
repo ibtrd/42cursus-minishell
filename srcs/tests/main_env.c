@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:41:08 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/09 19:36:18 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 17:56:15 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int ac, char **av, char **env)
 	dprintf(2, "\n\n");
 	dprintf(2, "EXPORT env:\n\n");
 	builtin_env(&envv);
-	ft_vector_free(&envv, &free_var);
+	ft_vector_free(&envv, &ft_vfree);
 	dprintf(2, "\n\n");
 	free(envp[0]);
 	free(envp[1]);

@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:17:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 17:40:39 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 17:53:47 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	check_var_name(char *var)
 int	builtin_export(t_vector *envv, char **argv)
 {
 	size_t		i;
-	t_env_var	*var;
+	char		**var;
 	int			error;
 	int			ret;
 

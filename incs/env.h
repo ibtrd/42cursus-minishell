@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:34:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 17:22:04 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 17:54:03 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ typedef struct s_env_var
 	char	*value;
 }	t_env_var;
 
-char		*ft_getenv(t_vector *env, char *name);
-int			init_env(t_vector *envv, char **env);
-int			var_processing(t_env_var *var);
-void		free_var(void **var);
-int			copy_var(t_env_var *env_var, char *var);
-int			add_var(t_vector *envv, char *var);
-t_env_var	*search_var(t_vector *envv, char *name);
-int			del_var(t_vector *envv, char *name);
-int			update_var(t_env_var *env_var, char *var);
+char	*ft_getenv(t_vector *env, char *name);
+int		init_env(t_vector *envv, char **env);
+int		var_processing(t_env_var *var);
+void	free_var(void **var);
+int		copy_var(t_env_var *env_var, char *var);
+int		add_var(t_vector *envv, char *var);
+char	**search_var(t_vector *envv, char *name);
+int		del_var(t_vector *envv, char *name);
+int		update_var(char **env_var, char *var);
 
 // VAR INIT
-int			init_path(t_vector *envv);
-int			init_shlvl(t_vector *envv);
+int		init_path(t_vector *envv);
+int		init_shlvl(t_vector *envv);
 
 #endif
