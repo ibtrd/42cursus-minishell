@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:41:21 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/06 18:21:09 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 18:59:36 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	close_fds(t_executor *exec)
 		close(*(int *)ft_vector_get(&exec->infd, i));
 		i++;
 	}
-	ft_vector_free(&exec->infd, NULL);
+	ft_vector_free(&exec->infd);
 	i = 0;
 	// dprintf(2, "FDOUT->total: %zu\n", exec->outfd.total);	// DEBUG
 	while (i < exec->outfd.total)
@@ -35,5 +35,5 @@ void	close_fds(t_executor *exec)
 		close(*(int *)ft_vector_get(&exec->outfd, i));
 		i++;
 	}
-	ft_vector_free(&exec->outfd, NULL);
+	ft_vector_free(&exec->outfd);
 }

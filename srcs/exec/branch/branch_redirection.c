@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 18:58:02 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 18:59:14 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ static int	close_redirect(t_executor *exec)
 		// dprintf(2, "close_redirect input\n");	// DEBUG
 		// dprintf(2, "\tfd = %d\n", *(int *)ft_vector_get(exec->redir + __FDIN, (exec->redir + __FDIN)->total - 1));	// DEBUG
 		close(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1));
-		ft_vector_delete(&exec->infd, exec->infd.total - 1, NULL);
+		ft_vector_delete(&exec->infd, exec->infd.total - 1);
 	}
 	else if (exec->node->type == _OUTPUT || exec->node->type == _APPEND)
 	{
 		// dprintf(2, "close_redirect output\n");	// DEBUG
 		// dprintf(2, "\tfd = %d\n", *(int *)ft_vector_get(exec->redir + __FDOUT, (exec->redir + __FDOUT)->total - 1));	// DEBUG
 		close(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1));
-		ft_vector_delete(&exec->outfd, exec->outfd.total - 1, NULL);
+		ft_vector_delete(&exec->outfd, exec->outfd.total - 1);
 	}
 	return (0);
 }
