@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:22:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 17:28:33 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 18:02:51 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ int	init_env(t_vector *envv, char **env)
 {
 	int			error;
 
-	if (ft_vector_init(envv, sizeof(char *), 0))
+	if (ft_vector_init(envv, (t_vinfos){sizeof(char *), 0, &ft_vfree}))
 		return (1);
 	if (!env || !*env)
 		error = create_env(envv);
 	else
 		error = copy_env(envv, env);
 	if (error)
-		ft_vector_free(envv, &ft_vfree);
+		ft_vector_free(envv);
 	return (error);
 }
 
