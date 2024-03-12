@@ -6,15 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 02:55:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 03:23:49 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 04:41:15 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 #include "minishelldef.h"
-
-#include <stdio.h> //REMOVE
 
 int	quote_removal(t_vector *args, t_vector *masks, size_t *index)
 {

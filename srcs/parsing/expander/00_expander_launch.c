@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 04:21:18 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 04:50:51 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include "interpreter.h"
 
 static int	expand_node(t_astnode *node, t_vector *env);
-static int	has_interpreter(t_astnode *node);
 static int	expand_string(t_vector *str, t_vector *masks, size_t *index,
 				t_vector *env);
 
@@ -38,6 +37,7 @@ int	expander_launch(t_astnode *node, t_vector *env)
 
 static int	expand_node(t_astnode *node, t_vector *env)
 {
+	t_vector	*args;
 	t_vector	mask;
 	size_t		i;
 
@@ -46,7 +46,8 @@ static int	expand_node(t_astnode *node, t_vector *env)
 	i = 0;
 	while (i < node->args->total)
 	{
-		if (has_interpreter(node)
+		args = (ft_vector_get(node->args, i));
+		if (ft_strpbrk((char *)args->ptr, __INTERPRETERS)
 			&& expand_string(node->args, &mask, &i, env))
 		{
 			ft_vector_free(&mask);
@@ -56,22 +57,6 @@ static int	expand_node(t_astnode *node, t_vector *env)
 	}
 	ft_vector_free(&mask);
 	return (SUCCESS);
-}
-
-static int	has_interpreter(t_astnode *node)
-{
-	t_vector	*str;
-	size_t		i;
-
-	i = 0;
-	while (i < node->args->total)
-	{
-		str = ft_vector_get(node->args, i);
-		if (ft_strpbrk((char *)str->ptr, __INTERPRETERS))
-			return (1);
-		i++;
-	}
-	return (0);
 }
 
 static int	expand_string(t_vector *str, t_vector *masks, size_t *index, t_vector *env)

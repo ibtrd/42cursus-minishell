@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 23:12:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 00:11:03 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 04:44:16 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	tilde_expansion(t_vector *args, t_vector *masks, size_t index)
 static int	lone_tilde(t_vector *str, t_vector *mask)
 {
 	const size_t	len = ft_strlen(__HOME_ENVAR);
-	const char		next = *((char *)str->ptr + 1);
-	const char		m = *((char *)mask->ptr + 1);
+	const char		next = *(char *)(ft_vector_get(str, 1));
+	const char		m = *(char *)(ft_vector_get(mask, 1));
 
 	if (next == '\0' || next == '/')
 	{
@@ -66,8 +66,8 @@ static int	lone_tilde(t_vector *str, t_vector *mask)
 static int	tilde_sign(t_vector *str, t_vector *mask, char *envar)
 {
 	const size_t	len = ft_strlen(envar);
-	const char		next = *((char *)str->ptr + 2);
-	const char		m = *((char *)mask->ptr + 2);
+	const char		next = *(char *)(ft_vector_get(str, 2));
+	const char		m = *(char *)(ft_vector_get(mask, 2));
 
 	if (next == '\0' || next == '/')
 	{
