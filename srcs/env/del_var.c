@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 17:52:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/09 17:54:22 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 18:14:16 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	del_var(t_vector *envv, char *name)
 			return (FAILURE);
 		if (!ft_strcmp(var->name, name))
 		{
-			if (ft_vector_delete(envv, i, &free_var))
+			if (ft_vector_delete(envv, i))
 				return (FAILURE);
 			return (SUCCESS);
 		}
