@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/12 18:11:21 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/12 18:32:06 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ BUILTIN_SRC = \
 	export \
 	false \
 	true \
+	unset \
 
 ## ENV ##
 
