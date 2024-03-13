@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector_free.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/10 14:47:38 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 02:18:28 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	ft_vector_free(t_vector *v)
 	}
 	free(v->ptr);
 	v->ptr = NULL;
+	v->capacity = 0;
 	v->total = 0;
+	v->del = NULL;
 	return (SUCCESS);
 }

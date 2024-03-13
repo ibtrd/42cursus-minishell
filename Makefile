@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/12 12:51:12 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 02:43:08 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -248,13 +248,13 @@ AVAILABLE_TESTS = \
 	dprintf \
 	vector_test \
 	vector_alloc \
-	vectorcpy \
+	vector_split \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
 	$(RM) minishell_test
 	@$(MAKE) TEST=$@ MODE=debug
-#	@$(VALGRIND) ./$(NAME)_test
+	@$(VALGRIND) ./$(NAME)_test
 #  ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
