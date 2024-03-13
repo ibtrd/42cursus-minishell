@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:55:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 09:24:47 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 13:02:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_mask	*str_to_mask(char *str, char mask_value)
 	while (i < len)
 	{
 		(insert + i)->c = *(str + i);
-		(insert + i)->c = mask_value;
+		(insert + i)->m = mask_value;
 		i++;
 	}
 	return (insert);
