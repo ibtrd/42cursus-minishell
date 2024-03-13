@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 01:48:20 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 05:47:52 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 06:02:46 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,11 @@ int main(void)
 		elem = rand() % 20;
 		ft_vector_add(&v, &elem);
 	}
-	printf("INIT\n");
-	ft_vector_print(&v, ft_vprint_int);
+	ft_vector_print(&v, ft_vprint_int, "INIT");
 	if (!ft_vector_split(&v, 3, 5, &v2))
 	{
-	printf("SPLIT-1\n");
-	ft_vector_print(&v, ft_vprint_int);
-	printf("SPLIT-2\n");
-	ft_vector_print(&v2, ft_vprint_int);
+	ft_vector_printi(&v, ft_vprint_int, "SPLIT-1");
+	ft_vector_printi(&v2, ft_vprint_int, "SPLIT-2");
 	}
 
 	i = 0;
@@ -54,5 +51,5 @@ int main(void)
 
 	ft_vector_init(&v, (t_vinfos){sizeof(char), 0, NULL});
 	ft_vector_join(&v, "pas sur de comp\nrendre t", 26);
-	ft_vector_print(&v, ft_vprint_char);
+	ft_vector_print(&v, ft_vprint_char, "TEST CHAR");
 }
