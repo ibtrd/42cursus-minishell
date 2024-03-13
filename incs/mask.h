@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_build_redirection.c                           :+:      :+:    :+:   */
+/*   mask.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 21:55:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 22:06:37 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/13 07:48:30 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/13 08:13:33 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MASK_H
+# define MASK_H
 
-#include "ast.h"
-
-int	build_redirection(t_vector **file_v, t_lexer_token *tok, t_astnode **root)
+typedef struct s_mask
 {
-	t_astnode	*new;
+	char	c;
+	char	m;
+}	t_mask;
 
-	if (ft_vector_alloc(file_v, (t_vinfos){sizeof(t_vector), 1, &del_args}, 1))
-		return (FAILURE);
-	if (ast_newnode(&new, tok->type, *file_v))
-	{
-		ft_vector_dealloc(file_v, 1);
-		return (FAILURE);
-	}
-	*root = ast_addnode(*root, new);
-	return (SUCCESS);
-}
+void	debug_print_mask(void *ptr, size_t index); //REMOVE
+
+#endif //MASK_H

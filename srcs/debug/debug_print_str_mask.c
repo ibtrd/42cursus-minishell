@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 04:16:47 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 07:29:58 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 08:13:20 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "env.h"
 #include "expander.h"
 #include "interpreter.h"
+#include "mask.h"
 
 void debug_print_str_mask(t_vector *args, t_vector *masks, size_t *index, char *msg)
 {
@@ -43,7 +44,7 @@ void debug_print_str_mask(t_vector *args, t_vector *masks, size_t *index, char *
 	printf("|\n\n");
 }
 
-void	debug_print_vector_mask(void *ptr, size_t index)
+void	debug_print_vcharmask(void *ptr, size_t index)
 {
 	const char	c = *(char *)ptr;
 
@@ -54,6 +55,23 @@ void	debug_print_vector_mask(void *ptr, size_t index)
 	else if (c & __SQUOTE_MASK)
 		printf("\'");
 	else if (c & __DQUOTE_MASK)
+		printf("\"");
+	else
+		printf(".");
+	(void)index;
+}
+
+void	debug_print_mask(void *ptr, size_t index)
+{
+	const char	m = ((t_mask *)ptr)->m;
+
+	if (m & __ENVAR_MASK && m & __DQUOTE_MASK)
+		printf("&");
+	else if (m & __ENVAR_MASK)
+		printf("$");
+	else if (m & __SQUOTE_MASK)
+		printf("\'");
+	else if (m & __DQUOTE_MASK)
 		printf("\"");
 	else
 		printf(".");
