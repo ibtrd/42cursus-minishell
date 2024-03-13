@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 14:44:55 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 15:59:18 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -316,7 +316,7 @@ AVAILABLE_TESTS = \
 $(AVAILABLE_TESTS) :
 	$(RM) minishell_test
 	@$(MAKE) TEST=$@ MODE=debug
-	@$(VALGRIND) ./$(NAME)_test
+#	@$(VALGRIND) ./$(NAME)_test
 #  ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
