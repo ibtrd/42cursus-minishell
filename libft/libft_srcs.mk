@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 04:16:16 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 05:24:38 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,6 +107,7 @@ VECTOR_SRC = \
 	vector_insert_ptr \
 	vector_insertn \
 	vector_join \
+	vector_print \
 	vector_replace \
 	vector_replacen \
 	vector_resize \
@@ -125,6 +126,8 @@ VUTILS_DIR = $(VECTOR_DIR)utility/
 VUTILS_SRC = \
 	vclose \
 	vfree \
+	vprint_char \
+	vprint_int \
 
 # *** LINKED LIST ************************************************************ #
 

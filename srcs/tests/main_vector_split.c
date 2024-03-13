@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 01:48:20 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 04:11:15 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 05:22:17 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,6 @@
 #include <unistd.h>
 #include "libft.h"
 #include "stdio.h"
-
-static void	print_vector(t_vector *v, char *msg)
-{
-	size_t i;
-
-	i = 0;
-	printf("\n\n----------------------\n%s\n\n", msg);
-	while (i < v->total)
-	{
-		printf("v[%ld] = %d\n", i, *((int *)ft_vector_get(v, i)));
-		i++;
-	}
-	printf("\n----------------------\n");
-}
 
 int main(void)
 {
@@ -45,11 +31,14 @@ int main(void)
 		elem = rand() % 20;
 		ft_vector_add(&v, &elem);
 	}
-	print_vector(&v, "INIT");
+	printf("INIT\n");
+	ft_vector_print(&v, ft_vprint_int);
 	if (!ft_vector_split(&v, 3, 5, &v2))
 	{
-		print_vector(&v, "SPLIT1");
-		print_vector(&v2, "SPLIT2");
+	printf("SPLIT-1\n");
+	ft_vector_print(&v, ft_vprint_int);
+	printf("SPLIT-2\n");
+	ft_vector_print(&v2, ft_vprint_int);
 	}
 
 	i = 0;
