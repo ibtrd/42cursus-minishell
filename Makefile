@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/11 19:18:48 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 06:43:24 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,25 +17,24 @@ NAME = minishell
 BUILD_DIR := .build/$(shell git branch --show-current)/
 
 SRCS_DIR = srcs/
+SRCS = $(addsuffix .c, $(SRC))
+
 SRC = \
 	main \
-	$(addprefix $(PARSING_DIR),$(PARSING_SRC)) \
-	$(addprefix $(AST_DIR),$(AST_SRC)) \
-	$(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC)) \
-	$(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC)) \
-	$(addprefix $(ENV_DIR),$(ENV_SRC)) \
 
 ## PARSING ##
 
+SRC += $(addprefix $(PARSING_DIR),$(PARSING_SRC))
+
 PARSING_DIR = parsing/
 PARSING_SRC = \
-	$(addprefix $(LEXER_DIR),$(LEXER_SRC)) \
 	escape_utils \
 	syntax_checker \
 	commandline_parser \
 
+SRC += $(addprefix $(LEXER_DIR),$(LEXER_SRC))
 
-LEXER_DIR = lexer/
+LEXER_DIR = $(PARSING_DIR)/lexer/
 LEXER_SRC = \
 		cmdline_addspace \
 		cmdline_tokenizer \
@@ -51,15 +50,18 @@ LEXER_SRC = \
 
 ## AST ##
 
+SRC += $(addprefix $(AST_DIR),$(AST_SRC))
+
 AST_DIR = ast/
 AST_SRC = \
-	$(addprefix $(BUILDER_DIR),$(BUILDER_SRC)) \
 	ast_utils \
 	ast_print \
 	ast_addnode \
 	ast_addnode_utils \
 
-BUILDER_DIR = builder/
+SRC += $(addprefix $(BUILDER_DIR),$(BUILDER_SRC))
+
+BUILDER_DIR = $(AST_DIR)/builder/
 BUILDER_SRC = \
 		ast_build \
 		ast_build_command \
@@ -69,6 +71,8 @@ BUILDER_SRC = \
 		ast_build_error \
 
 ## EXEC ##
+
+SRC += $(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC))
 
 EXECUTION_DIR = exec/
 EXECUTION_SRC = \
@@ -82,6 +86,8 @@ EXECUTION_SRC = \
 	executor \
 	node_exec \
 
+SRC += $(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC))
+
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
 	env \
@@ -90,13 +96,13 @@ BUILTIN_SRC = \
 
 ## ENV ##
 
+SRC += $(addprefix $(ENV_DIR),$(ENV_SRC))
+
 ENV_DIR = env/
 ENV_SRC = \
 	free_var \
 	ft_getenv \
 	init_env \
-
-SRCS = $(addsuffix .c, $(SRC))
 
 OBJS = $(patsubst %.c,$(BUILD_DIR)%.o,$(SRCS))
 
