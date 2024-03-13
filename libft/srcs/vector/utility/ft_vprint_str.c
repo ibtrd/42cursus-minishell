@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 11:41:32 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 11:43:44 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 12:00:54 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@ void	ft_vprint_str(void *ptr, size_t index)
 	(void)index;
 	if (!ptr)
 		return ;
-	printf("str%3ld: %s\n", index, (char *)ptr);
+	printf("str%3ld: %s\n", index, *(char **)ptr);
 }
