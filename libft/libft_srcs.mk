@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 05:24:38 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 06:36:15 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,6 +128,7 @@ VUTILS_SRC = \
 	vfree \
 	vprint_char \
 	vprint_int \
+	vprint_vchar \
 
 # *** LINKED LIST ************************************************************ #
 

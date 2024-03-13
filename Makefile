@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 03:03:09 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 06:36:11 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -276,7 +276,7 @@ AVAILABLE_TESTS = \
 	dprintf \
 	vector_test \
 	vector_alloc \
-	vector_split \
+	vector_ian \
 	tilde_expansion \
 
 .PHONY : $(AVAILABLE_TESTS)
