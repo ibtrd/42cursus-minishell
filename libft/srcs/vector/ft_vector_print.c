@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 04:49:01 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 06:13:10 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 08:22:05 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,24 @@
 #include "ft_mem.h"
 
 int	ft_vector_print(t_vector *v, void (*print)(void *, size_t), char *msg)
+{
+	size_t	i;
+
+	if (!v || !print)
+		return (FAILURE);
+	if (msg)
+		printf("\nvector_print: %-10s | ", msg);
+	i = 0;
+	while (i < v->total)
+	{
+		print(ft_vector_get(v, i), i);
+		i++;
+	}
+	printf("\n");
+	return (SUCCESS);
+}
+
+int	ft_vector_printv(t_vector *v, void (*print)(void *, size_t), char *msg)
 {
 	size_t	i;
 
