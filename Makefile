@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 14:26:01 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 14:44:55 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ PARSING_SRC = \
 	syntax_checker \
 	commandline_parser \
 
-# ***** LEXER ***** #
+#		# ***** LEXER ***** #
 
 SRC += $(addprefix $(LEXER_DIR),$(LEXER_SRC))
 
@@ -56,7 +56,7 @@ LEXER_SRC = \
 		lexer_rediction_tok \
 		lexer_set_args \
 
-# ********** EXPANDER ********** #
+#		# ********** EXPANDER ********** #
 
 SRC += $(addprefix $(EXPANDER_DIR),$(EXPANDER_SRC))
 
@@ -82,7 +82,7 @@ AST_SRC = \
 	ast_addnode \
 	ast_addnode_utils \
 
-# ***** BUILDER ***** #
+#		# ***** BUILDER ***** #
 
 SRC += $(addprefix $(BUILDER_DIR),$(BUILDER_SRC))
 
@@ -101,12 +101,31 @@ SRC += $(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC))
 
 EXECUTION_DIR = exec/
 EXECUTION_SRC = \
-	$(addprefix $(BRANCH_DIR),$(BRANCH_SRC)) \
-	$(addprefix $(OPEN_DIR),$(OPEN_SRC)) \
 	close_fds \
 	executor \
 	exec_utils \
 	node_exec \
+
+#		# ******* BRANCH ******* #
+
+SRC += $(addprefix $(BRANCH_DIR),$(BRANCH_SRC))       
+
+BRANCH_DIR = $(EXECUTION_DIR)/branch/
+BRANCH_SRC = \
+		branch_command \
+		branch_logicaloperator \
+		branch_pipe \
+		branch_redirection \
+
+#		# ******** OPEN ******** #
+
+SRC += $(addprefix $(OPEN_DIR),$(OPEN_SRC))
+
+OPEN_DIR = $(EXECUTION_DIR)/open/
+OPEN_SRC = \
+		open_input \
+		open_output \
+		open_append \
 
 # ********** BUILTINS ********** #
 
@@ -129,6 +148,9 @@ ENV_SRC = \
 	ft_getenv \
 	init_env \
 	var_update \
+
+
+################################################################################
 
 DEBUG_DIR = debug/
 DEBUG_SRC = \
