@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_vector_split.c                                :+:      :+:    :+:   */
+/*   main_vector_ian.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 01:48:20 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 05:22:17 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 05:47:52 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,9 @@ int main(void)
 	}
 	ft_vector_free(&v);
 	ft_vector_free(&v2);
+
+
+	ft_vector_init(&v, (t_vinfos){sizeof(char), 0, NULL});
+	ft_vector_join(&v, "pas sur de comp\nrendre t", 26);
+	ft_vector_print(&v, ft_vprint_char);
 }
