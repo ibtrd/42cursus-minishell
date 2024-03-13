@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 10:09:30 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 11:45:28 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	expand_node(t_astnode *node, t_vector *env)
 			return (FAILURE);
 		i++;
 	}
-	return (args_vectors_to_stings(&node->args, node->type));
+	return (args_vectors_to_stings(&node->args));
 }
 
 static int	expand_string(t_vector *args, size_t *index, t_vector *env)

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 02:25:47 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 11:36:29 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 11:52:58 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@ int	args_vectors_to_stings(t_vector **args)
 			return (FAILURE);
 		}
 		ft_vector_add_ptr(strings, str);
-		ft_vector_printi(strings, ft_vprint_char, "STRING");
 		i++;
 	}
 	ft_vector_add_ptr(strings, NULL);
-	ft_vector_printi(strings, ft_vprint_char, "STRING");
+	ft_vector_printi(strings, ft_vprint_str, "STRING");
 	ft_vector_dealloc(args, 1);
 	*args = strings;
 	return (SUCCESS);
