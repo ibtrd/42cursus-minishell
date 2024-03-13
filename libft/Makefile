@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 05:24:43 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 07:15:37 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,7 @@ include libft_srcs.mk
 
 BUILD_DIR := .build/$(shell git branch --show-current)/
 
-OBJS = $(patsubst %.c,$(BUILD_DIR)%.o,$(SRCS))
-OBJS = $(SRCS:$(SRCS_DIR)%.c=$(BUILD_DIR)%.o)
+OBJS = $(patsubst $(SRCS_DIR)%.c,$(BUILD_DIR)%.o,$(SRCS))
 
 DEPS = $(patsubst %.o,%.d,$(OBJS))
 -include $(DEPS)
