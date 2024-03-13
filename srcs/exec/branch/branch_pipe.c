@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 18:49:29 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 18:35:11 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 		close(1);
 		free_ast(exec->root);
 		close_fds(exec);
+		ft_vector_free(exec->env);
 		// dprintf(2, "end of pipe_fork\n");	// DEBUG
 		exit(ret);
 		// exit(node_exec(exec));

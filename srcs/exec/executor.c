@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 19:11:01 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 18:01:20 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@
 
 // }
 
-int	exec_init(t_executor *exec, t_astnode *root, char **env)
+int	exec_init(t_executor *exec, t_astnode *root, t_vector *env)
 {
 	int	fd;
 
@@ -90,7 +90,7 @@ int	exec_init(t_executor *exec, t_astnode *root, char **env)
 	exec->node = root;
 	exec->root = root;
 	exec->infd = (t_vector){0};
-	exec->outfd= (t_vector){0};
+	exec->outfd = (t_vector){0};
 	if (ft_vector_init(&exec->infd, (t_vinfos){sizeof(int), 1, &ft_vclose}))
 		return (1);
 	if (ft_vector_init(&exec->outfd, (t_vinfos){sizeof(int), 1, &ft_vclose}))
@@ -116,11 +116,15 @@ int	exec_cleanup(t_executor *exec)
 	// 	return (1);
 	// close(exec->in);
 	// close(exec->out);
-	close_fds(exec);
+	ft_vector_free(exec->env);
+	ft_vector_free(&exec->infd);
+	ft_vector_free(&exec->outfd);
+	free_ast(exec->root);
+	// close_fds(exec);
 	return (0);
 }
 
-int	executor(t_astnode *root, char **env)
+int	executor(t_astnode *root, t_vector *env)
 {
 	t_executor	exec;
 	int			ret;

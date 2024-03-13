@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:22:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 16:51:26 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 18:04:21 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static int	copy_env(t_vector *envv, char **env)
 			return (FAILURE);
 		i++;
 	}
+	if (ft_vector_add_ptr(envv, NULL))
+		return (FAILURE);
 	return (SUCCESS);
 }
 

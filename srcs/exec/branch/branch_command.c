@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 16:25:50 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 18:10:11 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@ static int	get_cmd_path(char *cmd, char **cmd_path)
 	{
 		if (access(cmd, F_OK) == 0)
 			return (0);
-		ft_dprintf(2, "minishell: %s: No such file or directory\n", cmd);
 		// command not found
 		return (127);
 	}
 	path = getenv("PATH");
-	dprintf(2, "PATH = %s\n", path);	// DEBUG
 	*cmd_path = ft_strtok(path, ":");
 	while (*cmd_path)
 	{
@@ -45,7 +43,6 @@ static int	get_cmd_path(char *cmd, char **cmd_path)
 		free(*cmd_path);
 		*cmd_path = ft_strtok(NULL, ":");
 	}
-	ft_dprintf(2, "minishell: %s: No such file or directory\n", cmd);
 	// command not found
 	return (127);
 }
@@ -54,7 +51,8 @@ static int	dup_fd(t_executor *exec)
 {
 	dup2(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1), STDIN_FILENO);		// PROTECT
 	dup2(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1), STDOUT_FILENO);	// PROTECT
-	close_fds(exec);
+	ft_vector_free(&exec->infd);
+	ft_vector_free(&exec->outfd);
 	return (0);
 }
 
@@ -71,8 +69,8 @@ static int	execute_command(t_executor *exec)
 	ret = get_cmd_path(cmd[0], &path);
 	if (ret)
 		return (ret);
-	dprintf(2, "execve command\n");	// DEBUG
-	execve(path, cmd, exec->env);
+	// dprintf(2, "execve command\n");	// DEBUG
+	execve(path, cmd, exec->env->ptr);
 	dprintf(2, "apres commande\n");	// DEBUG
 	free(path);
 	return (1);
