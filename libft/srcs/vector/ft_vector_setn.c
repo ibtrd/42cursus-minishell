@@ -6,14 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 05:07:51 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 05:26:30 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 03:04:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vector.h"
 #include "ft_mem.h"
 
-int	ft_vector_setn(t_vector *v, size_t index, void *item, size_t n)
+int	ft_vector_setn(t_vector *v, size_t index, const void *item, size_t n)
 {
 	size_t	i;
 

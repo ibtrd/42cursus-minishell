@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_build_command.c                               :+:      :+:    :+:   */
+/*   args_vectors_to_strings.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 21:55:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 22:06:32 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/12 02:25:47 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/12 02:26:03 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "libft.h"
 
-#include "minishelldef.h"
 #include "ast.h"
 
-int	build_command(t_vector **arg_v, t_lexer_token *tok, t_astnode **root)
+int	args_vectors_to_stings(t_vector **args, t_nodetype node)
 {
-	t_astnode	*new;
+	t_vector	*strings;
+	char		*str;
+	size_t		i;
 
-	if (ft_vector_alloc(arg_v, (t_vinfos){sizeof(t_vector), 2, del_args}, 1))
+	if (ft_vector_alloc(&strings, (t_vinfos){sizeof(char *), (*args)->total + (node == _CMD), ft_vfree}, 1))
 		return (FAILURE);
-	if (add_argument(*arg_v, tok->value) || ast_newnode(&new, _CMD, *arg_v))
+	i = 0;
+	while (i < (*args)->total)
 	{
-		ft_vector_dealloc(arg_v, 1);
-		return (FAILURE);
+		str = ((t_vector *)ft_vector_get(*args, i))->ptr;
+		str = ft_strdup(str);
+		if (!str)
+		{
+			ft_vector_free(strings);
+			return (FAILURE);
+		}
+		ft_vector_add_ptr(strings, str);
+		i++;
 	}
-	*root = ast_addnode(*root, new);
+	ft_vector_dealloc(args, 1);
+	*args = strings;
 	return (SUCCESS);
 }

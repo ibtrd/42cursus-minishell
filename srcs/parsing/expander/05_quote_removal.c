@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_build_command.c                               :+:      :+:    :+:   */
+/*   05_quote_removal.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 21:55:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 22:06:32 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/12 02:55:05 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/12 04:41:15 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdlib.h>
 
 #include "libft.h"
 
 #include "minishelldef.h"
-#include "ast.h"
 
-int	build_command(t_vector **arg_v, t_lexer_token *tok, t_astnode **root)
+int	quote_removal(t_vector *args, t_vector *masks, size_t *index)
 {
-	t_astnode	*new;
+	t_vector	*str;
+	t_vector	*mask;
+	size_t		i;
 
-	if (ft_vector_alloc(arg_v, (t_vinfos){sizeof(t_vector), 2, del_args}, 1))
-		return (FAILURE);
-	if (add_argument(*arg_v, tok->value) || ast_newnode(&new, _CMD, *arg_v))
+	str = ft_vector_get(args, *index);
+	mask = ft_vector_get(masks, *index);
+	i = 0;
+	while (i < str->total)
 	{
-		ft_vector_dealloc(arg_v, 1);
-		return (FAILURE);
+		if (!ft_ischarset(*(char *)(ft_vector_get(str, i)), "\"\'")
+			|| *(char *)(ft_vector_get(mask, i)) | __NO_MASK)
+		{
+			i++;
+		}
+		else if (ft_vector_delete(str, i) || ft_vector_delete(mask, i))
+			return (FAILURE);
 	}
-	*root = ast_addnode(*root, new);
 	return (SUCCESS);
 }

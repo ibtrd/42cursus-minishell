@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/12 19:09:17 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 14:26:01 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,28 +14,35 @@ NAME = minishell
 
 # *** FILES ****************************************************************** #
 
-BUILD_DIR := .build/
+BUILD_DIR := .build/$(shell git branch --show-current)/
 
 SRCS_DIR = srcs/
+SRCS = $(addsuffix .c, $(SRC))
+
+OBJS = $(patsubst %.c,$(BUILD_DIR)%.o,$(SRCS))
+
+DEPS = $(patsubst %.o,%.d,$(OBJS))
+-include $(DEPS)
+
 SRC = \
 	main \
-	$(addprefix $(PARSING_DIR),$(PARSING_SRC)) \
-	$(addprefix $(AST_DIR),$(AST_SRC)) \
-	$(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC)) \
-	$(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC)) \
-	$(addprefix $(ENV_DIR),$(ENV_SRC)) \
+	$(addprefix $(DEBUG_DIR),$(DEBUG_SRC)) ##REMOVE DEBUG
 
-## PARSING DIRECTORY ##
+# ********** PARSING ********** #
+
+SRC += $(addprefix $(PARSING_DIR),$(PARSING_SRC))
 
 PARSING_DIR = parsing/
 PARSING_SRC = \
-	$(addprefix $(LEXER_DIR),$(LEXER_SRC)) \
 	escape_utils \
 	syntax_checker \
 	commandline_parser \
 
+# ***** LEXER ***** #
 
-LEXER_DIR = lexer/
+SRC += $(addprefix $(LEXER_DIR),$(LEXER_SRC))
+
+LEXER_DIR = $(PARSING_DIR)/lexer/
 LEXER_SRC = \
 		cmdline_addspace \
 		cmdline_tokenizer \
@@ -49,17 +56,37 @@ LEXER_SRC = \
 		lexer_rediction_tok \
 		lexer_set_args \
 
-## AST DIRECTORY ##
+# ********** EXPANDER ********** #
+
+SRC += $(addprefix $(EXPANDER_DIR),$(EXPANDER_SRC))
+
+EXPANDER_DIR = $(PARSING_DIR)/expander/
+EXPANDER_SRC = \
+	00_expander_launch \
+	01_tilde_expansion \
+	02_envars_expansion \
+	expander_mask_utils \
+	03_word_splitting \
+	args_vectors_to_strings \
+	05_quote_removal \
+	word_splitting_utils \
+
+# ********** AST ********** #
+
+SRC += $(addprefix $(AST_DIR),$(AST_SRC))
 
 AST_DIR = ast/
 AST_SRC = \
-	$(addprefix $(BUILDER_DIR),$(BUILDER_SRC)) \
 	ast_utils \
 	ast_print \
 	ast_addnode \
 	ast_addnode_utils \
 
-BUILDER_DIR = builder/
+# ***** BUILDER ***** #
+
+SRC += $(addprefix $(BUILDER_DIR),$(BUILDER_SRC))
+
+BUILDER_DIR = $(AST_DIR)/builder/
 BUILDER_SRC = \
 		ast_build \
 		ast_build_command \
@@ -68,7 +95,9 @@ BUILDER_SRC = \
 		ast_build_brackets \
 		ast_build_error \
 
-## EXEC DIRECTORY ##
+# ********** EXECUTION ********** #
+
+SRC += $(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC))
 
 EXECUTION_DIR = exec/
 EXECUTION_SRC = \
@@ -79,20 +108,9 @@ EXECUTION_SRC = \
 	exec_utils \
 	node_exec \
 
-BRANCH_DIR = branch/
-BRANCH_SRC = \
-		branch_command \
-		branch_logicaloperator \
-		branch_pipe \
-		branch_redirection \
+# ********** BUILTINS ********** #
 
-OPEN_DIR = open/
-OPEN_SRC = \
-		open_input \
-		open_output \
-		open_append \
-
-## EXEC ##	
+SRC += $(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC))
 
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
@@ -101,20 +119,20 @@ BUILTIN_SRC = \
 	false \
 	true \
 
-## ENV ##
+# **************** ENVIRONMENT **************** #
+
+SRC += $(addprefix $(ENV_DIR),$(ENV_SRC))
 
 ENV_DIR = env/
 ENV_SRC = \
 	free_var \
 	ft_getenv \
 	init_env \
+	var_update \
 
-SRCS = $(addsuffix .c, $(SRC))
-
-OBJS = $(patsubst %.c,$(BUILD_DIR)%.o,$(SRCS))
-
-DEPS = $(patsubst %.o,%.d,$(OBJS))
--include $(DEPS)
+DEBUG_DIR = debug/
+DEBUG_SRC = \
+	debug_print_str_mask \
 
 # *** LIBRARIES && INCLUDES  ************************************************* #
 
@@ -132,7 +150,8 @@ INCS = \
 
 # *** CONFIG ***************************************************************** #
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror $(OFLAGS)
+OFLAGS 		=
 
 CPPFLAGS 	= 	$(addprefix -I, $(INCS)) \
 				$(addprefix -D, $(DEFINES)) \
@@ -181,6 +200,7 @@ endif
 all : $(NAME) 
 
 $(NAME) : $(LIBS_PATH) $(OBJS) | ERROR_CHECK
+	@printf "\n🔗 Linking $(NAME)...\n"
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "$(MODE)" > $(MODE_TRACE)
 ifneq ($(MODE),)
@@ -189,16 +209,24 @@ else
 	@echo "$(GREEN) $(NAME) has been built! $(RESET)"
 endif
 
-
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | ERROR_CHECK
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	@printf "🔧 $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@\n"
 
 $(LIBS_PATH): FORCE | ERROR_CHECK
 	@$(MAKE) -C $(@D)
 
 .PHONY : bonus
 bonus : $(NAME)
+
+.PHONY : debug
+debug :
+	$(MAKE) MODE=debug
+
+.PHONY : fsanitize
+fsanitize :
+	$(MAKE) MODE=fsanitize
 
 .PHONY : clean
 clean :
@@ -215,14 +243,6 @@ fclean :
 .PHONY : re
 re : fclean
 	$(MAKE)
-
-.PHONY : debug
-debug :
-	$(MAKE) MODE=debug
-
-.PHONY : fsanitize
-fsanitize :
-	$(MAKE) MODE=fsanitize
 
 .PHONY : norminette
 norminette :
@@ -243,7 +263,12 @@ print% :
 run :	$(NAME)
 	./$(NAME)
 
-VALGRIND = valgrind -q --suppressions=.valgrindignore.txt --leak-check=full --trace-children=yes --track-fds=yes
+VALGRIND = \
+	valgrind \
+	--suppressions=.valgrindignore.txt \
+	--leak-check=full \
+	--trace-children=yes \
+	--track-fds=yes \
 
 .PHONY : valgrind
 valgrind : debug
@@ -262,13 +287,14 @@ AVAILABLE_TESTS = \
 	dprintf \
 	vector_test \
 	vector_alloc \
-	vectorcpy \
+	vector_ian \
+	tilde_expansion \
 
 .PHONY : $(AVAILABLE_TESTS)
 $(AVAILABLE_TESTS) :
 	$(RM) minishell_test
 	@$(MAKE) TEST=$@ MODE=debug
-#	@$(VALGRIND) ./$(NAME)_test
+	@$(VALGRIND) ./$(NAME)_test
 #  ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #

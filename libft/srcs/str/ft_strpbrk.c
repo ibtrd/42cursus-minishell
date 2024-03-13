@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interpreter.h                                      :+:      :+:    :+:   */
+/*   ft_strpbrk.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 22:03:23 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 03:28:47 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/08 20:06:33 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/09 16:59:56 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERPRETER_H
-# define INTERPRETER_H
+#include <stddef.h>
 
-#include <stdbool.h>
-
-enum e_quote
+char	*ft_strpbrk(const char *str1, const char *str2)
 {
-	_NONE,
-	_SINGLE,
-	_DOUBLE
-};
+	const char	*ptr;
+	char		c1;
+	char		c2;
 
-typedef struct s_escape
-{
-	enum e_quote	mode;
-	bool			single_quote;
-	bool			double_quote;
-}	t_escape;
-
-void	set_escape_mode(t_escape *escape, char c);
-void	init_escape(t_escape *escape);
-
-void	debug_print_mask(char *arg, char *mask); //REMOVE
-
-#endif
+	c1 = *str1++;
+	while (c1)
+	{
+		ptr = str2;
+		c2 = *ptr++;
+		while (c2)
+		{
+			if (c1 == c2)
+				return ((char *)str1 - 1);
+			c2 = *ptr++;
+		}
+		c1 = *str1++;
+	}
+	return (NULL);
+}

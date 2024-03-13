@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_init_env.c                                    :+:      :+:    :+:   */
+/*   ft_vprint_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 15:41:08 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/11 00:28:21 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/13 04:52:29 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/13 06:26:23 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "builtins.h"
-#include "libft.h"
-
 #include <stdio.h>
 
-int	main(int ac, char **av, char **env)
+#include "ft_char.h"
+
+void	ft_vprint_char(void *ptr, size_t index)
 {
-	t_vector	envv;
-	// size_t		i;
+	const char	cmp[] = {'\0', '\n', '\t', ' '};
+	const char	*res[] = {"\\0", "\\n", "\\t", " ", NULL};
+	size_t		i;
 
-	(void)ac;
-	(void)av;
-	(void)env;
-	(void)envv;
-
-	// printf("env: %p\n", env);
-	envv = (t_vector){0};
-	init_env(&envv, env);
-	builtin_env(&envv);
-	printf("\n");
-	printf("ft_getenv(envv, \"PATH\") = %s\n", ft_getenv(&envv, "PATH"));
-	ft_vector_free(&envv);
-	return (0);
+	(void)index;
+	if (!ptr)
+		return ;
+	i = 0;
+	while (res[i])
+	{
+		if (*(char *)ptr == cmp[i])
+		{
+			printf("%s%s%s", "\e[36;40m", (char *)res[i], "\e[0m");
+			return ;
+		}
+		i++;
+	}
+	printf("%c", *(char *)ptr);
 }
+

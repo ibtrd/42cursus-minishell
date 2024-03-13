@@ -12,13 +12,16 @@
 
 #include "libft.h"
 
+#include "minishelldef.h"
 #include "ast.h"
+
+#include "unistd.h" //REMOVE
 
 int	build_redirection(t_vector **file_v, t_lexer_token *tok, t_astnode **root)
 {
 	t_astnode	*new;
 
-	if (ft_vector_alloc(file_v, (t_vinfos){sizeof(char *), 0, ft_vfree}, 1))
+	if (ft_vector_alloc(file_v, (t_vinfos){sizeof(t_vector), 1, &del_args}, 1))
 		return (FAILURE);
 	if (ast_newnode(&new, tok->type, *file_v))
 	{
@@ -29,12 +32,17 @@ int	build_redirection(t_vector **file_v, t_lexer_token *tok, t_astnode **root)
 	return (SUCCESS);
 }
 
-int	add_file(t_vector *file_v, char *str)
+int	add_argument(t_vector *vector, char *str)
 {
-	char	*dup;
+	const size_t	len = ft_strlen(str) + 1;
+	t_vector		dup;
 
-	dup = ft_strdup(str);
-	if (!dup)
+	if (ft_vector_init(&dup, (t_vinfos){sizeof(char), len, NULL}))
 		return (FAILURE);
-	return (ft_vector_add_ptr(file_v, dup));
+	if (ft_vector_join(&dup, str, len) || ft_vector_add(vector, &dup))
+	{
+		ft_vector_free(&dup);
+		return (FAILURE);
+	}
+	return (SUCCESS);
 }
