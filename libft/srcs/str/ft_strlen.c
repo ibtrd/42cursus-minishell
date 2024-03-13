@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:11:15 by ibertran          #+#    #+#             */
-/*   Updated: 2023/11/28 13:37:37 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/12 17:35:13 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ size_t	ft_strnlen(const char *str, size_t n)
 	if (n == 0)
 		return (0);
 	while (i < n && str[i])
+		i++;
+	return (i);
+}
+
+size_t	ft_strlen_charset(const char *str, const char *charset)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] && !ft_strchr(charset, str[i]))
 		i++;
 	return (i);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    libft_srcs.mk                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 06:36:15 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 16:49:59 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ STR_SRC = \
 	strlen \
 	strmapi \
 	strncmp \
+	strndup \
 	strnstr \
 	strpbrk \
 	strrchr \

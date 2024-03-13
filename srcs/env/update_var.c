@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_var.c                                         :+:      :+:    :+:   */
+/*   update_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 19:27:27 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 16:50:42 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/09 19:00:47 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/12 17:51:10 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+#include "libft.h"
+
 #include <stdlib.h>
 
-#include <stdio.h>
-
-void	free_var(void **var)
+int	update_var(char **env_var, char *var)
 {
-	t_env_var	*env_var;
-
-	env_var = (t_env_var *)var;
-	free(env_var->name);
-	env_var->name = NULL;
-	free(env_var->value);
-	env_var->value = NULL;
+	free(*env_var);
+	*env_var = ft_strdup(var);
+	return (!*env_var);
 }
