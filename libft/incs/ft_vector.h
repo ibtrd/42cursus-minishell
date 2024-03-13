@@ -68,6 +68,7 @@ int		ft_vector_printi(t_vector *v, void (*print)(void *, size_t), char *msg);
 void	ft_vclose(void **var);
 void	ft_vfree(void **var);
 void	ft_vprint_char(void *ptr, size_t index);
+void	ft_vprint_vchar(void *ptr, size_t index);
 void	ft_vprint_int(void *ptr, size_t index);
 
 #endif
