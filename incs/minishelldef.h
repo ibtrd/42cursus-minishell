@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 16:49:50 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 19:54:39 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@
 # define __SYNTAX_ERROR "syntax error near unexpected token"
 # define __UNSUPPORTED_ERROR "unsupported operator"
 # define __AST_ERROR "AST building failed"
+# define __CMD_NOT_FOUND "command not found"
 
 #endif //MINISHELLDEF_H

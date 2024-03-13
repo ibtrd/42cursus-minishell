@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 14:45:42 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 21:20:47 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av, char **env)
 		add_history(input);
 		root = commandline_parser(input, &envv);
 		printf("\n\n-------------------\n\n");
-		// executor(root, env);
+		executor(root, &envv);
 		free_ast(root);
 	}
 	ft_vector_free(&envv);

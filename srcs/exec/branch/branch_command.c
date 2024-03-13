@@ -6,21 +6,24 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 18:10:11 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 21:07:10 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "executor.h"
 #include "minishelldef.h"
+#include "env.h"
+
 #include <sys/wait.h>
 #include <errno.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
-#include <stdio.h>
+# include <stdio.h>
 
-static int	get_cmd_path(char *cmd, char **cmd_path)
+static int	get_cmd_path(char *cmd, char **cmd_path, t_vector *env)
 {
 	char	*path;
 
@@ -28,10 +31,10 @@ static int	get_cmd_path(char *cmd, char **cmd_path)
 	{
 		if (access(cmd, F_OK) == 0)
 			return (0);
-		// command not found
+		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __CMD_NOT_FOUND);
 		return (127);
 	}
-	path = getenv("PATH");
+	path = ft_getenv(env, "PATH");
 	*cmd_path = ft_strtok(path, ":");
 	while (*cmd_path)
 	{
@@ -43,7 +46,7 @@ static int	get_cmd_path(char *cmd, char **cmd_path)
 		free(*cmd_path);
 		*cmd_path = ft_strtok(NULL, ":");
 	}
-	// command not found
+	ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __CMD_NOT_FOUND);
 	return (127);
 }
 
@@ -66,10 +69,9 @@ static int	execute_command(t_executor *exec)
 		return (1);
 	path = NULL;
 	cmd = (char **)ft_vector_get(exec->node->args, 0);
-	ret = get_cmd_path(cmd[0], &path);
+	ret = get_cmd_path(cmd[0], &path, exec->env);
 	if (ret)
 		return (ret);
-	// dprintf(2, "execve command\n");	// DEBUG
 	execve(path, cmd, exec->env->ptr);
 	dprintf(2, "apres commande\n");	// DEBUG
 	free(path);
@@ -91,9 +93,8 @@ static int	command_fork(t_executor *exec)
 		close(0);
 		close(1);
 		free_ast(exec->root);
-		// dprintf(2, "end of command_fork (fail)\n");	// DEBUG
+		ft_vector_free(exec->env);
 		exit(ret);
-		// exit(execute_command(exec));
 	}
 	pid = waitpid(pid, &status, 0);
 	if (pid == -1 && errno != ECHILD)
@@ -105,6 +106,5 @@ static int	command_fork(t_executor *exec)
 
 int	branch_command(t_executor *exec)
 {
-	// dprintf(2, "command\n");	// DEBUG
 	return (command_fork(exec));
 }

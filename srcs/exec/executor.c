@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 18:01:20 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 21:20:41 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,11 +132,15 @@ int	executor(t_astnode *root, t_vector *env)
 	if (exec_init(&exec, root, env))
 	{
 		// dprintf(2, "exec_init failed\n");	// DEBUG
-		exec_cleanup(&exec);
+		// exec_cleanup(&exec);
+		ft_vector_free(&exec.infd);
+		ft_vector_free(&exec.outfd);
 		return (1);
 	}
 	ret = node_exec(&exec);
-	exec_cleanup(&exec);
+	ft_vector_free(&exec.infd);
+	ft_vector_free(&exec.outfd);
+	// exec_cleanup(&exec);
 	return (ret);
 }
 
