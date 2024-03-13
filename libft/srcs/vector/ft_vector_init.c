@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:50:49 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/10 16:07:17 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 02:55:42 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	ft_vector_init(t_vector *v, t_vinfos infos)
 	v->del = infos.del;
 	v->ptr = malloc(v->size * v->capacity);
 	if (!v->ptr)
+	{
+		ft_memset(v, '\0', sizeof(t_vector));
 		return (FAILURE);
+	}
 	ft_memset(v->ptr, 0, v->size); //REMOVE ?
 	return (SUCCESS);
 }

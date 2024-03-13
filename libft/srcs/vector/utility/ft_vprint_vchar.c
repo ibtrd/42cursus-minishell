@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_free.c                                   :+:      :+:    :+:   */
+/*   ft_vprint_vchar.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 02:58:33 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/13 06:26:12 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/13 06:26:26 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "ft_vector.h"
-#include "ft_mem.h"
 
-int	ft_vector_free(t_vector *v)
+void	ft_vprint_vchar(void *ptr, size_t index)
 {
-	size_t	i;
-
-	if (!v)
-		return (FAILURE);
-	if (v->del)
-	{
-		i = 0;
-		while (i < v->total)
-			v->del((void **)ft_vector_get(v, i++));
-	}
-	free(v->ptr);
-	ft_memset(v, '\0', sizeof(t_vector));
-	return (SUCCESS);
+	(void)index;
+	ft_vector_print((t_vector *)ptr, ft_vprint_char, NULL);
 }

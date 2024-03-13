@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_copy.c                                   :+:      :+:    :+:   */
+/*   ft_vprint_int.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 11:23:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 12:53:48 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/13 04:57:43 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/13 05:19:32 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
-#include "ft_mem.h"
+#include "stdio.h"
 
-int	ft_vector_copy(t_vector *v, size_t index, void *ptr)
+#include "libft.h"
+
+void	ft_vprint_int(void *ptr, size_t index)
 {
-	if (!v || index >= v->total || !ptr)
-		return (FAILURE);
-	ft_memcpy(ptr, v->ptr + (index * v->size), v->size);
-	return (SUCCESS);
+	(void)index;
+	if (!ptr)
+		return ;
+	printf("%d ", *(int *)ptr);
 }

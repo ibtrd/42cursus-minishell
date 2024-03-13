@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/02/18 22:17:10 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 04:57:10 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ INCS_DIR = incs/
 # *** CONFIG ***************************************************************** #
 
 CFLAGS		=	-Wall -Wextra -Werror $(OFLAGS)
-OFLAGS 		=	-O3
+OFLAGS 		=	
 
 CPPFLAGS	= 	$(addprefix -I, $(INCS_DIR)) \
 				-MMD -MP \
