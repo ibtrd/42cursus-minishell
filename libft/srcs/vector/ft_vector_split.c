@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 01:39:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 02:25:29 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 02:54:32 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	ft_vector_split(t_vector *v, size_t index, size_t n, t_vector *ptr)
 {
 	t_vector	split;
 
-	if (!v || index >= v->total || index + n > v->total || !ptr)
+	if (!ptr)
+		return (FAILURE);
+	ft_memset(ptr, '\0', sizeof(t_vector));
+	if (!v || index >= v->total || index + n > v->total)
 		return (FAILURE);
 	if (!n)
 		return (SUCCESS);

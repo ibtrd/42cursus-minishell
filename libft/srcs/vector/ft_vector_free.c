@@ -6,12 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 02:18:28 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 02:58:33 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
 #include <stdlib.h>
+
+#include "ft_vector.h"
+#include "ft_mem.h"
 
 int	ft_vector_free(t_vector *v)
 {
@@ -26,9 +28,6 @@ int	ft_vector_free(t_vector *v)
 			v->del((void **)ft_vector_get(v, i++));
 	}
 	free(v->ptr);
-	v->ptr = NULL;
-	v->capacity = 0;
-	v->total = 0;
-	v->del = NULL;
+	ft_memset(v, '\0', sizeof(t_vector));
 	return (SUCCESS);
 }
