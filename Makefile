@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 06:43:24 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 06:53:35 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,15 @@ BUILD_DIR := .build/$(shell git branch --show-current)/
 SRCS_DIR = srcs/
 SRCS = $(addsuffix .c, $(SRC))
 
+OBJS = $(patsubst %.c,$(BUILD_DIR)%.o,$(SRCS))
+
+DEPS = $(patsubst %.o,%.d,$(OBJS))
+-include $(DEPS)
+
 SRC = \
 	main \
 
-## PARSING ##
+# ********** PARSING ********** #
 
 SRC += $(addprefix $(PARSING_DIR),$(PARSING_SRC))
 
@@ -31,6 +36,8 @@ PARSING_SRC = \
 	escape_utils \
 	syntax_checker \
 	commandline_parser \
+
+# ***** LEXER ***** #
 
 SRC += $(addprefix $(LEXER_DIR),$(LEXER_SRC))
 
@@ -48,7 +55,7 @@ LEXER_SRC = \
 		lexer_rediction_tok \
 		lexer_set_args \
 
-## AST ##
+# ********** AST ********** #
 
 SRC += $(addprefix $(AST_DIR),$(AST_SRC))
 
@@ -58,6 +65,8 @@ AST_SRC = \
 	ast_print \
 	ast_addnode \
 	ast_addnode_utils \
+
+# ***** BUILDER ***** #
 
 SRC += $(addprefix $(BUILDER_DIR),$(BUILDER_SRC))
 
@@ -70,7 +79,7 @@ BUILDER_SRC = \
 		ast_build_brackets \
 		ast_build_error \
 
-## EXEC ##
+# ********** EXECUTION ********** #
 
 SRC += $(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC))
 
@@ -86,6 +95,8 @@ EXECUTION_SRC = \
 	executor \
 	node_exec \
 
+# ********** BUILTINS ********** #
+
 SRC += $(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC))
 
 BUILTIN_DIR = builtins/
@@ -94,7 +105,7 @@ BUILTIN_SRC = \
 	false \
 	true \
 
-## ENV ##
+# **************** ENVIRONMENT **************** #
 
 SRC += $(addprefix $(ENV_DIR),$(ENV_SRC))
 
@@ -103,11 +114,6 @@ ENV_SRC = \
 	free_var \
 	ft_getenv \
 	init_env \
-
-OBJS = $(patsubst %.c,$(BUILD_DIR)%.o,$(SRCS))
-
-DEPS = $(patsubst %.o,%.d,$(OBJS))
--include $(DEPS)
 
 # *** LIBRARIES && INCLUDES  ************************************************* #
 
@@ -184,7 +190,6 @@ else
 	@echo "$(GREEN) $(NAME) has been built! $(RESET)"
 endif
 
-
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | ERROR_CHECK
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
@@ -195,6 +200,14 @@ $(LIBS_PATH): FORCE | ERROR_CHECK
 
 .PHONY : bonus
 bonus : $(NAME)
+
+.PHONY : debug
+debug :
+	$(MAKE) MODE=debug
+
+.PHONY : fsanitize
+fsanitize :
+	$(MAKE) MODE=fsanitize
 
 .PHONY : clean
 clean :
@@ -211,14 +224,6 @@ fclean :
 .PHONY : re
 re : fclean
 	$(MAKE)
-
-.PHONY : debug
-debug :
-	$(MAKE) MODE=debug
-
-.PHONY : fsanitize
-fsanitize :
-	$(MAKE) MODE=fsanitize
 
 .PHONY : norminette
 norminette :
