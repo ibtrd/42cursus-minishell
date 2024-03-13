@@ -55,8 +55,13 @@ int		ft_vector_resize(t_vector *v, size_t capacity);
 int		ft_vector_set_ptr(t_vector *v, size_t index, void *item);
 int		ft_vector_set(t_vector *v, size_t index, void *item);
 int		ft_vector_setn(t_vector *v, size_t index, const void *item, size_t n);
+int		ft_vector_split(t_vector *v, size_t index, size_t n, t_vector *ptr);
 int		ft_vector_strncat(t_vector *v, char *str, size_t len);
 int		ft_vector_trim(t_vector *v);
+int		ft_vector_unlink(t_vector *v, size_t index, size_t n);
 void	*ft_vector_get(t_vector *v, size_t index);
+
+void	ft_vfree(void **var);
+void	ft_vclose(void **var);
 
 #endif

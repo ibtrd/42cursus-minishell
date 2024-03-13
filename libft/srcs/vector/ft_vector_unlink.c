@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_setn.c                                   :+:      :+:    :+:   */
+/*   ft_vector_unlinkn.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/11 05:07:51 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 03:04:44 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/12 10:45:00 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/13 02:23:53 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vector.h"
 #include "ft_mem.h"
 
-int	ft_vector_setn(t_vector *v, size_t index, const void *item, size_t n)
+int	ft_vector_unlink(t_vector *v, size_t index, size_t n)
 {
-	size_t	i;
-
-	if (!v || index + n > v->total)
+	if (!v || index >= v->total || index + n > v->total)
 		return (FAILURE);
-	i = 0;
-	while (i < n)
-	{
-		ft_memcpy(v->ptr + (index + i) * v->size, item, v->size);
-		i++;
-	}
+	if (!n)
+		return (SUCCESS);
+	ft_memcpy(v->ptr + index * v->size, v->ptr + (index + n) * v->size,
+		(v->total - n - index) * v->size);
+	v->total -= n;
+	while (v->capacity > 1 && v->total <= (v->capacity >> 2))
+		if (ft_vector_resize(v, v->capacity >> 1))
+			return (FAILURE);
 	return (SUCCESS);
 }
