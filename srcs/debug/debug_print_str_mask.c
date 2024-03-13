@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 04:16:47 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 05:35:56 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 07:29:58 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,21 @@ void debug_print_str_mask(t_vector *args, t_vector *masks, size_t *index, char *
 		i++;
 	}
 	printf("|\n\n");
+}
+
+void	debug_print_vector_mask(void *ptr, size_t index)
+{
+	const char	c = *(char *)ptr;
+
+	if (c & __ENVAR_MASK && c & __DQUOTE_MASK)
+		printf("&");
+	else if (c & __ENVAR_MASK)
+		printf("$");
+	else if (c & __SQUOTE_MASK)
+		printf("\'");
+	else if (c & __DQUOTE_MASK)
+		printf("\"");
+	else
+		printf(".");
+	(void)index;
 }
