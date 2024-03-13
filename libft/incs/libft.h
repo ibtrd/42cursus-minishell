@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:36:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/11 00:22:11 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 21:28:45 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ int		get_next_line(int fd, char **line);
 
 int		ft_dprintf(int fd, const char *str, ...) \
 				__attribute__ ((format (printf, 2, 3)));
+char	*ft_sprintf(const char *str, ...) \
+				__attribute__ ((format (printf, 1, 2)));
 
 #endif

@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 16:49:16 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/13 21:28:27 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -316,6 +316,7 @@ AVAILABLE_TESTS = \
 	lexer \
 	lexerfull \
 	dprintf \
+	sprintf \
 	vector_test \
 	vector_alloc \
 	vector_ian \
