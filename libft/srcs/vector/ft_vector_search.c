@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_get.c                                    :+:      :+:    :+:   */
+/*   ft_vector_search.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 13:25:48 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 03:44:52 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/13 03:38:16 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/13 04:12:41 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vector.h"
+#include "ft_mem.h"
 
-void	*ft_vector_get(t_vector *v, size_t index)
+void	*ft_vector_search(t_vector *v, const void *item)
 {
 	void	*ptr;
+	size_t	index;
 
-	if (!v || index >= v->total)
+	if (!v)
 		return (NULL);
-	ptr = v->ptr + index * v->size;
-	return (ptr);
+	index = 0;
+	while (index < v->total)
+	{
+		ptr = v->ptr + index * v->size;
+		if (!ft_memcmp(ptr, item, v->size))
+			return (ptr);
+		index++;
+	}
+	return (NULL);
 }

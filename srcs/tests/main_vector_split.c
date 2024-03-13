@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 01:48:20 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 02:57:14 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 04:11:15 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,12 @@ int main(void)
 	int			i;
 	int			elem;
 
-	void		*ptr;
-
 	srand(time(NULL));
 	ft_vector_init(&v, (t_vinfos){sizeof(int), 0, NULL});
 	i = 0;
 	while (i++ < 10)
 	{
-		elem = rand() % 100;
+		elem = rand() % 20;
 		ft_vector_add(&v, &elem);
 	}
 	print_vector(&v, "INIT");
@@ -53,8 +51,14 @@ int main(void)
 		print_vector(&v, "SPLIT1");
 		print_vector(&v2, "SPLIT2");
 	}
+
+	i = 0;
+	while (i < 20)
+	{
+		printf("SEARCHING %d in v1: %p\n", i, ft_vector_search(&v, &i));
+		printf("SEARCHING %d in v2: %p\n", i, ft_vector_search(&v2, &i));
+		i++;
+	}
 	ft_vector_free(&v);
 	ft_vector_free(&v2);
-	(void)v2;
-	(void)ptr;
 }

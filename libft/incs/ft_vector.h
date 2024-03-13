@@ -60,7 +60,9 @@ int		ft_vector_strncat(t_vector *v, char *str, size_t len);
 int		ft_vector_trim(t_vector *v);
 int		ft_vector_unlink(t_vector *v, size_t index, size_t n);
 void	*ft_vector_get(t_vector *v, size_t index);
+void	*ft_vector_search(t_vector *v, const void *item);
 
+// UTILITY
 void	ft_vfree(void **var);
 void	ft_vclose(void **var);
 
