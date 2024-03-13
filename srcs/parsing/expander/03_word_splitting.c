@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 05:10:14 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 05:28:01 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 07:02:54 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	split_vector(t_vector *dest, t_vector *src, size_t start, size_t end)
 		ft_vector_free(&new);
 		return (FAILURE);
 	}
-	ft_vector_print(&new, ft_vprint_char);
+	ft_vector_print(&new, ft_vprint_char, NULL);
 	return (SUCCESS);
 }
 
