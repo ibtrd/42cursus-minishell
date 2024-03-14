@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:18:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 20:15:50 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 18:48:12 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strjoin2(char const *s1, char const *s2, char const *s3);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char	*ft_strndup(const char *s, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strpbrk(const char *str1, const char *str2);
 char	*ft_strrchr(const char *s, int c);
@@ -37,6 +38,7 @@ int		ft_strcmp(const char *str1, const char *str2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t	ft_strlen_charset(const char *str, const char *charset);
 size_t	ft_strlen_protected(const char *str);
 size_t	ft_strlen(const char *str);
 size_t	ft_strnlen(const char *str, size_t n);

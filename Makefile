@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 11:49:38 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/14 18:50:02 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,8 +119,10 @@ SRC += $(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC))
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
 	env \
+	export \
 	false \
 	true \
+	unset \
 
 # **************** ENVIRONMENT **************** #
 
@@ -128,10 +130,15 @@ SRC += $(addprefix $(ENV_DIR),$(ENV_SRC))
 
 ENV_DIR = env/
 ENV_SRC = \
+	add_var \
+	copy_var \
+	del_var \
 	free_var \
 	ft_getenv \
 	init_env \
-	var_update \
+	search_var \
+	update_var \
+	var_processing \
 
 DEBUG_DIR = debug/
 DEBUG_SRC = \
@@ -281,6 +288,7 @@ valgrind : debug
 
 AVAILABLE_TESTS = \
 	cmdline_addspace \
+	env \
 	executor \
 	init_env \
 	syntax_checker \

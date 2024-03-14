@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 11:45:57 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/14 18:48:22 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ STR_SRC = \
 	strlen \
 	strmapi \
 	strncmp \
+	strndup \
 	strnstr \
 	strpbrk \
 	strrchr \

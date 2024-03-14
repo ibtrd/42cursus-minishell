@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   search_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 19:30:06 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 17:43:55 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/09 17:10:26 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/12 17:53:05 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishelldef.h"
 #include "env.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	builtin_env(t_vector *env)
+#include <stdlib.h>
+
+char	**search_var(t_vector *envv, char *name)
 {
 	size_t		i;
+	size_t		name_len;
+	size_t		entry_len;
+
+	name_len = ft_strlen_charset(name, "=");
 	i = 0;
-	while (i < env->total)
+	while (i < envv->total)
 	{
-		printf("%s\n", *(char **)ft_vector_get(env, i));
+		entry_len = ft_strlen_charset(*(char **)ft_vector_get(envv, i), "=");
+		if (entry_len == name_len
+			&& !ft_strncmp(*(char **)ft_vector_get(envv, i), name, entry_len))
+			return ((char **)ft_vector_get(envv, i));
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
