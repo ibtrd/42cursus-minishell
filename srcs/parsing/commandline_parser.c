@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commandline_parser.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 22:49:31 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 18:57:05 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 19:12:18 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_astnode	*commandline_parser(char *input, t_vector *env)
 	if (expander_launch(root, env))
 		return (NULL); //ADD FREE FUNCTION
 	dprint_ast(2, root, NULL); //REMOVE
-
+	ft_vector_printi(root->args, ft_vprint_char, "MONCUL"); //REMOVE
 	free(input);
 	return (root);
 }

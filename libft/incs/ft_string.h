@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_string.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:18:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 18:48:12 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 19:11:37 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 char	**ft_split(char const *s, char c);
+int		ft_str_in_array(const char *str, const char **array);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strcpy(char *dst, const char *src);
 char	*ft_strdup(const char *s);

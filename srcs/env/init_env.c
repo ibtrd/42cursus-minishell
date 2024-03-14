@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:22:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 18:48:55 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 19:12:12 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static int	copy_env(t_vector *envv, char **env)
 			return (FAILURE);
 		i++;
 	}
+	if (ft_vector_add_ptr(envv, NULL))
+		return (FAILURE);
 	return (SUCCESS);
 }
 

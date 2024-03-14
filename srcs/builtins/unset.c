@@ -6,17 +6,18 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:20:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 18:29:38 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 16:33:00 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishelldef.h"
 #include "env.h"
 #include "libft.h"
+#include "executor.h"
 
 #include <unistd.h>
 
-int	builtin_unset(t_vector *envv, char **argv)
+int	builtin_unset(t_executor *exec, char **argv)
 {
 	size_t		i;
 
@@ -25,7 +26,7 @@ int	builtin_unset(t_vector *envv, char **argv)
 	i = -1;
 	while (argv[++i])
 	{
-		if (del_var(envv, argv[i]))
+		if (del_var(exec->env, argv[i]))
 			return (FAILURE);
 	}
 	return (SUCCESS);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dprintf.c                                       :+:      :+:    :+:   */
+/*   ft_pf_build_buffer.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 03:38:44 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 15:27:44 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/12 15:24:25 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/12 15:49:15 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,25 @@
 
 #include "ft_printf.h"
 
-int	ft_dprintf(int fd, const char *str, ...)
+int	pf_build_buffer(const char *str, t_vector *buffer, va_list *args)
 {
-	va_list		args;
-	t_vector	buffer;
+	int		status;
+	char	c;
 
-	if (!str || ft_vector_init(&buffer, (t_vinfos){sizeof(char), 0, NULL}))
-		return (FAILURE);
-	va_start(args, str);
-	if (pf_build_buffer(str, &buffer, &args))
+	status = SUCCESS;
+	c = *str++;
+	while (c && !status)
 	{
-		va_end(args);
-		ft_vector_free(&buffer);
-		return (FAILURE);
+		if (c != '%')
+			status = ft_vector_add(buffer, &c);
+		else
+		{
+			status = add_conversion(*str, buffer, args);
+			str++;
+		}
+		c = *str++;
 	}
-	va_end(args);
-	return (print_buffer(fd, &buffer));
+	if (!status)
+		status = ft_vector_add(buffer, "\0");
+	return (status);
 }

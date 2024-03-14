@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dprintf.c                                       :+:      :+:    :+:   */
+/*   ft_pf_print_buffer.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 03:38:44 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 15:27:44 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/12 15:26:21 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/12 15:30:54 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <sys/types.h>
 
-#include "ft_printf.h"
+#include "ft_vector.h"
 
-int	ft_dprintf(int fd, const char *str, ...)
+int	print_buffer(int fd, t_vector *buffer)
 {
-	va_list		args;
-	t_vector	buffer;
+	ssize_t	status;
 
-	if (!str || ft_vector_init(&buffer, (t_vinfos){sizeof(char), 0, NULL}))
-		return (FAILURE);
-	va_start(args, str);
-	if (pf_build_buffer(str, &buffer, &args))
-	{
-		va_end(args);
-		ft_vector_free(&buffer);
-		return (FAILURE);
-	}
-	va_end(args);
-	return (print_buffer(fd, &buffer));
+	status = write(fd, buffer->ptr, buffer->total);
+	ft_vector_free(buffer);
+	return (status);
 }

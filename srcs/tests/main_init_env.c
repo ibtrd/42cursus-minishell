@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_init_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:41:08 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 18:49:03 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 19:12:32 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

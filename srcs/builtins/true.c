@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   true.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 21:37:30 by ibertran          #+#    #+#             */
-/*   Updated: 2024/02/28 21:38:53 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 16:44:49 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	builtin_true(void)
+#include "executor.h"
+
+int	builtin_true(t_executor *exec, char **argv)
 {
+	(void)exec;
+	(void)argv;
 	return (0);
 }

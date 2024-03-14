@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_var.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:27:27 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 18:48:35 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 19:11:44 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

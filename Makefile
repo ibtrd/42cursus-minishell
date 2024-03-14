@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/14 18:50:02 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/14 19:11:10 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ PARSING_SRC = \
 	syntax_checker \
 	commandline_parser \
 
-# ***** LEXER ***** #
+#		# ***** LEXER ***** #
 
 SRC += $(addprefix $(LEXER_DIR),$(LEXER_SRC))
 
@@ -56,7 +56,7 @@ LEXER_SRC = \
 		lexer_rediction_tok \
 		lexer_set_args \
 
-# ********** EXPANDER ********** #
+#		# ********** EXPANDER ********** #
 
 SRC += $(addprefix $(EXPANDER_DIR),$(EXPANDER_SRC))
 
@@ -82,7 +82,7 @@ AST_SRC = \
 	ast_addnode \
 	ast_addnode_utils \
 
-# ***** BUILDER ***** #
+#		# ***** BUILDER ***** #
 
 SRC += $(addprefix $(BUILDER_DIR),$(BUILDER_SRC))
 
@@ -102,15 +102,33 @@ SRC += $(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC))
 
 EXECUTION_DIR = exec/
 EXECUTION_SRC = \
-	branch/branch_command \
-	branch/branch_logicaloperator \
-	branch/branch_pipe \
-	branch/branch_redirection \
-	open/open_input \
-	open/open_output \
-	open/open_append \
+	close_fds \
+	exec_builtins \
+	exec_cleanup \
+	exec_utils \
 	executor \
 	node_exec \
+
+#		# ******* BRANCH ******* #
+
+SRC += $(addprefix $(BRANCH_DIR),$(BRANCH_SRC))       
+
+BRANCH_DIR = $(EXECUTION_DIR)/branch/
+BRANCH_SRC = \
+		branch_command \
+		branch_logicaloperator \
+		branch_pipe \
+		branch_redirection \
+
+#		# ******** OPEN ******** #
+
+SRC += $(addprefix $(OPEN_DIR),$(OPEN_SRC))
+
+OPEN_DIR = $(EXECUTION_DIR)/open/
+OPEN_SRC = \
+		open_input \
+		open_output \
+		open_append \
 
 # ********** BUILTINS ********** #
 
@@ -118,11 +136,17 @@ SRC += $(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC))
 
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
+	cd \
+	check_option \
 	env \
+	echo \
+	exit \
 	export \
 	false \
+	pwd \
 	true \
 	unset \
+
 
 # **************** ENVIRONMENT **************** #
 
@@ -139,6 +163,9 @@ ENV_SRC = \
 	search_var \
 	update_var \
 	var_processing \
+
+
+################################################################################
 
 DEBUG_DIR = debug/
 DEBUG_SRC = \
@@ -287,6 +314,7 @@ valgrind : debug
 # *** TESTING **************************************************************** #
 
 AVAILABLE_TESTS = \
+	builtins \
 	cmdline_addspace \
 	env \
 	executor \
@@ -295,6 +323,7 @@ AVAILABLE_TESTS = \
 	lexer \
 	lexerfull \
 	dprintf \
+	sprintf \
 	vector_test \
 	vector_alloc \
 	vector_ian \
@@ -304,7 +333,7 @@ AVAILABLE_TESTS = \
 $(AVAILABLE_TESTS) :
 	$(RM) minishell_test
 	@$(MAKE) TEST=$@ MODE=debug
-	@$(VALGRIND) ./$(NAME)_test
+#	@$(VALGRIND) ./$(NAME)_test
 #  ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #

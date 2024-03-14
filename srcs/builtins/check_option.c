@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dprintf.c                                       :+:      :+:    :+:   */
+/*   check_option.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 03:38:44 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 15:27:44 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/14 15:30:28 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/14 15:32:44 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-#include "ft_printf.h"
-
-int	ft_dprintf(int fd, const char *str, ...)
+int	chech_option(char *arg, char *options, char *charset)
 {
-	va_list		args;
-	t_vector	buffer;
+	size_t	i;
+	char	tmp_opt;
 
-	if (!str || ft_vector_init(&buffer, (t_vinfos){sizeof(char), 0, NULL}))
-		return (FAILURE);
-	va_start(args, str);
-	if (pf_build_buffer(str, &buffer, &args))
+	tmp_opt = 0;
+	i = 0;
+	while (arg[i])
 	{
-		va_end(args);
-		ft_vector_free(&buffer);
-		return (FAILURE);
+		if (!ft_ischarset(arg[i], charset))
+			return (1);
+		if (arg[i] == 'n')
+			tmp_opt |= 1;
+		i++;
 	}
-	va_end(args);
-	return (print_buffer(fd, &buffer));
+	*options |= tmp_opt;
+	return (0);
 }
