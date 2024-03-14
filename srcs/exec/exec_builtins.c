@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:16:43 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 17:04:52 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 18:00:18 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ int	exec_builtins(t_executor *exec, int index)
 								&builtin_exit};
 	int							ret;
 
-	ret = dup2(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1), STDIN_FILENO);
-	if (ret != -1)
-		ret = dup2(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1), STDOUT_FILENO);
-	if (ret == -1)
-	{
-		ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
-		return (1);
-	}
-	ret = builtins[index](exec, exec->node->args->ptr);
+	// ret = dup2(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1), STDIN_FILENO);
+	// if (ret != -1)
+	// 	ret = dup2(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1), STDOUT_FILENO);
+	// if (ret == -1)
+	// {
+	// 	ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
+	// 	return (1);
+	// }
+	ret = builtins[index](exec, ft_vector_get(exec->node->args, 1));
 	// close(0);
 	// close(1);
 	return (ret);

@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 20:57:04 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 18:11:26 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
 # include <stdio.h>
 
@@ -26,19 +27,25 @@ static int	piping(t_executor *exec, int wait, int pipe[2])
 	int	error;
 
 	close(pipe[wait]);
-	if (!wait)
+    error = dup2(pipe[!wait], !wait);
+	if (error != -1)
 	{
-		// dprintf(2, "wait = 0\tfd = %d\n", pipe[STDOUT_FILENO]);	// DEBUG
-		error = ft_vector_add(&exec->outfd, &pipe[STDOUT_FILENO]);
+		if (!wait)
+		{
+			// dprintf(2, "wait = 0\tfd = %d\n", pipe[STDOUT_FILENO]);	// DEBUG
+			error = ft_vector_add(&exec->outfd, &pipe[STDOUT_FILENO]);
+		}
+		else
+		{
+			// dprintf(2, "wait = 1\tfd = %d\n", pipe[STDIN_FILENO]);	// DEBUG
+			error = ft_vector_add(&exec->infd, &pipe[STDIN_FILENO]);
+		}
 	}
 	else
-	{
-		// dprintf(2, "wait = 1\tfd = %d\n", pipe[STDIN_FILENO]);	// DEBUG
-		error = ft_vector_add(&exec->infd, &pipe[STDIN_FILENO]);
-	}
+        ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
 	// printf_redir(exec);	// DEBUG
 	// usleep(100000);	// DEBUG
-	if (error)
+	if (error == -1)
 	{
 		close(0);
 		close(1);

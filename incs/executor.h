@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 16:38:10 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 17:52:39 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 typedef struct s_executor
 {
 	t_vector	*env;
-	int	in;		// stdin dup(0)
-	int	out;	// stdout dup(1)
 	int	pid;
 	t_astnode	*node;
 	t_astnode	*root;
