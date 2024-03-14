@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 21:28:27 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/14 15:38:43 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,8 +102,9 @@ SRC += $(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC))
 EXECUTION_DIR = exec/
 EXECUTION_SRC = \
 	close_fds \
-	executor \
+	exec_cleanup \
 	exec_utils \
+	executor \
 	node_exec \
 
 #		# ******* BRANCH ******* #
