@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_vectors_to_strings.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 02:25:47 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 19:12:24 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 19:35:04 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	args_vectors_to_stings(t_vector **args)
 	}
 	ft_vector_add_ptr(strings, NULL);
 	ft_vector_dealloc(args, 1);
-	ft_vector_add_ptr(strings, NULL);	// add NULL at the end of the vector
 	*args = strings;
 	return (SUCCESS);
 }
