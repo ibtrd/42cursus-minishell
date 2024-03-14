@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:21:50 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 17:45:44 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 20:08:24 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_getenv(t_vector *env, char *name)
 		return (NULL);
 	name_len = ft_strlen(name);
 	i = 0;
-	while (i < env->total)
+	while (i < env->total - 1)
 	{
 		entry_len = ft_strlen_charset(*(char **)ft_vector_get(env, i), "=");
 		if (entry_len == name_len
