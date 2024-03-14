@@ -6,12 +6,15 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 15:01:14 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 18:48:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELLDEF_H
 # define MINISHELLDEF_H
+
+// # define __PRGM_NAME "minishell"
+// # define __PRGM_NAME_LEN 9 //REMOVE
 
 //STATUS
 # define SUCCESS 0
@@ -20,6 +23,10 @@
 # define __UNCLOSED_SINGLE_QUOTE -1
 # define __UNCLOSED_DOUBLE_QUOTE -2
 # define __UNCLOSED_BRACKET -3
+
+//ENV
+# define __MAX_SHLVL 1000
+# define __DEFAULT_PATH "/usr/bin:/bin:/usr/sbin:/sbin"
 
 //BUILTIN
 # define __ECHO "echo"
@@ -50,6 +57,22 @@
 //PARSING CHARSETS
 # define __DEFAULT_IFS " \t\n"
 # define __METACHARACTER "&|<>();"
+# define __INTERPRETERS "\"\'$*~"
+# define __SINGLE_QUOTE "\'"
+# define __DOUBLE_QUOTE "\""
+
+//EXPANDER
+# define __HOME_ENVAR "$HOME"
+# define __PWD_ENVAR "$PWD"
+# define __OLDPWD_ENVAR "$OLDPWD"
+
+# define __NO_MASK 0x0
+# define __DQUOTE_MASK 0x1
+# define __SQUOTE_MASK 0x2
+# define __ENVAR_MASK 0x4
+
+# define __ENVARS_ESCAPE "\'$"
+# define __WORDSPLIT_ESCAPE "\'$"
 
 //PRINT
 # define __MINISHELL "minishell"

@@ -49,7 +49,7 @@ t_astnode	*ast_build(t_vector *lexer)
 		else if (build_from_token(tok, &root))
 			return (ast_builderror(root));
 		tok = ft_vector_get(lexer, ++index);
-		dprint_ast(2, root, NULL); //REMOVE
+		// dprint_ast(2, root, NULL); //REMOVE
 	}
 	return (root);
 }
@@ -64,7 +64,7 @@ int	build_from_token(t_lexer_token *tok, t_astnode **root)
 	if (tok->type <= _REDIR_APPEND_TOK)
 		return (build_redirection(&file_v, tok, root));
 	if (tok->type == _FILE_TOK)
-		return (add_file(file_v, tok->value));
+		return (add_argument(file_v, tok->value));
 	if (tok->type == _CMD_TOK)
 		return (build_command(&arg_v, tok, root));
 	if (tok->type == _ARG_TOK)

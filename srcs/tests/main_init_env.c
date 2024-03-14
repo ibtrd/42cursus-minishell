@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:41:08 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/10 19:46:42 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 18:49:03 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ int	main(int ac, char **av, char **env)
 	(void)env;
 	(void)envv;
 
+	// printf("env: %p\n", env);
 	envv = (t_vector){0};
 	init_env(&envv, env);
 	builtin_env(&envv);
+	printf("\n");
 	printf("ft_getenv(envv, \"PATH\") = %s\n", ft_getenv(&envv, "PATH"));
 	ft_vector_free(&envv);
 	return (0);

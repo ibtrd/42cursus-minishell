@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:27:27 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/10 19:47:45 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 18:48:35 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ void	free_var(void **var)
 
 	env_var = (t_env_var *)var;
 	free(env_var->name);
+	env_var->name = NULL;
 	free(env_var->value);
+	env_var->value = NULL;
 }

@@ -18,7 +18,7 @@ int	build_redirection(t_vector **file_v, t_lexer_token *tok, t_astnode **root)
 {
 	t_astnode	*new;
 
-	if (ft_vector_alloc(file_v, (t_vinfos){sizeof(char *), 0, ft_vfree}, 1))
+	if (ft_vector_alloc(file_v, (t_vinfos){sizeof(t_vector), 1, &del_args}, 1))
 		return (FAILURE);
 	if (ast_newnode(&new, tok->type, *file_v))
 	{
@@ -27,14 +27,4 @@ int	build_redirection(t_vector **file_v, t_lexer_token *tok, t_astnode **root)
 	}
 	*root = ast_addnode(*root, new);
 	return (SUCCESS);
-}
-
-int	add_file(t_vector *file_v, char *str)
-{
-	char	*dup;
-
-	dup = ft_strdup(str);
-	if (!dup)
-		return (FAILURE);
-	return (ft_vector_add_ptr(file_v, dup));
 }

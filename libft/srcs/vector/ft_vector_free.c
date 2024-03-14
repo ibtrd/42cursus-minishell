@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector_free.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 13:24:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/10 14:47:38 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/13 02:58:33 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
 #include <stdlib.h>
+
+#include "ft_vector.h"
+#include "ft_mem.h"
 
 int	ft_vector_free(t_vector *v)
 {
@@ -26,7 +28,6 @@ int	ft_vector_free(t_vector *v)
 			v->del((void **)ft_vector_get(v, i++));
 	}
 	free(v->ptr);
-	v->ptr = NULL;
-	v->total = 0;
+	ft_memset(v, '\0', sizeof(t_vector));
 	return (SUCCESS);
 }

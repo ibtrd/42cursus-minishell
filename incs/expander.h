@@ -1,0 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/09 00:12:59 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/13 16:05:47 by ibertran         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef EXPANDER_H
+# define EXPANDER_H
+
+# include "ft_vector.h"
+# include "ast.h"
+# include "mask.h"
+
+//INTERPRETATION MASKS
+t_mask	*str_to_mask(char *str, char mask_value);
+
+//EXPAND
+int		is_expandable(t_vector *arg);;
+int		tilde_expansion(t_vector *str);
+
+
+
+
+int	envars_expansion(t_vector *str, t_vector *env);
+int	quote_removal(t_vector *args, t_vector *masks, size_t *index);
+int	word_splitting(t_vector *args, t_vector *masks, size_t *index);
+
+//WORD_SPLITTING
+int	is_splittable(t_vector *str, t_vector *mask);
+int	is_separator(t_vector *str, t_vector *mask, size_t index);
+
+//ARGS
+int	args_vectors_to_stings(t_vector **args);
+
+#endif //EXPANDER_H

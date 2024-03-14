@@ -47,7 +47,7 @@ t_astnode	*ast_build_brackets(t_astnode *root, t_vector *lexer, int *index)
 		{
 			subroot = ast_build_brackets(subroot, lexer, index);
 			if (!subroot)
-				return (NULL);
+				return (NULL); //CHECK PROTECTION
 		}
 		else if (build_from_token(tok, &subroot))
 		{
@@ -55,7 +55,7 @@ t_astnode	*ast_build_brackets(t_astnode *root, t_vector *lexer, int *index)
 			return (ast_builderror(subroot));
 		}
 		tok = ft_vector_get(lexer, ++(*index));
-		dprint_ast(2, subroot, "\e[33m"); //REMOVE
+		// dprint_ast(2, subroot, "\e[33m"); //REMOVE
 	}
 	// printf("inner loop:	index %d (type %d)\n", *index, tok->type); //REMOVE
 	subroot = close_bracket(lexer, index, subroot); //PROTECTION
@@ -63,7 +63,6 @@ t_astnode	*ast_build_brackets(t_astnode *root, t_vector *lexer, int *index)
 		return (ast_builderror(root));
 	return(link_roots(root, subroot));
 }
-
 
 static t_astnode	*close_bracket(t_vector *lexer, int *index, t_astnode *subroot)
 {
@@ -81,7 +80,7 @@ static t_astnode	*close_bracket(t_vector *lexer, int *index, t_astnode *subroot)
 			free_ast(subroot);
 			return (ast_builderror(branch));
 		}
-		dprint_ast(2, branch, "\e[31m"); //REMOVE
+		// dprint_ast(2, branch, "\e[31m"); //REMOVE
 		if (tok->type == _PIPE_TOK)
 			return (link_branch(branch, subroot));
 		tok = ft_vector_get(lexer, ++(*index));
