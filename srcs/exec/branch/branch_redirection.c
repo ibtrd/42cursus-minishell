@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 20:54:43 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 16:02:58 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ static int	open_redirect(t_executor *exec)
 														open_output, \
 														open_input, \
 														open_append};
-	// int								ret;
 
-	// dprintf(2, "AAAAAAAAAAAAA");	// DEBUG
-	return (open_redirect[exec->node->type - _INPUT](exec));	// PROTECT
+	return (open_redirect[exec->node->type - _INPUT](exec));
 }
 
 static int	close_redirect(t_executor *exec)

@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 21:07:10 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 16:01:48 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@
 
 # include <stdio.h>
 
-static int	get_cmd_path(char *cmd, char **cmd_path, t_vector *env)
+static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 {
-	char	*path;
-
 	if (ft_strchr(cmd, '/'))
 	{
 		if (access(cmd, F_OK) == 0)
@@ -34,17 +32,19 @@ static int	get_cmd_path(char *cmd, char **cmd_path, t_vector *env)
 		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __CMD_NOT_FOUND);
 		return (127);
 	}
-	path = ft_getenv(env, "PATH");
-	*cmd_path = ft_strtok(path, ":");
-	while (*cmd_path)
+	if (path)
 	{
-		*cmd_path = ft_strjoin2(*cmd_path, "/", cmd);
-		if (!*cmd_path)
-			return (1);
-		if (access(*cmd_path, F_OK) == 0)
-			return (0);
-		free(*cmd_path);
-		*cmd_path = ft_strtok(NULL, ":");
+		*cmd_path = ft_strtok(path, ":");
+		while (*cmd_path)
+		{
+			*cmd_path = ft_strjoin2(*cmd_path, "/", cmd);
+			if (!*cmd_path)
+				return (1);
+			if (access(*cmd_path, F_OK) == 0)
+				return (0);
+			free(*cmd_path);
+			*cmd_path = ft_strtok(NULL, ":");
+		}
 	}
 	ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __CMD_NOT_FOUND);
 	return (127);
@@ -52,11 +52,13 @@ static int	get_cmd_path(char *cmd, char **cmd_path, t_vector *env)
 
 static int	dup_fd(t_executor *exec)
 {
-	dup2(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1), STDIN_FILENO);		// PROTECT
-	dup2(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1), STDOUT_FILENO);	// PROTECT
+	int	ret;
+	ret = dup2(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1), STDIN_FILENO);
+	if (ret != -1)
+		ret = dup2(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1), STDOUT_FILENO);
 	ft_vector_free(&exec->infd);
 	ft_vector_free(&exec->outfd);
-	return (0);
+	return (ret == -1);
 }
 
 static int	execute_command(t_executor *exec)
@@ -69,7 +71,7 @@ static int	execute_command(t_executor *exec)
 		return (1);
 	path = NULL;
 	cmd = (char **)ft_vector_get(exec->node->args, 0);
-	ret = get_cmd_path(cmd[0], &path, exec->env);
+	ret = get_cmd_path(cmd[0], &path, ft_getenv(exec->env, "PATH"));
 	if (ret)
 		return (ret);
 	execve(path, cmd, exec->env->ptr);
