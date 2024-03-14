@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 04:49:01 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 11:32:51 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 15:53:58 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_vector_print(t_vector *v, void (*print)(void *, size_t), char *msg)
 		print(ft_vector_get(v, i), i);
 		i++;
 	}
-	printf("\n");
+	// printf("\n");
 	return (SUCCESS);
 }
 

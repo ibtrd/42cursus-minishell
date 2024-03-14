@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 08:05:29 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 09:17:05 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 15:57:20 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	add_argument(t_vector *node, char *str)
 		ft_vector_free(&arg);
 		return (FAILURE);
 	}
-	ft_vector_print(&arg, ft_vprint_char, "arg:"); //DEBUG
-	ft_vector_print(&arg, debug_print_mask, "mask"); //DEBUG
 	return (SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 06:16:41 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 12:50:08 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 15:25:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ int	is_expandable(t_vector *arg)
 			return (1);
 		i++;
 	}
-	printf("NOT EXPANDABLE?\n");
 	return (0);
 }
