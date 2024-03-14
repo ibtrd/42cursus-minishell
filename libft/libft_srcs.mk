@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/14 16:41:50 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/14 19:11:31 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,6 +131,7 @@ VUTILS_SRC = \
 	vprint_char \
 	vprint_int \
 	vprint_vchar \
+	vprint_str \
 
 # *** LINKED LIST ************************************************************ #
 

@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vprint_str.c                                    :+:      :+:    :+:   */
+/*   mask.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 11:41:32 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 13:54:35 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/13 07:48:30 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/13 08:13:33 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef MASK_H
+# define MASK_H
 
-void	ft_vprint_str(void *ptr, size_t index)
+typedef struct s_mask
 {
-	(void)index;
-	if (!ptr)
-		return ;
-	printf("str%3ld: %s\n", index, *(char **)ptr);
-}
+	char	c;
+	char	m;
+}	t_mask;
+
+void	debug_print_mask(void *ptr, size_t index); //REMOVE
+
+#endif //MASK_H

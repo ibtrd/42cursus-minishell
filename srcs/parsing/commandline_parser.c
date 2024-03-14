@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 22:49:31 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 16:20:37 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 19:12:18 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,8 @@ t_astnode	*commandline_parser(char *input, t_vector *env)
 		return (NULL);
 	root = ast_build(&lexer);
 	ft_vector_free(&lexer);
-
-	dprint_ast(2, root, NULL); //REMOVE
 	if (expander_launch(root, env))
 		return (NULL); //ADD FREE FUNCTION
-	printf("EXPAND DONE\n");
 	dprint_ast(2, root, NULL); //REMOVE
 	ft_vector_printi(root->args, ft_vprint_char, "MONCUL"); //REMOVE
 	free(input);

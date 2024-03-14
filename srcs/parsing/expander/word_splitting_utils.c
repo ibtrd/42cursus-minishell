@@ -6,13 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 06:16:41 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 08:54:01 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 15:25:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 #include "minishelldef.h"
+#include "mask.h"
 
 #include <stdio.h>
 
@@ -36,6 +37,20 @@ int	is_splittable(t_vector *str, t_vector *mask)
 	while (i < str->total)
 	{
 		if (is_separator(str, mask, i))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	is_expandable(t_vector *arg)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < arg->total)
+	{
+		if (ft_ischarset(((t_mask *)ft_vector_get(arg, i))->c, __INTERPRETERS))
 			return (1);
 		i++;
 	}

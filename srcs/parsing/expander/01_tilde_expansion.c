@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 23:12:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 03:04:26 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 15:55:59 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 #include "libft.h"
 
 #include "minishelldef.h"
+#include "expander.h"
 
-static int	lone_tilde(t_vector *str, t_vector *mask);
-static int	tilde_sign(t_vector *str, t_vector *mask, char *envar);
+static int	lone_tilde(t_vector *str);
+static int	tilde_sign(t_vector *str, char *envar);
 
 /*
 	DESCRIPTION
@@ -29,54 +30,53 @@ static int	tilde_sign(t_vector *str, t_vector *mask, char *envar);
 	On succes, 0 is returned. On error, -1 is returned.
 */
 
-int	tilde_expansion(t_vector *args, t_vector *masks, size_t index)
+int	tilde_expansion(t_vector *str)
 {
-	t_vector	*str;
-	t_vector	*mask;
+	t_mask	*mask;
 
-	str = ft_vector_get(args, index);
-	mask = ft_vector_get(masks, index);
-	if (!ft_strncmp((char *)str->ptr, "~+", 2))
-		return (tilde_sign(str, mask, __PWD_ENVAR));
-	if (!ft_strncmp((char *)str->ptr, "~-", 2))
-		return (tilde_sign(str, mask, __OLDPWD_ENVAR));
-	if (!ft_strncmp((char *)str->ptr, "~", 1))
-		return (lone_tilde(str, mask));
+	mask = ft_vector_get(str, 0);
+	if (mask->c != '~')
+		return (SUCCESS);
+	mask = ft_vector_get(str, 1);
+	if (!mask || mask->c == '/')
+		return (lone_tilde(str));
+	else if (mask->c == '+')
+		return (tilde_sign(str, __PWD_ENVAR));
+	else if (mask->c == '-')
+		return (tilde_sign(str, __OLDPWD_ENVAR));
 	return (SUCCESS);
 }
 
-static int	lone_tilde(t_vector *str, t_vector *mask)
+static int	lone_tilde(t_vector *str)
 {
-	const size_t	len = ft_strlen(__HOME_ENVAR);
-	const char		next = *(char *)(ft_vector_get(str, 1));
-	const char		m = *(char *)(ft_vector_get(mask, 1));
+	t_mask			*insert;
 
-	if (next == '\0' || next == '/')
+	insert = str_to_mask(__HOME_ENVAR, __NO_MASK);
+	if (!insert)
+		return (FAILURE);
+	if (ft_vector_delete(str, 0)
+		|| ft_vector_insertn(str, insert, 0, ft_strlen(__HOME_ENVAR)))
 	{
-		if (ft_vector_delete(str, 0)
-			|| ft_vector_insertn(str, __HOME_ENVAR, 0, len)
-			|| ft_vector_delete(mask, 0)
-			|| ft_vector_insertn(mask, __HOME_ENVAR, 0, len)
-			|| ft_vector_setn(mask, 0, &m, len))
-			return (FAILURE);
+		free(insert);
+		return (FAILURE);
 	}
+	free(insert);
 	return (SUCCESS);
 }
 
-static int	tilde_sign(t_vector *str, t_vector *mask, char *envar)
+static int	tilde_sign(t_vector *str, char *envar)
 {
-	const size_t	len = ft_strlen(envar);
-	const char		next = *(char *)(ft_vector_get(str, 2));
-	const char		m = *(char *)(ft_vector_get(mask, 2));
+	t_mask			*insert;
 
-	if (next == '\0' || next == '/')
+	insert = str_to_mask(envar, __NO_MASK);
+	if (!insert)
+		return (FAILURE);
+	if (ft_vector_deleten(str, 0, 2)
+		|| ft_vector_insertn(str, insert, 0, ft_strlen(envar)))
 	{
-		if (ft_vector_deleten(str, 0, 2)
-			|| ft_vector_insertn(str, envar, 0, len)
-			|| ft_vector_deleten(mask, 0, 2)
-			|| ft_vector_insertn(mask, envar, 0, len)
-			|| ft_vector_setn(mask, 0, &m, len))
-			return (FAILURE);
+		free(insert);
+		return (FAILURE);
 	}
+	free(insert);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/14 16:42:54 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/14 19:11:10 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,7 @@ BUILDER_SRC = \
 		ast_build_redirection \
 		ast_build_brackets \
 		ast_build_error \
+		ast_build_argument \
 
 # ********** EXECUTION ********** #
 
