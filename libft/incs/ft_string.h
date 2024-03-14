@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:18:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 16:50:35 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 16:39:36 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 char	**ft_split(char const *s, char c);
+int		ft_str_in_array(const char *str, const char **array);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strcpy(char *dst, const char *src);
 char	*ft_strdup(const char *s);

@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 16:01:48 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 16:18:42 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,12 @@ static int	command_fork(t_executor *exec)
 
 int	branch_command(t_executor *exec)
 {
+	int			ret;
+	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env",
+								"exit", NULL};
+
+	ret = ft_str_in_array(*(char **)ft_vector_get(exec->node->args, 0), builtins);
+	if (ret != -1)
+		return (exec_builtins(exec, ret));
 	return (command_fork(exec));
 }

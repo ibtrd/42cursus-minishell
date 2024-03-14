@@ -6,13 +6,14 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:17:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 17:53:47 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 16:32:37 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishelldef.h"
 #include "env.h"
 #include "libft.h"
+#include "executor.h"
 
 #include <unistd.h>
 
@@ -45,7 +46,7 @@ static int	check_var_name(char *var)
 	return (-2);
 }
 
-int	builtin_export(t_vector *envv, char **argv)
+int	builtin_export(t_executor *exec, char **argv)
 {
 	size_t		i;
 	char		**var;
@@ -62,8 +63,8 @@ int	builtin_export(t_vector *envv, char **argv)
 		ret |= -error;
 		if (error)
 			continue ;
-		var = search_var(envv, argv[i]);
-		if (!var && add_var(envv, argv[i]))
+		var = search_var(exec->env, argv[i]);
+		if (!var && add_var(exec->env, argv[i]))
 			return (FAILURE);
 		if (var && update_var(var, argv[i]))
 			return (FAILURE);

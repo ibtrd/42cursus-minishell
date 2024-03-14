@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/14 15:42:17 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/14 16:42:54 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,6 +102,7 @@ SRC += $(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC))
 EXECUTION_DIR = exec/
 EXECUTION_SRC = \
 	close_fds \
+	exec_builtins \
 	exec_cleanup \
 	exec_utils \
 	executor \
@@ -134,11 +135,14 @@ SRC += $(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC))
 
 BUILTIN_DIR = builtins/
 BUILTIN_SRC = \
+	cd \
 	check_option \
 	env \
 	echo \
+	exit \
 	export \
 	false \
+	pwd \
 	true \
 	unset \
 

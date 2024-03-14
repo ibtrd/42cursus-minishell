@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 21:28:36 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/14 16:41:50 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ STR_DIR = str/
 STR_SRC = \
 	countwords \
 	split \
+	str_in_array \
 	strchr \
 	strcmp \
 	strcpy \

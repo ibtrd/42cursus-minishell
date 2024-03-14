@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   true.c                                             :+:      :+:    :+:   */
+/*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 21:37:30 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 16:44:49 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/14 16:16:43 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/14 16:45:22 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "executor.h"
+#include "minishelldef.h"
+#include "env.h"
+#include "builtins.h"
 
-int	builtin_true(t_executor *exec, char **argv)
+int	exec_builtins(t_executor *exec, int index)
 {
-	(void)exec;
-	(void)argv;
-	return (0);
+	static const t_builtin	builtins[] = {&builtin_echo, &builtin_cd, &builtin_pwd, \
+								&builtin_export, &builtin_unset, &builtin_env, \
+								&builtin_exit};
+	
+	return ((builtins[index])(exec, exec->node->args->ptr));
 }

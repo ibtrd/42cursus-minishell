@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   true.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 21:37:30 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 16:44:49 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/14 16:33:54 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/14 16:44:08 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-int	builtin_true(t_executor *exec, char **argv)
+int	builtin_cd(t_executor *exec, char **argv)
 {
 	(void)exec;
 	(void)argv;

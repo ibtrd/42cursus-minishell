@@ -6,18 +6,20 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:00:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 15:42:56 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 16:34:38 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <unistd.h>
 #include "builtins.h"
+#include "executor.h"
 
-int	builtin_echo(char **argv)
+int	builtin_echo(t_executor *exec, char **argv)
 {
 	char	options;
 
+	(void)exec;
 	if (!argv)
 		return (1);
 	options = 0;

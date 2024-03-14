@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:32:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 15:17:35 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 16:40:39 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **env)
 	args[7] = "-n";
 	args[8] = "a";
 	args[9] = NULL;
-	builtin_echo(args);
+	builtin_echo(NULL, args);
 	free(args);
 	return (0);
 }

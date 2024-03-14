@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:32:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 21:22:23 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 16:47:09 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	(void)env;
 	init_env(&envv, env);
-	root = commandline_parser(ft_strdup("< README.md < Makefile cat | (head -c162 < qwjeqjwekq || tail) > out && cata"), &envv);
+	root = commandline_parser(ft_strdup("< README.md < Makefile cat | (head -c162 < qwjeqjwekq || tail) > out && cata || echo -nnnn -n -nan oui \"\" non -n && exit"), &envv);
 	printf("\n\n-------------------\n\n");
 	// dprint_ast(2, root, NULL); //REMOVE
 	executor(root, &envv);

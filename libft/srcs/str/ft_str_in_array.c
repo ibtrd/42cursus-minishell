@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   true.c                                             :+:      :+:    :+:   */
+/*   ft_str_in_array.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 21:37:30 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 16:44:49 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/14 16:10:45 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/14 16:39:05 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#include "ft_string.h"
 
-int	builtin_true(t_executor *exec, char **argv)
+int	ft_str_in_array(const char *str, const char **array)
 {
-	(void)exec;
-	(void)argv;
-	return (0);
+	int	i;
+
+	if (!str || !array)
+		return (-1);
+	i = 0;
+	while (array[i])
+	{
+		if (!ft_strcmp(str, array[i]))
+			return (i);
+		i++;
+	}
+	return (-1);
 }

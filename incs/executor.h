@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 18:33:38 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/14 16:38:10 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_executor
 
 typedef int	(*t_branching)(t_executor *exec);
 typedef int	(*t_open_redirect)(t_executor *exec);
+typedef int	(*t_builtin)(t_executor *exec, char **args);
 
 int		branch_command(t_executor *exec);
 int		branch_logicaloperator(t_executor *exec);
@@ -42,6 +43,7 @@ int		open_output(t_executor *exec);
 int		node_exec(t_executor *exec);
 void	close_fds(t_executor *exec);
 int		exec_cleanup(t_executor *exec);
+int		exec_builtins(t_executor *exec, int index);
 
 void	printf_redir(t_executor *exec);	// DEBUG
 
