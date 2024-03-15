@@ -6,12 +6,11 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 10:45:01 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 21:47:34 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 21:48:10 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <errno.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
