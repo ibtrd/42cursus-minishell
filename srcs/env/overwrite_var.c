@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_var.c                                       :+:      :+:    :+:   */
+/*   overwrite_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/15 17:34:43 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/15 17:48:03 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/09 19:00:47 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/12 17:51:10 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishelldef.h"
 #include "env.h"
 #include "libft.h"
-#include "executor.h"
 
-#include <unistd.h>
+#include <stdlib.h>
 
-int	update_var(t_vector *env, char *arg)
+int	overwrite_var(char **env_var, char *var)
 {
-	char		**var;
-
-	var = search_var(env, arg);
-	if (!var && add_var(env, arg))
-		return (FAILURE);
-	if (var && overwrite_var(var, arg))
-		return (FAILURE);
-	return (SUCCESS);
+	free(*env_var);
+	*env_var = ft_strdup(var);
+	return (!*env_var);
 }

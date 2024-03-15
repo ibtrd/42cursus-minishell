@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/15 15:22:42 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/15 17:46:59 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -158,6 +158,7 @@ ENV_SRC = \
 	ft_getenv \
 	init_env \
 	search_var \
+	overwrite_var \
 	update_var \
 	var_processing \
 
