@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/15 03:26:37 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/15 15:22:42 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,9 +142,7 @@ BUILTIN_SRC = \
 	echo \
 	exit \
 	export \
-	false \
 	pwd \
-	true \
 	unset \
 
 # **************** ENVIRONMENT **************** #
