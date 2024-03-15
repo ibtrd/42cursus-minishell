@@ -37,6 +37,8 @@ typedef struct s_vinfos
 	void			(*del)(void **);
 }	t_vinfos;
 
+typedef int	(*t_vfunc)(void *);
+
 int		ft_vector_add_ptr(t_vector *v, void *item);
 int		ft_vector_add(t_vector *v, void *item);
 int		ft_vector_alloc(t_vector **ptr, t_vinfos infos, size_t n);
@@ -48,6 +50,7 @@ int		ft_vector_init(t_vector *v, t_vinfos infos);
 int		ft_vector_insert_ptr(t_vector *v, void *item, size_t index);
 int		ft_vector_insert(t_vector *v, void *item, size_t index);
 int		ft_vector_insertn(t_vector *v, void *item, size_t index, size_t n);
+int		ft_vector_iteri(t_vector *v, t_vfunc function);
 int		ft_vector_join(t_vector *v, void *items, size_t n);
 int		ft_vector_merge(t_vector *v1, size_t index, t_vector *v2);
 int		ft_vector_replace(t_vector *v, size_t index, void *new);
