@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 19:35:57 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 19:28:48 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,24 @@
 #include "parsing.h"
 #include "executor.h"
 #include "env.h"
+#include "prompt.h"
+#include <stdlib.h>
 
 int	main(int ac, char **av, char **env)
 {
 	char		*input;
 	t_astnode	*root;
 	t_vector	envv;
+	char		*prompt;
 
 	(void)ac;
 	(void)av;
 	init_env(&envv, env);
 	while (1)
 	{
-		input = readline("\e[34mminishell$\e[0m ");
+		prompt = get_prompt(&envv);
+		input = readline(prompt);
+		free(prompt);
 		if (!input)
 			break ;
 		add_history(input);
