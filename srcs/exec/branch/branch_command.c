@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 18:15:30 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 16:06:17 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-# include <stdio.h>
-
 static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 {
 	if (ft_strchr(cmd, '/'))
 	{
 		if (access(cmd, F_OK) == 0)
+		{
+			*cmd_path = ft_strdup(cmd);
 			return (0);
-		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __CMD_NOT_FOUND);
-		return (127);
+		}
 	}
 	if (path)
 	{
@@ -63,6 +62,8 @@ static int	execute_command(t_executor *exec)
 	ret = get_cmd_path(cmd[0], &path, ft_getenv(exec->env, "PATH"));
 	if (ret)
 		return (ret);
+	if(!path)
+		return (1);
 	execve(path, cmd, exec->env->ptr);
 	ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, *cmd, strerror(errno));
 	free(path);
