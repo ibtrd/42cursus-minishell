@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/15 16:06:17 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 17:12:25 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 			return (0);
 		}
 	}
-	if (path)
+	if (path && cmd && *cmd)
 	{
 		*cmd_path = ft_strtok(path, ":");
 		while (*cmd_path)
