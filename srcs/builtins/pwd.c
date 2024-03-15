@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:34:06 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/15 16:45:48 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 16:57:44 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int    builtin_pwd(t_executor *exec, char **argv)
     pwd = getcwd(NULL, 0);
     if (!pwd)
     {
-        ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
+        ft_dprintf(2, "%s: pwd: %s\n", __MINISHELL, strerror(errno));
         return (1);
     }
     printf("%s\n", pwd);
