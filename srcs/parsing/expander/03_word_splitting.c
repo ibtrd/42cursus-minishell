@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 05:10:14 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 03:08:56 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 04:21:41 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 static int	search_words(t_vector *args, t_vector *str, size_t *index);
 static int	split_word(t_vector *split, t_vector *str, size_t *start);
-static int	merge_to_args(t_vector *args, t_vector *split, size_t *index);
 
 int	word_splitting(t_vector *args, size_t *index)
 {
@@ -47,7 +46,12 @@ static int	search_words(t_vector *args, t_vector *str, size_t *index)
 			return (FAILURE);
 		}
 	}
-	return (merge_to_args(args, &split, index));
+	if (ft_vector_delete(args, *index) || ft_vector_merge(args, *index, &split))
+	{
+		ft_vector_free(&split);
+		return (FAILURE);
+	}
+	return (SUCCESS);
 }
 
 static int	split_word(t_vector *split, t_vector *str, size_t *start)
@@ -65,19 +69,5 @@ static int	split_word(t_vector *split, t_vector *str, size_t *start)
 		ft_vector_free(&new);
 		return (FAILURE);
 	}
-	return (SUCCESS);
-}
-
-static int	merge_to_args(t_vector *args, t_vector *split, size_t *index)
-{
-	size_t	size;
-
-	size = split->total;
-	if (ft_vector_delete(args, *index) || ft_vector_merge(args, *index, split))
-	{
-		ft_vector_free(split);
-		return (FAILURE);
-	}
-	*index += size - 1;
 	return (SUCCESS);
 }

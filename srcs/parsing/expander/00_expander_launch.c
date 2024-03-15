@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 03:29:57 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 15:25:50 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static int	expand_node(t_astnode *node, t_vector *env)
 	t_vector	*arg;
 	size_t		i;
 
+	if (node->type == _HEREDOC)
+		return (SUCCESS);
 	if (node->type != _CMD && (node->type < _INPUT || node->type > _APPEND))
 		return (SUCCESS);
 	i = 0;
@@ -74,9 +76,17 @@ static int	expand_string(t_vector *args, size_t *index, t_vector *env)
 	if (word_splitting(args, index))
 		return (FAILURE);
 
-	// if (quote_removal(str, masks, index))
-	// 	return (FAILURE);
+	str = ft_vector_get(args, *index);
+	// printf("\nWORD SPLIT\n"); //DEBUG
+	// ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
+	// ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
 
-	// printf("\n"); //DEBUG
+	if (quote_removal(str))
+		return (FAILURE);
+
+	// printf("\nQUOTE_REMOVAL\n"); //DEBUG
+	// ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
+	// ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
+
 	return (SUCCESS);
 }

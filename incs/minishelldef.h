@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishelldef.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 19:11:18 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 04:59:53 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@
 # define __DEFAULT_IFS " \t\n"
 # define __METACHARACTER "&|<>();"
 # define __INTERPRETERS "\"\'$*~"
-# define __SINGLE_QUOTE "\'"
-# define __DOUBLE_QUOTE "\""
+# define __QUOTES "\"\'"
 
 //EXPANDER
 # define __HOME_ENVAR "$HOME"
