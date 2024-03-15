@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:17:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/15 15:49:10 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 17:33:43 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	builtin_export(t_executor *exec, char **argv)
 		var = search_var(exec->env, argv[i]);
 		if (!var && add_var(exec->env, argv[i]))
 			return (FAILURE);
-		if (var && update_var(var, argv[i]))
+		if (var && overwrite_var(var, argv[i]))
 			return (FAILURE);
 	}
 	return (ret & -FAILURE);
