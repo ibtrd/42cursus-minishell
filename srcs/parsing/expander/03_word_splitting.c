@@ -6,13 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 05:10:14 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 04:21:41 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 15:44:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 #include "expander.h"
+#include "minishelldef.h"
 
 static int	search_words(t_vector *args, t_vector *str, size_t *index);
 static int	split_word(t_vector *split, t_vector *str, size_t *start);
@@ -22,6 +23,13 @@ int	word_splitting(t_vector *args, size_t *index)
 	t_vector	*str;
 
 	str = ft_vector_get(args, *index);
+	if (!str->total)
+	{
+		if (ft_vector_delete(args, *index))
+			return (FAILURE);
+		(*index)--;
+		return (REMOVAL);
+	}
 	if (!is_splittable(str))
 		return (SUCCESS);
 	return (search_words(args, str, index));

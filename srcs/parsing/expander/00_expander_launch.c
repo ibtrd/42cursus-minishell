@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 15:25:50 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 16:46:01 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	expand_node(t_astnode *node, t_vector *env)
 static int	expand_string(t_vector *args, size_t *index, t_vector *env)
 {
 	t_vector	*str;
+	int			status;
 
 	// printf("\nEXPANDING\n"); //DEBUG
 	// ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
@@ -73,8 +74,9 @@ static int	expand_string(t_vector *args, size_t *index, t_vector *env)
 	// ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
 	// ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
 
-	if (word_splitting(args, index))
-		return (FAILURE);
+	status = word_splitting(args, index);
+	if (status)
+		return (status == FAILURE);
 
 	str = ft_vector_get(args, *index);
 	// printf("\nWORD SPLIT\n"); //DEBUG

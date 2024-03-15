@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 04:59:53 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 15:43:43 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define __UNCLOSED_SINGLE_QUOTE -1
 # define __UNCLOSED_DOUBLE_QUOTE -2
 # define __UNCLOSED_BRACKET -3
+
+# define REMOVAL 1
 
 //ENV
 # define __MAX_SHLVL 1000
