@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 10:45:01 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 20:50:52 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 21:47:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		len2 = ft_strlen(s2);
 	ptr = ft_calloc(len1 + len2 + 1, sizeof(char));
 	if (!ptr)
-	{
-		errno = ENOMEM;
 		return (NULL);
-	}
 	ft_strlcpy(ptr, s1, len1 + len2 + 1);
 	ft_strlcat(ptr, s2, len1 + len2 + 1);
 	return (ptr);
