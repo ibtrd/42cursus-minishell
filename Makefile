@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/15 17:46:59 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/15 19:33:07 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -261,6 +261,10 @@ debug :
 .PHONY : fsanitize
 fsanitize :
 	$(MAKE) MODE=fsanitize
+
+.PHONY : print
+print :
+	$(MAKE) MODE=debug DEFINES=PRINT
 
 .PHONY : clean
 clean :
