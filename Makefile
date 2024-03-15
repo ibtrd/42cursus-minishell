@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/15 17:46:59 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/15 19:28:09 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -161,6 +161,14 @@ ENV_SRC = \
 	overwrite_var \
 	update_var \
 	var_processing \
+
+# **************** PROMPT **************** #
+
+SRC += $(addprefix $(PROMPT_DIR),$(PROMPT_SRC))
+
+PROMPT_DIR = prompt/
+PROMPT_SRC = \
+	get_prompt \
 
 ################################################################################
 

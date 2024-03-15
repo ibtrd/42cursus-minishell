@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   get_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 10:45:01 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 20:50:52 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/15 19:14:29 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/15 19:36:19 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <errno.h>
+#include "env.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*get_prompt(t_vector *env)
 {
-	char	*ptr;
-	size_t	len1;
-	size_t	len2;
+	char	*prompt;
+	char	*tmp;
 
-	if (!s1 || !s2)
+	tmp = ft_getenv(env, "PWD");
+	if (!tmp)
+		tmp = ft_getenv(env, "HOME");
+	if (!tmp)
+		tmp = ft_strdup("minishell");
+	if (!tmp)
 		return (NULL);
-	len1 = 0;
-	len2 = 0;
-	if (s1)
-		len1 = ft_strlen(s1);
-	if (s2)
-		len2 = ft_strlen(s2);
-	ptr = ft_calloc(len1 + len2 + 1, sizeof(char));
-	if (!ptr)
-	{
-		errno = ENOMEM;
-		return (NULL);
-	}
-	ft_strlcpy(ptr, s1, len1 + len2 + 1);
-	ft_strlcat(ptr, s2, len1 + len2 + 1);
-	return (ptr);
+	prompt = ft_strjoin2("\e[34m", tmp, "$\e[0m ");
+	return (prompt);
 }
