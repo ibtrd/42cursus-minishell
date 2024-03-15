@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    libft_srcs.mk                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/14 19:11:31 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/15 03:11:02 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,6 +109,7 @@ VECTOR_SRC = \
 	vector_insert_ptr \
 	vector_insertn \
 	vector_join \
+	vector_merge \
 	vector_print \
 	vector_replace \
 	vector_replacen \
@@ -132,6 +133,7 @@ VUTILS_SRC = \
 	vprint_int \
 	vprint_vchar \
 	vprint_str \
+	vvector_free \
 
 # *** LINKED LIST ************************************************************ #
 

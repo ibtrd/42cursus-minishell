@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 04:49:01 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 18:59:55 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 03:15:03 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_vector_print(t_vector *v, void (*print)(void *, size_t), char *msg)
 	if (!v || !print)
 		return (FAILURE);
 	if (msg)
-		printf("\nvector_print: %-10s | ", msg);
+		printf("%s| ", msg);
 	i = 0;
 	while (i < v->total)
 	{

@@ -6,90 +6,78 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 05:10:14 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 08:15:15 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 03:08:56 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "libft.h"
 
-#include "minishelldef.h"
 #include "expander.h"
-#include "ast.h"
 
-#include "stdio.h" //REMOVE
+static int	search_words(t_vector *args, t_vector *str, size_t *index);
+static int	split_word(t_vector *split, t_vector *str, size_t *start);
+static int	merge_to_args(t_vector *args, t_vector *split, size_t *index);
 
-void	debug_print_vector_mask(void *ptr, size_t index);
-
-static int	search_words(t_vector *str, t_vector *mask, size_t *insert, t_vector *args, t_vector *masks);
-static int	split_word(t_vector *split, t_vector *str, t_vector *mask, size_t *start);
-// static int	split_vector(t_vector *dest, t_vector *src, size_t start, size_t end);
-static int	merge_vectors(t_vector *srcs, t_vector *masks, t_vector *split, size_t *insert);
-
-int	word_splitting(t_vector *args, t_vector *masks, size_t *index)
+int	word_splitting(t_vector *args, size_t *index)
 {
 	t_vector	*str;
-	t_vector	*mask;
 
 	str = ft_vector_get(args, *index);
-	mask = ft_vector_get(masks, *index);
-	if (!is_splittable(str, mask))
+	if (!is_splittable(str))
 		return (SUCCESS);
-	return (search_words(str, mask, index, args, masks));
+	return (search_words(args, str, index));
 }
 
-static int	search_words(t_vector *str, t_vector *mask, size_t *insert, t_vector *args, t_vector *masks)
+static int	search_words(t_vector *args, t_vector *str, size_t *index)
 {
-	t_vector	*split;
+	t_vector	split;
 	size_t		start;
 
-	if (ft_vector_alloc(&split, (t_vinfos){sizeof(t_vector), 4, &del_args}, 2))
+	if (ft_vector_init(&split,
+			(t_vinfos){sizeof(t_vector), 4, &ft_vvector_free}))
 		return (FAILURE);
 	start = 0;
 	while (start < str->total)
 	{
-		while (start < str->total && is_separator(str, mask, start))
+		while (start < str->total && is_separator(ft_vector_get(str, start)))
 			start++;
-		if (start < str->total - 1 && split_word(split, str, mask, &start))
+		if (start < str->total && split_word(&split, str, &start))
 		{
-			ft_vector_dealloc(&split, 2);
+			ft_vector_free(&split);
 			return (FAILURE);
 		}
-		start++;
 	}
-	merge_vectors(args, masks, split, insert);
-	free(split->ptr);
-	free((split + 1)->ptr);
-	free(split);
-	return (SUCCESS);
+	return (merge_to_args(args, &split, index));
 }
 
-static int	split_word(t_vector *split, t_vector *str, t_vector *mask, size_t *start)
+static int	split_word(t_vector *split, t_vector *str, size_t *start)
 {
-	size_t		end;
 	t_vector	new;
+	size_t		end;
 
 	end = *start + 1;
-	while (end < str->total && !is_separator(str, mask, end))
+	while (end < str->total && !is_separator(ft_vector_get(str, end)))
 		end++;
-	if (ft_vector_split(str, *start, end - *start, &new)
-		|| ft_vector_add(&new, "\0")
-		|| ft_vector_add(split, &new)
-		|| ft_vector_split(mask, *start, end - *start, &new)
-		|| ft_vector_add(&new, "\0")
-		|| ft_vector_add(split + 1, &new))
+	if (ft_vector_split(str, *start, end - *start, &new))
 		return (FAILURE);
-	*start = end;
+	if (ft_vector_add(split, &new))
+	{
+		ft_vector_free(&new);
+		return (FAILURE);
+	}
 	return (SUCCESS);
 }
 
-static	int	merge_vectors(t_vector *args, t_vector *masks, t_vector *split, size_t *insert)
+static int	merge_to_args(t_vector *args, t_vector *split, size_t *index)
 {
-	if (ft_vector_delete(args, *insert)
-		|| ft_vector_insertn(args, split, *insert, split->total)
-		|| ft_vector_delete(masks, *insert)
-		|| ft_vector_insertn(masks, split + 1, *insert, (split + 1)->total))
+	size_t	size;
+
+	size = split->total;
+	if (ft_vector_delete(args, *index) || ft_vector_merge(args, *index, split))
+	{
+		ft_vector_free(split);
 		return (FAILURE);
+	}
+	*index += size - 1;
 	return (SUCCESS);
 }

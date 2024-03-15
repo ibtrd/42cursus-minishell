@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 01:48:20 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 08:24:27 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 02:48:20 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,32 @@ int main(void)
 	ft_vector_printi(&v2, ft_vprint_int, "SPLIT-2");
 	}
 
-	i = 0;
-	while (i < 20)
-	{
-		printf("SEARCHING %d in v1: %p\n", i, ft_vector_search(&v1, &i));
-		printf("SEARCHING %d in v2: %p\n", i, ft_vector_search(&v2, &i));
-		i++;
-	}
+	ft_vector_merge(&v1, 0, &v2);
+	ft_vector_printi(&v1, ft_vprint_int, "MERGE");
 	ft_vector_free(&v1);
-	ft_vector_free(&v2);
+	// i = 0;
+	// while (i < 20)
+	// {
+	// 	printf("SEARCHING %d in v1: %p\n", i, ft_vector_search(&v1, &i));
+	// 	printf("SEARCHING %d in v2: %p\n", i, ft_vector_search(&v2, &i));
+	// 	i++;
+	// }
+	// ft_vector_free(&v1);
+	// ft_vector_free(&v2);
 
 
-	ft_vector_init(&v2, (t_vinfos){sizeof(t_vector), 0, ft_vfree});
-		ft_vector_init(&v1, (t_vinfos){sizeof(char), 0, NULL});
-	ft_vector_join(&v1, "pas sur de comp\nrendre t", 26);
-	ft_vector_print(&v1, ft_vprint_char, "TEST CHAR");
-	ft_vector_add(&v2, &v1);
-		ft_vector_init(&v1, (t_vinfos){sizeof(char), 0, NULL});
-	ft_vector_join(&v1, "Une autre string", 15);
-	ft_vector_add(&v2, &v1);
-		ft_vector_init(&v1, (t_vinfos){sizeof(char), 0, NULL});
-	ft_vector_join(&v1, "UNE 3EME !!", 5);
-	ft_vector_add(&v2, &v1);
+	// ft_vector_init(&v2, (t_vinfos){sizeof(t_vector), 0, ft_vfree});
+	// 	ft_vector_init(&v1, (t_vinfos){sizeof(char), 0, NULL});
+	// ft_vector_join(&v1, "pas sur de comp\nrendre t", 26);
+	// ft_vector_print(&v1, ft_vprint_char, "TEST CHAR");
+	// ft_vector_add(&v2, &v1);
+	// 	ft_vector_init(&v1, (t_vinfos){sizeof(char), 0, NULL});
+	// ft_vector_join(&v1, "Une autre string", 15);
+	// ft_vector_add(&v2, &v1);
+	// 	ft_vector_init(&v1, (t_vinfos){sizeof(char), 0, NULL});
+	// ft_vector_join(&v1, "UNE 3EME !!", 5);
+	// ft_vector_add(&v2, &v1);
 
-	ft_vector_printi(&v2, ft_vprint_vchar, "VECTOR OF VECTOR");
-	ft_vector_free(&v2);
+	// ft_vector_printi(&v2, ft_vprint_vchar, "VECTOR OF VECTOR");
+	// ft_vector_free(&v2);
 }
