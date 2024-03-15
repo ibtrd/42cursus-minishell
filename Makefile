@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/15 19:28:09 by kchillon         ###   ########lyon.fr    #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = minishell
 
 # *** FILES ****************************************************************** #
@@ -269,6 +257,10 @@ debug :
 .PHONY : fsanitize
 fsanitize :
 	$(MAKE) MODE=fsanitize
+
+.PHONY : print
+print :
+	$(MAKE) MODE=debug DEFINES=PRINT
 
 .PHONY : clean
 clean :

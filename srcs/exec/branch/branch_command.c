@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/15 17:12:25 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 21:34:54 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,32 @@ static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 			*cmd_path = ft_strtok(NULL, ":");
 		}
 	}
-	ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __CMD_NOT_FOUND);
-	return (127);
+	if (path)
+		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __CMD_NOT_FOUND);
+	return (!!path * 127 + !path);
 }
 
 static int	execute_command(t_executor *exec)
 {
 	char	**cmd;
 	char	*path;
+	char	*cmd_path;
 	int		ret;
 
 	ft_vector_free(&exec->infd);
 	ft_vector_free(&exec->outfd);
-	path = NULL;
+	cmd_path = NULL;
+	path = ft_strdup(ft_getenv(exec->env, "PATH"));
 	cmd = (char **)ft_vector_get(exec->node->args, 0);
-	ret = get_cmd_path(cmd[0], &path, ft_getenv(exec->env, "PATH"));
+	ret = get_cmd_path(cmd[0], &cmd_path, path);
+	free(path);
 	if (ret)
 		return (ret);
-	if(!path)
+	if(!cmd_path)
 		return (1);
-	execve(path, cmd, exec->env->ptr);
+	execve(cmd_path, cmd, exec->env->ptr);
 	ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, *cmd, strerror(errno));
-	free(path);
+	free(cmd_path);
 	return (1);
 }
 

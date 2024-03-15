@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 16:46:01 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 19:34:25 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,40 +55,41 @@ static int	expand_string(t_vector *args, size_t *index, t_vector *env)
 	t_vector	*str;
 	int			status;
 
-	// printf("\nEXPANDING\n"); //DEBUG
-	// ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
-	// ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
-
+	#ifdef PRINT
+	printf("\nEXPANDING\n"); //DEBUG
+	ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
+	ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
+	#endif
 	str = ft_vector_get(args, *index);
 	if (tilde_expansion(str))
 		return (FAILURE);
-
-	// printf("\nTILDE EXPAND\n"); //DEBUG
-	// ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
-	// ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
-
+	#ifdef PRINT
+	printf("\nTILDE EXPAND\n"); //DEBUG
+	ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
+	ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
+	#endif
 	if (envars_expansion(str, env))
 		return (FAILURE);
-
-	// printf("\nENVARS\n"); //DEBUG
-	// ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
-	// ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
-
+	#ifdef PRINT
+	printf("\nENVARS\n"); //DEBUG
+	ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
+	ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
+	#endif
 	status = word_splitting(args, index);
 	if (status)
 		return (status == FAILURE);
-
 	str = ft_vector_get(args, *index);
-	// printf("\nWORD SPLIT\n"); //DEBUG
-	// ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
-	// ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
-
+	#ifdef PRINT
+	printf("\nWORD SPLIT\n"); //DEBUG
+	ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
+	ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
+	#endif
 	if (quote_removal(str))
 		return (FAILURE);
-
-	// printf("\nQUOTE_REMOVAL\n"); //DEBUG
-	// ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
-	// ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
-
+	#ifdef PRINT
+	printf("\nQUOTE_REMOVAL\n"); //DEBUG
+	ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
+	ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
+	#endif
 	return (SUCCESS);
 }
