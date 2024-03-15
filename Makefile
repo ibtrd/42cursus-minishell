@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/14 19:11:10 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/15 03:26:37 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ EXPANDER_SRC = \
 	03_word_splitting \
 	args_vectors_to_strings \
 	05_quote_removal \
-	word_splitting_utils \
+	expander_utils \
 
 # ********** AST ********** #
 
@@ -147,7 +147,6 @@ BUILTIN_SRC = \
 	true \
 	unset \
 
-
 # **************** ENVIRONMENT **************** #
 
 SRC += $(addprefix $(ENV_DIR),$(ENV_SRC))
@@ -163,7 +162,6 @@ ENV_SRC = \
 	search_var \
 	update_var \
 	var_processing \
-
 
 ################################################################################
 

@@ -49,7 +49,7 @@ int		ft_vector_insert_ptr(t_vector *v, void *item, size_t index);
 int		ft_vector_insert(t_vector *v, void *item, size_t index);
 int		ft_vector_insertn(t_vector *v, void *item, size_t index, size_t n);
 int		ft_vector_join(t_vector *v, void *items, size_t n);
-
+int		ft_vector_merge(t_vector *v1, size_t index, t_vector *v2);
 int		ft_vector_replace(t_vector *v, size_t index, void *new);
 int		ft_vector_replacen(t_vector *v, size_t index, void *new, size_t n[2]);
 int		ft_vector_resize(t_vector *v, size_t capacity);
@@ -63,10 +63,10 @@ int		ft_vector_unlink(t_vector *v, size_t index, size_t n);
 void	*ft_vector_get(t_vector *v, size_t index);
 void	*ft_vector_search(t_vector *v, const void *item);
 
-
 // UTILITY
 void	ft_vclose(void **var);
 void	ft_vfree(void **var);
+void	ft_vvector_free(void	**ptr);
 void	ft_vprint_char(void *ptr, size_t index);
 void	ft_vprint_vchar(void *ptr, size_t index);
 void	ft_vprint_int(void *ptr, size_t index);
