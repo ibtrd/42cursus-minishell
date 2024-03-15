@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:22:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 19:12:12 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 15:49:57 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,10 @@
 
 static int	create_env(t_vector *envv)
 {
-	// t_env_var	env_var;
 	int			error;
 
 	(void)envv;
 	error = 0;
-	// env_var.name = ft_strdup("PATH");
-	// if (!env_var.name)
-	// 	error = 1;
-	// env_var.value = ft_strdup("/usr/bin:/bin:/usr/sbin:/sbin");
-	// if (!env_var.value)
-	// 	error = 1;
-	// if (!error)
-	// 	error = ft_vector_add(envv, &env_var);
-	// if (error)
-	// 	ft_vector_free(envv, &free_var);
 	return (error);
 }
 
@@ -43,6 +32,8 @@ static int	copy_env(t_vector *envv, char **env)
 	size_t		i;
 
 	i = 0;
+	if (ft_vector_add_ptr(envv, NULL))
+		return (FAILURE);
 	while (env[i])
 	{
 		// update value (SHLVL, ...)
@@ -50,8 +41,6 @@ static int	copy_env(t_vector *envv, char **env)
 			return (FAILURE);
 		i++;
 	}
-	if (ft_vector_add_ptr(envv, NULL))
-		return (FAILURE);
 	return (SUCCESS);
 }
 
