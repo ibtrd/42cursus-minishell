@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 02:55:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 04:31:50 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 16:40:19 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ int	quote_removal(t_vector *str)
 	while (i < str->total)
 	{
 		mask = ft_vector_get(str, i);
-		if (ft_ischarset(mask->c, __QUOTES) && !(mask->m | __NO_MASK)
-			&& ft_vector_delete(str, i))
-			return (FAILURE);
+		if (ft_ischarset(mask->c, __QUOTES) && !mask->m)
+		{
+			if (ft_vector_delete(str, i))
+				return (FAILURE);
+		}
 		else
 			i++;
 	}
