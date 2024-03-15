@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 15:46:07 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 15:52:41 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,8 @@ static int	expand_string(t_vector *args, size_t *index, t_vector *env)
 	ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
 
 	status = word_splitting(args, index);
-	if (status == FAILURE)
-		return (FAILURE);
-	else if (status == REMOVAL)
-		return (SUCCESS);
+	if (status)
+		return (status == FAILURE);
 
 	str = ft_vector_get(args, *index);
 	printf("\nWORD SPLIT\n"); //DEBUG
