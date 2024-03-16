@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:33:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/15 21:06:11 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/16 16:46:26 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,31 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-static int	resolve_dir(char **dir, t_vector *env, char **argv)
+static int	get_dir(char **dir, t_vector *env, char *name)
 {
-	size_t	argc;
-
-	if (argv && *argv)
+	*dir = ft_getenv(env, name);
+	if (!*dir)
 	{
-		argc = 0;
-		while (argv[argc])
-			argc++;
-		if (argc > 1)
-		{
-			ft_dprintf(2, "%s: cd: too many arguments\n", __MINISHELL);
-			return (1);
-		}
-		*dir = argv[0];
-		if (ft_strcmp(*dir, "-"))
-			return (0);
-		*dir = ft_getenv(env, "OLDPWD");
-		if (!*dir)
-		{
-			ft_dprintf(2, "%s: cd: OLDPWD not set\n", __MINISHELL);
-			return (1);
-		}
+		ft_dprintf(2, "%s: cd: %s not set\n", __MINISHELL, name);
+		return (1);
 	}
-	if (!*argv)
-		*dir = ft_getenv(env, "HOME");
 	return (0);
 }
 
-#include <stdio.h>
+
+static int	resolve_dir(char **dir, t_vector *env, char **argv)
+{if (!*argv)
+		return (get_dir(dir, env, "HOME"));
+	if (argv[1])
+	{
+		ft_dprintf(2, "%s: cd: too many arguments\n", __MINISHELL);
+		return (1);
+	}
+	*dir = argv[0];
+	if (ft_strcmp(*dir, "-"))
+		return (0);
+	return (get_dir(dir, env, "OLDPWD"));
+}
 
 static int	update_wd(t_vector *env, char *oldcwd)
 {
