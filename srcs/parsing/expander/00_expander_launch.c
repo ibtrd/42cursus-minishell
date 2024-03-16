@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 19:34:25 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 22:38:18 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	expand_string(t_vector *args, size_t *index, t_vector *env)
 	if (tilde_expansion(str))
 		return (FAILURE);
 	#ifdef PRINT
-	printf("\nTILDE EXPAND\n"); //DEBUG
+	printf("\nTILDE EXPANSION\n"); //DEBUG
 	ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
 	ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
 	#endif
@@ -78,9 +78,16 @@ static int	expand_string(t_vector *args, size_t *index, t_vector *env)
 	status = word_splitting(args, index);
 	if (status)
 		return (status == FAILURE);
-	str = ft_vector_get(args, *index);
 	#ifdef PRINT
 	printf("\nWORD SPLIT\n"); //DEBUG
+	ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
+	ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
+	#endif
+	str = ft_vector_get(args, *index);
+	if (filemame_expansion(args, index))
+		return(FAILURE);
+	#ifdef PRINT
+	printf("\nFILENAME EXPANSION\n"); //DEBUG
 	ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
 	ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
 	#endif

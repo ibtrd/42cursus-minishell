@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:12:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 05:00:39 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 23:26:03 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ int		is_expandable(t_vector *arg);
 int		tilde_expansion(t_vector *str);
 int		envars_expansion(t_vector *str, t_vector *env);
 int		word_splitting(t_vector *args, size_t *index);
+int		filemame_expansion(t_vector *args, size_t *index);
+int		quote_removal(t_vector *str);
 
 //WORD_SPLITTING
 int		is_separator(t_mask *mask);
 int		is_splittable(t_vector *str);
 
-//QUOTE REMOVAL
-int		quote_removal(t_vector *str);
+//FILENAME_EXPANSION
+int		is_pattern(t_vector *str);
+int		opendir_error(char *dirname);
 
 //ARGS
 int		args_vectors_to_stings(t_vector **args);

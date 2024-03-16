@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander_mask_utils.c                              :+:      :+:    :+:   */
+/*   filename_expansion_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 19:55:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/16 22:27:39 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/15 23:08:15 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/15 23:25:30 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 
 #include "libft.h"
 
-#include "mask.h"
+#include "minishelldef.h"
 
-t_mask	*str_to_mask(char *str, char mask_value)
+int	opendir_error(char *dirname)
 {
-	const size_t	len = ft_strlen(str);
-	t_mask			*insert;
-	size_t			i;
-
-	insert = malloc(sizeof(t_mask) * (len + 1));
-	if (!insert)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		(insert + i)->c = *(str + i);
-		(insert + i)->m = mask_value;
-		i++;
-	}
-	return (insert);
+	ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, dirname, strerror(errno));
+	return (FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 15:43:43 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/15 23:04:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@
 # define __SQUOTE_MASK 0x2
 # define __ENVAR_MASK 0x4
 
-# define __ENVARS_ESCAPE "\'$"
-# define __WORDSPLIT_ESCAPE "\'$"
+# define __WORKING_DIRECTORY "."
 
 //PRINT
 # define __MINISHELL "minishell"
