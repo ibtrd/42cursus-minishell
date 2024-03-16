@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/16 16:38:35 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/16 17:56:29 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 		return (1);
 	if (pid == 0)
 	{
+		// dprintf(2, "pid = %d\n", getpid());	// DEBUG
 		if (piping(exec, wait, pipe) == -1)
 			exit(1);
 		exec->node = node;
@@ -92,7 +93,9 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 		close(1);
 		// dprintf(2, "cmd = %s\n", *(char **)ft_vector_get(node->args, 0));	// DEBUG
 		// if (i)
-		// 	dprintf(2, "\n");	// DEBUG
+		// 	dprintf(2, "a\n");	// DEBUG
+		// if (!i)
+		// 	dprintf(2, "b\n");	// DEBUG
 		exec_cleanup(exec);
 		// printf_redir(exec);	// DEBUG
 		exit(ret);
