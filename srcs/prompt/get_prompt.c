@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:14:29 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/16 18:00:14 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/16 18:15:41 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	*get_prompt(t_vector *env)
 	else
 		prompt = tmp;
 	prompt = ft_strjoin2("\e[34m", prompt, "\e[0m ");
+	add_git(env, &prompt);
 	free(cwd);
 	return (prompt);
 }
