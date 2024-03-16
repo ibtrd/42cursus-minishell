@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:14:29 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/16 17:39:43 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/16 18:00:14 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,6 @@ static int    user_dir(t_vector *env, char **cwd)
         if (!*cwd)
             return (1);
     }
-    // tmp = ft_strstr(*cwd, home);
-    // if (tmp)
-    // {
-    //     *cwd = ft_strjoin2("~", tmp + ft_strlen(home));
-    //     if (!*cwd)
-    //         return (0);
-    // }
     return (0);
 }
 
