@@ -6,13 +6,14 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:14:29 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/16 18:15:41 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 12:38:16 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "env.h"
 #include "minishelldef.h"
+#include "prompt.h"
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -38,9 +39,8 @@ static int    user_dir(t_vector *env, char **cwd)
     return (0);
 }
 
-char	*get_prompt(t_vector *env)
+int	get_prompt(t_vector *env, char **prompt)
 {
-	char	*prompt;
 	char	*cwd;
 	char	*tmp;
 
@@ -48,18 +48,20 @@ char	*get_prompt(t_vector *env)
 	if (!cwd)
 		cwd = ft_strdup(__MINISHELL);
 	if (!cwd)
-		return (NULL);
+		return (1);
 	if (user_dir(env, &cwd))
-		return (NULL);
+		return (1);
 	tmp = ft_strrchr(cwd, '/');
 	if (!tmp)
-		prompt = cwd;
+		*prompt = cwd;
 	else if (*(tmp + 1) && *(tmp + 1) != '/')
-		prompt = ft_strrchr(tmp, '/') + 1;
+		*prompt = ft_strrchr(tmp, '/') + 1;
 	else
-		prompt = tmp;
-	prompt = ft_strjoin2("\e[34m", prompt, "\e[0m ");
-	add_git(env, &prompt);
+		*prompt = tmp;
+	*prompt = ft_sprintf(__PROMPT, *prompt);
 	free(cwd);
-	return (prompt);
+	if (!*prompt)
+		return (1);
+	add_git(env, prompt);
+	return (!*prompt);
 }

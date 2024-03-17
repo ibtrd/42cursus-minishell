@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 19:28:48 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 12:37:02 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "executor.h"
 #include "env.h"
 #include "prompt.h"
+#include "minishelldef.h"
+
 #include <stdlib.h>
 
 int	main(int ac, char **av, char **env)
@@ -32,8 +34,10 @@ int	main(int ac, char **av, char **env)
 	init_env(&envv, env);
 	while (1)
 	{
-		prompt = get_prompt(&envv);
-		input = readline(prompt);
+		if (get_prompt(&envv, &prompt))
+			input = readline(__DEFAULT_PROMPT);
+		else
+			input = readline(prompt);
 		free(prompt);
 		if (!input)
 			break ;
