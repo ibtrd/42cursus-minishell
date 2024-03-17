@@ -156,6 +156,7 @@ SRC += $(addprefix $(PROMPT_DIR),$(PROMPT_SRC))
 
 PROMPT_DIR = prompt/
 PROMPT_SRC = \
+	add_git \
 	get_prompt \
 
 ################################################################################

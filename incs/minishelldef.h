@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishelldef.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/17 14:13:56 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 15:57:19 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@
 //ENV
 # define __MAX_SHLVL 1000
 # define __DEFAULT_PATH "/usr/bin:/bin:/usr/sbin:/sbin"
+
+//PROMPT
+# define __DEFAULT_PROMPT "\e[1m\e[36mminishell\e[0m "
+# define __PROMPT "\e[1m\e[36m%s\e[0m "
+# define __GIT_PROMPT "\e[1m\e[34mgit:(\e[31m%s\e[34m)\e[0m"
 
 //BUILTIN
 # define __ECHO "echo"
