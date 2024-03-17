@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cleanup.c                                     :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 14:38:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 17:28:27 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/17 16:58:32 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/17 17:24:33 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-#include <readline/readline.h>
+#include "libft.h"
 
-int	exec_cleanup(t_executor *exec)
+typedef struct s_minishell
 {
-	ft_vector_free(exec->env);
-	ft_vector_free(&exec->infd);
-	ft_vector_free(&exec->outfd);
-	free_ast(exec->root);
-	rl_clear_history();
-	return (0);
-}
+	t_vector	env;
+	struct special_params
+	{
+		int		exit_status;
+		char	*sh_name;
+	} sp_params;
+}	t_minishell;
+
+int	get_input(t_minishell *minishell, char **input);
+
+#endif
