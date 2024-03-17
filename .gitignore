@@ -7,6 +7,7 @@ minishell_test
 *.log
 TEST_DIR/*
 *.old
+*.txt
 
 # Prerequisites
 *.d

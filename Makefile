@@ -13,6 +13,7 @@ DEPS = $(patsubst %.o,%.d,$(OBJS))
 -include $(DEPS)
 
 SRC = \
+	get_input \
 	main \
 	search_path \
 	$(addprefix $(DEBUG_DIR),$(DEBUG_SRC)) ##REMOVE DEBUG

@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cleanup.c                                     :+:      :+:    :+:   */
+/*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 14:38:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 17:28:27 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/17 17:29:34 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#include "minishell.h"
+#include "minishelldef.h"
+#include "prompt.h"
 
 #include <readline/readline.h>
+#include <readline/history.h>
+#include <stdlib.h>
 
-int	exec_cleanup(t_executor *exec)
+int	get_input(t_minishell *minishell, char **input)
 {
-	ft_vector_free(exec->env);
-	ft_vector_free(&exec->infd);
-	ft_vector_free(&exec->outfd);
-	free_ast(exec->root);
-	rl_clear_history();
+	char		*prompt;
+	if (get_prompt(&minishell->env, &prompt))
+		*input = readline(__DEFAULT_PROMPT);
+	else
+		*input = readline(prompt);
+	free(prompt);
+	if (!*input)
+		return (1) ;
+	add_history(*input);
 	return (0);
 }
