@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 18:11:26 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/16 17:56:29 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ static int	piping(t_executor *exec, int wait, int pipe[2])
 	{
 		close(0);
 		close(1);
+		close(pipe[!wait]);
 		exec_cleanup(exec);
 	}
+	// dprintf(2, "error = %d\n", error);	// DEBUG
 	return (error);
 }
 
@@ -70,19 +72,32 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 {
 	pid_t	pid;
 	int		ret;
+	// static int	i = 0;
 
+	// i = (i + 1) % 2;
+	// dprintf(2, "%d. cmd = %s\n", i, *(char **)ft_vector_get(node->args, 0));	// DEBUG
 	pid = fork();
 	if (pid == -1)
 		return (1);
 	if (pid == 0)
 	{
+		// dprintf(2, "pid = %d\n", getpid());	// DEBUG
 		if (piping(exec, wait, pipe) == -1)
 			exit(1);
 		exec->node = node;
 		ret = node_exec(exec);
+		// usleep(10000);	// DEBUG
+		// if (close(0))
+		// 	printf("close 0 failed\n");
 		close(0);
 		close(1);
+		// dprintf(2, "cmd = %s\n", *(char **)ft_vector_get(node->args, 0));	// DEBUG
+		// if (i)
+		// 	dprintf(2, "a\n");	// DEBUG
+		// if (!i)
+		// 	dprintf(2, "b\n");	// DEBUG
 		exec_cleanup(exec);
+		// printf_redir(exec);	// DEBUG
 		exit(ret);
 	}
 	if (!wait)
