@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 23:04:08 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 00:41:27 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define __UNCLOSED_BRACKET -3
 
 # define REMOVAL 1
+# define MATCH 1
 
 //ENV
 # define __MAX_SHLVL 1000

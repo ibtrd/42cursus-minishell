@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:12:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 23:26:03 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 03:35:38 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # include "ft_vector.h"
 # include "mask.h"
+
+typedef enum e_wildcard
+{
+	_INACTIVE,
+	_ASTERISK,
+	_QUESTION_MARK
+}	t_wildcard;
 
 //INTERPRETATION MASKS
 t_mask	*str_to_mask(char *str, char mask_value);
