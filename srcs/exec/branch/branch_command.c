@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 18:47:26 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 19:42:49 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 		if (access(cmd, F_OK) == 0)
 		{
 			*cmd_path = ft_strdup(cmd);
-			return (0);
+			return (!*cmd_path);
 		}
 		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __NO_FILE);
 		return (1);
@@ -41,7 +41,7 @@ static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 		ft_dprintf(2, "%s: %s\n", cmd, __CMD_NOT_FOUND);
 	if (!path)
 		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __NO_FILE);
-	return (127);
+	return (!!path * 127 + !path);
 }
 
 static int	is_dir(char *path)
@@ -73,14 +73,14 @@ static int	execute_command(t_executor *exec)
 	ft_vector_free(&exec->infd);
 	ft_vector_free(&exec->outfd);
 	cmd_path = NULL;
-	path = ft_strdup(ft_getenv(exec->env, "PATH"));
+	path = ft_getenv(exec->env, "PATH");
+	if (path)
+		path = ft_strdup(path);
 	cmd = (char **)ft_vector_get(exec->node->args, 0);
 	ret = get_cmd_path(cmd[0], &cmd_path, path);
 	free(path);
 	if (ret)
 		return (ret);
-	if(!cmd_path)
-		return (1);
 	if (is_dir(cmd_path))
 		return (126);
 	execve(cmd_path, cmd, exec->env->ptr);
