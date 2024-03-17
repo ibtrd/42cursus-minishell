@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/15 21:34:54 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 14:17:49 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 {
@@ -50,6 +51,25 @@ static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 	return (!!path * 127 + !path);
 }
 
+static int	is_dir(char *path)
+{
+	struct stat	buf;
+
+	if (stat(path, &buf))
+	{
+		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, path, strerror(errno));
+		free(path);
+		return (1);
+	}
+	if (S_ISDIR(buf.st_mode))
+	{
+		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, path, __IS_DIR);
+		free(path);
+		return (1);
+	}
+	return (0);
+}
+
 static int	execute_command(t_executor *exec)
 {
 	char	**cmd;
@@ -68,6 +88,8 @@ static int	execute_command(t_executor *exec)
 		return (ret);
 	if(!cmd_path)
 		return (1);
+	if (is_dir(cmd_path))
+		return (126);
 	execve(cmd_path, cmd, exec->env->ptr);
 	ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, *cmd, strerror(errno));
 	free(cmd_path);
