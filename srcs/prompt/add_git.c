@@ -6,36 +6,19 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:15:50 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 12:56:46 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 18:47:27 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minishelldef.h"
 #include "env.h"
+#include "minishell.h"
 
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <errno.h>
-
-static int	get_git_path(const char *cmd, char **cmd_path, char *path)
-{
-	if (!path)
-		return (1);
-	*cmd_path = ft_strtok(path, ":");
-	while (*cmd_path)
-	{
-		*cmd_path = ft_strjoin2(*cmd_path, "/", cmd);
-		if (!*cmd_path)
-			return (1);
-		if (access(*cmd_path, F_OK) == 0)
-			return (0);
-		free(*cmd_path);
-		*cmd_path = ft_strtok(NULL, ":");
-	}
-	return (1);
-}
 
 static int	execute_git(t_vector *env)
 {
@@ -48,7 +31,7 @@ static int	execute_git(t_vector *env)
 	path = ft_strdup(ft_getenv(env, "PATH"));
 	if (!path)
 		path = ft_strdup(__DEFAULT_PATH);
-	ret = get_git_path(cmd[0], &cmd_path, path);
+	ret = search_path(cmd[0], &cmd_path, path);
 	free(path);
 	if (ret)
 		return (ret);
