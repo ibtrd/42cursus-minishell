@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 18:24:23 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 18:47:26 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "executor.h"
 #include "minishelldef.h"
 #include "env.h"
+#include "minishell.h"
 
 #include <sys/wait.h>
 #include <errno.h>
@@ -21,8 +22,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-
-int	search_path(const char *cmd, char **cmd_path, char *path);
 
 static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 {

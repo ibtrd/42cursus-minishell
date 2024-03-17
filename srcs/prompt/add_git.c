@@ -6,20 +6,19 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:15:50 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 18:39:01 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 18:47:27 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minishelldef.h"
 #include "env.h"
+#include "minishell.h"
 
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <errno.h>
-
-int	search_path(const char *cmd, char **cmd_path, char *path);
 
 static int	execute_git(t_vector *env)
 {
