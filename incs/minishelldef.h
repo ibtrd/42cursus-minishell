@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/17 00:41:27 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 23:17:33 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 # define REMOVAL 1
 # define MATCH 1
+# define NO_MATCH 0
 
 //ENV
 # define __MAX_SHLVL 1000
