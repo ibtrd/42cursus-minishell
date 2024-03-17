@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishelldef.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 15:43:43 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 14:13:56 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@
 # define __UNSUPPORTED_ERROR "unsupported operator"
 # define __AST_ERROR "AST building failed"
 # define __CMD_NOT_FOUND "command not found"
+# define __IS_DIR "Is a directory"
 
 #endif //MINISHELLDEF_H
