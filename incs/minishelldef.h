@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/18 05:06:49 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/18 18:15:37 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@
 # define __DEFAULT_PROMPT "\e[1m\e[36mminishell\e[0m "
 # define __PROMPT "\e[1m\e[36m%s\e[0m "
 # define __GIT_PROMPT "\e[1m\e[34mgit:(\e[31m%s\e[34m)\e[0m"
-# define __SECONDARY_PROMPT " \e[33;1m>\e[0m "
+# define __SECONDARY_PROMPT ">"
+
+# define C_YELLOW "\001\e[33;1m\002"
+# define C_RESET "\001\e[0m\002"
 
 //BUILTIN
 # define __ECHO "echo"

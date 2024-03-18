@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/18 05:07:34 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/18 18:17:24 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,14 @@ static int	complete_input(char **old_input)
 {
 	char	*new_input;
 	char	*joined_inputs;
+	char	*prompt;
 
-	new_input = readline(__SECONDARY_PROMPT);
+
+	prompt = ft_sprintf(" %s%s%s ", C_YELLOW, __SECONDARY_PROMPT, C_RESET);
+	if (!prompt)
+		return (FAILURE);
+	new_input = readline(prompt);
+	free(prompt);
 	if (!new_input)
 		return (FAILURE);
 	joined_inputs = ft_strjoin2(*old_input, "\n", new_input);
