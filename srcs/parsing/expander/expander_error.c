@@ -1,16 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vsort_ascii.c                                   :+:      :+:    :+:   */
+/*   expander_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 04:35:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/17 04:36:53 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/18 01:02:57 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/18 01:04:52 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_vsort_ascii(void *ptr1, void*ptr2)
-{
-	return (ft_strcmp(*(char *)ptr1, *(char *)ptr2));
-}

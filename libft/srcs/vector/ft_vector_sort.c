@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 03:58:48 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/17 04:33:29 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/18 02:55:40 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	ft_vector_sort(t_vector *v, int (*cmp)(void *, void *))
 
 	if (!v || !cmp)
 		return (FAILURE);
+	if (!v->total)
+		return (SUCCESS);
 	tmp = malloc(v->size);
 	if (!tmp)
 		return (FAILURE);

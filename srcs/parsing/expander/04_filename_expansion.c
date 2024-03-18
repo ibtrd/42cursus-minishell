@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:29:46 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/18 02:31:07 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/18 03:15:45 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 static int	scan_directory(DIR *dir, t_vector *pattern, t_vector *matches);
 static int	search_for_matches(t_vector *pattern, t_vector *matches);
 static int	add_match(char *file, t_vector *matches);
+
 
 int	filemame_expansion(t_vector *args, size_t *index)
 {
@@ -55,6 +56,9 @@ static int	search_for_matches(t_vector *pattern, t_vector *matches)
 		return (opendir_error(__WORKING_DIRECTORY));
 	if (scan_directory(dir, pattern, matches))
 		return (FAILURE);
+	ft_vector_printi(matches, ft_vprint_vchar, "Expand");
+	ft_vector_sort(matches, vsort_masks);
+	ft_vector_printi(matches, ft_vprint_vchar, "SORTED");
 	return (SUCCESS);
 }
 
@@ -84,6 +88,7 @@ static int	scan_directory(DIR *dir, t_vector *pattern, t_vector *matches)
 	return (errno);
 }
 
+
 static int	add_match(char *file, t_vector *matches)
 {
 	t_vector	match;
@@ -105,7 +110,26 @@ static int	add_match(char *file, t_vector *matches)
 		ft_vector_free(&match);
 		return (FAILURE);
 	}
-	ft_vector_printi(&match, ft_vprint_char, "test");
 	free(mask);
 	return (SUCCESS);
+}
+
+int	vsort_masks(void *ptr1, void*ptr2)
+{
+	const t_mask	*str1 = ((t_vector *)ptr1)->ptr;
+	const t_mask	*str2 = ((t_vector *)ptr2)->ptr;
+	char			c1;
+	char			c2;
+	size_t			i;
+
+	i = 0;
+	c1 = ft_tolower(str1[i].c);
+	c2 = ft_tolower(str2[i].c);
+	while (c1 && c2 && c1 == c2)
+	{
+		i++;
+		c1 = ft_tolower(str1[i].c);
+		c2 = ft_tolower(str2[i].c);
+	}
+	return ((c1 - c2) > 0);
 }
