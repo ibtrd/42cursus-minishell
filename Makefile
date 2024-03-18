@@ -282,15 +282,18 @@ fclean :
 re : fclean
 	$(MAKE)
 
+NORM_LOG = $(MAKE_DIR)norminette.log
+
 .PHONY : norminette
 norminette :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
-	norminette $(INCS_DIR) $(SRCS_DIR) > norminette.log || true
-	if [ $$(< norminette.log grep Error | wc -l) -eq 0 ]; \
+	mkdir -p $(dir $(NORM_LOG))
+	norminette $(INCS_DIR) $(SRCS_DIR) > $(NORM_LOG) || true
+	if [ $$(< $(NORM_LOG) grep Error | wc -l) -eq 0 ]; \
 		then echo "$(NAME): \e[32;49;1mOK!\e[0m"; \
 		else echo "$(NAME): \e[31;49;1mKO!\e[0m" \
-			&& < norminette.log grep Error; fi
-	$(RM) norminette.log
+			&& < $(NORM_LOG) grep Error; fi
+	$(RM) $(NORM_LOG)
 
 .PHONY : print%
 print% :
