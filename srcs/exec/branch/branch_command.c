@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/15 17:12:25 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 18:47:26 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 #include "executor.h"
 #include "minishelldef.h"
 #include "env.h"
+#include "minishell.h"
 
 #include <sys/wait.h>
 #include <errno.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 {
@@ -30,44 +32,61 @@ static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 			*cmd_path = ft_strdup(cmd);
 			return (0);
 		}
+		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __NO_FILE);
+		return (1);
 	}
-	if (path && cmd && *cmd)
-	{
-		*cmd_path = ft_strtok(path, ":");
-		while (*cmd_path)
-		{
-			*cmd_path = ft_strjoin2(*cmd_path, "/", cmd);
-			if (!*cmd_path)
-				return (1);
-			if (access(*cmd_path, F_OK) == 0)
-				return (0);
-			free(*cmd_path);
-			*cmd_path = ft_strtok(NULL, ":");
-		}
-	}
-	ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __CMD_NOT_FOUND);
+	if (!search_path(cmd, cmd_path, path))
+		return (0);
+	if (path && !*cmd_path)
+		ft_dprintf(2, "%s: %s\n", cmd, __CMD_NOT_FOUND);
+	if (!path)
+		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __NO_FILE);
 	return (127);
+}
+
+static int	is_dir(char *path)
+{
+	struct stat	buf;
+
+	if (stat(path, &buf))
+	{
+		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, path, strerror(errno));
+		free(path);
+		return (1);
+	}
+	if (S_ISDIR(buf.st_mode))
+	{
+		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, path, __IS_DIR);
+		free(path);
+		return (1);
+	}
+	return (0);
 }
 
 static int	execute_command(t_executor *exec)
 {
 	char	**cmd;
 	char	*path;
+	char	*cmd_path;
 	int		ret;
 
 	ft_vector_free(&exec->infd);
 	ft_vector_free(&exec->outfd);
-	path = NULL;
+	cmd_path = NULL;
+	path = ft_strdup(ft_getenv(exec->env, "PATH"));
 	cmd = (char **)ft_vector_get(exec->node->args, 0);
-	ret = get_cmd_path(cmd[0], &path, ft_getenv(exec->env, "PATH"));
+	ret = get_cmd_path(cmd[0], &cmd_path, path);
+	free(path);
 	if (ret)
 		return (ret);
-	if(!path)
+	if(!cmd_path)
 		return (1);
-	execve(path, cmd, exec->env->ptr);
+	if (is_dir(cmd_path))
+		return (126);
+	execve(cmd_path, cmd, exec->env->ptr);
 	ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, *cmd, strerror(errno));
-	free(path);
-	return (1);
+	free(cmd_path);
+	return (126);
 }
 
 static int	command_fork(t_executor *exec)

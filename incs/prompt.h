@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 16:34:10 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/16 15:26:52 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/15 19:14:51 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/17 12:32:22 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#ifndef PROMPT_H
+# define PROMPT_H
+
 #include "libft.h"
 
-#include <stdlib.h>
-#include <unistd.h>
+int		add_git(t_vector *env, char **prompt);
+int		get_prompt(t_vector *env, char **prompt);
 
-int	builtin_exit(t_executor *exec, char **argv)
-{
-	(void)argv;
-	exec_cleanup(exec);
-	close(0);
-	close(1);
-	exit(0);
-	return (0);
-}
+#endif

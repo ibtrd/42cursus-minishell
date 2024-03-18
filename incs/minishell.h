@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 16:34:10 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/16 15:26:52 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/17 16:58:32 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/17 18:47:36 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
 #include "libft.h"
 
-#include <stdlib.h>
-#include <unistd.h>
-
-int	builtin_exit(t_executor *exec, char **argv)
+typedef struct s_minishell
 {
-	(void)argv;
-	exec_cleanup(exec);
-	close(0);
-	close(1);
-	exit(0);
-	return (0);
-}
+	t_vector	env;
+	struct special_params
+	{
+		int		exit_status;
+		char	*sh_name;
+	} sp_params;
+}	t_minishell;
+
+int	get_input(t_minishell *minishell, char **input);
+int	search_path(const char *cmd, char **cmd_path, char *path);
+
+#endif

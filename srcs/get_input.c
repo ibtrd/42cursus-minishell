@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 16:34:10 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/16 15:26:52 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/17 17:29:34 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
-#include "libft.h"
+#include "minishell.h"
+#include "minishelldef.h"
+#include "prompt.h"
 
+#include <readline/readline.h>
+#include <readline/history.h>
 #include <stdlib.h>
-#include <unistd.h>
 
-int	builtin_exit(t_executor *exec, char **argv)
+int	get_input(t_minishell *minishell, char **input)
 {
-	(void)argv;
-	exec_cleanup(exec);
-	close(0);
-	close(1);
-	exit(0);
+	char		*prompt;
+	if (get_prompt(&minishell->env, &prompt))
+		*input = readline(__DEFAULT_PROMPT);
+	else
+		*input = readline(prompt);
+	free(prompt);
+	if (!*input)
+		return (1) ;
+	add_history(*input);
 	return (0);
 }

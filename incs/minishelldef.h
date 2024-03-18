@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/18 01:15:35 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/18 20:13:36 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@
 //ENV
 # define __MAX_SHLVL 1000
 # define __DEFAULT_PATH "/usr/bin:/bin:/usr/sbin:/sbin"
+
+//PROMPT
+# define __DEFAULT_PROMPT "\e[1m\e[36mminishell\e[0m "
+# define __PROMPT "\e[1m\e[36m%s\e[0m "
+# define __GIT_PROMPT "\e[1m\e[34mgit:(\e[31m%s\e[34m)\e[0m"
 
 //BUILTIN
 # define __ECHO "echo"
@@ -84,5 +89,7 @@
 # define __UNSUPPORTED_ERROR "unsupported operator"
 # define __AST_ERROR "AST building failed"
 # define __CMD_NOT_FOUND "command not found"
+# define __IS_DIR "Is a directory"
+# define __NO_FILE "No such file or directory"
 
 #endif //MINISHELLDEF_H

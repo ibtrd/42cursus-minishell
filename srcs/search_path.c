@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   search_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 16:34:10 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/16 15:26:52 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/17 18:08:34 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/17 18:09:44 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
 #include "libft.h"
 
-#include <stdlib.h>
 #include <unistd.h>
+#include <stdlib.h>
 
-int	builtin_exit(t_executor *exec, char **argv)
+int	search_path(const char *cmd, char **cmd_path, char *path)
 {
-	(void)argv;
-	exec_cleanup(exec);
-	close(0);
-	close(1);
-	exit(0);
-	return (0);
+	if (!path)
+		return (1);
+	*cmd_path = ft_strtok(path, ":");
+	while (*cmd_path)
+	{
+		*cmd_path = ft_strjoin2(*cmd_path, "/", cmd);
+		if (!*cmd_path)
+			return (1);
+		if (access(*cmd_path, F_OK) == 0)
+			return (0);
+		free(*cmd_path);
+		*cmd_path = ft_strtok(NULL, ":");
+	}
+	return (1);
 }
