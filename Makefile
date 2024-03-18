@@ -2,7 +2,8 @@ NAME = minishell
 
 # *** FILES ****************************************************************** #
 
-BUILD_DIR := .build/$(shell git branch --show-current)/
+MAKE_DIR := .make/
+BUILD_DIR := $(MAKE_DIR)$(shell git branch --show-current)/
 
 SRCS_DIR = srcs/
 SRCS = $(addsuffix .c, $(SRC))
@@ -10,7 +11,6 @@ SRCS = $(addsuffix .c, $(SRC))
 OBJS = $(patsubst %.c,$(BUILD_DIR)%.o,$(SRCS))
 
 DEPS = $(patsubst %.o,%.d,$(OBJS))
--include $(DEPS)
 
 SRC = \
 	get_input \
@@ -197,7 +197,7 @@ MAKEFLAGS	=	--no-print-directory
 
 # *** COMPILATION MODES ****************************************************** #
 
-MODE_TRACE = .trace 
+MODE_TRACE = $(MAKE_DIR).trace 
 LAST_MODE = $(shell cat $(MODE_TRACE) 2>/dev/null)
 
 MODE ?=
@@ -230,7 +230,8 @@ endif
 # *** TARGETS **************************************************************** #
 
 .PHONY : all
-all : $(NAME) 
+all : $(NAME)
+
 
 $(NAME) : $(LIBS_PATH) $(OBJS) | ERROR_CHECK
 	@printf "\n🔗 Linking $(NAME)...\n"
@@ -274,7 +275,7 @@ clean :
 .PHONY : fclean
 fclean :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
-	rm -rf $(BUILD_DIR) $(NAME) $(MODE_TRACE) $(NAME)_test
+	rm -rf $(MAKE_DIR) $(NAME)
 	echo "$(YELLOW) $(NAME) files removed! $(RESET)"
 
 .PHONY : re
@@ -337,6 +338,8 @@ $(AVAILABLE_TESTS) :
 #  ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
+
+-include $(DEPS)
 
 .DEFAULT_GOAL := all
 

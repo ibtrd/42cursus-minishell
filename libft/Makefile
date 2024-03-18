@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 07:15:37 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/18 16:25:28 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,12 @@ NAME = libft.a
 
 include libft_srcs.mk
 
-BUILD_DIR := .build/$(shell git branch --show-current)/
+MAKE_DIR = .make/
+BUILD_DIR := $(MAKE_DIR)$(shell git branch --show-current)/
 
 OBJS = $(patsubst $(SRCS_DIR)%.c,$(BUILD_DIR)%.o,$(SRCS))
 
 DEPS = $(patsubst %.o,%.d,$(OBJS))
--include $(DEPS)
 
 INCS_DIR = incs/
 
@@ -39,7 +39,7 @@ MAKEFLAGS	=	--no-print-directory
 
 # *** COMPILATION MODES ****************************************************** #
 
-MODE_TRACE = .trace 
+MODE_TRACE = $(MAKE_DIR).trace 
 LAST_MODE = $(shell cat $(MODE_TRACE) 2>/dev/null)
 
 MODE ?=
@@ -117,6 +117,8 @@ print% :
 	@echo $($(patsubst print%,%,$@))
 
 # *** SPECIAL TARGETS ******************************************************** #
+
+-include $(DEPS)
 
 .DEFAULT_GOAL := all
 
