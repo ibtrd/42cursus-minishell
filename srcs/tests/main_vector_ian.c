@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 01:48:20 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 02:48:20 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 04:21:40 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int main(void)
 
 	ft_vector_merge(&v1, 0, &v2);
 	ft_vector_printi(&v1, ft_vprint_int, "MERGE");
+	ft_vector_sort(&v1, ft_vsort_intascend);
+	ft_vector_printi(&v1, ft_vprint_int, "SORT");
 	ft_vector_free(&v1);
 	// i = 0;
 	// while (i < 20)
