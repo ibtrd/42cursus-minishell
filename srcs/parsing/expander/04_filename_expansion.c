@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:29:46 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/17 23:17:42 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/18 02:31:07 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,78 +21,91 @@
 
 #include "stdio.h" //REMOVE
 
-static int	search_for_matches(t_vector *args, size_t *index);
-// static int	check_match(char *entry, t_mask *str, t_wildcard mode);
-static int	is_match(char *str, t_mask *pattern, int si, int pi);
+static int	scan_directory(DIR *dir, t_vector *pattern, t_vector *matches);
+static int	search_for_matches(t_vector *pattern, t_vector *matches);
+static int	add_match(char *file, t_vector *matches);
 
 int	filemame_expansion(t_vector *args, size_t *index)
 {
 	t_vector	*str;
+	t_vector	matches;
 
 	str = ft_vector_get(args, *index);
 	if (!is_pattern(str))
 		return (SUCCESS);
-	printf("\twildcard detected!\n");
-	return (search_for_matches(args, index));
-}
-
-static int	search_for_matches(t_vector *args, size_t *index)
-{
-	t_vector		matches;
-	DIR				*wd;
-	struct dirent	*entry;
-
-	if (ft_vector_init(&matches, (t_vinfos){sizeof(t_vector), 0, ft_vvector_free}))
+	if (ft_vector_init(&matches,
+			(t_vinfos){sizeof(t_vector), 0, ft_vvector_free}))
 		return (FAILURE);
-	wd = opendir(__WORKING_DIRECTORY);
-	if (!wd)
-		return (opendir_error(__WORKING_DIRECTORY));
-	errno = 0;
-	entry = readdir(wd);
-	while (entry)
-	{
-		printf("entry= %s\n", entry->d_name);
-		if (is_match(entry->d_name, ((t_vector *)ft_vector_get(args, *index))->ptr, 0, 0) == MATCH)
-			printf ("\e[32mMATCH! %s\e[0m\n\n", entry->d_name);
-		else
-			printf ("\e[31mMeh... %s\e[0m\n\n", entry->d_name);
-		entry = readdir(wd);
-	}
-	printf("\n");
-	if (errno)
+	if (search_for_matches(str, &matches)
+		|| (matches.total && (ft_vector_delete(args, *index)
+				|| ft_vector_merge(args, *index, &matches))))
 	{
 		ft_vector_free(&matches);
 		return (FAILURE);
 	}
-	closedir(wd);
-	ft_vector_free(&matches);
-	(void)args;
-	(void)index;
+	return (MATCH);
+}
+
+static int	search_for_matches(t_vector *pattern, t_vector *matches)
+{
+	DIR				*dir;
+
+	dir = opendir(__WORKING_DIRECTORY);
+	if (!dir)
+		return (opendir_error(__WORKING_DIRECTORY));
+	if (scan_directory(dir, pattern, matches))
+		return (FAILURE);
 	return (SUCCESS);
 }
 
-static int	is_wildcard(t_mask *mask, char wildcard);
-
-static int	is_match(char *str, t_mask *pattern, int si, int pi)
+static int	scan_directory(DIR *dir, t_vector *pattern, t_vector *matches)
 {
-	if (!str[si] && !pattern[pi].c)
-		return (MATCH);
-	if (ft_ischarset(pattern[pi].c, __QUOTES))
-		return (is_match(str, pattern, si, pi + 1));
-	if (pattern[pi].c && is_wildcard(pattern + pi, '*'))
-		return (is_match(str, pattern, si, pi + 1)
-			|| (str[si] && is_match(str, pattern, si + 1, pi)));
-	if (str[si] && pattern[pi].c
-		&& (str[si] == pattern[pi].c || is_wildcard(pattern + pi, '?')))
-		return (is_match(str, pattern, si + 1, pi + 1));
-	return (NO_MATCH);
+	struct dirent	*entry;
+
+	errno = 0;
+	entry = readdir(dir);
+	while (entry)
+	{
+		if (is_match(entry->d_name, pattern->ptr))
+		{
+			printf ("\e[32mMATCH! %s\e[0m\n\n", entry->d_name);
+			if (add_match(entry->d_name, matches))
+			{
+				closedir(dir);
+				return (FAILURE);
+			}
+		}
+		else //REMOVE
+			printf ("\e[31mMeh... %s\e[0m\n\n", entry->d_name); //REMOVE
+		entry = readdir(dir);
+	}
+	printf("\n");
+	closedir(dir);
+	return (errno);
 }
 
-static int	is_wildcard(t_mask *mask, char wildcard)
+static int	add_match(char *file, t_vector *matches)
 {
-	if (wildcard == '*')
-		return (mask->c == '*' && !mask->m);
-	if (wildcard == '?')
-		return (mask->c == '?' && !mask->m);
-	return (FAILURE);
+	t_vector	match;
+	t_mask		*mask;
+
+	if (ft_vector_init(&match, (t_vinfos){sizeof(t_mask), 0, NULL}))
+		return (FAILURE);
+	mask = str_to_mask(file, __FILE_MASK);
+	if (!mask)
+	{
+		ft_vector_free(&match);
+		return (FAILURE);
+	}
+	if (ft_vector_join(&match, mask, ft_strlen(file))
+		|| ft_vector_add(&match, "\0")
+		|| ft_vector_add(matches, &match))
+	{
+		free(mask);
+		ft_vector_free(&match);
+		return (FAILURE);
+	}
+	ft_vector_printi(&match, ft_vprint_char, "test");
+	free(mask);
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/15 23:58:52 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/18 00:41:23 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ EXPANDER_SRC = \
 	expander_mask_utils \
 	expander_utils \
 	filename_expansion_utils \
+	is_match \
 
 # ********** AST ********** #
 

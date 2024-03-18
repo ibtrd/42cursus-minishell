@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/17 23:17:33 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/18 01:15:35 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@
 //PARSING CHARSETS
 # define __DEFAULT_IFS " \t\n"
 # define __METACHARACTER "&|<>();"
-# define __INTERPRETERS "\"\'$*~"
+# define __INTERPRETERS "\"\'$*?~"
 # define __QUOTES "\"\'"
 
 //EXPANDER
@@ -73,6 +73,7 @@
 # define __DQUOTE_MASK 0x1
 # define __SQUOTE_MASK 0x2
 # define __ENVAR_MASK 0x4
+# define __FILE_MASK 0x8
 
 # define __WORKING_DIRECTORY "."
 

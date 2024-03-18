@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 06:16:41 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 22:25:18 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 23:30:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	is_pattern(t_vector *str)
 	while (i < str->total)
 	{
 		mask = ft_vector_get(str, i);
-		if (mask->c == '*' && !mask->m)
+		if ((mask->c == '*' || mask->c == '?') && !mask->m)
 			return (1);
 		i++;
 	}

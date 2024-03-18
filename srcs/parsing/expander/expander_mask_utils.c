@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:55:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/16 22:27:39 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/18 02:25:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@
 
 #include "mask.h"
 
+#include <stdio.h>
+
 t_mask	*str_to_mask(char *str, char mask_value)
 {
 	const size_t	len = ft_strlen(str);
 	t_mask			*insert;
 	size_t			i;
 
+	printf("debuf: creating mask %s\n", str);
 	insert = malloc(sizeof(t_mask) * (len + 1));
 	if (!insert)
 		return (NULL);

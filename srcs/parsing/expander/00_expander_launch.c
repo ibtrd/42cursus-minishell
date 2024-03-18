@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 22:38:18 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/18 02:21:09 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ static int	expand_string(t_vector *args, size_t *index, t_vector *env)
 	ft_vector_print(ft_vector_get(args, *index), debug_print_mask, "mask"); //DEBUG
 	#endif
 	str = ft_vector_get(args, *index);
-	if (filemame_expansion(args, index))
-		return(FAILURE);
+	status = filemame_expansion(args, index);
+	if (status)
+		return (status == FAILURE);
 	#ifdef PRINT
 	printf("\nFILENAME EXPANSION\n"); //DEBUG
 	ft_vector_print(ft_vector_get(args, *index), ft_vprint_char, "arg "); //DEBUG
