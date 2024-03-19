@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 19:31:37 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/19 17:49:04 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include "ft_vector.h"
 
+# include "minishell.h"
 # include "ast.h"
 
 enum e_quote
@@ -34,7 +35,7 @@ typedef struct s_escape
 }	t_escape;
 
 //PARSER
-t_astnode	*commandline_parser(char *input, t_vector *env);
+t_astnode	*commandline_parser(char *input, t_minishell *env);
 t_astnode	*ast_build(t_vector *lexer);
 
 int			syntax_checker(char *cmdline);
@@ -51,6 +52,6 @@ void		set_escape_mode(t_escape *escape, char c);
 void		init_escape(t_escape *escape);
 
 //EXPANDER
-int			expander_launch(t_astnode *node, t_vector *env);
+int			expander_launch(t_astnode *node, t_minishell *env);
 
 #endif //PARSING_H

@@ -60,6 +60,7 @@ EXPANDER_SRC = \
 	args_vectors_to_strings \
 	05_quote_removal \
 	expander_utils \
+	special_parameter_utils \
 
 # ********** AST ********** #
 
