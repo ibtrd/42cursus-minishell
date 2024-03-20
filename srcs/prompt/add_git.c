@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:15:50 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 14:22:10 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 14:25:00 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ static int	git_fork(t_vector *env, int *pipefd, int try)
 		close(pipefd[0]);
 		status = dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[1]);
-		// if (status != -1)
-		// 	status = dup2(minishell->fdnull, STDERR_FILENO);
-		// close(minishell->fdnull);
 		if (status == -1)
 			exit(1);
 		status = execute_git(env, try);
@@ -92,7 +89,6 @@ static int	git_branch(t_vector *env, char **branch)
 		if (pipe(pipefd) == -1)
 			return (1);
 		ret = git_fork(env, pipefd, i);
-		dprintf(2, "ret%d = %d\n", i, ret);
 		if (ret)
 			close(pipefd[0]);
 		i++;
