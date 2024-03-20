@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 22:49:31 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 19:28:57 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 16:34:13 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@
 #include "ast.h"
 #include "parsing.h"
 
-#include "testing.h" //REMOVE
-
 static int	commandline_lexer(char **input, t_vector *lexer);
 static int	lexer_failure(char *ptr, char *error);
 
-t_astnode	*commandline_parser(char *input, t_vector *env)
+t_astnode	*commandline_parser(char *input, t_minishell *env)
 {
 	t_vector	lexer;
 	t_astnode	*root;
@@ -48,8 +46,6 @@ static int	commandline_lexer(char **input, t_vector *lexer)
 {
 	char		*cmdline;
 
-	if (syntax_checker(*input))
-		return (lexer_failure(*input, NULL));
 	if (cmdline_addspace(*input, &cmdline))
 		return (lexer_failure(*input, strerror(errno)));
 	free(*input);

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 18:47:36 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 16:34:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include "libft.h"
+# include "ft_vector.h"
 
 typedef struct s_minishell
 {
 	t_vector	env;
-	struct special_params
+	struct s_special_params
 	{
 		int		exit_status;
 		char	*sh_name;

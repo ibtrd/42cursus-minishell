@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:46:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 18:06:12 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/19 23:01:39 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 #include "env.h"
 #include "mask.h"
 
-static int	search_envars(t_vector *arg, size_t index, t_vector *env);
+static int	search_envars(t_vector *str, size_t index, t_minishell *env);
 static char	*get_var_name(t_vector *arg, size_t index);
 static int	expand_var(t_vector *str, size_t index, char *name, char *value);
 static int	var_not_found(t_vector *str, size_t index, char *name);
 
-int	envars_expansion(t_vector *str, t_vector *env)
+int	envars_expansion(t_vector *str, t_minishell *env)
 {
 	t_mask	*mask;
 	size_t	i;
@@ -39,24 +39,26 @@ int	envars_expansion(t_vector *str, t_vector *env)
 		i++;
 	}
 	return (SUCCESS);
-	(void)env;
 }
 
-static int	search_envars(t_vector *arg, size_t index, t_vector *env)
+static int	search_envars(t_vector *str, size_t index, t_minishell *env)
 {
 	char	*name;
-	void	*ptr;
+	char	*value;
+	t_mask	*mask;
 
-	ptr = ft_vector_get(arg, index + 1);
-	if (!ptr)
+	mask = ft_vector_get(str, index + 1);
+	if (!mask)
 		return (SUCCESS);
-	name = get_var_name(arg, index);
+	if ((!ft_isalnum(mask->c) && mask->c != '_') || mask->c == '0')
+		return (is_special_param(str, index, mask->c, env));
+	name = get_var_name(str, index);
 	if (!name)
 		return (FAILURE);
-	ptr = ft_getenv(env, name);
-	if (!ptr)
-		return (var_not_found(arg, index, name));
-	return (expand_var(arg, index, name, (char *)ptr));
+	value = ft_getenv(&env->env, name);
+	if (!value)
+		return (var_not_found(str, index, name));
+	return (expand_var(str, index, name, value));
 }
 
 static char	*get_var_name(t_vector *arg, size_t index)
@@ -70,16 +72,11 @@ static char	*get_var_name(t_vector *arg, size_t index)
 		return (NULL);
 	i = 0;
 	mask = ft_vector_get(arg, ++index);
-	name[i++] = mask->c;
-	if (ft_isalnum(mask->c) || mask->c == '_')
+	while (mask && (ft_isalnum(mask->c) || mask->c == '_')
+		&& index < arg->total)
 	{
+		name[i++] = mask->c;
 		mask = ft_vector_get(arg, ++index);
-		while (mask && (ft_isalnum(mask->c) || mask->c == '_')
-			&& index < arg->total)
-		{
-			name[i++] = mask->c;
-			mask = ft_vector_get(arg, ++index);
-		}
 	}
 	name[i] = '\0';
 	return (name);
@@ -108,13 +105,6 @@ static int	expand_var(t_vector *str, size_t index, char *name, char *value)
 
 static int	var_not_found(t_vector *str, size_t index, char *name)
 {
-	if (!ft_isalnum(*name) && *name != '_' )
-	{
-		((t_mask *)ft_vector_get(str, index))->m |= __ENVAR_MASK;
-		((t_mask *)ft_vector_get(str, index + 1))->m |= __ENVAR_MASK;
-		free(name);
-		return (SUCCESS);
-	}
 	if (ft_vector_deleten(str, index, ft_strlen(name) + 1))
 	{
 		free(name);

@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/18 20:13:42 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/20 16:38:26 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRC += $(addprefix $(PARSING_DIR),$(PARSING_SRC))
 PARSING_DIR = parsing/
 PARSING_SRC = \
 	escape_utils \
-	syntax_checker \
+	check_unclosed_input \
 	commandline_parser \
 
 #		# ***** LEXER ***** #
@@ -73,6 +73,7 @@ EXPANDER_SRC = \
 	args_vectors_to_strings \
 	expander_mask_utils \
 	expander_utils \
+	special_parameter_utils \
 	filename_expansion_utils \
 	is_match \
 
@@ -325,6 +326,7 @@ VALGRIND = \
 	--leak-check=full \
 	--trace-children=yes \
 	--track-fds=yes \
+	--show-leak-kinds=all \
 
 .PHONY : valgrind
 valgrind : debug
@@ -338,7 +340,7 @@ AVAILABLE_TESTS = \
 	env \
 	executor \
 	init_env \
-	syntax_checker \
+	check_unclosed_input \
 	lexer \
 	lexerfull \
 	dprintf \

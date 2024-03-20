@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_checker.c                                   :+:      :+:    :+:   */
+/*   check_unclosed_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:41:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 18:14:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/18 04:33:17 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,40 +23,20 @@ static int	check_parentheses(char *cmdline);
 
 /*
 	DESCRIPTION
-	The syntax_checker() function analyse the string pointed by cmdline
-	to check if each ' and/or " quote is closed by the the end of the string.
+	The check_unclosed_input() function analyse the string pointed by cmdline
+	to check if each ' and " quotes are closed by the the end of the string.
 	It then check that no parenthesis is left open by the end of the string.
-	On syntax error, the syntax_checker() function print an error
-	message on standard error.
 	
 	RETURN VALUE
-	The syntax_checker() function return 0 if no syntax error has been
-	detected. On error, syntax_checker() return -1.
+	The check_unclosed_input() function return 0 if no syntax error has been
+	detected. On error, check_unclosed_input() return -1.
 */
 
-int	syntax_checker(char *cmdline)
+int	check_unclosed_input(char *cmdline)
 {
-	int			status;
-	char		*str;
-
-	status = check_quotes(cmdline);
-	if (status == __UNCLOSED_SINGLE_QUOTE)
-		str = "`'' quote";
-	else if (status == __UNCLOSED_DOUBLE_QUOTE)
-		str = "`\"' quote";
-	else
-	{
-		status = check_parentheses(cmdline);
-		if (status == __UNCLOSED_BRACKET)
-			str = "`(' bracket";
-	}
-	if (!status)
-		return (SUCCESS);
-	ft_dprintf(STDERR_FILENO, "%s: %s %s\n",
-		__MINISHELL,
-		__UNCLOSED_ERROR,
-		str);
-	return (FAILURE);
+	if (check_quotes(cmdline) || check_parentheses(cmdline))
+		return (FAILURE);
+	return (SUCCESS);
 }
 
 static int	check_quotes(char *cmdline)
@@ -80,10 +60,10 @@ static int	check_quotes(char *cmdline)
 		i++;
 	}
 	if (single_quotes % 2)
-		return (__UNCLOSED_SINGLE_QUOTE);
+		return (FAILURE);
 	if (double_quotes % 2)
-		return (__UNCLOSED_DOUBLE_QUOTE);
-	return (0);
+		return (FAILURE);
+	return (SUCCESS);
 }
 
 static int	check_parentheses(char *cmdline)
@@ -105,7 +85,7 @@ static int	check_parentheses(char *cmdline)
 		i++;
 	}
 	if (parenthesis > 0)
-		return (__UNCLOSED_BRACKET);
+		return (FAILURE);
 	return (SUCCESS);
 }
 
