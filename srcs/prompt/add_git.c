@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:15:50 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 18:47:27 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 19:04:07 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ static int	execute_git(t_vector *env)
 	int		ret;
 
 	cmd_path = NULL;
-	path = ft_strdup(ft_getenv(env, "PATH"));
+	path = ft_getenv(env, "PATH");
+	if (path)
+		path = ft_strdup(path);
 	if (!path)
 		path = ft_strdup(__DEFAULT_PATH);
 	ret = search_path(cmd[0], &cmd_path, path);
@@ -41,6 +43,7 @@ static int	execute_git(t_vector *env)
 	execve(cmd_path, cmd, env->ptr);
 	close(1);
 	free(cmd_path);
+	ft_vector_free(env);
 	return (1);
 }
 
