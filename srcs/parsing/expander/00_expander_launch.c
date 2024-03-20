@@ -6,20 +6,21 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 19:34:25 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/19 17:49:32 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishelldef.h"
+#include "minishell.h"
 #include "ast.h"
 #include "env.h"
 #include "expander.h"
 #include "interpreter.h"
 
-static int	expand_node(t_astnode *node, t_vector *env);
-static int	expand_string(t_vector *args, size_t *index, t_vector *env);
+static int	expand_node(t_astnode *node, t_minishell *env);
+static int	expand_string(t_vector *args, size_t *index, t_minishell *env);
 
-int	expander_launch(t_astnode *node, t_vector *env)
+int	expander_launch(t_astnode *node, t_minishell *env)
 {
 	if (!node)
 		return (SUCCESS);
@@ -30,7 +31,7 @@ int	expander_launch(t_astnode *node, t_vector *env)
 	return (SUCCESS);
 }
 
-static int	expand_node(t_astnode *node, t_vector *env)
+static int	expand_node(t_astnode *node, t_minishell *env)
 {
 	t_vector	*arg;
 	size_t		i;
@@ -50,7 +51,7 @@ static int	expand_node(t_astnode *node, t_vector *env)
 	return (args_vectors_to_stings(&node->args));
 }
 
-static int	expand_string(t_vector *args, size_t *index, t_vector *env)
+static int	expand_string(t_vector *args, size_t *index, t_minishell *env)
 {
 	t_vector	*str;
 	int			status;
