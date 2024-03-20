@@ -6,20 +6,19 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 14:41:20 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 17:19:10 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 #include <unistd.h>
 
-# include <stdio.h>
-
-int	exec_init(t_executor *exec, t_astnode *root, t_vector *env)
+int	exec_init(t_executor *exec, t_astnode *root, t_minishell *minishell)
 {
 	int	fd;
 
-	exec->env = env;
+	exec->minishell = minishell;
+	exec->env = &minishell->env;
 	exec->pid = 0;
 	exec->node = root;
 	exec->root = root;
@@ -42,32 +41,15 @@ int	exec_init(t_executor *exec, t_astnode *root, t_vector *env)
 	return (0);
 }
 
-int	executor(t_astnode *root, t_vector *env)
+int	executor(t_astnode *root, t_minishell *minishell)
 {
 	t_executor	exec;
 	int			ret;
 
 	ret = 1;
-	if (!exec_init(&exec, root, env))
+	if (!exec_init(&exec, root, minishell))
 		ret = node_exec(&exec);
 	ft_vector_free(&exec.infd);
 	ft_vector_free(&exec.outfd);
 	return (ret);
 }
-
-// int	executor(t_astnode *root, t_vector *env)
-// {
-// 	t_executor	exec;
-// 	int			ret;
-
-// 	if (exec_init(&exec, root, env))
-// 	{
-// 		ft_vector_free(&exec.infd);
-// 		ft_vector_free(&exec.outfd);
-// 		return (1);
-// 	}
-// 	ret = node_exec(&exec);
-// 	ft_vector_free(&exec.infd);
-// 	ft_vector_free(&exec.outfd);
-// 	return (ret);
-// }

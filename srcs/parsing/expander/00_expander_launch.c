@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_expander_launch.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 16:38:03 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 17:14:47 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,9 @@
 #include "expander.h"
 #include "interpreter.h"
 
-static int	expand_node(t_astnode *node, t_minishell *env);
 static int	expand_string(t_vector *args, size_t *index, t_minishell *env);
 
-int	expander_launch(t_astnode *node, t_minishell *env)
-{
-	if (!node)
-		return (SUCCESS);
-	if (expand_node(node, env))
-		return (FAILURE);
-	if (expander_launch(node->left, env) || expander_launch(node->right, env))
-		return (FAILURE);
-	return (SUCCESS);
-}
-
-static int	expand_node(t_astnode *node, t_minishell *env)
+int	expand_node(t_astnode *node, t_minishell *env)
 {
 	t_vector	*arg;
 	size_t		i;

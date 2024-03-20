@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commandline_parser.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 22:49:31 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 16:34:13 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 17:15:32 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 static int	commandline_lexer(char **input, t_vector *lexer);
 static int	lexer_failure(char *ptr, char *error);
 
-t_astnode	*commandline_parser(char *input, t_minishell *env)
+t_astnode	*commandline_parser(char *input)
 {
 	t_vector	lexer;
 	t_astnode	*root;
@@ -33,8 +33,6 @@ t_astnode	*commandline_parser(char *input, t_minishell *env)
 		return (NULL);
 	root = ast_build(&lexer);
 	ft_vector_free(&lexer);
-	if (expander_launch(root, env))
-		return (NULL); //ADD FREE FUNCTION
 	#ifdef PRINT
 	dprint_ast(2, root, NULL); //REMOVE
 	#endif
