@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 14:22:59 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 14:32:34 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 int	get_input(t_minishell *minishell, char **input)
 {
 	char		*prompt;
-	if (get_prompt(&minishell->env, &prompt))
+	if (get_prompt(minishell, &prompt))
 		*input = readline(__DEFAULT_PROMPT);
 	else
 		*input = readline(prompt);
