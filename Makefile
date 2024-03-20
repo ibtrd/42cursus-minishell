@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
+#    Updated: 2024/03/20 16:38:26 by ibertran         ###   ########lyon.fr    #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = minishell
 
 # *** FILES ****************************************************************** #
@@ -55,12 +67,15 @@ EXPANDER_SRC = \
 	00_expander_launch \
 	01_tilde_expansion \
 	02_envars_expansion \
-	expander_mask_utils \
 	03_word_splitting \
-	args_vectors_to_strings \
+	04_filename_expansion \
 	05_quote_removal \
+	args_vectors_to_strings \
+	expander_mask_utils \
 	expander_utils \
 	special_parameter_utils \
+	filename_expansion_utils \
+	is_match \
 
 # ********** AST ********** #
 

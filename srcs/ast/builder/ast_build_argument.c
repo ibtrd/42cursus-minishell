@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 08:05:29 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 15:57:20 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/16 22:40:13 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ static int	build_mask(t_vector *arg, char *str)
 			return (FAILURE);
 		c = *str++;
 	}
-	return (SUCCESS);
+	return (ft_vector_add(arg, "\0"));
 }
 

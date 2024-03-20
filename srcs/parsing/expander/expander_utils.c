@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   word_splitting_utils.c                             :+:      :+:    :+:   */
+/*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 06:16:41 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 03:25:56 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/17 23:30:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,18 @@ int	is_splittable(t_vector *str)
 	return (0);
 }
 
+int	is_pattern(t_vector *str)
+{
+	t_mask	*mask;
+	size_t	i;
+
+	i = 0;
+	while (i < str->total)
+	{
+		mask = ft_vector_get(str, i);
+		if ((mask->c == '*' || mask->c == '?') && !mask->m)
+			return (1);
+		i++;
+	}
+	return (0);
+}

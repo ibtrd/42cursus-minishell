@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/15 03:11:02 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/18 02:50:11 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,6 +122,7 @@ VECTOR_SRC = \
 	vector_strncat \
 	vector_trim \
 	vector_unlink \
+	vector_sort \
 
 SRC += $(addprefix $(VUTILS_DIR)ft_,$(addsuffix .c, $(VUTILS_SRC)))
 
@@ -134,6 +135,7 @@ VUTILS_SRC = \
 	vprint_vchar \
 	vprint_str \
 	vvector_free \
+	vsort_intascend \
 
 # *** LINKED LIST ************************************************************ #
 

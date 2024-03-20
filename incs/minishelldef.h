@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 16:30:32 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 16:37:58 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define SUCCESS 0
 # define FAILURE -1
 # define REMOVAL 1
+# define MATCH 1
+# define NO_MATCH 0
 
 //ENV
 # define __MAX_SHLVL 1000
@@ -69,7 +71,7 @@
 //PARSING CHARSETS
 # define __DEFAULT_IFS " \t\n"
 # define __METACHARACTER "&|<>();"
-# define __INTERPRETERS "\"\'$*~"
+# define __INTERPRETERS "\"\'$*?~"
 # define __QUOTES "\"\'"
 
 //EXPANDER
@@ -81,9 +83,9 @@
 # define __DQUOTE_MASK 0x1
 # define __SQUOTE_MASK 0x2
 # define __ENVAR_MASK 0x4
+# define __FILE_MASK 0x8
 
-# define __ENVARS_ESCAPE "\'$"
-# define __WORDSPLIT_ESCAPE "\'$"
+# define __WORKING_DIRECTORY "."
 
 //PRINT
 # define __MINISHELL "minishell"

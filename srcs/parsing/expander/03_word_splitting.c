@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 05:10:14 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/15 15:44:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/16 22:41:10 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	word_splitting(t_vector *args, size_t *index)
 	t_vector	*str;
 
 	str = ft_vector_get(args, *index);
-	if (!str->total)
+	if (str->total == 1)
 	{
 		if (ft_vector_delete(args, *index))
 			return (FAILURE);

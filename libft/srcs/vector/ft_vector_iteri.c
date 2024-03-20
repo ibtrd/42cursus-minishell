@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander_mask_utils.c                              :+:      :+:    :+:   */
+/*   ft_vector_iteri.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 19:55:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/18 02:53:12 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/03/15 18:00:04 by ibertran          #+#    #+#             */
+/*   Updated: 2024/03/15 18:12:52 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "ft_vector.h"
 
-#include "libft.h"
-
-#include "mask.h"
-
-#include <stdio.h>
-
-t_mask	*str_to_mask(char *str, char mask_value)
+int	ft_vector_iteri(t_vector *v, t_vfunc function)
 {
-	const size_t	len = ft_strlen(str);
-	t_mask			*insert;
-	size_t			i;
+	size_t	i;
 
-	insert = malloc(sizeof(t_mask) * len);
-	if (!insert)
-		return (NULL);
+	if (!v || !function)
+		return (FAILURE);
 	i = 0;
-	while (i < len)
+	while (i < v->total)
 	{
-		(insert + i)->c = *(str + i);
-		(insert + i)->m = mask_value;
+		if (function(ft_vector_get(v, i)))
+			return (FAILURE);
 		i++;
 	}
-	return (insert);
+	return (SUCCESS);
 }
