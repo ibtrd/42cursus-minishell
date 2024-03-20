@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:15:50 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 18:47:27 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 13:49:40 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@
 #include <stdlib.h>
 #include <errno.h>
 
-static int	execute_git(t_vector *env)
+static int	execute_git(t_vector *env, int try)
 {
-	static char	*cmd[] = {"git", "branch", "--show-current", NULL};
+	static char	*cmd[3][6] = {{"git", "symbolic-ref", "--short", "HEAD", NULL},
+		{"git", "describe", "--tags", "--exact-match", "HEAD", NULL},
+		{"git", "rev-parse", "--short", "HEAD", NULL}};
 	char	*path;
 	char	*cmd_path;
 	int		ret;
@@ -31,20 +33,20 @@ static int	execute_git(t_vector *env)
 	path = ft_strdup(ft_getenv(env, "PATH"));
 	if (!path)
 		path = ft_strdup(__DEFAULT_PATH);
-	ret = search_path(cmd[0], &cmd_path, path);
+	ret = search_path(cmd[try][0], &cmd_path, path);
 	free(path);
 	if (ret)
 		return (ret);
 	if(!cmd_path)
 		return (1);
 	close(2);
-	execve(cmd_path, cmd, env->ptr);
+	execve(cmd_path, cmd[try], env->ptr);
 	close(1);
 	free(cmd_path);
 	return (1);
 }
 
-static int	git_fork(t_vector *env, int *pipefd)
+static int	git_fork(t_vector *env, int *pipefd, int try)
 {
 	pid_t	pid;
 	int	status;
@@ -61,7 +63,7 @@ static int	git_fork(t_vector *env, int *pipefd)
 		close(pipefd[1]);
 		if (status == -1)
 			exit(1);
-		exit(execute_git(env));
+		exit(execute_git(env, try));
 	}
 	close(pipefd[1]);
 	pid = waitpid(pid, &status, 0);
@@ -79,7 +81,19 @@ static int	git_branch(t_vector *env, char **branch)
 
 	if (pipe(pipefd) == -1)
 		return (1);
-	ret = git_fork(env, pipefd);
+	// ret = !(!git_fork(env, pipefd, 0) || !git_fork(env, pipefd, 1) || !git_fork(env, pipefd, 2));
+	ret = git_fork(env, pipefd, 0);
+	dprintf(2, "ret0 = %d\n", ret);
+	if (ret)
+	{
+		ret = git_fork(env, pipefd, 1);
+		dprintf(2, "ret1 = %d\n", ret);
+	}
+	if (ret)
+	{
+		ret = git_fork(env, pipefd, 2);
+		dprintf(2, "ret2 = %d\n", ret);
+	}
 	close(pipefd[1]);
 	if (!ret)
 		ret = get_next_line(pipefd[0], branch);
