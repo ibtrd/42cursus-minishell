@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 00:30:10 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/05 00:09:54 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/18 04:44:01 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(void)
 		printf("\ninput            | \e[33m%s\e[0m\n", input);
 
 		printf("\n\n\e[37;40mUNCLOSED_CHECK  ");
-		if (!syntax_checker(input))
+		if (!check_unclosed_input(input))
 			printf("\e[32;1mValid!\e[0m\n\n");
 		else
 		{

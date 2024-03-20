@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishelldef.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/17 18:12:48 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 15:53:40 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@
 //STATUS
 # define SUCCESS 0
 # define FAILURE -1
-
-# define __UNCLOSED_SINGLE_QUOTE -1
-# define __UNCLOSED_DOUBLE_QUOTE -2
-# define __UNCLOSED_BRACKET -3
-
 # define REMOVAL 1
 
 //ENV
@@ -34,6 +29,10 @@
 # define __DEFAULT_PROMPT "\e[1m\e[36mminishell\e[0m "
 # define __PROMPT "\e[1m\e[36m%s\e[0m "
 # define __GIT_PROMPT "\e[1m\e[34mgit:(\e[31m%s\e[34m)\e[0m"
+# define __SECONDARY_PROMPT ">"
+
+# define P_YELLOW "\001\e[33;1m\002"
+# define P_RESET "\001\e[0m\002"
 
 //BUILTIN
 # define __ECHO "echo"
