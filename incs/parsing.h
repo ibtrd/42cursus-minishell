@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 16:34:07 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 17:15:42 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_escape
 }	t_escape;
 
 //PARSER
-t_astnode	*commandline_parser(char *input, t_minishell *env);
+t_astnode	*commandline_parser(char *input);
 t_astnode	*ast_build(t_vector *lexer);
 
 int			check_unclosed_input(char *cmdline);
@@ -52,6 +52,5 @@ void		set_escape_mode(t_escape *escape, char c);
 void		init_escape(t_escape *escape);
 
 //EXPANDER
-int			expander_launch(t_astnode *node, t_minishell *env);
 
 #endif //PARSING_H

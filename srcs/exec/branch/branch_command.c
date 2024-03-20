@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 19:42:49 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 18:09:58 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,10 @@ int	branch_command(t_executor *exec)
 	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env",
 								"exit", NULL};
 
+	if (expand_node(exec->node, exec->minishell))
+		return (1);
+	if (exec->node->args->total == 1)
+		return (0);
 	ret = ft_str_in_array(*(char **)ft_vector_get(exec->node->args, 0), builtins);
 	if (ret != -1)
 		return (exec_builtins(exec, ret));

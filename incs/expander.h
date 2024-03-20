@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:12:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 16:37:56 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 17:47:58 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef enum e_wildcard
 
 //INTERPRETATION MASKS
 t_mask	*str_to_mask(char *str, char mask_value);
+char	*mask_to_string(t_vector *arg);
 
 //EXPAND
 int		is_expandable(t_vector *arg);

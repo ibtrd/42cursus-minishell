@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 17:52:39 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 18:03:15 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define EXECUTOR_H
 
 # include "ast.h"
+# include "minishell.h"
 
 typedef struct s_executor
 {
+	t_minishell	*minishell;
 	t_vector	*env;
 	int	pid;
 	t_astnode	*node;
@@ -33,7 +35,7 @@ int		branch_command(t_executor *exec);
 int		branch_logicaloperator(t_executor *exec);
 int		branch_pipe(t_executor *exec);
 int		branch_redirection(t_executor *exec);
-int		executor(t_astnode *root, t_vector *env);
+int		executor(t_astnode *root, t_minishell *minishell);
 int		open_append(t_executor *exec);
 // int	open_heredoc(t_executor *exec); 7
 int		open_input(t_executor *exec);

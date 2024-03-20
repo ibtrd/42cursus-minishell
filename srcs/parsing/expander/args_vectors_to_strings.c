@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_vectors_to_strings.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 02:25:47 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/16 22:11:13 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 17:55:11 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 
 #include "ast.h"
 #include "mask.h"
-
-static char	*mask_to_string(t_vector *arg);
+#include "expander.h"
 
 int	args_vectors_to_stings(t_vector **args)
 {
@@ -44,21 +43,4 @@ int	args_vectors_to_stings(t_vector **args)
 	ft_vector_dealloc(args, 1);
 	*args = strings;
 	return (SUCCESS);
-}
-
-static char	*mask_to_string(t_vector *arg)
-{
-	char	*str;
-	size_t	i;
-
-	str = malloc(arg->total + 1);
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (i < arg->total)
-	{
-		str[i] = ((t_mask *)ft_vector_get(arg, i))->c;
-		i++;
-	}
-	return (str);
 }

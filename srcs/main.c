@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 16:34:18 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 17:19:19 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-
-# include <stdio.h>
 
 static int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name)
 {
@@ -47,8 +45,8 @@ static int	minishell_routine(t_minishell *minishell)
 
 	if (get_input(minishell, &input))
 		return (1);
-	root = commandline_parser(input, minishell);
-	minishell->sp_params.exit_status = executor(root, &minishell->env);
+	root = commandline_parser(input);
+	minishell->sp_params.exit_status = executor(root, minishell);
 	free_ast(root);
 	return (0);
 }
