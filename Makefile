@@ -25,7 +25,7 @@ SRC += $(addprefix $(PARSING_DIR),$(PARSING_SRC))
 PARSING_DIR = parsing/
 PARSING_SRC = \
 	escape_utils \
-	syntax_checker \
+	check_unclosed_input \
 	commandline_parser \
 
 #		# ***** LEXER ***** #
@@ -310,6 +310,7 @@ VALGRIND = \
 	--leak-check=full \
 	--trace-children=yes \
 	--track-fds=yes \
+	--show-leak-kinds=all \
 
 .PHONY : valgrind
 valgrind : debug
@@ -323,7 +324,7 @@ AVAILABLE_TESTS = \
 	env \
 	executor \
 	init_env \
-	syntax_checker \
+	check_unclosed_input \
 	lexer \
 	lexerfull \
 	dprintf \

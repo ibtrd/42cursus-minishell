@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 00:30:10 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/04 02:20:09 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/18 04:44:01 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(void)
 		if (!input)
 			return (0);
 		add_history(input);
-		if (syntax_checker(input))
+		if (check_unclosed_input(input))
 		{
 			free(input);
 			continue ;
