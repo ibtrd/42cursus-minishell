@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 23:12:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 15:55:59 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 18:31:40 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	tilde_expansion(t_vector *str)
 	if (mask->c != '~')
 		return (SUCCESS);
 	mask = ft_vector_get(str, 1);
-	if (!mask || mask->c == '/')
+	if (mask->c == '/' || mask->c == '\0')
 		return (lone_tilde(str));
 	else if (mask->c == '+')
 		return (tilde_sign(str, __PWD_ENVAR));
