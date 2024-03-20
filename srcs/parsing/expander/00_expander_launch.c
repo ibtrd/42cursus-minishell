@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 17:14:47 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 18:11:38 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	expand_node(t_astnode *node, t_minishell *env)
 	size_t		i;
 
 	if (node->type == _HEREDOC)
-		return (SUCCESS);
-	if (node->type != _CMD && (node->type < _INPUT || node->type > _APPEND))
 		return (SUCCESS);
 	i = 0;
 	while (i < node->args->total)

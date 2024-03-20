@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 17:45:30 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 17:19:52 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 18:07:16 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	node_exec(t_executor *exec)
 {
 	if (!exec->node)
 		return (0);
-	if (expand_node(exec->node, exec->minishell))
-		return (1);
 	if (exec->node->type == _AND || exec->node->type == _OR)
 		return (branch_logicaloperator(exec));
 	if (exec->node->type == _PIPE)
