@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/13 07:15:37 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/18 16:58:44 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,12 @@ NAME = libft.a
 
 include libft_srcs.mk
 
-BUILD_DIR := .build/$(shell git branch --show-current)/
+MAKE_DIR = .make/
+BUILD_DIR := $(MAKE_DIR)$(shell git branch --show-current)/
 
 OBJS = $(patsubst $(SRCS_DIR)%.c,$(BUILD_DIR)%.o,$(SRCS))
 
 DEPS = $(patsubst %.o,%.d,$(OBJS))
--include $(DEPS)
 
 INCS_DIR = incs/
 
@@ -39,7 +39,7 @@ MAKEFLAGS	=	--no-print-directory
 
 # *** COMPILATION MODES ****************************************************** #
 
-MODE_TRACE = .trace 
+MODE_TRACE = $(MAKE_DIR).trace 
 LAST_MODE = $(shell cat $(MODE_TRACE) 2>/dev/null)
 
 MODE ?=
@@ -67,7 +67,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS) | ERROR_CHECK
 	@printf "\n📚 Building $(NAME) archive...\n"
-	$(AR) $(ARFLAGS) $(NAME) $(filter %.o,$?)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 	@echo "$(MODE)" > $(MODE_TRACE)
 ifneq ($(MODE),)
 	@echo "$(BLUE) $(NAME)($(MODE)) has been built! $(RESET)"
@@ -82,12 +82,12 @@ $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | ERROR_CHECK
 
 .PHONY : clean
 clean :
-	rm -rf $(BUILD_DIR) $(LAST_MODE_FILE)
+	rm -rf $(BUILD_DIR)
 	echo "$(YELLOW) $(NAME) building files removed! $(RESET)"
 
 .PHONY : fclean
 fclean :
-	rm -rf $(BUILD_DIR) $(LAST_MODE_FILE) $(NAME)
+	rm -rf $(MAKE_DIR) $(NAME)
 	echo "$(YELLOW) $(NAME) files removed! $(RESET)"
 
 .PHONY : re
@@ -102,14 +102,17 @@ debug :
 fsanitize :
 	$(MAKE) MODE=fsanitize
 
+NORM_LOG = $(MAKE_DIR)norminette.log
+
 .PHONY : norminette
 norminette :
-	norminette $(INCS_DIR) $(SRCS_DIR) > norminette.log || true
-	if [ $$(< norminette.log grep Error | wc -l) -eq 0 ]; \
+	mkdir -p $(dir $(NORM_LOG))
+	norminette $(INCS_DIR) $(SRCS_DIR) > $(NORM_LOG) || true
+	if [ $$(< $(NORM_LOG) grep Error | wc -l) -eq 0 ]; \
 		then echo "$(NAME): \e[32;49;1mOK!\e[0m"; \
 		else echo "$(NAME): \e[31;49;1mKO!\e[0m" \
-			&& < norminette.log grep Error; fi
-	$(RM) norminette.log
+			&& < $(NORM_LOG) grep Error; fi
+	$(RM) $(NORM_LOG)
 
 .PHONY : print%
 print% :
@@ -117,6 +120,8 @@ print% :
 	@echo $($(patsubst print%,%,$@))
 
 # *** SPECIAL TARGETS ******************************************************** #
+
+-include $(DEPS)
 
 .DEFAULT_GOAL := all
 

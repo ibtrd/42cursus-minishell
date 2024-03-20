@@ -2,7 +2,8 @@ NAME = minishell
 
 # *** FILES ****************************************************************** #
 
-BUILD_DIR := .build/$(shell git branch --show-current)/
+MAKE_DIR := .make/
+BUILD_DIR := $(MAKE_DIR)$(shell git branch --show-current)/
 
 SRCS_DIR = srcs/
 SRCS = $(addsuffix .c, $(SRC))
@@ -10,7 +11,6 @@ SRCS = $(addsuffix .c, $(SRC))
 OBJS = $(patsubst %.c,$(BUILD_DIR)%.o,$(SRCS))
 
 DEPS = $(patsubst %.o,%.d,$(OBJS))
--include $(DEPS)
 
 SRC = \
 	get_input \
@@ -197,7 +197,7 @@ MAKEFLAGS	=	--no-print-directory
 
 # *** COMPILATION MODES ****************************************************** #
 
-MODE_TRACE = .trace 
+MODE_TRACE = $(MAKE_DIR).trace 
 LAST_MODE = $(shell cat $(MODE_TRACE) 2>/dev/null)
 
 MODE ?=
@@ -230,7 +230,8 @@ endif
 # *** TARGETS **************************************************************** #
 
 .PHONY : all
-all : $(NAME) 
+all : $(NAME)
+
 
 $(NAME) : $(LIBS_PATH) $(OBJS) | ERROR_CHECK
 	@printf "\n🔗 Linking $(NAME)...\n"
@@ -274,22 +275,25 @@ clean :
 .PHONY : fclean
 fclean :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
-	rm -rf $(BUILD_DIR) $(NAME) $(MODE_TRACE) $(NAME)_test
+	rm -rf $(MAKE_DIR) $(NAME)
 	echo "$(YELLOW) $(NAME) files removed! $(RESET)"
 
 .PHONY : re
 re : fclean
 	$(MAKE)
 
+NORM_LOG = $(MAKE_DIR)norminette.log
+
 .PHONY : norminette
 norminette :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
-	norminette $(INCS_DIR) $(SRCS_DIR) > norminette.log || true
-	if [ $$(< norminette.log grep Error | wc -l) -eq 0 ]; \
+	mkdir -p $(dir $(NORM_LOG))
+	norminette $(INCS_DIR) $(SRCS_DIR) > $(NORM_LOG) || true
+	if [ $$(< $(NORM_LOG) grep Error | wc -l) -eq 0 ]; \
 		then echo "$(NAME): \e[32;49;1mOK!\e[0m"; \
 		else echo "$(NAME): \e[31;49;1mKO!\e[0m" \
-			&& < norminette.log grep Error; fi
-	$(RM) norminette.log
+			&& < $(NORM_LOG) grep Error; fi
+	$(RM) $(NORM_LOG)
 
 .PHONY : print%
 print% :
@@ -337,6 +341,8 @@ $(AVAILABLE_TESTS) :
 #  ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
+
+-include $(DEPS)
 
 .DEFAULT_GOAL := all
 
