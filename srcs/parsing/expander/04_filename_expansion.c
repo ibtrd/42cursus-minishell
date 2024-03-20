@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:29:46 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/18 04:03:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 16:04:49 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,12 @@ static int	scan_directory(DIR *dir, t_vector *pattern, t_vector *matches)
 	{
 		if (is_match(entry->d_name, pattern->ptr))
 		{
-			printf ("\e[32mMATCH! %s\e[0m\n\n", entry->d_name);
 			if (add_match(entry->d_name, matches))
 			{
 				closedir(dir);
 				return (FAILURE);
 			}
 		}
-		else //REMOVE
-			printf ("\e[31mMeh... %s\e[0m\n\n", entry->d_name); //REMOVE
 		entry = readdir(dir);
 	}
 	closedir(dir);
