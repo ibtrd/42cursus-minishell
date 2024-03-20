@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 18:47:36 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 14:02:56 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct s_minishell
 {
 	t_vector	env;
+	int			fdnull;
 	struct special_params
 	{
 		int		exit_status;

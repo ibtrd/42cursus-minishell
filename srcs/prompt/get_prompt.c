@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:14:29 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 12:38:16 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 14:22:37 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "env.h"
 #include "minishelldef.h"
 #include "prompt.h"
+#include "minishell.h"
 
 #include <stdlib.h>
 #include <unistd.h>
