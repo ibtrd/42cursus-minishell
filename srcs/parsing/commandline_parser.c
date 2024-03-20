@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 22:49:31 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/19 17:47:14 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 16:00:49 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 #include "minishelldef.h"
 #include "ast.h"
 #include "parsing.h"
-
-#include "testing.h" //REMOVE
 
 static int	commandline_lexer(char **input, t_vector *lexer);
 static int	lexer_failure(char *ptr, char *error);
