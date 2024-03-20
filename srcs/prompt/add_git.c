@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:15:50 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 19:04:07 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 16:16:11 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,35 +19,38 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <fcntl.h>
 
-static int	execute_git(t_vector *env)
+static int	execute_git(t_vector *env, int try)
 {
-	static char	*cmd[] = {"git", "branch", "--show-current", NULL};
+	static char	*cmd[3][6] = {{"git", "symbolic-ref", "--short", "HEAD", NULL},
+		{"git", "describe", "--tags", "--exact-match", "HEAD", NULL},
+		{"git", "rev-parse", "--short", "HEAD", NULL}};
 	char	*path;
 	char	*cmd_path;
 	int		ret;
 
+	if (dup2(open("/dev/null", O_WRONLY), STDERR_FILENO) == -1)
+		return (1);
 	cmd_path = NULL;
 	path = ft_getenv(env, "PATH");
 	if (path)
 		path = ft_strdup(path);
 	if (!path)
 		path = ft_strdup(__DEFAULT_PATH);
-	ret = search_path(cmd[0], &cmd_path, path);
+	ret = search_path(cmd[try][0], &cmd_path, path);
 	free(path);
 	if (ret)
 		return (ret);
 	if(!cmd_path)
 		return (1);
-	close(2);
-	execve(cmd_path, cmd, env->ptr);
-	close(1);
+	execve(cmd_path, cmd[try], env->ptr);
 	free(cmd_path);
 	ft_vector_free(env);
 	return (1);
 }
 
-static int	git_fork(t_vector *env, int *pipefd)
+static int	git_fork(t_vector *env, int *pipefd, int try)
 {
 	pid_t	pid;
 	int	status;
@@ -59,12 +62,13 @@ static int	git_fork(t_vector *env, int *pipefd)
 	{
 		close(pipefd[0]);
 		status = dup2(pipefd[1], STDOUT_FILENO);
-		// if (status != -1)
-		// 	status = dup2(pipefd[1], STDERR_FILENO);
 		close(pipefd[1]);
 		if (status == -1)
 			exit(1);
-		exit(execute_git(env));
+		status = execute_git(env, try);
+		close(STDOUT_FILENO);
+		close(STDERR_FILENO);
+		exit(status);
 	}
 	close(pipefd[1]);
 	pid = waitpid(pid, &status, 0);
@@ -79,11 +83,19 @@ static int	git_branch(t_vector *env, char **branch)
 {
 	int	pipefd[2];
 	int		ret;
+	int		i;
 
-	if (pipe(pipefd) == -1)
-		return (1);
-	ret = git_fork(env, pipefd);
-	close(pipefd[1]);
+	ret = 1;
+	i = 0;
+	while (ret && i < 3)
+	{
+		if (pipe(pipefd) == -1)
+			return (1);
+		ret = git_fork(env, pipefd, i);
+		if (ret)
+			close(pipefd[0]);
+		i++;
+	}
 	if (!ret)
 		ret = get_next_line(pipefd[0], branch);
 	close(pipefd[0]);
@@ -100,7 +112,7 @@ int	add_git(t_vector *env, char **prompt)
 	if (git_branch(env, &branch) || !branch)
 		return (1);
 	branch[ft_strlen(branch) - 1] = '\0';
-	git = ft_sprintf(__GIT_PROMPT, branch);
+	git = ft_sprintf(__GIT_PROMPT, P_BOLD, P_BLUE, branch);
 	if (!git)
 	{
 		free(branch);

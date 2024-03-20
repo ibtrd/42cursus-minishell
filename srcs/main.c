@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/17 17:46:38 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 14:23:12 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
+
+# include <stdio.h>
 
 static int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name)
 {
