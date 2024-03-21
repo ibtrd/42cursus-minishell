@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:22:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/15 15:49:57 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/21 18:48:49 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,45 +18,47 @@
 #include <stdlib.h>
 # include "builtins.h"
 
-static int	create_env(t_vector *envv)
+static int	create_env(t_vector *env)
 {
-	int			error;
-
-	(void)envv;
-	error = 0;
-	return (error);
+	if (ft_vector_add_ptr(env, NULL))
+		return (FAILURE);
+	if (init_path(env))
+		return (FAILURE);
+	if (init_shlvl(env))
+		return (FAILURE);
+	return (SUCCESS);
 }
 
-static int	copy_env(t_vector *envv, char **env)
+static int	copy_env(t_vector *env, char **old_env)
 {
 	size_t		i;
 
 	i = 0;
-	if (ft_vector_add_ptr(envv, NULL))
+	if (ft_vector_add_ptr(env, NULL))
 		return (FAILURE);
-	while (env[i])
+	while (old_env[i])
 	{
-		// update value (SHLVL, ...)
-		if (add_var(envv, env[i]))
+		if (add_var(env, old_env[i]))
 			return (FAILURE);
 		i++;
 	}
+	if (init_shlvl(env))
+		return (FAILURE);
 	return (SUCCESS);
 }
 
-
-int	init_env(t_vector *envv, char **env)
+int	init_env(t_vector *env, char **old_env)
 {
 	int			error;
 
-	if (ft_vector_init(envv, (t_vinfos){sizeof(char *), 0, &ft_vfree}))
+	if (ft_vector_init(env, (t_vinfos){sizeof(char *), 0, &ft_vfree}))
 		return (1);
-	if (!env || !*env)
-		error = create_env(envv);
+	if (!old_env || !*old_env)
+		error = create_env(env);
 	else
-		error = copy_env(envv, env);
+		error = copy_env(env, old_env);
 	if (error)
-		ft_vector_free(envv);
+		ft_vector_free(env);
 	return (error);
 }
 

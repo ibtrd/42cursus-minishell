@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:18:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 19:11:37 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/21 18:06:37 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ size_t	ft_strlen_charset(const char *str, const char *charset);
 size_t	ft_strlen_protected(const char *str);
 size_t	ft_strlen(const char *str);
 size_t	ft_strnlen(const char *str, size_t n);
+void	ft_free_split_arr(char ***split);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 
 #endif
