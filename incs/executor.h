@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 18:03:15 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 18:33:31 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "ast.h"
 # include "minishell.h"
+
+#include <sys/types.h>
 
 typedef struct s_executor
 {
@@ -44,6 +46,7 @@ int		node_exec(t_executor *exec);
 void	close_fds(t_executor *exec);
 int		exec_cleanup(t_executor *exec);
 int		exec_builtins(t_executor *exec, int index);
+int		retrieve_status(pid_t pid);
 
 void	printf_redir(t_executor *exec);	// DEBUG
 
