@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_string.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:18:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/21 18:06:37 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 16:13:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 char	**ft_split(char const *s, char c);
-int		ft_str_in_array(const char *str, const char **array);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strcpy(char *dst, const char *src);
 char	*ft_strdup(const char *s);
@@ -35,6 +34,8 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*get_random_string(int len, const char *charset);
 int		ft_countwords(const char *str, const char *sep);
+int		ft_isnumber(const char *str);
+int		ft_str_in_array(const char *str, const char **array);
 int		ft_strcmp(const char *str1, const char *str2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
