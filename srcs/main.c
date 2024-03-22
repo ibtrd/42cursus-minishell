@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 17:19:19 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 16:57:12 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name)
 {
 	t_vector	env;
 
+	if (signal_setup_main())
+		return (1);
 	if (init_env(&env, old_env))
 		return (1);
 	minishell->env = env;

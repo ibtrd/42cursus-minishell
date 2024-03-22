@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   branch_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 21:26:31 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 19:13:13 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "minishelldef.h"
 #include "env.h"
 #include "minishell.h"
+#include "signals.h"
 
 #include <sys/wait.h>
 #include <errno.h>
@@ -92,7 +93,6 @@ static int	execute_command(t_executor *exec)
 static int	command_fork(t_executor *exec)
 {
 	pid_t	pid;
-	int		status;
 	int		ret;
 
 	pid = fork();
@@ -100,19 +100,13 @@ static int	command_fork(t_executor *exec)
 		return (1);
 	if (pid == 0)
 	{
-		ret = execute_command(exec);
-		close(0);
-		close(1);
-		free_ast(exec->root);
-		ft_vector_free(exec->env);
+		ret = 1;
+		if (!signal_setup_child())
+			ret = execute_command(exec);
+		exec_cleanup(exec, 0);
 		exit(ret);
 	}
-	pid = waitpid(pid, &status, 0);
-	if (pid == -1 && errno != ECHILD)
-		return (1);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	return (1);
+	return (retrieve_status(pid));
 }
 
 int	branch_command(t_executor *exec)
@@ -128,5 +122,13 @@ int	branch_command(t_executor *exec)
 	ret = ft_str_in_array(*(char **)ft_vector_get(exec->node->args, 0), builtins);
 	if (ret != -1)
 		return (exec_builtins(exec, ret));
-	return (command_fork(exec));
+	ret = command_fork(exec);
+	if (ret > 128)
+	{
+		if (ret == 131)
+			printf("Quit");
+		printf("\n");
+		return (ret);
+	}
+	return (ret);
 }

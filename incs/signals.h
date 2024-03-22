@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cleanup.c                                     :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 14:38:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 18:59:14 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/22 16:02:34 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/22 17:20:01 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#ifndef SIGNALS_H
+# define SIGNALS_H
 
-#include <readline/readline.h>
-#include <unistd.h>
+int		signal_ign_main(void);
+int		signal_setup_child(void);
+void	child_int_handler(int sig);
+void	child_quit_handler(int sig);
+void	main_int_handler(int sig);
 
-int	exec_cleanup(t_executor *exec, int ret)
-{
-	close(0);
-	close(1);
-	ft_vector_free(exec->env);
-	ft_vector_free(&exec->infd);
-	ft_vector_free(&exec->outfd);
-	free_ast(exec->root);
-	rl_clear_history();
-	return (ret);
-}
+#endif

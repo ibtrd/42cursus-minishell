@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cleanup.c                                     :+:      :+:    :+:   */
+/*   signal_ign_main.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 14:38:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 18:59:14 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/22 16:59:37 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/22 18:46:29 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#include "signals.h"
 
-#include <readline/readline.h>
-#include <unistd.h>
+#include <signal.h>
+#include <stddef.h>
 
-int	exec_cleanup(t_executor *exec, int ret)
+int	signal_ign_main(void)
 {
-	close(0);
-	close(1);
-	ft_vector_free(exec->env);
-	ft_vector_free(&exec->infd);
-	ft_vector_free(&exec->outfd);
-	free_ast(exec->root);
-	rl_clear_history();
-	return (ret);
+	struct sigaction	act;
+
+	act = (struct sigaction){0};
+	act.sa_handler = SIG_IGN;
+	act.sa_flags = SA_RESTART;
+	if (sigaction(SIGINT, &act, NULL) == -1)
+		return (1);
+	if (sigaction(SIGQUIT, &act, NULL) == -1)
+		return (1);
+	if (sigaction(SIGTERM, &act, NULL) == -1)
+		return (1);
+	return (0);
 }
