@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    libft_srcs.mk                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/18 02:50:11 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/22 13:24:10 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC += $(addprefix $(STR_DIR)ft_, $(addsuffix .c, $(STR_SRC)))
 STR_DIR = str/
 STR_SRC = \
 	countwords \
+	isnumber \
 	split \
 	str_in_array \
 	strchr \
