@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/22 16:57:12 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 19:22:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ int	main(int ac, char **av, char **env)
 		;
 	ft_vector_free(&minishell.env);
 	rl_clear_history();
-	return (0);
+	printf("exit\n");
+	return (minishell.sp_params.exit_status);
 }
