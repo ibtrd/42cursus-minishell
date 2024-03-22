@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:58:16 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/09 12:02:18 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/21 13:35:52 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,15 @@
 
 #include <stdlib.h>
 
-int	init_path(t_vector *envv)
+int	init_path(t_vector *env)
 {
-	t_env_var	env_var;
-	char		*path;
+	char		*var;
+	int			error;	
 
-	path = ft_getenv(envv, "PATH");
-	if (!path)
-	{
-		env_var.name = ft_strdup("PATH");
-		if (!env_var.name)
-			return (FAILURE);
-		env_var.value = ft_strdup(__DEFAULT_PATH);
-		if (!env_var.value)
-		{
-			free(env_var.name);
-			return (FAILURE);
-		}
-		if (ft_vector_add(envv, &env_var))
-		{
-			free(env_var.name);
-			free(env_var.value);
-			return (FAILURE);
-		}
-	}
-	return (SUCCESS);
+	if (ft_getenv(env, "PATH"))
+		return (SUCCESS);
+	var = ft_strjoin("PATH=", __DEFAULT_PATH);
+	error = !var || update_var(env, var);
+	free(var);
+	return (error);
 }

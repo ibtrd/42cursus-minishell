@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/22 18:33:55 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/22 18:51:34 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -168,6 +168,15 @@ ENV_SRC = \
 	overwrite_var \
 	update_var \
 	var_processing \
+
+#		# ******* BRANCH ******* #
+
+SRC += $(addprefix $(INIT_VAR_DIR),$(INIT_VAR_SRC))       
+
+INIT_VAR_DIR = $(ENV_DIR)/init_var/
+INIT_VAR_SRC = \
+		init_path \
+		init_shlvl \
 
 # **************** PROMPT **************** #
 

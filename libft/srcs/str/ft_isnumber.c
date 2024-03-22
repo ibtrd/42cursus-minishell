@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pf_print_buffer.c                               :+:      :+:    :+:   */
+/*   ft_isnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 15:26:21 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 12:11:12 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/22 13:22:20 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/22 13:50:32 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <sys/types.h>
+#include "ft_char.h"
 
-#include "ft_vector.h"
-
-int	print_buffer(int fd, t_vector *buffer)
+int	ft_isnumber(const char *str)
 {
-	ssize_t	status;
-
-	status = write(fd, buffer->ptr, buffer->total - 1);
-	ft_vector_free(buffer);
-	return (status);
+	if (!str)
+		return (0);
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str)
+	{
+		if (*str < '0' || *str > '9')
+			return (0);
+		str++;
+	}
+	return (1);
 }
