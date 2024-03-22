@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/20 16:38:26 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/21 18:48:04 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -167,6 +167,15 @@ ENV_SRC = \
 	overwrite_var \
 	update_var \
 	var_processing \
+
+#		# ******* BRANCH ******* #
+
+SRC += $(addprefix $(INIT_VAR_DIR),$(INIT_VAR_SRC))       
+
+INIT_VAR_DIR = $(ENV_DIR)/init_var/
+INIT_VAR_SRC = \
+		init_path \
+		init_shlvl \
 
 # **************** PROMPT **************** #
 

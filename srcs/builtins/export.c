@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:17:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/15 17:33:43 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 18:45:05 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static int	check_var_name(char *var)
 int	builtin_export(t_executor *exec, char **argv)
 {
 	size_t		i;
-	char		**var;
 	int			error;
 	int			ret;
 
@@ -63,10 +62,7 @@ int	builtin_export(t_executor *exec, char **argv)
 		ret |= -error;
 		if (error)
 			continue ;
-		var = search_var(exec->env, argv[i]);
-		if (!var && add_var(exec->env, argv[i]))
-			return (FAILURE);
-		if (var && overwrite_var(var, argv[i]))
+		if (update_var(exec->env, argv[i]))
 			return (FAILURE);
 	}
 	return (ret & -FAILURE);
