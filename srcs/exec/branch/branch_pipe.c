@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 18:43:29 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 18:49:24 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ static int	piping(t_executor *exec, int wait, int pipe[2])
         ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
 	if (error == -1)
 	{
-		close(0);
-		close(1);
 		close(pipe[!wait]);
 		exec_cleanup(exec);
 	}
@@ -66,8 +64,6 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 			exec->node = node;
 			ret = node_exec(exec);
 		}
-		close(0);
-		close(1);
 		exec_cleanup(exec);
 		exit(ret);
 	}

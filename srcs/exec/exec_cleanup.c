@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:38:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 18:02:16 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 18:49:17 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 int	exec_cleanup(t_executor *exec)
 {
+	close(0);
+	close(1);
 	ft_vector_free(exec->env);
 	ft_vector_free(&exec->infd);
 	ft_vector_free(&exec->outfd);

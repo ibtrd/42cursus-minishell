@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 18:34:48 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 18:49:33 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,7 @@ static int	command_fork(t_executor *exec)
 		ret = 1;
 		if (!signal_setup_child())
 			ret = execute_command(exec);
-		close(0);
-		close(1);
-		free_ast(exec->root);
-		ft_vector_free(exec->env);
+		exec_cleanup(exec);
 		exit(ret);
 	}
 	return (retrieve_status(pid));
