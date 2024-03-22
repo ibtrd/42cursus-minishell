@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:14:29 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 16:04:54 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 12:57:46 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,24 @@ static int    user_dir(t_vector *env, char **cwd)
     return (0);
 }
 
+static int	resolve_cwd(t_vector *env, char **cwd)
+{
+	*cwd = ft_getenv(env, "PWD");
+	if (*cwd)
+		*cwd = ft_strdup(*cwd);
+	if (!*cwd)
+		*cwd = getcwd(NULL, 0);
+	if (!*cwd)
+		*cwd = ft_strdup(__MINISHELL);
+	return (!*cwd || user_dir(env, cwd));
+}
+
 int	get_prompt(t_minishell *minishell, char **prompt)
 {
 	char	*cwd;
 	char	*tmp;
 
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		cwd = ft_strdup(__MINISHELL);
-	if (!cwd || user_dir(&minishell->env, &cwd))
+	if (resolve_cwd(&minishell->env, &cwd))
 		return (1);
 	tmp = ft_strrchr(cwd, '/');
 	if (!tmp)

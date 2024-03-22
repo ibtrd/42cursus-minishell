@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:33:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/16 16:46:26 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 13:14:04 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	get_dir(char **dir, t_vector *env, char *name)
 	}
 	return (0);
 }
-
 
 static int	resolve_dir(char **dir, t_vector *env, char **argv)
 {if (!*argv)
@@ -59,7 +58,7 @@ static int	update_wd(t_vector *env, char *oldcwd)
 	oldpwd = ft_strjoin("OLDPWD=", oldcwd);
 	free(oldcwd);
 	if (errno != ENOMEM)
-		error = update_var(env, oldpwd) || update_var(env, pwd);
+		error = update_var(env, pwd) | update_var(env, oldpwd);
 	free(oldpwd);
 	free(pwd);
 	return (error);
@@ -77,8 +76,6 @@ int	builtin_cd(t_executor *exec, char **argv)
 	if (resolve_dir(&dir, exec->env, argv))
 		return (1);
 	oldpwd = getcwd(NULL, 0);
-	if (!oldpwd)
-		return (1);
 	if (chdir(dir) == -1)
 	{
 		free(oldpwd);

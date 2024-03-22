@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:34:43 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/15 17:48:03 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 12:22:58 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	update_var(t_vector *env, char *arg)
 {
 	char		**var;
 
+	if (!arg)
+		return (SUCCESS);
 	var = search_var(env, arg);
 	if (!var && add_var(env, arg))
 		return (FAILURE);
