@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:26:21 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/12 15:30:54 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 12:11:12 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	print_buffer(int fd, t_vector *buffer)
 {
 	ssize_t	status;
 
-	status = write(fd, buffer->ptr, buffer->total);
+	status = write(fd, buffer->ptr, buffer->total - 1);
 	ft_vector_free(buffer);
 	return (status);
 }

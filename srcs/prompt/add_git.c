@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:15:50 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 16:16:11 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 19:12:55 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@
 #include <errno.h>
 #include <fcntl.h>
 
+static int	get_git_path(char *cmd, char **cmd_path, char *path)
+{
+	int	ret;
+	if (path)
+		path = ft_strdup(path);
+	ret = search_path(cmd, cmd_path, path);
+	free(path);
+	return (ret);
+}
+
 static int	execute_git(t_vector *env, int try)
 {
 	static char	*cmd[3][6] = {{"git", "symbolic-ref", "--short", "HEAD", NULL},
@@ -34,14 +44,10 @@ static int	execute_git(t_vector *env, int try)
 		return (1);
 	cmd_path = NULL;
 	path = ft_getenv(env, "PATH");
-	if (path)
-		path = ft_strdup(path);
-	if (!path)
-		path = ft_strdup(__DEFAULT_PATH);
-	ret = search_path(cmd[try][0], &cmd_path, path);
-	free(path);
+	ret = get_git_path(cmd[try][0], &cmd_path, path)
+		&& get_git_path(cmd[try][0], &cmd_path, __DEFAULT_PATH);
 	if (ret)
-		return (ret);
+		return (1);
 	if(!cmd_path)
 		return (1);
 	execve(cmd_path, cmd[try], env->ptr);

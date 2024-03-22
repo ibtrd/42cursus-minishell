@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:17:51 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/09 12:18:20 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/21 13:31:25 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,37 @@
 
 #include <stdlib.h>
 
-int	init_shlvl(t_vector *envv)
-{
-	t_env_var	env_var;
-	char		*shlvl;
+# include <stdio.h>
 
-	shlvl = ft_getenv(envv, "SHLVL");
+static int	get_shlvl(t_vector *env)
+{
+	int		shlvl_int;
+	char	*shlvl;
+
+	shlvl = ft_getenv(env, "SHLVL");
 	if (!shlvl)
-	{
-		env_var.name = ft_strdup("SHLVL");
-		if (!env_var.name)
-			return (FAILURE);
-		env_var.value = ft_strdup("1");
-		if (!env_var.value)
-		{
-			free(env_var.name);
-			return (FAILURE);
-		}
-		if (ft_vector_add(envv, &env_var))
-		{
-			free(env_var.name);
-			free(env_var.value);
-			return (FAILURE);
-		}
-	}
-	return (SUCCESS);
+		return (0);
+	shlvl_int = ft_atoi(shlvl);
+	if (shlvl_int <= 0 || shlvl_int + 1 >= __MAX_SHLVL)
+		return (0);
+	return (shlvl_int);
+}
+
+int	init_shlvl(t_vector *env)
+{
+	char		*var;
+	char		*shlvl;
+	int			shlvl_int;
+	int			error;	
+
+	shlvl_int = 1;
+	shlvl_int += get_shlvl(env);
+	shlvl = ft_itoa(shlvl_int);
+	if (!shlvl)
+		return (FAILURE);
+	var = ft_strjoin("SHLVL=", shlvl);
+	free(shlvl);
+	error = !var || update_var(env, var);
+	free(var);
+	return (error);
 }
