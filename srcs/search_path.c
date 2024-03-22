@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 18:08:34 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/17 19:39:19 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 21:11:50 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	search_here(const char *cmd, char **path)
 
 int	search_path(const char *cmd, char **cmd_path, char *path)
 {
-	if (path)
+	if (path && *path)
 	{
 		*cmd_path = ft_strtok(path, ":");
 		while (*cmd_path)
@@ -52,5 +52,7 @@ int	search_path(const char *cmd, char **cmd_path, char *path)
 			*cmd_path = ft_strtok(NULL, ":");
 		}
 	}
-	return (search_here(cmd, cmd_path));
+	else
+		return (search_here(cmd, cmd_path));
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 18:09:58 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/20 21:26:31 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 			return (!*cmd_path);
 		}
 		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __NO_FILE);
-		return (1);
+		return (127);
 	}
 	if (!search_path(cmd, cmd_path, path))
 		return (0);
-	if (path && !*cmd_path)
+	if (path && *path && !*cmd_path)
 		ft_dprintf(2, "%s: %s\n", cmd, __CMD_NOT_FOUND);
-	if (!path)
+	if (!path || !*path)
 		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __NO_FILE);
-	return (!!path * 127 + !path);
+	return (127);
 }
 
 static int	is_dir(char *path)

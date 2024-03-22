@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_string.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:18:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/22 13:23:46 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 16:13:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ size_t	ft_strlen_charset(const char *str, const char *charset);
 size_t	ft_strlen_protected(const char *str);
 size_t	ft_strlen(const char *str);
 size_t	ft_strnlen(const char *str, size_t n);
+void	ft_free_split_arr(char ***split);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 
 #endif
