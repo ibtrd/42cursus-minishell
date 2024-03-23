@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:12:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 17:47:58 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 16:14:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_mask	*str_to_mask(char *str, char mask_value);
 char	*mask_to_string(t_vector *arg);
 
 //EXPAND
-int		is_expandable(t_vector *arg);
+int		is_expandable(t_vector *arg, char *interpreters);
 
 int		tilde_expansion(t_vector *str);
 int		envars_expansion(t_vector *str, t_minishell *env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_expander_launch.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 18:11:38 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 16:14:36 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	expand_node(t_astnode *node, t_minishell *env)
 	while (i < node->args->total)
 	{
 		arg = (ft_vector_get(node->args, i));
-		if (is_expandable(arg) && expand_string(node->args, &i, env))
+		if (is_expandable(arg, __INTERPRETERS)
+			&& expand_string(node->args, &i, env))
 			return (FAILURE);
 		i++;
 	}

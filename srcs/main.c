@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 17:19:19 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 16:19:15 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static int	minishell_routine(t_minishell *minishell)
 	if (get_input(minishell, &input))
 		return (1);
 	root = commandline_parser(input);
+	if (create_here_documents(root))
+		return (1);
 	minishell->sp_params.exit_status = executor(root, minishell);
 	free_ast(root);
 	return (0);

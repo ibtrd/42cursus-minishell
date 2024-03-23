@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/21 18:50:09 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 16:19:43 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_minishell
 }	t_minishell;
 
 int	get_input(t_minishell *minishell, char **input);
+int	create_here_documents(t_astnode *root);
 int	search_path(const char *cmd, char **cmd_path, char *path);
 int	expand_node(t_astnode *node, t_minishell *env);
 
