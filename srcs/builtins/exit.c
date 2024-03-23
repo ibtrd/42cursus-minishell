@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:34:10 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 13:48:24 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 18:56:40 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	builtin_exit(t_executor *exec, char **argv)
 	}
 	else
 		status = (unsigned char)ft_strtol(argv[0], NULL);
-	exec_cleanup(exec);
-	close(0);
-	close(1);
+	exec_cleanup(exec, 0);
 	exit(status);
 	return (0);
 }

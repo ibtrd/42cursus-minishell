@@ -6,12 +6,16 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 17:19:10 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/22 18:30:53 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
+#include "signals.h"
+
 #include <unistd.h>
+
+#include <stdio.h>	// DEBUG
 
 int	exec_init(t_executor *exec, t_astnode *root, t_minishell *minishell)
 {
@@ -47,9 +51,12 @@ int	executor(t_astnode *root, t_minishell *minishell)
 	int			ret;
 
 	ret = 1;
+	if (signal_ign_main())
+		return (1);
 	if (!exec_init(&exec, root, minishell))
 		ret = node_exec(&exec);
 	ft_vector_free(&exec.infd);
 	ft_vector_free(&exec.outfd);
+	signal_setup_main();
 	return (ret);
 }

@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cleanup.c                                     :+:      :+:    :+:   */
+/*   main_int_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 14:38:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 18:59:14 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/22 16:01:24 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/22 18:46:17 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
-
-#include <readline/readline.h>
+#include <stdio.h>
 #include <unistd.h>
+#include <readline/readline.h>
 
-int	exec_cleanup(t_executor *exec, int ret)
+void	main_int_handler(int sig)
 {
-	close(0);
-	close(1);
-	ft_vector_free(exec->env);
-	ft_vector_free(&exec->infd);
-	ft_vector_free(&exec->outfd);
-	free_ast(exec->root);
-	rl_clear_history();
-	return (ret);
+	(void)sig;
+	printf("\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }

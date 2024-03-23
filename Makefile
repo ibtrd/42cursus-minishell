@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/23 17:32:51 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/23 18:38:04 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,6 +115,7 @@ EXECUTION_SRC = \
 	exec_utils \
 	executor \
 	node_exec \
+	retrieve_status \
 
 #		# ******* BRANCH ******* #
 
@@ -187,6 +188,19 @@ PROMPT_DIR = prompt/
 PROMPT_SRC = \
 	add_git \
 	get_prompt \
+
+# **************** SIGNAL **************** #
+
+SRC += $(addprefix $(SIGNAL_DIR),$(SIGNAL_SRC))
+
+SIGNAL_DIR = signals/
+SIGNAL_SRC = \
+	child_int_handler \
+	child_quit_handler \
+	main_int_handler \
+	signal_ign_main \
+	signal_setup_child \
+	signal_setup_main \
 
 ################################################################################
 

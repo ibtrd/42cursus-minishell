@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cleanup.c                                     :+:      :+:    :+:   */
+/*   child_int_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 14:38:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 18:59:14 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/03/22 16:01:24 by kchillon          #+#    #+#             */
+/*   Updated: 2024/03/22 18:46:20 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
-
-#include <readline/readline.h>
+#include <stdio.h>
 #include <unistd.h>
+#include <readline/readline.h>
+#include <signal.h>
 
-int	exec_cleanup(t_executor *exec, int ret)
+void	child_int_handler(int sig)
 {
-	close(0);
-	close(1);
-	ft_vector_free(exec->env);
-	ft_vector_free(&exec->infd);
-	ft_vector_free(&exec->outfd);
-	free_ast(exec->root);
-	rl_clear_history();
-	return (ret);
+	struct sigaction	act;
+
+	(void)sig;
+	act.sa_handler = SIG_DFL;
+	act.sa_flags = SA_RESTART;
+	printf("\n");
+	if (sigaction(SIGINT, &act, NULL) == -1)
+		return ;
+	kill(0, SIGINT);
 }
