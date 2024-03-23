@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:51:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/23 18:25:57 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 18:29:17 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ static char	*generate_tmp_filepath(char *prefix)
 		return (NULL);
 	return (path);
 }
-
-# include <stdio.h>
-# include <string.h>
 
 int	ft_tmp_file(char **path, char *prefix)
 {
