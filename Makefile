@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/23 18:56:11 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/23 22:06:03 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -199,6 +199,7 @@ SIGNAL_SRC = \
 	main_int_handler \
 	signal_ign_main \
 	signal_setup_child \
+	signal_setup_input \
 	signal_setup_main \
 
 ################################################################################
