@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/23 17:46:41 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/23 18:46:10 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -152,6 +152,7 @@ BUILTIN_SRC = \
 	export \
 	pwd \
 	unset \
+	history \
 
 # **************** ENVIRONMENT **************** #
 

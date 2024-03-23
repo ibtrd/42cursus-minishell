@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/22 19:22:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 18:27:45 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name)
 {
 	t_vector	env;
 
+	load_global_history();
 	if (signal_setup_main())
 		return (1);
 	if (init_env(&env, old_env))

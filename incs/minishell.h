@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/23 17:44:46 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 18:27:21 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int		search_path(const char *cmd, char **cmd_path, char *path);
 int		expand_node(t_astnode *node, t_minishell *env);
 int		signal_setup_main(void);
 void	minishell_add_history(char *str);
-void	init_history(void);
+void	load_global_history(void);
 
 #endif

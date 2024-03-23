@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/23 18:01:28 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 19:26:01 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define P_WHITE "\001\e[37m\002"
 # define P_CYAN "\001\e[36m\002"
 # define P_BLUE "\001\e[34m\002"
-# define P_YELLOW "\001\e[33;1m\002"
+# define P_YELLOW "\001\e[33\002"
 # define P_GREEN "\001\e[32m\002"
 # define P_RED "\001\e[31m\002"	
 # define P_BOLD "\001\e[1m\002"

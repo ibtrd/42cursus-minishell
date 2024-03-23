@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/23 17:43:27 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 18:38:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	get_input(t_minishell *minishell, char **input)
 	minishell_add_history(*input);
 	return (0);
 }
-
 static int	complete_input(char **old_input)
 {
 	char	*new_input;
@@ -60,4 +59,3 @@ static int	complete_input(char **old_input)
 		return (FAILURE);
 	return (SUCCESS);
 }
-
