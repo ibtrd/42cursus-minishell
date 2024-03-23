@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/23 18:46:10 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/23 21:10:00 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -316,7 +316,7 @@ clean :
 .PHONY : fclean
 fclean :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
-	rm -rf $(MAKE_DIR) $(NAME)
+	rm -rf $(MAKE_DIR) $(NAME) .minishell_history
 	echo "$(YELLOW) $(NAME) files removed! $(RESET)"
 
 .PHONY : re

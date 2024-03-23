@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 17:28:48 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/23 18:56:52 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 21:08:00 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	minishell_add_history(char *str)
 	int		fd;
 
 	add_history(str);
-	fd = open(__GLOBAL_HISTORY, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	fd = open(__GLOBAL_HISTORY, O_WRONLY | O_CREAT | O_APPEND, 0600);
 	if (fd == -1)
 		return ;
 	ft_dprintf(fd, "%s\n", str);
@@ -40,7 +40,6 @@ void	load_global_history(void)
 	fd = open(__GLOBAL_HISTORY, O_RDONLY);
 	if (fd == -1)
 		return ;
-	// gnl == NULL;
 	while (!get_next_line(fd, &gnl) && gnl)
 	{
 		line = ft_strndup(gnl, ft_strlen(gnl) - 1);
@@ -54,4 +53,5 @@ void	load_global_history(void)
 		free(line);
 	}
 	close(fd);
+	//ADD ERROR MESSAGE
 }
