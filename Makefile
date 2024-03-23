@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/23 16:20:46 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/23 17:32:51 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,9 +133,10 @@ SRC += $(addprefix $(OPEN_DIR),$(OPEN_SRC))
 
 OPEN_DIR = $(EXECUTION_DIR)/open/
 OPEN_SRC = \
+		open_append \
+		open_heredoc \
 		open_input \
 		open_output \
-		open_append \
 
 # ********** BUILTINS ********** #
 

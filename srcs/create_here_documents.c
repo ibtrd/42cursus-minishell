@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_here_documents.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/23 17:07:19 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 17:55:23 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static int	build_heredoc(t_vector **args)
 	ft_vector_dealloc(args, 1);
 	*args = buffer;
 	free(delimiter);
+	ft_vector_print(*args, &ft_vprint_char, "test ");
 	return (SUCCESS);
 }
 

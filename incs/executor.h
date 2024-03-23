@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 18:03:15 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 18:01:04 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_executor
 {
 	t_minishell	*minishell;
 	t_vector	*env;
-	int	pid;
+	int			pid;
 	t_astnode	*node;
 	t_astnode	*root;
 	t_vector	infd;
@@ -37,7 +37,7 @@ int		branch_pipe(t_executor *exec);
 int		branch_redirection(t_executor *exec);
 int		executor(t_astnode *root, t_minishell *minishell);
 int		open_append(t_executor *exec);
-// int	open_heredoc(t_executor *exec); 7
+int		open_heredoc(t_executor *exec);
 int		open_input(t_executor *exec);
 int		open_output(t_executor *exec);
 int		node_exec(t_executor *exec);

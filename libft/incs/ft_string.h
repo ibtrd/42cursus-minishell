@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_string.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:18:27 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/22 16:13:08 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 17:41:01 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define ALPHANUM "abcdefghijklmnopqrstuvwxyz\
 ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
+char	*ft_generate_rand_str(size_t len, const char *charset);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strcpy(char *dst, const char *src);
@@ -32,7 +33,6 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strtok(char *str, const char *delimiters);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*get_random_string(int len, const char *charset);
 int		ft_countwords(const char *str, const char *sep);
 int		ft_isnumber(const char *str);
 int		ft_str_in_array(const char *str, const char **array);
