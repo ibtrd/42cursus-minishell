@@ -8,6 +8,7 @@ minishell_test
 TEST_DIR/*
 *.old
 *.txt
+.minishell_history
 
 # Prerequisites
 *.d

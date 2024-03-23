@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/22 18:51:34 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/23 17:46:41 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = \
 	get_input \
 	main \
 	search_path \
+	minishell_history \
 	$(addprefix $(DEBUG_DIR),$(DEBUG_SRC)) ##REMOVE DEBUG
 
 # ********** PARSING ********** #
