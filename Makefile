@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/22 18:51:34 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/03/23 18:56:11 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ OBJS = $(patsubst %.c,$(BUILD_DIR)%.o,$(SRCS))
 DEPS = $(patsubst %.o,%.d,$(OBJS))
 
 SRC = \
+	get_additional_input \
 	get_input \
 	main \
 	search_path \

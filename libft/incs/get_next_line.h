@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 13:35:44 by kchillon          #+#    #+#             */
-/*   Updated: 2024/02/29 19:03:05 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 21:22:49 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 50
+#  define BUFFER_SIZE 15
 # endif
 
 # ifndef GNL_VECTOR_SIZE

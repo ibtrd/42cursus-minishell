@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishelldef.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 16:37:58 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 16:35:57 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define __DEFAULT_PROMPT "\001\e[1m\e[36m\002minishell\001\e[0m\002 "
 # define __PROMPT "%s%s↳ \001\e[33m\002%s\001\e[0m\002 "
 # define __GIT_PROMPT "%s%s[\001\e[36m\002%s\001\e[34m\002]\001\e[0m\002"
-# define __SECONDARY_PROMPT ">"
+# define __SECONDARY_PROMPT " \001\e[33;1m\002>\001\e[0m\002 "
 
 # define P_WHITE "\001\e[37m\002"
 # define P_CYAN "\001\e[36m\002"
