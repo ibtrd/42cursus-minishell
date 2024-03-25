@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:33:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 13:14:04 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/25 21:10:51 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static int	get_dir(char **dir, t_vector *env, char *name)
 }
 
 static int	resolve_dir(char **dir, t_vector *env, char **argv)
-{if (!*argv)
+{
+	if (!*argv)
 		return (get_dir(dir, env, "HOME"));
 	if (argv[1])
 	{
@@ -59,6 +60,8 @@ static int	update_wd(t_vector *env, char *oldcwd)
 	free(oldcwd);
 	if (errno != ENOMEM)
 		error = update_var(env, pwd) | update_var(env, oldpwd);
+	else
+		error = 0;
 	free(oldpwd);
 	free(pwd);
 	return (error);

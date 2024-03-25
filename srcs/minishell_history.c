@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 17:28:48 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/23 21:08:00 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/25 15:41:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,18 @@ void	load_global_history(void)
 {
 	int		fd;
 	char	*gnl;
-	char	*line;
+	char	*nl;
 
 	fd = open(__GLOBAL_HISTORY, O_RDONLY);
 	if (fd == -1)
 		return ;
 	while (!get_next_line(fd, &gnl) && gnl)
 	{
-		line = ft_strndup(gnl, ft_strlen(gnl) - 1);
+		nl = ft_strchr(gnl, '\n');
+		if (nl)
+			*nl = '\0';
+		add_history(gnl);
 		free(gnl);
-		if (!line)
-		{
-			close(fd);
-			return ;
-		}
-		add_history(line);
-		free(line);
 	}
 	close(fd);
 	//ADD ERROR MESSAGE
