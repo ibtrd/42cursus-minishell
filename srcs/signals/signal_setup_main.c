@@ -6,14 +6,15 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:54:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/01 18:29:17 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 23:41:59 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signals.h"
-
 #include <signal.h>
 #include <stddef.h>
+#include <readline/readline.h>
+
+#include "signals.h"
 
 int	signal_setup_main(void)
 {
@@ -29,5 +30,6 @@ int	signal_setup_main(void)
 		return (1);
 	if (sigaction(SIGTERM, &act, NULL) == -1)
 		return (1);
+	rl_event_hook = NULL;
 	return (0);
 }

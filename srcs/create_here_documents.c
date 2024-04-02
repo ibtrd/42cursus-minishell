@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/02 22:23:00 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 23:57:39 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static int	build_heredoc(t_vector **args)
 	if (ft_vector_alloc(&buffer, (t_vinfos){sizeof(char), 0, NULL}, 1))
 		return (FAILURE);
 	set_config(ft_vector_get(*args, 0), &delimiter, &expand);
-	g_signal = 0;
 	if (signal_setup_heredoc() || read_heredoc(buffer, delimiter))
 	{
 		free(delimiter);
 		ft_vector_dealloc(&buffer, 1);
-		return (signal_setup_main() || FAILURE);
+		signal_setup_main();
+		return (FAILURE);
 	}
 	free(delimiter);
 	ft_vector_dealloc(args, 1);
@@ -62,23 +62,10 @@ static int	read_heredoc(t_vector *buffer, char *delimiter)
 {
 	char	*line;
 
-	while (1)
+	g_signal = 0;
+	line = readline(__SECONDARY_PROMPT);
+	while (!g_signal && line && ft_strcmp(line, delimiter))
 	{
-		line = readline(__SECONDARY_PROMPT);
-		printf("from builder: %d\n", g_signal);
-		if (g_signal)
-		{
-			printf("signal trigger\n");
-			free(line);
-			return (FAILURE);
-		}
-		if (!line)
-			return (SUCCESS);
-		if (!ft_strcmp(line, delimiter))
-		{
-			free(line);
-			return (SUCCESS);
-		}
 		if (ft_vector_join(buffer, line, ft_strlen(line))
 			|| ft_vector_add(buffer, "\n"))
 		{
@@ -86,7 +73,10 @@ static int	read_heredoc(t_vector *buffer, char *delimiter)
 			return (FAILURE);
 		}
 		free(line);
+		line = readline(__SECONDARY_PROMPT);
 	}
+	free(line);
+	return (g_signal);
 }
 
 static	int	set_config(t_vector *arg, char **delimiter, int *expand)
@@ -99,7 +89,6 @@ static	int	set_config(t_vector *arg, char **delimiter, int *expand)
 	else
 		*expand = 1;
 	*delimiter = mask_to_string(arg);
-	printf("DEBUG delimiter=%s\n", *delimiter);
 	if (!*delimiter)
 		return (FAILURE);
 	return (SUCCESS);

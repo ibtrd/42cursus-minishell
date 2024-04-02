@@ -6,14 +6,17 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:52:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/02 19:21:29 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 23:40:58 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signals.h"
-
 #include <signal.h>
 #include <stddef.h>
+#include <readline/readline.h>
+
+#include "signals.h"
+
+static int ft_rl_event(void);
 
 int	signal_setup_heredoc(void)
 {
@@ -23,5 +26,11 @@ int	signal_setup_heredoc(void)
 	act.sa_handler = &heredoc_int_handler;
 	if (sigaction(SIGINT, &act, NULL) == -1)
 		return (1);
+	rl_event_hook=&ft_rl_event;
+	return (0);
+}
+
+static int ft_rl_event(void)
+{
 	return (0);
 }
