@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:02:34 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 17:20:01 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 18:15:45 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		signal_ign_main(void);
 int		signal_setup_child(void);
+int		signal_setup_main(void);
 void	child_int_handler(int sig);
 void	child_quit_handler(int sig);
 void	main_int_handler(int sig);

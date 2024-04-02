@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 18:51:42 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 18:10:41 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ typedef struct s_minishell
 int	get_input(t_minishell *minishell, char **input);
 int	search_path(const char *cmd, char **cmd_path, char *path);
 int	expand_node(t_astnode *node, t_minishell *env);
-int	signal_setup_main(void);
 
 #endif

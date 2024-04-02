@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    libft_srcs.mk                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/22 16:13:14 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/03/23 19:40:47 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -161,6 +161,14 @@ SRC += $(addprefix $(GNL_DIR), $(addsuffix .c, $(GNL_SRC)))
 GNL_DIR = get_next_line/
 GNL_SRC = \
 	get_next_line \
+
+# *** GET_FD_CONTENT ********************************************************* #
+
+SRC += $(addprefix $(GFC_DIR), $(addsuffix .c, $(GFC_SRC)))
+
+GFC_DIR = get_fd_content/
+GFC_SRC = \
+	get_fd_content \
 
 # *** FT_PRINTF ************************************************************** #
 
