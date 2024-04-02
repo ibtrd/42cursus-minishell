@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:43:19 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/10 16:55:08 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 21:35:44 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	get_next_line(int fd, char **line)
 	error = get_from_buffer(buffer, &v);
 	if (!error)
 		error = gnl_read_line(buffer, &v, fd);
-	if (error < 0)
+	if (error < 0 && v.total == 0)
 		ft_vector_free(&v);
 	if (error != -1)
 		*line = v.ptr;
