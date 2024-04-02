@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 21:41:18 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/23 18:48:16 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 18:10:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int	builtin_export(t_executor *exec, char **argv);
 int	builtin_pwd(t_executor *exec, char **argv);
 int	builtin_unset(t_executor *exec, char **argv);
 int	builtin_history(t_executor *exec, char **argv);
-int	chech_option(char *arg, char *options, char *charset);
+int	check_option(char *arg, char *options, char *charset);
 
 #endif //BUILTINS_H

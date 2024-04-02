@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 18:41:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/25 18:59:55 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 18:12:01 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 #include "minishelldef.h"
 #include "executor.h"
+#include "builtins.h"
 
 static int	history_print(void);
 static int	history_delete(void);
@@ -29,21 +30,23 @@ static int	history_invalid_option(char *option);
 
 int	builtin_history(t_executor *exec, char **argv)
 {
+	char	options;
+
 	(void)exec;
-	if (!argv[0])
-		return (history_print());
-	if (argv[0] && argv[1])
-		return (history_usage());
-	if (argv[0][0] == '-')
+	if (!argv)
+		return (1);
+	options = 0;
+	while (*argv)
 	{
-		if (argv[0][1] == 'c' && !argv[0][2])
-			return (history_delete());
-		else
-			return (history_invalid_option(argv[0]));
+		if (**argv == '-' && check_option((*argv) + 1, &options, "c"))
+			return (history_invalid_option(*argv));
+		if (**argv != '-' && !options)
+			return (history_usage());
+		argv++;
 	}
-	else
-		return (history_usage());
-	return (SUCCESS);
+	if (options & 1)
+		return (history_delete());
+	return (history_print());
 }
 
 static int	history_print(void)
