@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/23 22:05:45 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 17:24:47 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ static int	minishell_routine(t_minishell *minishell)
 {
 	char		*input;
 	t_astnode	*root;
+	int			error;
 
-	if (get_input(minishell, &input))
-		return (1);
+	error = get_input(minishell, &input);
+	if (error)
+		return (error == FAILURE);
 	root = commandline_parser(input);
 	minishell->sp_params.exit_status = executor(root, minishell);
 	free_ast(root);
