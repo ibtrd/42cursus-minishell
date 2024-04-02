@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 22:47:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/19 23:05:10 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/01 20:52:05 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ int	is_special_param(t_vector *str, size_t index, char param, t_minishell *env)
 		ptr = ft_itoa(env->sp_params.exit_status);
 	else if (param == '0')
 		ptr = ft_strdup(env->sp_params.sh_name);
+	else if (param == '\"' || param == '\'')
+	{
+		if (!((t_mask *)ft_vector_get(str, index))->m)
+			return (ft_vector_deleten(str, index, 1));
+		return (SUCCESS);
+	}
 	else
 	{
 		((t_mask *)ft_vector_get(str, index))->m |= __ENVAR_MASK;

@@ -16,7 +16,7 @@ int	build_operator(t_lexer_token *tok, t_astnode **root)
 {
 	t_astnode	*new;
 
-	if (ast_newnode(&new, tok->type, NULL))
+	if (ast_newnode(&new, (t_nodetype)tok->type, NULL))
 		return (FAILURE);
 	*root = ast_addnode(*root, new);
 	return (SUCCESS);
