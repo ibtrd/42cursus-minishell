@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_here_documents.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/23 18:31:09 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 22:23:00 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "minishelldef.h"
 #include "expander.h"
 #include "ast.h"
+#include "signals.h"
 
 static int	build_heredoc(t_vector **args);
 static int	read_heredoc(t_vector *buffer, char *delimiter);
@@ -44,15 +45,17 @@ static int	build_heredoc(t_vector **args)
 	if (ft_vector_alloc(&buffer, (t_vinfos){sizeof(char), 0, NULL}, 1))
 		return (FAILURE);
 	set_config(ft_vector_get(*args, 0), &delimiter, &expand);
-	if (read_heredoc(buffer, delimiter))
+	g_signal = 0;
+	if (signal_setup_heredoc() || read_heredoc(buffer, delimiter))
 	{
+		free(delimiter);
 		ft_vector_dealloc(&buffer, 1);
-		return (FAILURE);
+		return (signal_setup_main() || FAILURE);
 	}
+	free(delimiter);
 	ft_vector_dealloc(args, 1);
 	*args = buffer;
-	free(delimiter);
-	return (SUCCESS);
+	return (signal_setup_main());
 }
 
 static int	read_heredoc(t_vector *buffer, char *delimiter)
@@ -62,6 +65,13 @@ static int	read_heredoc(t_vector *buffer, char *delimiter)
 	while (1)
 	{
 		line = readline(__SECONDARY_PROMPT);
+		printf("from builder: %d\n", g_signal);
+		if (g_signal)
+		{
+			printf("signal trigger\n");
+			free(line);
+			return (FAILURE);
+		}
 		if (!line)
 			return (SUCCESS);
 		if (!ft_strcmp(line, delimiter))

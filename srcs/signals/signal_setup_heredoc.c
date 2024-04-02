@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.h                                          :+:      :+:    :+:   */
+/*   signal_setup_heredoc.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 16:02:34 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/02 19:21:52 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/04/02 18:52:34 by ibertran          #+#    #+#             */
+/*   Updated: 2024/04/02 19:21:29 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNALS_H
-# define SIGNALS_H
+#include "signals.h"
 
-int		signal_ign_main(void);
-int		signal_setup_child(void);
-int		signal_setup_heredoc(void);
-void	child_int_handler(int sig);
-void	child_quit_handler(int sig);
-void	heredoc_int_handler(int sig);
-void	main_int_handler(int sig);
+#include <signal.h>
+#include <stddef.h>
 
-#endif
+int	signal_setup_heredoc(void)
+{
+	struct sigaction	act;
+
+	act = (struct sigaction){0};
+	act.sa_handler = &heredoc_int_handler;
+	if (sigaction(SIGINT, &act, NULL) == -1)
+		return (1);
+	return (0);
+}

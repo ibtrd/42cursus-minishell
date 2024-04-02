@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/23 18:38:04 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/02 18:57:07 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -197,9 +197,11 @@ SIGNAL_DIR = signals/
 SIGNAL_SRC = \
 	child_int_handler \
 	child_quit_handler \
+	heredoc_int_handler \
 	main_int_handler \
 	signal_ign_main \
 	signal_setup_child \
+	signal_setup_heredoc \
 	signal_setup_main \
 
 ################################################################################
