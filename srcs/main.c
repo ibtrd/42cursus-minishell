@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/02 17:24:47 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 15:16:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "minishelldef.h"
 #include "minishell.h"
 #include "signals.h"
+#include "history.h"
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -30,6 +31,7 @@ static int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name)
 
 	if (signal_setup_main())
 		return (1);
+	load_global_history();
 	if (init_env(&env, old_env))
 		return (1);
 	minishell->env = env;

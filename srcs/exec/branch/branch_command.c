@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 19:13:13 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 18:49:46 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	branch_command(t_executor *exec)
 {
 	int			ret;
 	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env",
-								"exit", NULL};
+								"exit", "history", NULL};
 
 	if (expand_node(exec->node, exec->minishell))
 		return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:00:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 16:34:38 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 18:10:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	builtin_echo(t_executor *exec, char **argv)
 	options = 0;
 	while (*argv && **argv == '-')
 	{
-		if (chech_option((*argv) + 1, &options, "n"))
+		if (check_option((*argv) + 1, &options, "n"))
 			break ;
 		argv++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_option.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:30:28 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/02 16:19:47 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 18:09:52 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	isoption(char c, char *charset)
 	return (0);
 }
 
-int	chech_option(char *arg, char *options, char *charset)
+int	check_option(char *arg, char *options, char *charset)
 {
 	size_t	i;
 	char	tmp_opt;

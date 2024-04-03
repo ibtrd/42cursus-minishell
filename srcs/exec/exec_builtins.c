@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:16:43 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 18:00:18 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 18:49:33 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	exec_builtins(t_executor *exec, int index)
 {
 	static const t_builtin	builtins[] = {&builtin_echo, &builtin_cd, &builtin_pwd, \
 								&builtin_export, &builtin_unset, &builtin_env, \
-								&builtin_exit};
+								&builtin_exit, &builtin_history};
 	int							ret;
 
 	// ret = dup2(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1), STDIN_FILENO);

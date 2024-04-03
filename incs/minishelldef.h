@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishelldef.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/02 18:06:50 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 15:15:05 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 // # define __PRGM_NAME "minishell"
 // # define __PRGM_NAME_LEN 9 //REMOVE
+
+# define __GLOBAL_HISTORY ".minishell_history"
 
 //STATUS
 # define SUCCESS 0
@@ -36,7 +38,7 @@
 # define P_WHITE "\001\e[37m\002"
 # define P_CYAN "\001\e[36m\002"
 # define P_BLUE "\001\e[34m\002"
-# define P_YELLOW "\001\e[33;1m\002"
+# define P_YELLOW "\001\e[33\002"
 # define P_GREEN "\001\e[32m\002"
 # define P_RED "\001\e[31m\002"	
 # define P_BOLD "\001\e[1m\002"

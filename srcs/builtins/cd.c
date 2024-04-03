@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:33:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/01 18:31:38 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 16:11:37 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static int	get_dir(char **dir, t_vector *env, char *name)
 }
 
 static int	resolve_dir(char **dir, t_vector *env, char **argv)
-{if (!*argv)
+{
+	if (!*argv)
 		return (get_dir(dir, env, "HOME"));
 	if (argv[1])
 	{
