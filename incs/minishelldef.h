@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/03 16:35:57 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 16:45:17 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 // # define __PRGM_NAME "minishell"
 // # define __PRGM_NAME_LEN 9 //REMOVE
+
+# define __GLOBAL_HISTORY ".minishell_history"
 
 //STATUS
 # define SUCCESS 0

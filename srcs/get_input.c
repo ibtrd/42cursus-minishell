@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 15:04:26 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 16:45:44 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "minishelldef.h"
 #include "prompt.h"
 #include "parsing.h"
+#include "history.h"
 
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -41,7 +42,7 @@ static void	input_error_handler(char **input, int error, int *exit_status)
 	int	quote;
 
 	if (error != FAILURE && *input && **input)
-		add_history(*input);
+		minishell_add_history(*input);
 	if (error == 2)
 	{
 		quote = check_quotes(*input);
@@ -70,7 +71,7 @@ int	get_input(t_minishell *minishell, char **input)
 	{
 		error = complete_input(input);
 		if (error)
-			break;
+			break ;
 	}
 	input_error_handler(input, error, &minishell->sp_params.exit_status);
 	return (error);
