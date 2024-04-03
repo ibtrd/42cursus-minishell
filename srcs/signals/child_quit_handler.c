@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:01:24 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 18:46:15 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 14:31:38 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	child_quit_handler(int sig)
 	act.sa_handler = SIG_DFL;
 	act.sa_flags = SA_RESTART;
 	printf("Quit\n");
-	if (sigaction(SIGQUIT, &act, NULL) == -1)
-		return ;
+	sigaction(SIGQUIT, &act, NULL);
 	kill(0, SIGQUIT);
 }

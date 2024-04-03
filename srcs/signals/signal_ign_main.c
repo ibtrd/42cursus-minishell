@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:59:37 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 18:46:29 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 14:33:30 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,14 @@
 #include <signal.h>
 #include <stddef.h>
 
-int	signal_ign_main(void)
+void	signal_ign_main(void)
 {
 	struct sigaction	act;
 
 	act = (struct sigaction){0};
 	act.sa_handler = SIG_IGN;
 	act.sa_flags = SA_RESTART;
-	if (sigaction(SIGINT, &act, NULL) == -1)
-		return (1);
-	if (sigaction(SIGQUIT, &act, NULL) == -1)
-		return (1);
-	if (sigaction(SIGTERM, &act, NULL) == -1)
-		return (1);
-	return (0);
+	sigaction(SIGINT, &act, NULL);
+	sigaction(SIGQUIT, &act, NULL);
+	sigaction(SIGTERM, &act, NULL);
 }

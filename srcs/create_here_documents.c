@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 14:24:11 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 14:38:53 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static int	build_heredoc(t_vector **args)
 	if (ft_vector_alloc(&buffer, (t_vinfos){sizeof(char), 0, NULL}, 1))
 		return (FAILURE);
 	set_config(ft_vector_get(*args, 0), &delimiter, &expand);
-	if (signal_setup_heredoc() || read_heredoc(buffer, delimiter))
+	signal_setup_heredoc();
+	if (read_heredoc(buffer, delimiter))
 	{
 		free(delimiter);
 		ft_vector_dealloc(&buffer, 1);
@@ -55,7 +56,8 @@ static int	build_heredoc(t_vector **args)
 	free(delimiter);
 	ft_vector_dealloc(args, 1);
 	*args = buffer;
-	return (signal_setup_main());
+	signal_setup_main();
+	return (SUCCESS);
 }
 
 static int	read_heredoc(t_vector *buffer, char *delimiter)

@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 18:58:47 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 14:35:11 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 		ret = 1;
 		if (piping(exec, wait, pipe) == -1)
 			exit(exec_cleanup(exec, ret));
-		if (signal_setup_child())
-			exit(exec_cleanup(exec, ret));
+		signal_setup_child();
 		exec->node = node;
 		ret = node_exec(exec);
 		exit(exec_cleanup(exec, ret));
