@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:02:34 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 16:55:49 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 16:58:03 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void	main_int_handler(int sig);
 void	signal_ign_main(void);
 void	signal_setup_child(void);
 void	signal_setup_heredoc(void);
+void	signal_setup_main(void);
 
 #endif
