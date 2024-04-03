@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 18:41:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/03 15:08:34 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 15:36:39 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,23 @@ static int	history_print(void)
 	history_file = get_history_filepath();
 	if (!history_file)
 		return (1);
-	errno = 0;
 	fd = open(history_file, O_RDONLY);
 	free(history_file);
-	if (!errno)
+	if (fd == -1)
+		return (1);
+	i = 1;
+	while (!get_next_line(fd, &gnl) && gnl)
 	{
-		i = 1;
-		while (!get_next_line(fd, &gnl) && gnl)
-			printf("%5d  %s", i++, gnl);
+		printf("%5d  %s", i++, gnl);
+		free(gnl);
+	}
+	if (errno)
+	{
+		close(fd);
+		return (1);
 	}
 	close(fd);
-	return (errno);
+	return (0);
 }
 
 static int	history_delete(void)

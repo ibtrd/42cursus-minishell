@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 15:17:33 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 15:39:18 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	input_error_handler(char **input, int error, int *exit_status)
 	int	quote;
 
 	if (error != FAILURE)
-		add_history(*input);
+		minishell_add_history(*input);
 	if (error == 2)
 	{
 		quote = check_quotes(*input);
