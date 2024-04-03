@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:02:34 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/02 19:21:52 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 14:24:09 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SIGNALS_H
 # define SIGNALS_H
 
+int		ft_rl_event(void);
 int		signal_ign_main(void);
 int		signal_setup_child(void);
 int		signal_setup_heredoc(void);

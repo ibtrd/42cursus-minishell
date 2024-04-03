@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_here_documents.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/02 23:57:39 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 14:24:11 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
