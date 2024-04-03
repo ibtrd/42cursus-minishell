@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_here_documents.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 14:38:53 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 16:36:56 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <readline/readline.h>
+#include <unistd.h>
 
 #include "libft.h"
 
@@ -77,6 +78,8 @@ static int	read_heredoc(t_vector *buffer, char *delimiter)
 		free(line);
 		line = readline(__SECONDARY_PROMPT);
 	}
+	if (!line)
+		ft_dprintf(STDERR_FILENO, __HEREDOC_EOF, __MINISHELL, delimiter);
 	free(line);
 	return (g_signal);
 }
