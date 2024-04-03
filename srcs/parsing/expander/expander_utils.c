@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 06:16:41 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/17 23:30:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 16:10:43 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 #include "minishelldef.h"
 #include "mask.h"
 
-int	is_expandable(t_vector *arg)
+int	is_expandable(t_vector *arg, char *interpreters)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < arg->total)
 	{
-		if (ft_ischarset(((t_mask *)ft_vector_get(arg, i))->c, __INTERPRETERS))
+		if (ft_ischarset(((t_mask *)ft_vector_get(arg, i))->c, interpreters))
 			return (1);
 		i++;
 	}

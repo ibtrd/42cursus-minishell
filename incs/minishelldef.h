@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishelldef.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/03 16:45:17 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 17:00:09 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,7 @@
 # define __CMD_NOT_FOUND "command not found"
 # define __IS_DIR "Is a directory"
 # define __NO_FILE "No such file or directory"
+# define __HEREDOC_EOF "%s: warning: here-document delimited by end-of-file \
+(wanted `%s')\n"
 
 #endif //MINISHELLDEF_H

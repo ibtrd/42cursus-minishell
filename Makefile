@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/03 15:15:51 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/04/03 16:56:37 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = \
 	get_input \
 	main \
 	search_path \
+	create_here_documents \
 	minishell_history \
 	$(addprefix $(DEBUG_DIR),$(DEBUG_SRC)) ##REMOVE DEBUG
 
@@ -134,9 +135,10 @@ SRC += $(addprefix $(OPEN_DIR),$(OPEN_SRC))
 
 OPEN_DIR = $(EXECUTION_DIR)/open/
 OPEN_SRC = \
+		open_append \
+		open_heredoc \
 		open_input \
 		open_output \
-		open_append \
 
 # ********** BUILTINS ********** #
 
@@ -197,9 +199,12 @@ SIGNAL_DIR = signals/
 SIGNAL_SRC = \
 	child_int_handler \
 	child_quit_handler \
+	ft_rl_event \
+	heredoc_int_handler \
 	main_int_handler \
 	signal_ign_main \
 	signal_setup_child \
+	signal_setup_heredoc \
 	signal_setup_main \
 
 ################################################################################

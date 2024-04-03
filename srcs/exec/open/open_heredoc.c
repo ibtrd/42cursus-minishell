@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 18:27:13 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 23:17:51 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,41 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
+#include <stdlib.h>
 
 # include <stdio.h>
+
+static int	get_heredoc(t_executor *exec)
+{
+	int		fd;
+	char	*path;
+	int		ret;
+
+	path = NULL;
+	fd = ft_tmp_file(&path, "heredoc");
+	if (fd == -1)
+		return (-1);
+	ret = write(fd, (char *)ft_vector_get(exec->node->args, 0), exec->node->args->total);
+	close(fd);
+	if (ret != -1)
+		fd = open(path, O_RDONLY);
+	unlink(path);
+	free(path);
+	if (ret == -1 || fd == -1)
+		return (-1);
+	return (fd);
+}
 
 int	open_heredoc(t_executor *exec)
 {
 	int	fd;
 
-	fd = open(*(char **)ft_vector_get(exec->node->args, 0), O_RDONLY);
+	fd = get_heredoc(exec);
 	if (fd == -1)
 	{
-		ft_dprintf(2, "%s: %s: %s\n",
+		ft_dprintf(2, "%s: heredoc: %s\n",
 			__MINISHELL,
-			*(char **)ft_vector_get(exec->node->args, 0),
 			strerror(errno));
-		return (1);
-	}
-	if (unlink(*(char **)ft_vector_get(exec->node->args, 0)))
-	{
-		close(fd);
 		return (1);
 	}
     if (dup2(fd, STDIN_FILENO) == -1)

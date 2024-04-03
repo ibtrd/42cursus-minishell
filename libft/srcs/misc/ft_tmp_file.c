@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tmp_file.c                                         :+:      :+:    :+:   */
+/*   ft_tmp_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:51:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/02/23 16:45:46 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 18:29:17 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*generate_tmp_filepath(char *prefix)
 	char	*tmp_name;
 	char	*path;
 
-	tmp_name = generate_rand_str(10, ALPHANUM);
+	tmp_name = ft_generate_rand_str(10, ALPHANUM);
 	if (!tmp_name)
 		return (NULL);
 	path = ft_strjoin2("/tmp/", prefix, tmp_name);
@@ -31,16 +31,18 @@ static char	*generate_tmp_filepath(char *prefix)
 	return (path);
 }
 
-int	tmp_file(char **path, char *prefix)
+int	ft_tmp_file(char **path, char *prefix)
 {
 	int		fd;
 	int		i;
 
 	*path = NULL;
 	i = 0;
-	fd = 0;
-	while (errno == EEXIST && i < 1000 || fd == -1)
+	fd = -1;
+	errno = EEXIST;
+	while (errno == EEXIST && i < 1000)
 	{
+		errno = 0;
 		free(*path);
 		*path = generate_tmp_filepath(prefix);
 		if (!*path)

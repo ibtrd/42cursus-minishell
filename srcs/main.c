@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/03 15:16:08 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 16:57:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+int g_signal = 0;
+
 static int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name)
 {
 	t_vector	env;
 
-	if (signal_setup_main())
-		return (1);
+	signal_setup_main();
 	load_global_history();
 	if (init_env(&env, old_env))
 		return (1);
@@ -53,6 +54,15 @@ static int	minishell_routine(t_minishell *minishell)
 	if (error)
 		return (error == FAILURE);
 	root = commandline_parser(input);
+	if (create_here_documents(root))
+	{
+		free_ast(root);
+		if (g_signal)
+			minishell->sp_params.exit_status = g_signal + 128;
+		else
+			minishell->sp_params.exit_status = 1;
+		return (0);
+	}
 	minishell->sp_params.exit_status = executor(root, minishell);
 	free_ast(root);
 	return (0);

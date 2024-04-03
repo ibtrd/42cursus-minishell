@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 18:30:53 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 14:36:03 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int	executor(t_astnode *root, t_minishell *minishell)
 	int			ret;
 
 	ret = 1;
-	if (signal_ign_main())
-		return (1);
+	signal_ign_main();
 	if (!exec_init(&exec, root, minishell))
 		ret = node_exec(&exec);
 	ft_vector_free(&exec.infd);
