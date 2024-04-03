@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:15:50 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 15:02:31 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 16:36:34 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	add_git(t_vector *env, char **prompt)
 	if (git_branch(env, &branch) || !branch)
 		return (1);
 	branch[ft_strlen(branch) - 1] = '\0';
-	git = ft_sprintf(__GIT_PROMPT, P_BOLD, P_RED, branch);
+	git = ft_sprintf(__GIT_PROMPT, P_BOLD, P_CYAN, branch);
 	if (!git)
 	{
 		free(branch);
