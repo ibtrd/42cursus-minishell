@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_setup_child.c                               :+:      :+:    :+:   */
+/*   history.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 15:54:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 16:56:22 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/04/03 14:57:50 by ibertran          #+#    #+#             */
+/*   Updated: 2024/04/03 14:58:53 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signals.h"
+#ifndef HISTORY_H
+# define HISTORY_H
 
-#include <signal.h>
-#include <stddef.h>
+void	minishell_add_history(char *str);
+char	*get_history_filepath(void);
+void	load_global_history(void);
 
-# include <stdio.h>
-
-void	signal_setup_child(void)
-{
-	struct sigaction	act;
-
-	act = (struct sigaction){0};
-	act.sa_flags = SA_RESTART;
-	act.sa_handler = &child_int_handler;
-	sigaction(SIGINT, &act, NULL);
-	act.sa_handler = &child_quit_handler;
-	sigaction(SIGQUIT, &act, NULL);
-	act.sa_handler = SIG_DFL;
-	sigaction(SIGTERM, &act, NULL);
-}
+#endif //HISTORY_H

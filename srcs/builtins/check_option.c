@@ -3,16 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   check_option.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:30:28 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 15:32:44 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 18:09:52 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	chech_option(char *arg, char *options, char *charset)
+static int	isoption(char c, char *charset)
+{
+	size_t	i;
+
+	i = 0;
+	while (charset[i])
+	{
+		if (c == charset[i])
+			return (1 << i);
+		i++;
+	}
+	return (0);
+}
+
+int	check_option(char *arg, char *options, char *charset)
 {
 	size_t	i;
 	char	tmp_opt;
@@ -21,10 +35,10 @@ int	chech_option(char *arg, char *options, char *charset)
 	i = 0;
 	while (arg[i])
 	{
-		if (!ft_ischarset(arg[i], charset))
+		if (isoption(arg[i], charset))
+			tmp_opt |= isoption(arg[i], charset);
+		else
 			return (1);
-		if (arg[i] == 'n')
-			tmp_opt |= 1;
 		i++;
 	}
 	*options |= tmp_opt;

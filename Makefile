@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/03 14:24:43 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/03 16:56:37 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC = \
 	main \
 	search_path \
 	create_here_documents \
+	minishell_history \
 	$(addprefix $(DEBUG_DIR),$(DEBUG_SRC)) ##REMOVE DEBUG
 
 # ********** PARSING ********** #
@@ -153,6 +154,7 @@ BUILTIN_SRC = \
 	export \
 	pwd \
 	unset \
+	history \
 
 # **************** ENVIRONMENT **************** #
 

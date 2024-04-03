@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/03 14:36:36 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 16:57:05 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "env.h"
 #include "minishelldef.h"
 #include "minishell.h"
+#include "signals.h"
+#include "history.h"
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -29,7 +31,9 @@ static int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name)
 {
 	t_vector	env;
 
-	signal_setup_main();
+	if (signal_setup_main())
+		return (1);
+	load_global_history();
 	if (init_env(&env, old_env))
 		return (1);
 	minishell->env = env;
@@ -45,9 +49,11 @@ static int	minishell_routine(t_minishell *minishell)
 {
 	char		*input;
 	t_astnode	*root;
+	int			error;
 
-	if (get_input(minishell, &input))
-		return (1);
+	error = get_input(minishell, &input);
+	if (error)
+		return (error == FAILURE);
 	root = commandline_parser(input);
 	if (create_here_documents(root))
 	{

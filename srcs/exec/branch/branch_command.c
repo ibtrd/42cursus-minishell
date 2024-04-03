@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   branch_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 14:35:37 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 16:56:18 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	branch_command(t_executor *exec)
 {
 	int			ret;
 	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env",
-								"exit", NULL};
+								"exit", "history", NULL};
 
 	if (expand_node(exec->node, exec->minishell))
 		return (1);

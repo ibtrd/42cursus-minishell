@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/02 19:11:02 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 16:54:19 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ int	get_input(t_minishell *minishell, char **input);
 int	create_here_documents(t_astnode *root);
 int	search_path(const char *cmd, char **cmd_path, char *path);
 int	expand_node(t_astnode *node, t_minishell *env);
-int	signal_setup_main(void);
 
 #endif

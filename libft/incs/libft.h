@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:36:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/13 21:28:45 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/03/23 19:38:26 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 int		ft_close(int *fd);
 void	ft_free_array(void **array);
 void	ft_free_2darray_char(char **array);
+int		get_fd_content(int fd, char **content);
 int		get_next_line(int fd, char **line);
 
 /* FT_PRINTF ******************************************************************/
