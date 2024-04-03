@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/03 17:34:20 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/03 18:11:46 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -258,15 +258,38 @@ ifneq ($(LAST_MODE),$(MODE))
 $(NAME) : FORCE
 endif
 
+# *** COMPILATION MODES ****************************************************** #
+
+LOGFILE = $(MAKE_DIR).mklog
+
+# MODE ?=
+
+# ifneq ($(MODE),)
+# BUILD_DIR := $(BUILD_DIR)$(MODE)/
+# endif
+
+# ifeq ($(MODE),debug)
+# CFLAGS := $(filter-out $(OFLAGS),$(CFLAGS)) -g3
+# else ifeq ($(MODE),fsanitize)
+# CFLAGS := $(filter-out $(OFLAGS),$(CFLAGS)) -g3 -fsanitize=address
+# else ifneq ($(MODE),)
+# ERROR = MODE
+# endif
+
+# ifneq ($(LAST_MODE),$(MODE))
+# $(NAME) : FORCE
+# endif
+
 # *** TARGETS **************************************************************** #
 
 .PHONY : all
 all : $(NAME)
 
 
-$(NAME) : $(LIBS_PATH) $(OBJS) | ERROR_CHECK
+$(NAME) : $(LIBS_PATH) $(OBJS) | PREMAKE
 	@printf "\n🔗 Linking $(NAME)...\n"
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
+	@echo "$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)" >> $(LOGFILE)
+	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "$(MODE)" > $(MODE_TRACE)
 ifneq ($(MODE),)
 	@echo "$(GREEN) $(NAME)($(MODE)) has been built! $(RESET)"
@@ -274,12 +297,14 @@ else
 	@echo "$(GREEN) $(NAME) has been built! $(RESET)"
 endif
 
-$(BUILD_DIR)%.o : $(SRCS_DIR)%.c | ERROR_CHECK
+$(BUILD_DIR)%.o : $(SRCS_DIR)%.c | PREMAKE
 	@mkdir -p $(@D)
+	@echo "$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@" >> $(LOGFILE)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-	@printf "🔧 $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@\n"
+	@printf "🔧 $(basename $(@F))\n"
 
-$(LIBS_PATH): FORCE | ERROR_CHECK
+$(LIBS_PATH): FORCE | PREMAKE
+	@echo "Building $@..."
 	@$(MAKE) -C $(@D)
 
 .PHONY : bonus
@@ -358,8 +383,9 @@ valgrind : debug
 .PHONY : FORCE
 FORCE :
 
-.PHONY : ERROR_CHECK
-ERROR_CHECK :
+.PHONY : PREMAKE
+PREMAKE :
+	@rm -f $(LOGFILE)
 ifeq ($(ERROR),MODE)
 	$(error Invalid mode: $(MODE))
 endif
