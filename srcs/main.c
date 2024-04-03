@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/03 14:59:09 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 15:16:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "env.h"
 #include "minishelldef.h"
 #include "minishell.h"
+#include "signals.h"
 #include "history.h"
 
 #include <stdlib.h>
@@ -46,9 +47,11 @@ static int	minishell_routine(t_minishell *minishell)
 {
 	char		*input;
 	t_astnode	*root;
+	int			error;
 
-	if (get_input(minishell, &input))
-		return (1);
+	error = get_input(minishell, &input);
+	if (error)
+		return (error == FAILURE);
 	root = commandline_parser(input);
 	minishell->sp_params.exit_status = executor(root, minishell);
 	free_ast(root);

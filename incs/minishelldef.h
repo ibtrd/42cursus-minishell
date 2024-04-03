@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/03 14:46:11 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 15:15:05 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define __DEFAULT_PROMPT "\001\e[1m\e[36m\002minishell\001\e[0m\002 "
 # define __PROMPT "%s%s↳ \001\e[33m\002%s\001\e[0m\002 "
 # define __GIT_PROMPT "%s%s[\001\e[36m\002%s\001\e[34m\002]\001\e[0m\002"
-# define __SECONDARY_PROMPT ">"
+# define __SECONDARY_PROMPT " \001\e[33;1m\002>\001\e[0m\002 "
 
 # define P_WHITE "\001\e[37m\002"
 # define P_CYAN "\001\e[36m\002"
@@ -91,6 +91,7 @@
 
 //PRINT
 # define __MINISHELL "minishell"
+# define __UNEXPECTED_EOF "unexpected EOF while looking for matching `"
 # define __UNCLOSED_ERROR "syntax error: unclosed"
 # define __SYNTAX_ERROR "syntax error near unexpected token"
 # define __UNSUPPORTED_ERROR "unsupported operator"

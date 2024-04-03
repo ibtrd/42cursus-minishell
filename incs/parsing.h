@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 17:15:42 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/02 18:07:28 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_escape
 t_astnode	*commandline_parser(char *input);
 t_astnode	*ast_build(t_vector *lexer);
 
+int			check_quotes(char *cmdline);
 int			check_unclosed_input(char *cmdline);
 int			cmdline_addspace(char *cmdline, char **dup);
 char		*cmdline_tokenizer(char *cmdline);

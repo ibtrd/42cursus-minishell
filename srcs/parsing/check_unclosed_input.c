@@ -18,7 +18,6 @@
 #include "minishelldef.h"
 #include "parsing.h"
 
-static int	check_quotes(char *cmdline);
 static int	check_parentheses(char *cmdline);
 
 /*
@@ -39,7 +38,7 @@ int	check_unclosed_input(char *cmdline)
 	return (SUCCESS);
 }
 
-static int	check_quotes(char *cmdline)
+int	check_quotes(char *cmdline)
 {
 	size_t		i;
 	t_escape	escape;
@@ -60,9 +59,9 @@ static int	check_quotes(char *cmdline)
 		i++;
 	}
 	if (single_quotes % 2)
-		return (FAILURE);
+		return ('\'');
 	if (double_quotes % 2)
-		return (FAILURE);
+		return ('\"');
 	return (SUCCESS);
 }
 
