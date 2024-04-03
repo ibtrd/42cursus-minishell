@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:14:29 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 12:57:46 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 14:58:59 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ int	get_prompt(t_minishell *minishell, char **prompt)
 	else
 		*prompt = tmp;
 	if (minishell->sp_params.exit_status)
-		*prompt = ft_sprintf(__PROMPT, P_BOLD, P_RED, *prompt);
+		*prompt = ft_sprintf(__PROMPT, P_RED, *prompt);
 	else
-		*prompt = ft_sprintf(__PROMPT, P_BOLD, P_GREEN, *prompt);
+		*prompt = ft_sprintf(__PROMPT, P_GREEN, *prompt);
 	free(cwd);
 	if (!*prompt)
 		return (1);

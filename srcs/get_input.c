@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/02 18:08:37 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 15:04:26 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	input_error_handler(char **input, int error, int *exit_status)
 {
 	int	quote;
 
-	if (error != FAILURE)
+	if (error != FAILURE && *input && **input)
 		add_history(*input);
 	if (error == 2)
 	{

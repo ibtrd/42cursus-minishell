@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/02 19:51:17 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 15:02:34 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@
 # define __DEFAULT_PATH "/usr/bin:/bin:/usr/sbin:/sbin"
 
 //PROMPT
-# define __DEFAULT_PROMPT "\001\e[1m\002\001\e[36m\002minishell\001\e[0m\002 "
-# define __PROMPT "%s%s↳ \001\e[33m\002%s\001\e[0m\002 "
-# define __GIT_PROMPT "%s%s[\001\e[36m\002%s\001\e[34m\002]\001\e[0m\002"
+# define __DEFAULT_PROMPT "\001\e[36;1m\002minishell\001\e[0m\002 "
+# define __PROMPT "\001\e[1m\002%s↳ \001\e[33m\002%s\001\e[0m\002 "
+# define __GIT_PROMPT "%s\001\e[34m\002[%s%s\001\e[34m\002]\001\e[0m\002"
 # define __SECONDARY_PROMPT " \001\e[33;1m\002>\001\e[0m\002 "
 
 # define P_WHITE "\001\e[37m\002"
 # define P_CYAN "\001\e[36m\002"
 # define P_BLUE "\001\e[34m\002"
-# define P_YELLOW "\001\e[33;1m\002"
+# define P_YELLOW "\001\e[33m\002"
 # define P_GREEN "\001\e[32m\002"
 # define P_RED "\001\e[31m\002"	
 # define P_BOLD "\001\e[1m\002"
