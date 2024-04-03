@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 17:28:48 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/25 15:41:02 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 14:59:27 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,19 @@
 #include <libft.h>
 
 #include "minishelldef.h"
+#include "history.h"
 
 void	minishell_add_history(char *str)
 {
+	char	*history_file;
 	int		fd;
 
 	add_history(str);
-	fd = open(__GLOBAL_HISTORY, O_WRONLY | O_CREAT | O_APPEND, 0600);
+	history_file = get_history_filepath();
+	if (!history_file)
+		return ;
+	fd = open(history_file, O_WRONLY | O_CREAT | O_APPEND, 0600);
+	free(history_file);
 	if (fd == -1)
 		return ;
 	ft_dprintf(fd, "%s\n", str);
@@ -33,11 +39,16 @@ void	minishell_add_history(char *str)
 
 void	load_global_history(void)
 {
+	char	*history_file;
 	int		fd;
 	char	*gnl;
 	char	*nl;
 
-	fd = open(__GLOBAL_HISTORY, O_RDONLY);
+	history_file = get_history_filepath();
+	if (!history_file)
+		return ;
+	fd = open(history_file, O_RDONLY);
+	free(history_file);
 	if (fd == -1)
 		return ;
 	while (!get_next_line(fd, &gnl) && gnl)
@@ -49,5 +60,18 @@ void	load_global_history(void)
 		free(gnl);
 	}
 	close(fd);
-	//ADD ERROR MESSAGE
+}
+
+char	*get_history_filepath(void)
+{
+	char	*home;
+	char	*path;
+
+	path = NULL;
+	home = getenv("HOME");
+	if (home)
+	{
+		path = ft_sprintf("%s/%s", home, __GLOBAL_HISTORY);
+	}
+	return (path);
 }

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/23 18:38:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 14:58:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "minishelldef.h"
 #include "prompt.h"
 #include "parsing.h"
+#include "history.h"
 
 #include <readline/readline.h>
 #include <readline/history.h>
