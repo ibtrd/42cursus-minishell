@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 16:45:44 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/03 17:26:42 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "prompt.h"
 #include "parsing.h"
 #include "history.h"
+#include "signals.h"
 
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -25,7 +26,13 @@ static int	complete_input(char **old_input)
 	char	*new_input;
 	char	*joined_inputs;
 
+	g_signal = 0;
 	new_input = readline(__SECONDARY_PROMPT);
+	if (g_signal)
+	{
+		free(new_input);
+		return (g_signal << 4);
+	}
 	if (!new_input)
 		return (2);
 	joined_inputs = ft_strjoin2(*old_input, "\n", new_input);
@@ -52,6 +59,13 @@ static void	input_error_handler(char **input, int error, int *exit_status)
 		free(*input);
 		*input = NULL;
 	}
+	else if(error)
+	{
+		*exit_status = (error >> 4) + 128;
+		free(*input);
+		*input = NULL;
+	
+	}
 }
 
 int	get_input(t_minishell *minishell, char **input)
@@ -67,12 +81,14 @@ int	get_input(t_minishell *minishell, char **input)
 	if (!*input)
 		return (FAILURE);
 	error = SUCCESS;
+	signal_setup_input();
 	while (check_unclosed_input(*input))
 	{
 		error = complete_input(input);
 		if (error)
 			break ;
 	}
+	signal_setup_main();
 	input_error_handler(input, error, &minishell->sp_params.exit_status);
 	return (error);
 }
