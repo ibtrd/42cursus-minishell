@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/03 17:12:00 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/03 17:34:20 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -207,12 +207,6 @@ SIGNAL_SRC = \
 	signal_setup_input \
 	signal_setup_main \
 
-################################################################################
-
-DEBUG_DIR = debug/
-DEBUG_SRC = \
-	debug_print_str_mask \
-
 # *** LIBRARIES && INCLUDES  ************************************************* #
 
 LIBS_PATH = \
@@ -262,15 +256,6 @@ endif
 
 ifneq ($(LAST_MODE),$(MODE))
 $(NAME) : FORCE
-endif
-
-# *** TESTING **************************************************************** #
-
-ifdef TEST
-BUILD_DIR := $(BUILD_DIR)test/
-NAME = minishell_test
-CFLAGS := $(filter-out $(OFLAGS),$(CFLAGS)) -g3
-SRC := tests/main_$(TEST) $(filter-out main, $(SRC))
 endif
 
 # *** TARGETS **************************************************************** #
@@ -347,7 +332,7 @@ print% :
 	@echo $($(patsubst print%,%,$@))
 
 .PHONY : run
-run :	$(NAME)
+run : $(NAME)
 	./$(NAME)
 
 VALGRIND = \
@@ -361,31 +346,6 @@ VALGRIND = \
 .PHONY : valgrind
 valgrind : debug
 	$(VALGRIND) ./$(NAME)
-
-# *** TESTING **************************************************************** #
-
-AVAILABLE_TESTS = \
-	builtins \
-	cmdline_addspace \
-	env \
-	executor \
-	init_env \
-	check_unclosed_input \
-	lexer \
-	lexerfull \
-	dprintf \
-	sprintf \
-	vector_test \
-	vector_alloc \
-	vector_ian \
-	tilde_expansion \
-
-.PHONY : $(AVAILABLE_TESTS)
-$(AVAILABLE_TESTS) :
-	$(RM) minishell_test
-	@$(MAKE) TEST=$@ MODE=debug
-#	@$(VALGRIND) ./$(NAME)_test
-#  ./$(NAME)_test
 
 # *** SPECIAL TARGETS ******************************************************** #
 
