@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/03 18:11:46 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/04 15:17:04 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ PARSING_SRC = \
 
 SRC += $(addprefix $(LEXER_DIR),$(LEXER_SRC))
 
-LEXER_DIR = $(PARSING_DIR)/lexer/
+LEXER_DIR = $(PARSING_DIR)lexer/
 LEXER_SRC = \
 		cmdline_addspace \
 		cmdline_tokenizer \
@@ -64,7 +64,7 @@ LEXER_SRC = \
 
 SRC += $(addprefix $(EXPANDER_DIR),$(EXPANDER_SRC))
 
-EXPANDER_DIR = $(PARSING_DIR)/expander/
+EXPANDER_DIR = $(PARSING_DIR)expander/
 EXPANDER_SRC = \
 	00_expander_launch \
 	01_tilde_expansion \
@@ -94,7 +94,7 @@ AST_SRC = \
 
 SRC += $(addprefix $(BUILDER_DIR),$(BUILDER_SRC))
 
-BUILDER_DIR = $(AST_DIR)/builder/
+BUILDER_DIR = $(AST_DIR)builder/
 BUILDER_SRC = \
 		ast_build \
 		ast_build_command \
@@ -122,7 +122,7 @@ EXECUTION_SRC = \
 
 SRC += $(addprefix $(BRANCH_DIR),$(BRANCH_SRC))       
 
-BRANCH_DIR = $(EXECUTION_DIR)/branch/
+BRANCH_DIR = $(EXECUTION_DIR)branch/
 BRANCH_SRC = \
 		branch_command \
 		branch_logicaloperator \
@@ -133,7 +133,7 @@ BRANCH_SRC = \
 
 SRC += $(addprefix $(OPEN_DIR),$(OPEN_SRC))
 
-OPEN_DIR = $(EXECUTION_DIR)/open/
+OPEN_DIR = $(EXECUTION_DIR)open/
 OPEN_SRC = \
 		open_append \
 		open_heredoc \
@@ -177,7 +177,7 @@ ENV_SRC = \
 
 SRC += $(addprefix $(INIT_VAR_DIR),$(INIT_VAR_SRC))       
 
-INIT_VAR_DIR = $(ENV_DIR)/init_var/
+INIT_VAR_DIR = $(ENV_DIR)init_var/
 INIT_VAR_SRC = \
 		init_path \
 		init_shlvl \

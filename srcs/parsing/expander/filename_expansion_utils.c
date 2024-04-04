@@ -6,12 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 23:08:15 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/18 04:02:54 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/04 13:35:17 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <errno.h>
+#include <unistd.h>
 
 #include "libft.h"
 
@@ -20,7 +21,10 @@
 
 int	opendir_error(char *dirname)
 {
-	ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, dirname, strerror(errno));
+	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n",
+		__MINISHELL,
+		dirname,
+		strerror(errno));
 	return (FAILURE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:12:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/23 16:14:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/04 14:08:21 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int		is_splittable(t_vector *str);
 //FILENAME_EXPANSION
 int		is_pattern(t_vector *str);
 int		opendir_error(char *dirname);
-int		is_match(char *str, t_mask *pat);
+int		is_match(char *str, t_mask *pat, t_vector *matches);
+int		is_match_dir(char *str, t_mask *pat, t_vector *matches);
 int		vsort_masks(void *ptr1, void*ptr2);
 
 //ARGS

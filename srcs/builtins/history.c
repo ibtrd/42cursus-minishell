@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 18:41:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/03 15:36:39 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/04 13:22:54 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	builtin_history(t_executor *exec, char **argv)
 	while (*argv)
 	{
 		if (**argv == '-' && check_option((*argv) + 1, &options, "c"))
-			return (history_usage() + history_invalid_option(*argv));
+			return (history_invalid_option(*argv) + history_usage());
 		if (**argv != '-' && !options)
 			return (history_usage());
 		argv++;
@@ -91,17 +91,19 @@ static int	history_delete(void)
 		return (1);
 	status = unlink(history_file);
 	free(history_file);
-	return(status);
+	return (status);
 }
 
 static int	history_usage(void)
 {
-	ft_dprintf(2, "history: usage: history [-c]\n");
+	ft_dprintf(STDERR_FILENO, "history: usage: history [-c]\n");
 	return (1);
 }
 
 static int	history_invalid_option(char *option)
 {
-	ft_dprintf(2, "%s: history: %s: invalid option\n", __MINISHELL, option);
+	ft_dprintf(STDERR_FILENO, "%s: history: %s: invalid option\n",
+		__MINISHELL,
+		option);
 	return (1);
 }
