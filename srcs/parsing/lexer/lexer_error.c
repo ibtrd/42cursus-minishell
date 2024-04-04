@@ -38,7 +38,7 @@ int	unsupported_error(const char *token)
 {
 	ft_dprintf(STDERR_FILENO, "%s: %s: `%s'\n",
 		__MINISHELL,
-		__SYNTAX_ERROR,
+		__UNSUPPORTED_ERROR,
 		token);
 	return (FAILURE);
 }
