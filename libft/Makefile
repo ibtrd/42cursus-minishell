@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/03/18 16:58:44 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/04/04 19:56:21 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,35 +60,49 @@ ifneq ($(LAST_MODE),$(MODE))
 $(NAME) : FORCE
 endif
 
+# *** MISC ******************************************************************* #
+
+LOGFILE = $(MAKE_DIR).mklog
+
+LOADING_BAR_SIZE = 20
+
 # *** TARGETS **************************************************************** #
 
 .PHONY : all
 all : $(NAME)
 
-$(NAME) : $(OBJS) | ERROR_CHECK
-	@printf "\n📚 Building $(NAME) archive...\n"
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+$(NAME) : count $(OBJS) | ERROR_CHECK
+	@printf "\n📚$(BOLD)$(PURPLE) Creating $(NAME) archive...\n$(RESET)"
+	@echo "$(AR) $(ARFLAGS) $(NAME) $(OBJS)" >> $(LOGFILE)
+	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 	@echo "$(MODE)" > $(MODE_TRACE)
 ifneq ($(MODE),)
-	@echo "$(BLUE) $(NAME)($(MODE)) has been built! $(RESET)"
+	@printf "$(BOLD)$(GREEN)$(NAME)($(MODE)) has been created!$(RESET)\n"
 else
-	@echo "$(BLUE) $(NAME) has been built! $(RESET)"
+	@printf "$(BOLD)$(GREEN)$(NAME) has been created!$(RESET)\n"
 endif
 
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | ERROR_CHECK
+	$(eval COUNT_DONE := $(shell echo $$(($(COUNT_DONE) + 1))))
+	$(eval LOADING_COMPLETED := $(shell echo "$(COUNT_DONE) * $(LOADING_BAR_SIZE) / $(COUNT_TOTAL)" | bc 2> /dev/null))
 	@mkdir -p $(@D)
+	@echo "$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@" >> $(LOGFILE)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-	@printf "🔧 $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@\n"
+	@printf "$(ERASE)$(BOLD)$(CC) $(BLUE)$(CFLAGS) $(YELLOW)$(patsubst $(MAKE_DIR)%, %, $(basename $@))$(RESET)\n"
+	@printf "🔧 $(BOLD)$(CYAN)Compiling sources: $(WHITE)["
+	@for i in $(shell seq 1 $(LOADING_COMPLETED)); do printf "="; done 
+	@for i in $(shell seq 1 $(shell echo "$(LOADING_BAR_SIZE) - $(LOADING_COMPLETED)" | bc 2> /dev/null)); do printf " "; done
+	@printf "] $(shell echo "$(COUNT_DONE) * 100 / $(COUNT_TOTAL)" | bc 2> /dev/null)%%$(RESET)"
 
 .PHONY : clean
 clean :
 	rm -rf $(BUILD_DIR)
-	echo "$(YELLOW) $(NAME) building files removed! $(RESET)"
+	@printf "$(BOLD)(╯°□°)╯︵ ┻━┻ $(NAME) building files removed!$(RESET)\n"
 
 .PHONY : fclean
 fclean :
 	rm -rf $(MAKE_DIR) $(NAME)
-	echo "$(YELLOW) $(NAME) files removed! $(RESET)"
+	@printf "$(BOLD)(╯°□°)╯︵ ┻━┻ $(NAME) files removed!$(RESET)\n"
 
 .PHONY : re
 re : fclean
@@ -119,6 +133,13 @@ print% :
 	@echo $(patsubst print%,%,$@)=
 	@echo $($(patsubst print%,%,$@))
 
+.PHONY : count
+count :
+ifneq ($(AS_COUNTED),TRUE)
+	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "mkdir" | wc -l))
+	$(eval COUNT_DONE := 0)
+endif
+
 # *** SPECIAL TARGETS ******************************************************** #
 
 -include $(DEPS)
@@ -137,8 +158,22 @@ endif
 
 # *** FANCY STUFF ************************************************************ #
 
+RED_SHRUG		=	\e[31;49;1m ¯\_(ツ)_/¯ \e[39;41;1m
+GREEN_SHRUG		=	\e[32;49;1m ¯\_(ツ)_/¯ \e[39;42;1m
+YELLOW_SHRUG	=	\e[33;49;1m ¯\_(ツ)_/¯ \e[39;43;1m
+BLUE_SHRUG		=	\e[34;49;1m ¯\_(ツ)_/¯ \e[39;44;1m
 RESET	=	\e[0m
-RED		=	\e[31;49;1m ¯\_(ツ)_/¯ \e[39;41;1m
-GREEN	=	\e[32;49;1m ¯\_(ツ)_/¯ \e[39;42;1m
-YELLOW	=	\e[33;49;1m ¯\_(ツ)_/¯ \e[39;43;1m
-BLUE	=	\e[34;49;1m ¯\_(ツ)_/¯ \e[39;44;1m
+ERASE	=	\033[2K\r
+BOLD	=	\033[1m
+UNDER	=	\033[4m
+SUR		=	\033[7m
+GREY	=	\033[30m
+RED		=	\033[31m
+GREEN	=	\033[32m
+YELLOW	=	\033[33m
+BLUE	=	\033[34m
+PURPLE	=	\033[35m
+CYAN	=	\033[36m
+WHITE	=	\033[37m
+
+# **************************************************************************** #

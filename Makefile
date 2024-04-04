@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/04 15:17:04 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/04 19:52:54 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -258,27 +258,11 @@ ifneq ($(LAST_MODE),$(MODE))
 $(NAME) : FORCE
 endif
 
-# *** COMPILATION MODES ****************************************************** #
+# *** MISC ******************************************************************* #
 
 LOGFILE = $(MAKE_DIR).mklog
 
-# MODE ?=
-
-# ifneq ($(MODE),)
-# BUILD_DIR := $(BUILD_DIR)$(MODE)/
-# endif
-
-# ifeq ($(MODE),debug)
-# CFLAGS := $(filter-out $(OFLAGS),$(CFLAGS)) -g3
-# else ifeq ($(MODE),fsanitize)
-# CFLAGS := $(filter-out $(OFLAGS),$(CFLAGS)) -g3 -fsanitize=address
-# else ifneq ($(MODE),)
-# ERROR = MODE
-# endif
-
-# ifneq ($(LAST_MODE),$(MODE))
-# $(NAME) : FORCE
-# endif
+LOADING_BAR_SIZE = 35
 
 # *** TARGETS **************************************************************** #
 
@@ -286,25 +270,50 @@ LOGFILE = $(MAKE_DIR).mklog
 all : $(NAME)
 
 
-$(NAME) : $(LIBS_PATH) $(OBJS) | PREMAKE
-	@printf "\n🔗 Linking $(NAME)...\n"
+$(NAME) : $(LIBS_PATH) count $(OBJS) | PREMAKE
 	@echo "$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)" >> $(LOGFILE)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "$(MODE)" > $(MODE_TRACE)
 ifneq ($(MODE),)
-	@echo "$(GREEN) $(NAME)($(MODE)) has been built! $(RESET)"
+	@printf "\n$(BOLD)$(GREEN)$(NAME)($(MODE)) compiled!$(RESET)\n"	
+	@printf "$(BOLD)\
+     88     888b     d888 d8b          d8b          888               888 888\n\
+ .d88888b.  8888b   d8888 Y8P          Y8P          888               888 888\n\
+d88P 88\"88b 88888b.d88888                           888               888 888\n\
+Y88b.88     888Y88888P888 888 88888b.  888 .d8888b  88888b.   .d88b.  888 888\n\
+ \"Y88888b.  888 Y888P 888 888 888 \"88b 888 88K      888 \"88b d8P  Y8b 888 888\n\
+     88\"88b 888  Y8P  888 888 888  888 888 \"Y8888b. 888  888 88888888 888 888\n\
+Y88b 88.88P 888   \"   888 888 888  888 888      X88 888  888 Y8b.     888 888\n\
+ \"Y88888P\"  888       888 888 888  888 888  88888P' 888  888  \"Y8888  888 888\n\
+     88                                                                      $(RESET)\n"
 else
-	@echo "$(GREEN) $(NAME) has been built! $(RESET)"
+	@printf "\n$(BOLD)$(GREEN)$(NAME) compiled!$(RESET)\n"	
+	@printf "$(BOLD)\
+     88     888b     d888 d8b          d8b          888               888 888\n\
+ .d88888b.  8888b   d8888 Y8P          Y8P          888               888 888\n\
+d88P 88\"88b 88888b.d88888                           888               888 888\n\
+Y88b.88     888Y88888P888 888 88888b.  888 .d8888b  88888b.   .d88b.  888 888\n\
+ \"Y88888b.  888 Y888P 888 888 888 \"88b 888 88K      888 \"88b d8P  Y8b 888 888\n\
+     88\"88b 888  Y8P  888 888 888  888 888 \"Y8888b. 888  888 88888888 888 888\n\
+Y88b 88.88P 888   \"   888 888 888  888 888      X88 888  888 Y8b.     888 888\n\
+ \"Y88888P\"  888       888 888 888  888 888  88888P' 888  888  \"Y8888  888 888\n\
+     88                                                                      $(RESET)\n"
 endif
 
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | PREMAKE
+	$(eval COUNT_DONE := $(shell echo $$(($(COUNT_DONE) + 1))))
+	$(eval LOADING_COMPLETED := $(shell echo "$(COUNT_DONE) * $(LOADING_BAR_SIZE) / $(COUNT_TOTAL)" | bc 2> /dev/null))
 	@mkdir -p $(@D)
 	@echo "$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@" >> $(LOGFILE)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-	@printf "🔧 $(basename $(@F))\n"
+	@printf "$(ERASE)$(BOLD)$(CC) $(BLUE)$(CFLAGS) $(YELLOW)$(patsubst $(MAKE_DIR)%, %, $(basename $@)) $(RESET)\n"
+	@printf "🔧 $(BOLD)$(CYAN)Compiling sources: $(WHITE)["
+	@for i in $(shell seq 1 $(LOADING_COMPLETED)); do printf "="; done 
+	@for i in $(shell seq 1 $(shell echo "$(LOADING_BAR_SIZE) - $(LOADING_COMPLETED)" | bc 2> /dev/null)); do printf " "; done
+	@printf "] $(shell echo "$(COUNT_DONE) * 100 / $(COUNT_TOTAL)" | bc 2> /dev/null)%%$(RESET)"
 
 $(LIBS_PATH): FORCE | PREMAKE
-	@echo "Building $@..."
+	@printf "🔨 $(BOLD)Building $@...$(RESET)\n"
 	@$(MAKE) -C $(@D)
 
 .PHONY : bonus
@@ -326,13 +335,13 @@ print :
 clean :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
 	rm -rf $(BUILD_DIR)
-	echo "$(YELLOW) $(NAME) building files removed! $(RESET)"
+	@printf "$(BOLD)(╯°□°)╯︵ ┻━┻ $(NAME) building files removed!$(RESET)\n"
 
 .PHONY : fclean
 fclean :
 	-for f in $(dir $(LIBS_PATH)); do $(MAKE) -s -C $$f $@; done
 	rm -rf $(MAKE_DIR) $(NAME)
-	echo "$(YELLOW) $(NAME) files removed! $(RESET)"
+	@printf "$(BOLD)(╯°□°)╯︵ ┻━┻ $(NAME) files removed!$(RESET)\n"
 
 .PHONY : re
 re : fclean
@@ -353,8 +362,15 @@ norminette :
 
 .PHONY : print%
 print% :
-	@echo $(patsubst print%,%,$@)=
-	@echo $($(patsubst print%,%,$@))
+	echo $(patsubst print%,%,$@)=
+	echo $($(patsubst print%,%,$@))
+
+.PHONY : count
+count :
+ifneq ($(AS_COUNTED),TRUE)
+	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "mkdir" | wc -l))
+	$(eval COUNT_DONE := 0)
+endif
 
 .PHONY : run
 run : $(NAME)
@@ -385,6 +401,7 @@ FORCE :
 
 .PHONY : PREMAKE
 PREMAKE :
+	@printf "🔨 $(BOLD)Building $(NAME)...$(RESET)\n"
 	@rm -f $(LOGFILE)
 ifeq ($(ERROR),MODE)
 	$(error Invalid mode: $(MODE))
@@ -392,10 +409,24 @@ endif
 
 # *** FANCY STUFF ************************************************************ #
 
+RED_SHRUG		=	\e[31;49;1m ¯\_(ツ)_/¯ \e[39;41;1m
+GREEN_SHRUG		=	\e[32;49;1m ¯\_(ツ)_/¯ \e[39;42;1m
+YELLOW_SHRUG	=	\e[33;49;1m ¯\_(ツ)_/¯ \e[39;43;1m
+BLUE_SHRUG		=	\e[34;49;1m ¯\_(ツ)_/¯ \e[39;44;1m
 RESET	=	\e[0m
-RED		=	\e[31;49;1m ¯\_(ツ)_/¯ \e[39;41;1m
-GREEN	=	\e[32;49;1m ¯\_(ツ)_/¯ \e[39;42;1m
-YELLOW	=	\e[33;49;1m ¯\_(ツ)_/¯ \e[39;43;1m
-BLUE	=	\e[34;49;1m ¯\_(ツ)_/¯ \e[39;44;1m
+ERASE	=	\033[2K\r
+BOLD	=	\033[1m
+UNDER	=	\033[4m
+SUR		=	\033[7m
+GREY	=	\033[30m
+RED		=	\033[31m
+GREEN	=	\033[32m
+YELLOW	=	\033[33m
+BLUE	=	\033[34m
+PURPLE	=	\033[35m
+CYAN	=	\033[36m
+WHITE	=	\033[37m
+C12	=	\033[39m
+C13	=	\033[43m
 
 # **************************************************************************** #
