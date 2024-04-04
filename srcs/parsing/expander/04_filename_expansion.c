@@ -6,24 +6,22 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:29:46 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 16:04:49 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/04 14:22:47 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 #include "libft.h"
-
-#include "minishelldef.h"
 #include "expander.h"
 
-#include "stdio.h" //REMOVE
+#include "minishelldef.h"
 
 static int	scan_directory(DIR *dir, t_vector *pattern, t_vector *matches);
 static int	search_for_matches(t_vector *pattern, t_vector *matches);
-static int	add_match(char *file, t_vector *matches);
 
 int	filemame_expansion(t_vector *args, size_t *index)
 {
@@ -54,7 +52,11 @@ static int	search_for_matches(t_vector *pattern, t_vector *matches)
 	if (!dir)
 		return (opendir_error(__WORKING_DIRECTORY));
 	if (scan_directory(dir, pattern, matches))
+	{
+		closedir(dir);
 		return (FAILURE);
+	}
+	closedir(dir);
 	ft_vector_sort(matches, vsort_masks);
 	return (SUCCESS);
 }
@@ -65,43 +67,15 @@ static int	scan_directory(DIR *dir, t_vector *pattern, t_vector *matches)
 
 	errno = 0;
 	entry = readdir(dir);
-	while (entry)
+	while (!errno && entry)
 	{
-		if (is_match(entry->d_name, pattern->ptr))
-		{
-			if (add_match(entry->d_name, matches))
-			{
-				closedir(dir);
-				return (FAILURE);
-			}
-		}
+		if (*(char *)(ft_vector_get(pattern, pattern->total - 2)) == '/'
+			&& entry->d_type == DT_DIR
+			&& is_match_dir(entry->d_name, pattern->ptr, matches))
+			return (FAILURE);
+		if (is_match(entry->d_name, pattern->ptr, matches))
+			return (FAILURE);
 		entry = readdir(dir);
 	}
-	closedir(dir);
 	return (errno);
-}
-
-static int	add_match(char *file, t_vector *matches)
-{
-	t_vector	match;
-	t_mask		*mask;
-
-	if (ft_vector_init(&match, (t_vinfos){sizeof(t_mask), 0, NULL}))
-		return (FAILURE);
-	mask = str_to_mask(file, __FILE_MASK);
-	if (!mask)
-	{
-		ft_vector_free(&match);
-		return (FAILURE);
-	}
-	if (ft_vector_join(&match, mask, ft_strlen(file))
-		|| ft_vector_add(&match, "\0")
-		|| ft_vector_add(matches, &match))
-	{
-		free(mask);
-		ft_vector_free(&match);
-		return (FAILURE);
-	}
-	free(mask);
-	return (SUCCESS);
 }
