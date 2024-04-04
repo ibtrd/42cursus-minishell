@@ -4,6 +4,7 @@ minishell
 minishell_test
 .build/
 .trace
+.mklog
 *.log
 TEST_DIR/*
 *.old
