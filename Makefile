@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/04 19:52:54 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/04 20:14:31 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -270,7 +270,7 @@ LOADING_BAR_SIZE = 35
 all : $(NAME)
 
 
-$(NAME) : $(LIBS_PATH) count $(OBJS) | PREMAKE
+$(NAME) : $(LIBS_PATH) $(OBJS) | PREMAKE
 	@echo "$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)" >> $(LOGFILE)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "$(MODE)" > $(MODE_TRACE)
@@ -300,7 +300,7 @@ Y88b 88.88P 888   \"   888 888 888  888 888      X88 888  888 Y8b.     888 888\n
      88                                                                      $(RESET)\n"
 endif
 
-$(BUILD_DIR)%.o : $(SRCS_DIR)%.c | PREMAKE
+$(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count PREMAKE
 	$(eval COUNT_DONE := $(shell echo $$(($(COUNT_DONE) + 1))))
 	$(eval LOADING_COMPLETED := $(shell echo "$(COUNT_DONE) * $(LOADING_BAR_SIZE) / $(COUNT_TOTAL)" | bc 2> /dev/null))
 	@mkdir -p $(@D)

@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/04 19:56:21 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/04 20:14:47 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,14 +64,14 @@ endif
 
 LOGFILE = $(MAKE_DIR).mklog
 
-LOADING_BAR_SIZE = 20
+LOADING_BAR_SIZE = 35
 
 # *** TARGETS **************************************************************** #
 
 .PHONY : all
 all : $(NAME)
 
-$(NAME) : count $(OBJS) | ERROR_CHECK
+$(NAME) : $(OBJS) | ERROR_CHECK
 	@printf "\n📚$(BOLD)$(PURPLE) Creating $(NAME) archive...\n$(RESET)"
 	@echo "$(AR) $(ARFLAGS) $(NAME) $(OBJS)" >> $(LOGFILE)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
@@ -82,7 +82,7 @@ else
 	@printf "$(BOLD)$(GREEN)$(NAME) has been created!$(RESET)\n"
 endif
 
-$(BUILD_DIR)%.o : $(SRCS_DIR)%.c | ERROR_CHECK
+$(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count ERROR_CHECK
 	$(eval COUNT_DONE := $(shell echo $$(($(COUNT_DONE) + 1))))
 	$(eval LOADING_COMPLETED := $(shell echo "$(COUNT_DONE) * $(LOADING_BAR_SIZE) / $(COUNT_TOTAL)" | bc 2> /dev/null))
 	@mkdir -p $(@D)
@@ -152,6 +152,10 @@ endif
 FORCE :
 
 ERROR_CHECK :
+# ifneq ($(AS_COUNTED),TRUE)
+# 	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "mkdir" | wc -l))
+# 	$(eval COUNT_DONE := 0)
+# endif
 ifeq ($(ERROR),MODE)
 	$(error Invalid mode: $(MODE))
 endif
