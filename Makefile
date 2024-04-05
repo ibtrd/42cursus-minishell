@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/05 14:33:38 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/05 15:06:18 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -359,7 +359,7 @@ print% :
 .PHONY : count
 count :
 ifneq ($(AS_COUNTED),TRUE)
-	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "$(NAME)_object" | wc -l))
+	$(eval COUNT_TOTAL := $(shell $(MAKE) -j -n MODE=$(MODE) AS_COUNTED=TRUE | grep "$(NAME)_object" | wc -l))
 	$(eval COUNT_DONE := 0)
 endif
 

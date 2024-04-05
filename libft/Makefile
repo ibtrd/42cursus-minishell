@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/05 14:33:37 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/05 15:08:43 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,7 +137,7 @@ print% :
 .PHONY : count
 count :
 ifneq ($(AS_COUNTED),TRUE)
-	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "$(NAME)_object" | wc -l))
+	$(eval COUNT_TOTAL := $(shell $(MAKE) -j -n MODE=$(MODE) AS_COUNTED=TRUE | grep "$(NAME)_object" | wc -l))
 	$(eval COUNT_DONE := 0)
 endif
 
@@ -159,10 +159,6 @@ endif
 
 # *** FANCY STUFF ************************************************************ #
 
-RED_SHRUG		=	\e[31;49;1m ¯\_(ツ)_/¯ \e[39;41;1m
-GREEN_SHRUG		=	\e[32;49;1m ¯\_(ツ)_/¯ \e[39;42;1m
-YELLOW_SHRUG	=	\e[33;49;1m ¯\_(ツ)_/¯ \e[39;43;1m
-BLUE_SHRUG		=	\e[34;49;1m ¯\_(ツ)_/¯ \e[39;44;1m
 RESET	=	\e[0m
 ERASE	=	\033[2K\r
 BOLD	=	\033[1m
