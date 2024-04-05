@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/03 16:57:34 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 20:23:21 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,29 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+static int	check_ttys(void);
+static int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name);
+static int	minishell_routine(t_minishell *minishell);
+
 int g_signal = 0;
 
-static int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name)
+int	main(int ac, char **av, char **env)
 {
-	t_vector	env;
+	t_minishell	minishell;
 
-	signal_setup_main();
-	load_global_history();
-	if (init_env(&env, old_env))
+	(void)ac;
+	(void)av;
+
+	if (check_ttys())
 		return (1);
-	minishell->env = env;
-	minishell->sp_params.exit_status = 0;
-	if (sh_name)
-		minishell->sp_params.sh_name = sh_name;
-	else
-		minishell->sp_params.sh_name = __MINISHELL;
-	return (0);
+	if (init_minishell(&minishell, env, av[0]))
+		return (1);
+	while (!minishell_routine(&minishell))
+		;
+	ft_vector_free(&minishell.env);
+	rl_clear_history();
+	printf("exit\n");
+	return (minishell.sp_params.exit_status);
 }
 
 static int	minishell_routine(t_minishell *minishell)
@@ -68,20 +74,40 @@ static int	minishell_routine(t_minishell *minishell)
 	return (0);
 }
 
-int	main(int ac, char **av, char **env)
+static int	init_minishell(t_minishell *minishell,
+							char **old_env, char *sh_name)
 {
-	t_minishell	minishell;
+	t_vector	env;
 
-	(void)ac;
-	(void)av;
-	if (!isatty(STDIN_FILENO))
-		return (0);
-	if (init_minishell(&minishell, env, av[0]))
+	signal_setup_main();
+	load_global_history();
+	if (init_env(&env, old_env))
 		return (1);
-	while (!minishell_routine(&minishell))
-		;
-	ft_vector_free(&minishell.env);
-	rl_clear_history();
-	printf("exit\n");
-	return (minishell.sp_params.exit_status);
+	minishell->env = env;
+	minishell->sp_params.exit_status = 0;
+	if (sh_name)
+		minishell->sp_params.sh_name = sh_name;
+	else
+		minishell->sp_params.sh_name = __MINISHELL;
+	return (0);
+}
+
+static int	check_ttys(void)
+{
+	int	in;
+	int	out;
+
+	in = !isatty(STDIN_FILENO);
+	if (in)
+		ft_dprintf(STDERR_FILENO, "%s: %d: %s\n",
+			__MINISHELL,
+			STDIN_FILENO,
+			__NOT_TTY);
+	out = !isatty(STDOUT_FILENO);
+	if (out)
+		ft_dprintf(STDERR_FILENO, "%s: %d: %s\n",
+			__MINISHELL,
+			STDOUT_FILENO,
+			__NOT_TTY);
+	return (in || out);
 }
