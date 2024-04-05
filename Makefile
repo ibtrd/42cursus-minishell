@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/05 15:06:18 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/04/05 15:14:43 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -304,7 +304,6 @@ $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count PREMAKE
 	@printf "] $(shell echo "$(COUNT_DONE) * 100 / $(COUNT_TOTAL)" | bc 2> /dev/null)%%$(RESET)"
 
 $(LIBS_PATH): FORCE | PREMAKE
-	@printf "🔨 $(BOLD)Building $@...$(RESET)\n"
 	@$(MAKE) -C $(@D)
 
 .PHONY : bonus
@@ -392,7 +391,11 @@ FORCE :
 
 .PHONY : PREMAKE
 PREMAKE :
+ifneq ($(MODE),)
+	@printf "🔨 $(BOLD)Building $(NAME)($(MODE))...$(RESET)\n"
+else
 	@printf "🔨 $(BOLD)Building $(NAME)...$(RESET)\n"
+endif
 	@rm -f $(LOGFILE)
 ifeq ($(ERROR),MODE)
 	$(error Invalid mode: $(MODE))

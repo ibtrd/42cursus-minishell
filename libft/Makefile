@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/05 15:08:43 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/04/05 15:15:53 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ LOADING_BAR_SIZE = 35
 .PHONY : all
 all : $(NAME)
 
-$(NAME) : $(OBJS) | ERROR_CHECK
+$(NAME) : $(OBJS) | PREMAKE
 	@printf "\n📚$(BOLD)$(PURPLE) Creating $(NAME) archive...\n$(RESET)"
 	@echo "$(AR) $(ARFLAGS) $(NAME) $(OBJS)" >> $(LOGFILE)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
@@ -82,7 +82,7 @@ else
 	@printf "$(BOLD)$(GREEN)$(NAME) has been created!$(RESET)\n"
 endif
 
-$(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count ERROR_CHECK
+$(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count PREMAKE
 	@true || echo "$(NAME)_object"
 	$(eval COUNT_DONE := $(shell echo $$(($(COUNT_DONE) + 1))))
 	$(eval LOADING_COMPLETED := $(shell echo "$(COUNT_DONE) * $(LOADING_BAR_SIZE) / $(COUNT_TOTAL)" | bc 2> /dev/null))
@@ -152,7 +152,12 @@ endif
 .PHONY : FORCE
 FORCE :
 
-ERROR_CHECK :
+PREMAKE :
+ifneq ($(MODE),)
+	@printf "🔨 $(BOLD)Building $(NAME)($(MODE))...$(RESET)\n"
+else
+	@printf "🔨 $(BOLD)Building $(NAME)...$(RESET)\n"
+endif
 ifeq ($(ERROR),MODE)
 	$(error Invalid mode: $(MODE))
 endif
