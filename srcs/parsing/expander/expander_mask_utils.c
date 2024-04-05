@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:55:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/05 18:36:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 18:42:15 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "libft.h"
 
 #include "mask.h"
-
-#include <stdio.h>
 
 t_mask	*str_to_mask(char *str, char mask_value)
 {

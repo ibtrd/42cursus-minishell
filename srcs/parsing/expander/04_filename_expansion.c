@@ -6,19 +6,15 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 22:29:46 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/04 14:22:47 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 19:26:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include <errno.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-
-#include "libft.h"
-#include "expander.h"
 
 #include "minishelldef.h"
+#include "expander.h"
 
 static int	scan_directory(DIR *dir, t_vector *pattern, t_vector *matches);
 static int	search_for_matches(t_vector *pattern, t_vector *matches);
@@ -40,6 +36,11 @@ int	filemame_expansion(t_vector *args, size_t *index)
 	{
 		ft_vector_free(&matches);
 		return (FAILURE);
+	}
+	if (!matches.total)
+	{
+		ft_vector_free(&matches);
+		return (SUCCESS);
 	}
 	return (MATCH);
 }
