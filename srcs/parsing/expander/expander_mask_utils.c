@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_mask_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:55:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 17:47:29 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 18:36:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_mask	*str_to_mask(char *str, char mask_value)
 	}
 	return (insert);
 }
+
 char	*mask_to_string(t_vector *arg)
 {
 	char	*str;
@@ -50,5 +51,6 @@ char	*mask_to_string(t_vector *arg)
 		str[i] = ((t_mask *)ft_vector_get(arg, i))->c;
 		i++;
 	}
+	str[i] = '\0';
 	return (str);
 }
