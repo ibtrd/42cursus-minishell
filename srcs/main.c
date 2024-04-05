@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/05 20:53:56 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 21:08:30 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,5 @@ int	main(int ac, char **av, char **env)
 	ft_vector_free(&minishell.env);
 	rl_clear_history();
 	printf("exit\n");
-	exit(minishell.sp_params.exit_status);
+	return (minishell.sp_params.exit_status);
 }
