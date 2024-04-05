@@ -6,30 +6,25 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/05 20:23:21 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 20:36:51 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <readline/readline.h>
+#include <unistd.h>
 
-#include "ast.h"
 #include "parsing.h"
-#include "executor.h"
 #include "env.h"
 #include "minishelldef.h"
-#include "minishell.h"
 #include "signals.h"
 #include "history.h"
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-static int	check_ttys(void);
-static int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name);
 static int	minishell_routine(t_minishell *minishell);
+static int	init_minishell(t_minishell *minishell,
+				char **old_env, char *sh_name);
+static int	check_ttys(void);
 
-int g_signal = 0;
+int	g_signal = 0;
 
 int	main(int ac, char **av, char **env)
 {
@@ -37,7 +32,6 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-
 	if (check_ttys())
 		return (1);
 	if (init_minishell(&minishell, env, av[0]))
@@ -75,7 +69,7 @@ static int	minishell_routine(t_minishell *minishell)
 }
 
 static int	init_minishell(t_minishell *minishell,
-							char **old_env, char *sh_name)
+				char **old_env, char *sh_name)
 {
 	t_vector	env;
 
