@@ -54,7 +54,6 @@ int		ft_vector_iteri(t_vector *v, t_vfunc function);
 int		ft_vector_join(t_vector *v, void *items, size_t n);
 int		ft_vector_merge(t_vector *v1, size_t index, t_vector *v2);
 int		ft_vector_replace(t_vector *v, size_t index, void *new);
-int		ft_vector_replacen(t_vector *v, size_t index, void *new, size_t n[2]);
 int		ft_vector_resize(t_vector *v, size_t capacity);
 int		ft_vector_set_ptr(t_vector *v, size_t index, void *item);
 int		ft_vector_set(t_vector *v, size_t index, void *item);

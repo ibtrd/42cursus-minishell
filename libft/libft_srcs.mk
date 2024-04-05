@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 06:32:49 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/03 16:56:06 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/04/05 18:13:17 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,7 +114,6 @@ VECTOR_SRC = \
 	vector_merge \
 	vector_print \
 	vector_replace \
-	vector_replacen \
 	vector_resize \
 	vector_search \
 	vector_set \
