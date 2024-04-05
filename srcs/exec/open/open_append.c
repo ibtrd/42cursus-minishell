@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/14 18:26:17 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 19:45:37 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
-
-# include <stdio.h>
 
 int	open_append(t_executor *exec)
 {
@@ -34,16 +32,9 @@ int	open_append(t_executor *exec)
 			strerror(errno));
 		return (1);
 	}
-    if (dup2(fd, STDOUT_FILENO) == -1)
-    {
-        ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
-        close(fd);
-        return (1);
-    }
 	if (ft_vector_add(&exec->outfd, &fd))
 	{
 		close(fd);
-		dup2(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1), STDOUT_FILENO); // ERROR ANYWAY
 		return (1);
 	}
 	return (0);

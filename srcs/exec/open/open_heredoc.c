@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/02 23:17:51 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 19:45:48 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-
-# include <stdio.h>
 
 static int	get_heredoc(t_executor *exec)
 {
@@ -55,16 +53,9 @@ int	open_heredoc(t_executor *exec)
 			strerror(errno));
 		return (1);
 	}
-    if (dup2(fd, STDIN_FILENO) == -1)
-    {
-        ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
-        close(fd);
-        return (1);
-    }
     if (ft_vector_add(&exec->infd, &fd))
     {
         close(fd);
-        dup2(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1), STDIN_FILENO); // ERROR ANYWAY
         return (1);
     }
 	return (0);

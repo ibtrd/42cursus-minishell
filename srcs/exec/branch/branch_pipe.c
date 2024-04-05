@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 14:35:11 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 20:01:47 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-# include <stdio.h>
-
 static int	piping(t_executor *exec, int wait, int pipe[2])
 {
 	int	error;
 
 	close(pipe[wait]);
-    error = dup2(pipe[!wait], !wait);
-	if (error != -1)
-	{
-		if (!wait)
-			error = ft_vector_add(&exec->outfd, &pipe[STDOUT_FILENO]);
-		else
-			error = ft_vector_add(&exec->infd, &pipe[STDIN_FILENO]);
-	}
+	if (!wait)
+		error = ft_vector_add(&exec->outfd, &pipe[STDOUT_FILENO]);
 	else
-        ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
+		error = ft_vector_add(&exec->infd, &pipe[STDIN_FILENO]);
 	if (error == -1)
 		close(pipe[!wait]);
 	return (error);
@@ -53,9 +45,8 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 		return (1);
 	if (pid == 0)
 	{
-		ret = 1;
 		if (piping(exec, wait, pipe) == -1)
-			exit(exec_cleanup(exec, ret));
+			exit(exec_cleanup(exec, 1));
 		signal_setup_child();
 		exec->node = node;
 		ret = node_exec(exec);

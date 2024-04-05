@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:16:43 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/23 18:49:33 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 21:43:45 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,39 @@
 #include <errno.h>
 #include <string.h>
 
+static int    revert_redirections(t_executor *exec)
+{
+	int	ret;
+	ret = 0;
+    if (exec->infd.total > 1)
+	{
+		ret = ft_vector_delete(&exec->infd, exec->infd.total - 1) == FAILURE;
+		if (!ret)
+			ret = dup2(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1), STDIN_FILENO) == FAILURE;
+	}
+	ret <<= 1;
+	if (exec->outfd.total > 1)
+	{
+		ret += ft_vector_delete(&exec->outfd, exec->outfd.total - 1) == FAILURE;
+		if (!(ret & 1))
+			ret += dup2(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1), STDOUT_FILENO) == FAILURE;
+	}
+	if (ret)
+    	ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
+    return (ret);
+}
+
 int	exec_builtins(t_executor *exec, int index)
 {
-	static const t_builtin	builtins[] = {&builtin_echo, &builtin_cd, &builtin_pwd, \
-								&builtin_export, &builtin_unset, &builtin_env, \
-								&builtin_exit, &builtin_history};
+	static const t_builtin	builtins[] = {&builtin_echo, &builtin_cd, \
+								&builtin_pwd, &builtin_export, &builtin_unset, \
+								&builtin_env, &builtin_exit, &builtin_history};
 	int							ret;
 
-	// ret = dup2(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1), STDIN_FILENO);
-	// if (ret != -1)
-	// 	ret = dup2(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1), STDOUT_FILENO);
-	// if (ret == -1)
-	// {
-	// 	ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
-	// 	return (1);
-	// }
+	if (apply_redirections(exec))
+		return (1);
 	ret = builtins[index](exec, ft_vector_get(exec->node->args, 1));
-	// close(0);
-	// close(1);
+	if (revert_redirections(exec))
+		return (257);
 	return (ret);
 }

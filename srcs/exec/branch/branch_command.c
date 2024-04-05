@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   branch_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 16:56:18 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 18:39:39 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ static int	command_fork(t_executor *exec)
 	if (pid == 0)
 	{
 		signal_setup_child();
+		if (apply_redirections(exec))
+			exit(exec_cleanup(exec, 1));
 		ret = execute_command(exec);
 		exec_cleanup(exec, 0);
 		exit(ret);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/05 18:12:59 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/04/05 21:48:34 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,10 +110,9 @@ SRC += $(addprefix $(EXECUTION_DIR),$(EXECUTION_SRC))
 
 EXECUTION_DIR = exec/
 EXECUTION_SRC = \
-	close_fds \
+	apply_redirections \
 	exec_builtins \
 	exec_cleanup \
-	exec_utils \
 	executor \
 	node_exec \
 	retrieve_status \
