@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 14:36:03 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 13:48:49 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "signals.h"
 
 #include <unistd.h>
-
-#include <stdio.h>	// DEBUG
 
 int	exec_init(t_executor *exec, t_astnode *root, t_minishell *minishell)
 {

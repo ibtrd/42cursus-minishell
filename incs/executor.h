@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/23 18:38:13 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 13:46:50 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,8 @@ int		open_heredoc(t_executor *exec);
 int		open_input(t_executor *exec);
 int		open_output(t_executor *exec);
 int		node_exec(t_executor *exec);
-void	close_fds(t_executor *exec);
 int		exec_cleanup(t_executor *exec, int ret);
 int		exec_builtins(t_executor *exec, int index);
 int		retrieve_status(pid_t pid);
-
-void	printf_redir(t_executor *exec);	// DEBUG
 
 #endif
