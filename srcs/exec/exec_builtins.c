@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:16:43 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/05 20:02:09 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 21:43:45 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,24 @@
 
 static int    revert_redirections(t_executor *exec)
 {
+	int	ret;
+	ret = 0;
     if (exec->infd.total > 1)
 	{
-		if (ft_vector_delete(&exec->infd, exec->infd.total - 1))
-			return (1);
-		if (dup2(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1), STDIN_FILENO) != -1)
-			return (0);
+		ret = ft_vector_delete(&exec->infd, exec->infd.total - 1) == FAILURE;
+		if (!ret)
+			ret = dup2(*(int *)ft_vector_get(&exec->infd, exec->infd.total - 1), STDIN_FILENO) == FAILURE;
 	}
+	ret <<= 1;
 	if (exec->outfd.total > 1)
 	{
-		if (ft_vector_delete(&exec->outfd, exec->outfd.total - 1))
-			return (1);
-		if (dup2(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1), STDOUT_FILENO) != -1)
-			return (0);
+		ret += ft_vector_delete(&exec->outfd, exec->outfd.total - 1) == FAILURE;
+		if (!(ret & 1))
+			ret += dup2(*(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1), STDOUT_FILENO) == FAILURE;
 	}
-    ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
-    return (1);
+	if (ret)
+    	ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
+    return (ret);
 }
 
 int	exec_builtins(t_executor *exec, int index)
@@ -50,6 +52,7 @@ int	exec_builtins(t_executor *exec, int index)
 	if (apply_redirections(exec))
 		return (1);
 	ret = builtins[index](exec, ft_vector_get(exec->node->args, 1));
-	revert_redirections(exec);
+	if (revert_redirections(exec))
+		return (257);
 	return (ret);
 }

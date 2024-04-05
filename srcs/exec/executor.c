@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/05 13:48:49 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 21:43:37 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "signals.h"
 
 #include <unistd.h>
+#include <fcntl.h>
 
 int	exec_init(t_executor *exec, t_astnode *root, t_minishell *minishell)
 {
@@ -43,6 +44,36 @@ int	exec_init(t_executor *exec, t_astnode *root, t_minishell *minishell)
 	return (0);
 }
 
+static int	reopen_std()
+{
+	int	fd;
+	int ret;
+
+	ret = 1;
+	if (!isatty(STDIN_FILENO))
+	{
+		fd = open("/dev/tty", O_RDONLY);
+		if (fd == -1)
+			return (-1);
+		ret = dup2(fd, STDIN_FILENO);
+		close(fd);
+	}
+	if (ret != -1 && !isatty(STDOUT_FILENO))
+	{
+		fd = open("/dev/tty", O_WRONLY);
+		if (fd == -1)
+			return (-1);
+		ret = dup2(fd, STDOUT_FILENO);
+		close(fd);
+	}
+	if (ret != -1)
+		return (1);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	return (-1);
+
+}
+
 int	executor(t_astnode *root, t_minishell *minishell)
 {
 	t_executor	exec;
@@ -52,8 +83,14 @@ int	executor(t_astnode *root, t_minishell *minishell)
 	signal_ign_main();
 	if (!exec_init(&exec, root, minishell))
 		ret = node_exec(&exec);
+	if (ret == 257)
+		ret = reopen_std();
+	minishell->sp_params.exit_status = ret;
+	if (ret == -1)
+		minishell->sp_params.exit_status = 1;
 	ft_vector_free(&exec.infd);
 	ft_vector_free(&exec.outfd);
+	free_ast(root);
 	signal_setup_main();
-	return (ret);
+	return (ret == FAILURE);
 }
