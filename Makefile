@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/05 11:35:52 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/05 13:34:09 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -275,19 +275,10 @@ $(NAME) : $(LIBS_PATH) $(OBJS) | PREMAKE
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "$(MODE)" > $(MODE_TRACE)
 ifneq ($(MODE),)
-	@printf "\n$(BOLD)$(GREEN)$(NAME)($(MODE)) compiled!$(RESET)\n"	
-	@printf "$(BOLD)\
-     88     888b     d888 d8b          d8b          888               888 888\n\
- .d88888b.  8888b   d8888 Y8P          Y8P          888               888 888\n\
-d88P 88\"88b 88888b.d88888                           888               888 888\n\
-Y88b.88     888Y88888P888 888 88888b.  888 .d8888b  88888b.   .d88b.  888 888\n\
- \"Y88888b.  888 Y888P 888 888 888 \"88b 888 88K      888 \"88b d8P  Y8b 888 888\n\
-     88\"88b 888  Y8P  888 888 888  888 888 \"Y8888b. 888  888 88888888 888 888\n\
-Y88b 88.88P 888   \"   888 888 888  888 888      X88 888  888 Y8b.     888 888\n\
- \"Y88888P\"  888       888 888 888  888 888  88888P' 888  888  \"Y8888  888 888\n\
-     88                                                                      $(RESET)\n"
+	@printf "\n$(BOLD)$(GREEN)$(NAME)($(MODE)) compiled!$(RESET)\n"
 else
-	@printf "\n$(BOLD)$(GREEN)$(NAME) compiled!$(RESET)\n"	
+	@printf "\n$(BOLD)$(GREEN)$(NAME) compiled!$(RESET)\n"
+endif
 	@printf "$(BOLD)\
      88     888b     d888 d8b          d8b          888               888 888\n\
  .d88888b.  8888b   d8888 Y8P          Y8P          888               888 888\n\
@@ -298,7 +289,6 @@ Y88b.88     888Y88888P888 888 88888b.  888 .d8888b  88888b.   .d88b.  888 888\n\
 Y88b 88.88P 888   \"   888 888 888  888 888      X88 888  888 Y8b.     888 888\n\
  \"Y88888P\"  888       888 888 888  888 888  88888P' 888  888  \"Y8888  888 888\n\
      88                                                                      $(RESET)\n"
-endif
 
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count PREMAKE
 #	@true || echo "$(NAME)_object"
