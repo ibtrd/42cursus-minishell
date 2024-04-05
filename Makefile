@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/05 13:34:09 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/05 14:33:38 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -291,7 +291,7 @@ Y88b 88.88P 888   \"   888 888 888  888 888      X88 888  888 Y8b.     888 888\n
      88                                                                      $(RESET)\n"
 
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count PREMAKE
-#	@true || echo "$(NAME)_object"
+	@true || echo "$(NAME)_object"
 	$(eval COUNT_DONE := $(shell echo $$(($(COUNT_DONE) + 1))))
 	$(eval LOADING_COMPLETED := $(shell echo "$(COUNT_DONE) * $(LOADING_BAR_SIZE) / $(COUNT_TOTAL)" | bc 2> /dev/null))
 	@mkdir -p $(@D)
@@ -359,7 +359,7 @@ print% :
 .PHONY : count
 count :
 ifneq ($(AS_COUNTED),TRUE)
-	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "mkdir" | wc -l))
+	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "$(NAME)_object" | wc -l))
 	$(eval COUNT_DONE := 0)
 endif
 
@@ -392,10 +392,6 @@ FORCE :
 
 .PHONY : PREMAKE
 PREMAKE :
-# ifneq ($(AS_COUNTED),TRUE)
-# 	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "$(NAME)_object" | wc -l))
-# 	$(eval COUNT_DONE := 0)
-# endif
 	@printf "🔨 $(BOLD)Building $(NAME)...$(RESET)\n"
 	@rm -f $(LOGFILE)
 ifeq ($(ERROR),MODE)

@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/05 11:35:51 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/05 14:33:37 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,7 @@ else
 endif
 
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count ERROR_CHECK
-#	@true || echo "$(NAME)_object"
+	@true || echo "$(NAME)_object"
 	$(eval COUNT_DONE := $(shell echo $$(($(COUNT_DONE) + 1))))
 	$(eval LOADING_COMPLETED := $(shell echo "$(COUNT_DONE) * $(LOADING_BAR_SIZE) / $(COUNT_TOTAL)" | bc 2> /dev/null))
 	@mkdir -p $(@D)
@@ -137,7 +137,7 @@ print% :
 .PHONY : count
 count :
 ifneq ($(AS_COUNTED),TRUE)
-	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "mkdir" | wc -l))
+	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "$(NAME)_object" | wc -l))
 	$(eval COUNT_DONE := 0)
 endif
 
@@ -153,10 +153,6 @@ endif
 FORCE :
 
 ERROR_CHECK :
-# ifneq ($(AS_COUNTED),TRUE)
-# 	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "$(NAME)_object" | wc -l))
-# 	$(eval COUNT_DONE := 0)
-# endif
 ifeq ($(ERROR),MODE)
 	$(error Invalid mode: $(MODE))
 endif
