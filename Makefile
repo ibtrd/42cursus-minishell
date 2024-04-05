@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/04 19:52:54 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/05 15:21:43 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -270,24 +270,15 @@ LOADING_BAR_SIZE = 35
 all : $(NAME)
 
 
-$(NAME) : $(LIBS_PATH) count $(OBJS) | PREMAKE
+$(NAME) : $(LIBS_PATH) $(OBJS) | PREMAKE
 	@echo "$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)" >> $(LOGFILE)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "$(MODE)" > $(MODE_TRACE)
 ifneq ($(MODE),)
-	@printf "\n$(BOLD)$(GREEN)$(NAME)($(MODE)) compiled!$(RESET)\n"	
-	@printf "$(BOLD)\
-     88     888b     d888 d8b          d8b          888               888 888\n\
- .d88888b.  8888b   d8888 Y8P          Y8P          888               888 888\n\
-d88P 88\"88b 88888b.d88888                           888               888 888\n\
-Y88b.88     888Y88888P888 888 88888b.  888 .d8888b  88888b.   .d88b.  888 888\n\
- \"Y88888b.  888 Y888P 888 888 888 \"88b 888 88K      888 \"88b d8P  Y8b 888 888\n\
-     88\"88b 888  Y8P  888 888 888  888 888 \"Y8888b. 888  888 88888888 888 888\n\
-Y88b 88.88P 888   \"   888 888 888  888 888      X88 888  888 Y8b.     888 888\n\
- \"Y88888P\"  888       888 888 888  888 888  88888P' 888  888  \"Y8888  888 888\n\
-     88                                                                      $(RESET)\n"
+	@printf "\n$(BOLD)$(GREEN)$(NAME)($(MODE)) compiled!$(RESET)\n"
 else
-	@printf "\n$(BOLD)$(GREEN)$(NAME) compiled!$(RESET)\n"	
+	@printf "\n$(BOLD)$(GREEN)$(NAME) compiled!$(RESET)\n"
+endif
 	@printf "$(BOLD)\
      88     888b     d888 d8b          d8b          888               888 888\n\
  .d88888b.  8888b   d8888 Y8P          Y8P          888               888 888\n\
@@ -297,10 +288,10 @@ Y88b.88     888Y88888P888 888 88888b.  888 .d8888b  88888b.   .d88b.  888 888\n\
      88\"88b 888  Y8P  888 888 888  888 888 \"Y8888b. 888  888 88888888 888 888\n\
 Y88b 88.88P 888   \"   888 888 888  888 888      X88 888  888 Y8b.     888 888\n\
  \"Y88888P\"  888       888 888 888  888 888  88888P' 888  888  \"Y8888  888 888\n\
-     88                                                                      $(RESET)\n"
-endif
+     88                                                   $(RESET)@kchillon @ibertran\n"
 
-$(BUILD_DIR)%.o : $(SRCS_DIR)%.c | PREMAKE
+$(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count PREMAKE
+	@true || echo "$(NAME)_object"
 	$(eval COUNT_DONE := $(shell echo $$(($(COUNT_DONE) + 1))))
 	$(eval LOADING_COMPLETED := $(shell echo "$(COUNT_DONE) * $(LOADING_BAR_SIZE) / $(COUNT_TOTAL)" | bc 2> /dev/null))
 	@mkdir -p $(@D)
@@ -313,7 +304,6 @@ $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | PREMAKE
 	@printf "] $(shell echo "$(COUNT_DONE) * 100 / $(COUNT_TOTAL)" | bc 2> /dev/null)%%$(RESET)"
 
 $(LIBS_PATH): FORCE | PREMAKE
-	@printf "🔨 $(BOLD)Building $@...$(RESET)\n"
 	@$(MAKE) -C $(@D)
 
 .PHONY : bonus
@@ -368,7 +358,7 @@ print% :
 .PHONY : count
 count :
 ifneq ($(AS_COUNTED),TRUE)
-	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "mkdir" | wc -l))
+	$(eval COUNT_TOTAL := $(shell $(MAKE) -j -n MODE=$(MODE) AS_COUNTED=TRUE | grep "$(NAME)_object" | wc -l))
 	$(eval COUNT_DONE := 0)
 endif
 
@@ -401,7 +391,11 @@ FORCE :
 
 .PHONY : PREMAKE
 PREMAKE :
+ifneq ($(MODE),)
+	@printf "🔨 $(BOLD)Building $(NAME)($(MODE))...$(RESET)\n"
+else
 	@printf "🔨 $(BOLD)Building $(NAME)...$(RESET)\n"
+endif
 	@rm -f $(LOGFILE)
 ifeq ($(ERROR),MODE)
 	$(error Invalid mode: $(MODE))
