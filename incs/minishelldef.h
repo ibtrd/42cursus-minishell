@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/05 20:06:09 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 20:47:39 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@
 # define __NO_FILE "No such file or directory"
 # define __HEREDOC_EOF "%s: warning: here-document delimited by end-of-file \
 (wanted `%s')\n"
-# define __NOT_TTY "Not a tty"
+# define __NOT_A_TTY "%s: %d: Not a tty\n"
+# define __INIT_ERROR "%s: Initialisation failed: %s\n"
 
 #endif //MINISHELLDEF_H
