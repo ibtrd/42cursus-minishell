@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 04:52:29 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/14 15:52:01 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 17:52:01 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ void	ft_vprint_char(void *ptr, size_t index)
 	}
 	printf("%c", *(char *)ptr);
 }
-

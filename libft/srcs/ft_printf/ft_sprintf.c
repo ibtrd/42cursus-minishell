@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 03:38:44 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/12 15:48:57 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 17:48:39 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-# include <stdio.h>
 
 char	*ft_sprintf(const char *str, ...)
 {

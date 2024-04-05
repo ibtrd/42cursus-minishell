@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:50:49 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/13 03:03:12 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 17:49:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int	ft_vector_init(t_vector *v, t_vinfos infos)
 		ft_memset(v, '\0', sizeof(t_vector));
 		return (FAILURE);
 	}
-	ft_memset(v->ptr, 0, v->size); //REMOVE ?
+	ft_memset(v->ptr, 0, v->size);
 	return (SUCCESS);
 }
