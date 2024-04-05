@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/05 17:46:28 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 19:45:48 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-
-# include <stdio.h>
 
 static int	get_heredoc(t_executor *exec)
 {
@@ -58,13 +56,6 @@ int	open_heredoc(t_executor *exec)
     if (ft_vector_add(&exec->infd, &fd))
     {
         close(fd);
-        return (1);
-    }
-    if (dup2(fd, STDIN_FILENO) == -1)
-    {
-        ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
-        close(fd);
-		exec->infd.total--;
         return (1);
     }
 	return (0);

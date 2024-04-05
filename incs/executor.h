@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/05 13:46:50 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/05 20:04:21 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "ast.h"
 # include "minishell.h"
 
-#include <sys/types.h>
+# include <sys/types.h>
 
 typedef struct s_executor
 {
@@ -33,6 +33,7 @@ typedef int	(*t_branching)(t_executor *exec);
 typedef int	(*t_open_redirect)(t_executor *exec);
 typedef int	(*t_builtin)(t_executor *exec, char **args);
 
+int		apply_redirections(t_executor *exec);
 int		branch_command(t_executor *exec);
 int		branch_logicaloperator(t_executor *exec);
 int		branch_pipe(t_executor *exec);
