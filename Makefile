@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/04 20:14:31 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/05 11:35:52 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -301,6 +301,7 @@ Y88b 88.88P 888   \"   888 888 888  888 888      X88 888  888 Y8b.     888 888\n
 endif
 
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count PREMAKE
+#	@true || echo "$(NAME)_object"
 	$(eval COUNT_DONE := $(shell echo $$(($(COUNT_DONE) + 1))))
 	$(eval LOADING_COMPLETED := $(shell echo "$(COUNT_DONE) * $(LOADING_BAR_SIZE) / $(COUNT_TOTAL)" | bc 2> /dev/null))
 	@mkdir -p $(@D)
@@ -401,6 +402,10 @@ FORCE :
 
 .PHONY : PREMAKE
 PREMAKE :
+# ifneq ($(AS_COUNTED),TRUE)
+# 	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "$(NAME)_object" | wc -l))
+# 	$(eval COUNT_DONE := 0)
+# endif
 	@printf "🔨 $(BOLD)Building $(NAME)...$(RESET)\n"
 	@rm -f $(LOGFILE)
 ifeq ($(ERROR),MODE)
