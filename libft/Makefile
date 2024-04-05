@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/04 19:56:21 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/05 15:15:53 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,14 +64,14 @@ endif
 
 LOGFILE = $(MAKE_DIR).mklog
 
-LOADING_BAR_SIZE = 20
+LOADING_BAR_SIZE = 35
 
 # *** TARGETS **************************************************************** #
 
 .PHONY : all
 all : $(NAME)
 
-$(NAME) : count $(OBJS) | ERROR_CHECK
+$(NAME) : $(OBJS) | PREMAKE
 	@printf "\n📚$(BOLD)$(PURPLE) Creating $(NAME) archive...\n$(RESET)"
 	@echo "$(AR) $(ARFLAGS) $(NAME) $(OBJS)" >> $(LOGFILE)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
@@ -82,7 +82,8 @@ else
 	@printf "$(BOLD)$(GREEN)$(NAME) has been created!$(RESET)\n"
 endif
 
-$(BUILD_DIR)%.o : $(SRCS_DIR)%.c | ERROR_CHECK
+$(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count PREMAKE
+	@true || echo "$(NAME)_object"
 	$(eval COUNT_DONE := $(shell echo $$(($(COUNT_DONE) + 1))))
 	$(eval LOADING_COMPLETED := $(shell echo "$(COUNT_DONE) * $(LOADING_BAR_SIZE) / $(COUNT_TOTAL)" | bc 2> /dev/null))
 	@mkdir -p $(@D)
@@ -136,7 +137,7 @@ print% :
 .PHONY : count
 count :
 ifneq ($(AS_COUNTED),TRUE)
-	$(eval COUNT_TOTAL := $(shell $(MAKE) -n AS_COUNTED=TRUE | grep "mkdir" | wc -l))
+	$(eval COUNT_TOTAL := $(shell $(MAKE) -j -n MODE=$(MODE) AS_COUNTED=TRUE | grep "$(NAME)_object" | wc -l))
 	$(eval COUNT_DONE := 0)
 endif
 
@@ -151,17 +152,18 @@ endif
 .PHONY : FORCE
 FORCE :
 
-ERROR_CHECK :
+PREMAKE :
+ifneq ($(MODE),)
+	@printf "🔨 $(BOLD)Building $(NAME)($(MODE))...$(RESET)\n"
+else
+	@printf "🔨 $(BOLD)Building $(NAME)...$(RESET)\n"
+endif
 ifeq ($(ERROR),MODE)
 	$(error Invalid mode: $(MODE))
 endif
 
 # *** FANCY STUFF ************************************************************ #
 
-RED_SHRUG		=	\e[31;49;1m ¯\_(ツ)_/¯ \e[39;41;1m
-GREEN_SHRUG		=	\e[32;49;1m ¯\_(ツ)_/¯ \e[39;42;1m
-YELLOW_SHRUG	=	\e[33;49;1m ¯\_(ツ)_/¯ \e[39;43;1m
-BLUE_SHRUG		=	\e[34;49;1m ¯\_(ツ)_/¯ \e[39;44;1m
 RESET	=	\e[0m
 ERASE	=	\033[2K\r
 BOLD	=	\033[1m
