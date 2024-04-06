@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 09:39:02 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 09:44:04 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	build_heredoc(t_vector **args)
 	t_vector	*buffer;
 	char		*delimiter;
 	int			expand;
+	int			status;
 
 	expand = 0;
 	if (ft_vector_alloc(&buffer, (t_vinfos){sizeof(char), 0, NULL}, 1))
@@ -51,18 +52,17 @@ static int	build_heredoc(t_vector **args)
 		return (FAILURE);
 	}
 	signal_setup_input();
-	if (read_heredoc(buffer, delimiter))
-	{
-		signal_setup_main();
-		free(delimiter);
-		ft_vector_dealloc(&buffer, 1);
-		return (FAILURE);
-	}
+	status = read_heredoc(buffer, delimiter);
 	signal_setup_main();
 	free(delimiter);
-	ft_vector_dealloc(args, 1);
-	*args = buffer;
-	return (SUCCESS);
+	if (status)
+		ft_vector_dealloc(&buffer, 1);
+	else
+	{
+		ft_vector_dealloc(args, 1);
+		*args = buffer;
+	}
+	return (status);
 }
 
 static int	read_heredoc(t_vector *buffer, char *delimiter)
