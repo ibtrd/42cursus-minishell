@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 17:26:42 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 11:38:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "minishelldef.h"
-#include "prompt.h"
-#include "parsing.h"
-#include "history.h"
-#include "signals.h"
-
 #include <readline/readline.h>
-#include <readline/history.h>
 #include <stdlib.h>
+#include <unistd.h>
+
+#include "history.h"
+#include "minishelldef.h"
+#include "parsing.h"
+#include "prompt.h"
+#include "signals.h"
 
 static int	complete_input(char **old_input)
 {
@@ -54,17 +53,16 @@ static void	input_error_handler(char **input, int error, int *exit_status)
 	{
 		quote = check_quotes(*input);
 		if (quote)
-			ft_dprintf(2, "%s: %s%c'\n", __MINISHELL, __UNEXPECTED_EOF, quote);
+			ft_dprintf(STDERR_FILENO, __UNEXPECTED_EOF, __MINISHELL, quote);
 		*exit_status = 2;
 		free(*input);
 		*input = NULL;
 	}
-	else if(error)
+	else if (error)
 	{
 		*exit_status = (error >> 4) + 128;
 		free(*input);
 		*input = NULL;
-	
 	}
 }
 

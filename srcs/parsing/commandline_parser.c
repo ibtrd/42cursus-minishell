@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 22:49:31 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/23 16:17:14 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 11:29:52 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 #include <errno.h>
 
 #include "libft.h"
-
 #include "minishelldef.h"
-#include "ast.h"
 #include "parsing.h"
 
 static int	commandline_lexer(char **input, t_vector *lexer);
@@ -63,6 +61,6 @@ static int	lexer_failure(char *ptr, char *error)
 {
 	free(ptr);
 	if (error)
-		ft_dprintf(STDERR_FILENO, "%s: Error: %s\n", __MINISHELL, error);
+		ft_dprintf(STDERR_FILENO, __PARSING_ERROR, __MINISHELL, error);
 	return (FAILURE);
 }

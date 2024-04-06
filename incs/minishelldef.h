@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/05 20:47:39 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 10:31:29 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,17 @@
 
 //PRINT
 # define __MINISHELL "minishell"
-# define __UNEXPECTED_EOF "unexpected EOF while looking for matching `"
+# define __UNEXPECTED_EOF "%s: unexpected EOF while looking for matching `%c'\n"
 # define __UNCLOSED_ERROR "syntax error: unclosed"
 # define __SYNTAX_ERROR "syntax error near unexpected token"
 # define __UNSUPPORTED_ERROR "unsupported operator"
-# define __AST_ERROR "AST building failed"
 # define __CMD_NOT_FOUND "command not found"
 # define __IS_DIR "Is a directory"
 # define __NO_FILE "No such file or directory"
 # define __HEREDOC_EOF "%s: warning: here-document delimited by end-of-file \
 (wanted `%s')\n"
 # define __NOT_A_TTY "%s: %d: Not a tty\n"
-# define __INIT_ERROR "%s: Initialisation failed: %s\n"
+# define __INIT_ERROR "%s: Initialisation failure: %s\n"
+# define __PARSING_ERROR "%s: Parsing failure: %s\n"
 
 #endif //MINISHELLDEF_H

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/05 21:50:09 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 10:36:30 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static int	minishell_routine(t_minishell *minishell)
 	if (error)
 		return (error == FAILURE);
 	root = commandline_parser(input);
+	if (!root)
+		return (0);
 	if (create_here_documents(root))
 	{
 		free_ast(root);
