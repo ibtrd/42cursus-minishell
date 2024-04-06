@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 09:54:44 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 09:55:50 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 #include "minishelldef.h"
 #include "signals.h"
 
+static int	build_heredoc(t_vector **args);
+static int	read_heredoc(t_vector *buffer, char *delimiter);
+static	int	set_config(t_vector *arg, char **delimiter, int *expand);
+
 /*
 	DESCRIPTION
 	The create_here_documents() traverses the tree pointed to by root,
@@ -28,13 +32,9 @@
 	is encountered.
 	
 	RETURN VALUE
-	create_here_documents() function return 0.
-	On error, create_here_documents() return -1.
+	The create_here_documents() function returns 0.
+	On error, create_here_documents() returns -1.
 */
-
-static int	build_heredoc(t_vector **args);
-static int	read_heredoc(t_vector *buffer, char *delimiter);
-static	int	set_config(t_vector *arg, char **delimiter, int *expand);
 
 int	create_here_documents(t_astnode *root)
 {
