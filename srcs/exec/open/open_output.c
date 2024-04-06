@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/05 19:45:33 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:24:40 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	open_output(t_executor *exec)
 {
 	int	fd;
 
-	fd = open(*(char **)ft_vector_get(exec->node->args, 0), O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd = open(*(char **)ft_vector_get(exec->node->args, 0),
+			O_WRONLY | O_CREAT | O_TRUNC,
+			0644);
 	if (fd == -1)
 	{
 		ft_dprintf(2, "%s: %s: %s\n",
