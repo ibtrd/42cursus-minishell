@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 16:40:07 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:32:16 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,13 @@ int	branch_command(t_executor *exec)
 {
 	int			ret;
 	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env",
-								"exit", "history", NULL};
+		"exit", "history", NULL};
 
 	if (expand_node(exec->node, exec->minishell))
 		return (1);
 	if (exec->node->args->total == 1)
 		return (0);
-	ret = ft_str_in_array(*(char **)ft_vector_get(exec->node->args, 0), builtins);
+	ret = ft_str_in_array(*(char **)exec->node->args->ptr, builtins);
 	if (ret != -1)
 		return (exec_builtins(exec, ret));
 	ret = command_fork(exec);

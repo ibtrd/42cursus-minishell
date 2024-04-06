@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:36:55 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/05 19:43:05 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 16:46:25 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
-
-# include <stdio.h>
 
 int	apply_redirections(t_executor *exec)
 {
@@ -41,7 +39,6 @@ int	apply_redirections(t_executor *exec)
 			ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
 			return (1);
 		}
-	
 	}
 	return (0);
 }

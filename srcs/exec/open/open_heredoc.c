@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/05 19:45:48 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:23:50 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static int	get_heredoc(t_executor *exec)
 	fd = ft_tmp_file(&path, "heredoc");
 	if (fd == -1)
 		return (-1);
-	ret = write(fd, (char *)ft_vector_get(exec->node->args, 0), exec->node->args->total);
+	ret = write(fd, (char *)ft_vector_get(exec->node->args, 0),
+			exec->node->args->total);
 	close(fd);
 	if (ret != -1)
 		fd = open(path, O_RDONLY);
@@ -53,10 +54,10 @@ int	open_heredoc(t_executor *exec)
 			strerror(errno));
 		return (1);
 	}
-    if (ft_vector_add(&exec->infd, &fd))
-    {
-        close(fd);
-        return (1);
-    }
+	if (ft_vector_add(&exec->infd, &fd))
+	{
+		close(fd);
+		return (1);
+	}
 	return (0);
 }
