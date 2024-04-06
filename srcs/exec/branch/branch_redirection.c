@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/05 18:49:19 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:18:51 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-# include <stdio.h>
-# include <testing.h>
-
 static int	open_redirect(t_executor *exec, char *no_expand)
 {
 	static const t_open_redirect	open_redirect[4] = {open_input, \
 														open_output, \
 														open_heredoc, \
 														open_append};
+
 	if (exec->node->type != _HEREDOC && exec->node->args->total != 2)
 	{
 		ft_dprintf(2, "%s: %s: ambiguous redirect\n", __MINISHELL, no_expand);
@@ -62,7 +60,5 @@ int	branch_redirection(t_executor *exec)
 	exec->node = node->right;
 	ret = node_exec(exec);
 	exec->node = node;
-	// if (close_redirect(exec))
-	// 	return (1);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/05 21:43:37 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:17:41 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ int	exec_init(t_executor *exec, t_astnode *root, t_minishell *minishell)
 	return (0);
 }
 
-static int	reopen_std()
+static int	reopen_std(void)
 {
 	int	fd;
-	int ret;
+	int	ret;
 
 	ret = 1;
 	if (!isatty(STDIN_FILENO))
@@ -71,7 +71,6 @@ static int	reopen_std()
 	close(STDIN_FILENO);
 	close(STDOUT_FILENO);
 	return (-1);
-
 }
 
 int	executor(t_astnode *root, t_minishell *minishell)
