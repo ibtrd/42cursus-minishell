@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:17:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 18:45:05 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:17:21 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishelldef.h"
-#include "env.h"
-#include "libft.h"
-#include "executor.h"
-
 #include <unistd.h>
+
+#include "env.h"
+#include "minishelldef.h"
 
 static int	check_var_name(char *var)
 {
@@ -24,19 +22,14 @@ static int	check_var_name(char *var)
 	i = 0;
 	if (!ft_isalpha(var[i]) && var[i] != '_')
 	{
-		ft_dprintf(STDERR_FILENO, "%s: export: `%s': not a valid identifier\n", 
-			__MINISHELL, 
-			var);
+		ft_dprintf(STDERR_FILENO, __INVALID_IDENTIFIER, __MINISHELL, var);
 		return (FAILURE);
 	}
 	while (var[i] && var[i] != '=')
 	{
 		if (!ft_isalnum(var[i]) && var[i] != '_')
 		{
-			ft_dprintf(STDERR_FILENO, 
-				"%s: export: `%s': not a valid identifier\n", 
-				__MINISHELL, 
-				var);
+			ft_dprintf(STDERR_FILENO, __INVALID_IDENTIFIER, __MINISHELL, var);
 			return (FAILURE);
 		}
 		i++;

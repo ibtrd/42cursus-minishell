@@ -6,14 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 10:36:30 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 16:37:29 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <readline/readline.h>
 #include <unistd.h>
 #include <errno.h>
-#include <stdlib.h>
 
 #include "parsing.h"
 #include "env.h"
@@ -63,7 +62,7 @@ static int	minishell_routine(t_minishell *minishell)
 
 	error = get_input(minishell, &input);
 	if (error)
-		return (error == FAILURE);
+		return (error == EOF);
 	root = commandline_parser(input);
 	if (!root)
 		return (0);

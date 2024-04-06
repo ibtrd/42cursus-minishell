@@ -6,15 +6,12 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 10:31:29 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:11:19 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELLDEF_H
 # define MINISHELLDEF_H
-
-// # define __PRGM_NAME "minishell"
-// # define __PRGM_NAME_LEN 9 //REMOVE
 
 # define __GLOBAL_HISTORY ".minishell_history"
 
@@ -103,5 +100,22 @@
 # define __NOT_A_TTY "%s: %d: Not a tty\n"
 # define __INIT_ERROR "%s: Initialisation failure: %s\n"
 # define __PARSING_ERROR "%s: Parsing failure: %s\n"
+
+//EXIT
+# define __MINISHELL_EXIT "exit\n"
+# define __EXIT_NUMERIC_ERR "%s: exit: too many arguments\n"
+# define __EXIT_ARGS_ERR "%s: exit: %s: numeric argument required\n"
+
+//EXPORT
+# define __INVALID_IDENTIFIER "%s: export: `%s': not a valid identifier\n"
+
+//CD
+# define __CD_NOT_SET "%s: cd: %s not set\n"
+# define __CD_ARGS "%s: cd: too many arguments\n"
+# define __CD_ERR "%s: cd: %s: %s\n"
+
+//HISTORY
+# define __HISTORY_USAGE "history: usage: history [-c]\n"
+# define __HISTORY_INVAL "%s: history: %s: invalid option\n"
 
 #endif //MINISHELLDEF_H

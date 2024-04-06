@@ -6,15 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 21:41:18 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/02 18:10:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:05:20 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-#include "libft.h"
-#include "executor.h"
+# include "executor.h"
 
 int	builtin_cd(t_executor *exec, char **argv);
 int	builtin_echo(t_executor *exec, char **argv);

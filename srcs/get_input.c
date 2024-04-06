@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 11:38:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 16:37:48 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	get_input(t_minishell *minishell, char **input)
 		*input = readline(prompt);
 	free(prompt);
 	if (!*input)
-		return (FAILURE);
+		return (EOF);
 	error = SUCCESS;
 	signal_setup_input();
 	while (check_unclosed_input(*input))

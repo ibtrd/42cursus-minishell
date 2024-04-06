@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:33:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 16:56:13 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:02:24 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	get_dir(char **dir, t_vector *env, char *name)
 	*dir = ft_getenv(env, name);
 	if (!*dir)
 	{
-		ft_dprintf(2, "%s: cd: %s not set\n", __MINISHELL, name);
+		ft_dprintf(STDERR_FILENO, __CD_NOT_SET, __MINISHELL, name);
 		return (1);
 	}
 	return (0);
@@ -37,7 +37,7 @@ static int	resolve_dir(char **dir, t_vector *env, char **argv)
 		return (get_dir(dir, env, "HOME"));
 	if (argv[1])
 	{
-		ft_dprintf(2, "%s: cd: too many arguments\n", __MINISHELL);
+		ft_dprintf(STDERR_FILENO, __CD_ARGS, __MINISHELL);
 		return (1);
 	}
 	*dir = argv[0];
@@ -82,7 +82,8 @@ int	builtin_cd(t_executor *exec, char **argv)
 	if (chdir(dir) == -1)
 	{
 		free(oldpwd);
-		ft_dprintf(2, "%s: cd: %s: %s\n", __MINISHELL, argv[0], strerror(errno));
+		ft_dprintf(STDERR_FILENO, __CD_ERR,
+			__MINISHELL, argv[0], strerror(errno));
 		return (1);
 	}
 	update_wd(exec->env, oldpwd);

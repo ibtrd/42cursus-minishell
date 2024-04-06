@@ -6,16 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:54:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 16:56:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 16:45:09 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "signals.h"
 
 #include <signal.h>
 #include <stddef.h>
 
-# include <stdio.h>
+#include "signals.h"
 
 void	signal_setup_child(void)
 {
