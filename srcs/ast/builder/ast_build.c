@@ -14,9 +14,6 @@
 
 #include "ast.h"
 
-#include "libft.h" //REMOVE
-#include "testing.h" //REMOVE
-
 /*
 	DESCRIPTION
 	The ast_build() function creates an Abstract Syntax Tree based on the
@@ -39,7 +36,6 @@ t_astnode	*ast_build(t_vector *lexer)
 	tok = ft_vector_get(lexer, index);
 	while (tok->type != _END_TOK)
 	{
-		// printf("main loop:	index %d (type %d)\n", index, tok->type);
 		if (tok->type == _OPEN_BRACKETS_TOK)
 		{
 			root = ast_build_brackets(root, lexer, &index);
@@ -49,7 +45,6 @@ t_astnode	*ast_build(t_vector *lexer)
 		else if (build_from_token(tok, &root))
 			return (ast_builderror(root));
 		tok = ft_vector_get(lexer, ++index);
-		// dprint_ast(2, root, NULL); //REMOVE
 	}
 	return (root);
 }
@@ -69,6 +64,5 @@ int	build_from_token(t_lexer_token *tok, t_astnode **root)
 		return (build_command(&arg_v, tok, root));
 	if (tok->type == _ARG_TOK)
 		return (add_argument(arg_v, tok->value));
-	ft_dprintf(2, "BUILDING BAD TOKEN! (Type %d)\n", tok->type); //REMOVE
 	return (FAILURE);
 }

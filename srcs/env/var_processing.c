@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_processing.c                                       :+:      :+:    :+:   */
+/*   var_processing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:16:35 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/09 18:59:50 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:51:38 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdlib.h>
+
 #include "minishelldef.h"
 #include "env.h"
-#include "libft.h"
-
-#include <stdlib.h>
 
 int	var_processing(t_env_var *var)
 {
@@ -25,11 +25,7 @@ int	var_processing(t_env_var *var)
 		i = ft_atoi(var->value) + 1;
 		if (i >= __MAX_SHLVL)
 		{
-			ft_dprintf(
-				2, 
-				"%s: warning: shell level (%d) too high, resetting to 1\n", 
-				__MINISHELL, 
-				i);
+			ft_dprintf(STDERR_FILENO, __HIGH_SHLVL, __MINISHELL, i);
 			i = 1;
 		}
 		free(var->value);

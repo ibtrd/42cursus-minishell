@@ -6,17 +6,18 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:34:06 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:04:41 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:53:19 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "minishelldef.h"
-
-#include <unistd.h>
+#include <errno.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
+#include <unistd.h>
+
+#include "env.h"
+#include "minishelldef.h"
 
 int	builtin_pwd(t_executor *exec, char **argv)
 {
@@ -33,7 +34,7 @@ int	builtin_pwd(t_executor *exec, char **argv)
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 	{
-		ft_dprintf(2, "%s: pwd: %s\n", __MINISHELL, strerror(errno));
+		ft_dprintf(STDERR_FILENO, __PWD_ERR, __MINISHELL, strerror(errno));
 		return (1);
 	}
 	printf("%s\n", pwd);

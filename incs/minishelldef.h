@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 17:31:57 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:56:32 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@
 
 //PRINT
 # define __MINISHELL "minishell"
+# define __ERR "%s: %s: %s\n"
 # define __UNEXPECTED_EOF "%s: unexpected EOF while looking for matching `%c'\n"
 # define __UNCLOSED_ERROR "syntax error: unclosed"
 # define __SYNTAX_ERROR "syntax error near unexpected token"
@@ -101,6 +102,8 @@
 # define __NOT_A_TTY "%s: %d: Not a tty\n"
 # define __INIT_ERROR "%s: Initialisation failure: %s\n"
 # define __PARSING_ERROR "%s: Parsing failure: %s\n"
+# define __HIGH_SHLVL "%s: warning: shell level (%d) too high, resetting to 1\n"
+# define __AMBIGUOUS "%s: %s: ambiguous redirect\n"
 
 //EXIT
 # define __MINISHELL_EXIT "exit\n"
@@ -118,5 +121,8 @@
 //HISTORY
 # define __HISTORY_USAGE "history: usage: history [-c]\n"
 # define __HISTORY_INVAL "%s: history: %s: invalid option\n"
+
+//PWD
+# define __PWD_ERR "%s: pwd: %s\n"
 
 #endif //MINISHELLDEF_H

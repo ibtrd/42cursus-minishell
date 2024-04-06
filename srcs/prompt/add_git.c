@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_git.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:15:50 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 16:14:27 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:47:14 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 static int	get_git_path(char *cmd, char **cmd_path, char *path)
 {
 	int	ret;
+
 	if (path)
 		path = ft_strdup(path);
 	ret = search_path(cmd, cmd_path, path);
@@ -33,12 +34,13 @@ static int	get_git_path(char *cmd, char **cmd_path, char *path)
 
 static int	execute_git(t_vector *env, int try)
 {
-	static char	*cmd[3][6] = {{"git", "symbolic-ref", "--short", "HEAD", NULL},
-		{"git", "describe", "--tags", "--exact-match", "HEAD", NULL},
-		{"git", "rev-parse", "--short", "HEAD", NULL}};
-	char	*path;
-	char	*cmd_path;
-	int		ret;
+	static char	*cmd[3][6] = {
+	{"git", "symbolic-ref", "--short", "HEAD", NULL},
+	{"git", "describe", "--tags", "--exact-match", "HEAD", NULL},
+	{"git", "rev-parse", "--short", "HEAD", NULL}};
+	char		*path;
+	char		*cmd_path;
+	int			ret;
 
 	if (dup2(open("/dev/null", O_WRONLY), STDERR_FILENO) == -1)
 		return (1);
@@ -48,7 +50,7 @@ static int	execute_git(t_vector *env, int try)
 		&& get_git_path(cmd[try][0], &cmd_path, __DEFAULT_PATH);
 	if (ret)
 		return (1);
-	if(!cmd_path)
+	if (!cmd_path)
 		return (1);
 	execve(cmd_path, cmd[try], env->ptr);
 	free(cmd_path);
@@ -59,7 +61,7 @@ static int	execute_git(t_vector *env, int try)
 static int	git_fork(t_vector *env, int *pipefd, int try)
 {
 	pid_t	pid;
-	int	status;
+	int		status;
 
 	pid = fork();
 	if (pid == -1)
@@ -88,8 +90,8 @@ static int	git_fork(t_vector *env, int *pipefd, int try)
 static int	git_branch(t_vector *env, char **branch)
 {
 	int	pipefd[2];
-	int		ret;
-	int		i;
+	int	ret;
+	int	i;
 
 	ret = 1;
 	i = 0;

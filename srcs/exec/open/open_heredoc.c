@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:23:50 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:40:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	open_heredoc(t_executor *exec)
 	fd = get_heredoc(exec);
 	if (fd == -1)
 	{
-		ft_dprintf(2, "%s: heredoc: %s\n",
+		ft_dprintf(STDERR_FILENO, "%s: heredoc: %s\n",
 			__MINISHELL,
 			strerror(errno));
 		return (1);

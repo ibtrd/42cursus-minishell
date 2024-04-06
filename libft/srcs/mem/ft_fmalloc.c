@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 23:58:51 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 23:58:55 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:40:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*ft_fmalloc(size_t size)
 	}
 	if (i++ > max)
 	{
-		dprintf(2, "Forcing ft_fmalloc() failure! (call^%d)\n", i);
+		dprintf(STDERR_FILENO, "Forcing ft_fmalloc() failure! (call^%d)\n", i);
 		errno = ENOMEM;
 		return (NULL);
 	}
