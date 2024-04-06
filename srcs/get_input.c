@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 17:26:42 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 15:44:43 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ static void	input_error_handler(char **input, int error, int *exit_status)
 	}
 }
 
-int	get_input(t_minishell *minishell, char **input)
+int	get_input(t_minishell *minishell, char **input, void *color_flag)
 {
 	char	*prompt;
 	int		error;
 
-	if (get_prompt(minishell, &prompt))
+	if (get_prompt(minishell, &prompt, color_flag))
 		*input = readline(__DEFAULT_PROMPT);
 	else
 		*input = readline(prompt);
