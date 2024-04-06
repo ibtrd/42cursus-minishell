@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:34:10 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 18:56:40 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:03:51 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ int	builtin_exit(t_executor *exec, char **argv)
 {
 	int	status;
 
-	ft_dprintf(2, "exit\n");
+	ft_dprintf(STDERR_FILENO, __MINISHELL_EXIT);
 	if (!argv || !argv[0])
 		status = 0;
 	else if (!ft_isnumber(argv[0]))
 	{
-		ft_dprintf(2, "%s: exit: %s: numeric argument required\n", __MINISHELL, argv[0]);
+		ft_dprintf(STDERR_FILENO, __EXIT_ARGS_ERR, __MINISHELL, argv[0]);
 		status = 2;
 	}
 	else if (argv[1])
 	{
-		ft_dprintf(2, "%s: exit: too many arguments\n", __MINISHELL);
+		ft_dprintf(STDERR_FILENO, __EXIT_NUMERIC_ERR, __MINISHELL);
 		return (1);
 	}
 	else

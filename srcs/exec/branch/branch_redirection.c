@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   branch_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:18:51 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:56:42 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	open_redirect(t_executor *exec, char *no_expand)
 
 	if (exec->node->type != _HEREDOC && exec->node->args->total != 2)
 	{
-		ft_dprintf(2, "%s: %s: ambiguous redirect\n", __MINISHELL, no_expand);
+		ft_dprintf(STDERR_FILENO, __AMBIGUOUS, __MINISHELL, no_expand);
 		return (1);
 	}
 	return (open_redirect[exec->node->type - _INPUT](exec));

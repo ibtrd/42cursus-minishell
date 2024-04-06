@@ -6,18 +6,17 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 02:20:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 18:13:03 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 10:25:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <string.h>
 #include <errno.h>
+#include <string.h>
+#include <unistd.h>
 
-#include "libft.h"
-
-#include "minishelldef.h"
 #include "ast.h"
+#include "libft.h"
+#include "minishelldef.h"
 
 /*
 	DESCRIPTION
@@ -31,10 +30,7 @@
 
 t_astnode	*ast_builderror(t_astnode *root)
 {
-	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n",
-		__MINISHELL,
-		__AST_ERROR,
-		strerror(errno));
+	ft_dprintf(STDERR_FILENO, __PARSING_ERROR, __MINISHELL, strerror(errno));
 	free_ast(root);
 	return (NULL);
 }

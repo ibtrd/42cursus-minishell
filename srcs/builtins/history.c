@@ -6,24 +6,20 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 18:41:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/04 13:22:54 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:14:51 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <readline/readline.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-#include "libft.h"
-#include "get_next_line.h"
-
-#include "minishelldef.h"
-#include "executor.h"
 #include "builtins.h"
 #include "history.h"
+#include "libft.h"
+#include "minishelldef.h"
 
 static int	history_print(void);
 static int	history_delete(void);
@@ -96,14 +92,12 @@ static int	history_delete(void)
 
 static int	history_usage(void)
 {
-	ft_dprintf(STDERR_FILENO, "history: usage: history [-c]\n");
+	ft_dprintf(STDERR_FILENO, __HISTORY_USAGE);
 	return (1);
 }
 
 static int	history_invalid_option(char *option)
 {
-	ft_dprintf(STDERR_FILENO, "%s: history: %s: invalid option\n",
-		__MINISHELL,
-		option);
+	ft_dprintf(STDERR_FILENO, __HISTORY_INVAL, __MINISHELL, option);
 	return (1);
 }

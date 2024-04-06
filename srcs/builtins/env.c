@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:30:06 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/15 15:49:17 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:37:50 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "executor.h"
-
 #include <stdio.h>
+
+#include "env.h"
 
 int	builtin_env(t_executor *exec, char **argv)
 {

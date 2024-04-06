@@ -3,26 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   branch_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:20:09 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:55:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "executor.h"
 #include "minishelldef.h"
 #include "env.h"
-#include "minishell.h"
 #include "signals.h"
 
-#include <sys/wait.h>
 #include <errno.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <stdio.h>
 
 static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 {
@@ -33,15 +30,15 @@ static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 			*cmd_path = ft_strdup(cmd);
 			return (!*cmd_path);
 		}
-		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __NO_FILE);
+		ft_dprintf(STDERR_FILENO, __ERR, __MINISHELL, cmd, __NO_FILE);
 		return (127);
 	}
 	if (!search_path(cmd, cmd_path, path))
 		return (0);
 	if (path && *path && !*cmd_path)
-		ft_dprintf(2, "%s: %s\n", cmd, __CMD_NOT_FOUND);
+		ft_dprintf(STDERR_FILENO, "%s: %s\n", cmd, __CMD_NOT_FOUND);
 	if (!path || !*path)
-		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, cmd, __NO_FILE);
+		ft_dprintf(STDERR_FILENO, __ERR, __MINISHELL, cmd, __NO_FILE);
 	return (127);
 }
 
@@ -51,13 +48,14 @@ static int	is_dir(char *path)
 
 	if (stat(path, &buf))
 	{
-		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, path, strerror(errno));
+		ft_dprintf(STDERR_FILENO, __ERR,
+			__MINISHELL, path, strerror(errno));
 		free(path);
 		return (1);
 	}
 	if (S_ISDIR(buf.st_mode))
 	{
-		ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, path, __IS_DIR);
+		ft_dprintf(STDERR_FILENO, __ERR, __MINISHELL, path, __IS_DIR);
 		free(path);
 		return (1);
 	}
@@ -85,7 +83,7 @@ static int	execute_command(t_executor *exec)
 	if (is_dir(cmd_path))
 		return (126);
 	execve(cmd_path, cmd, exec->env->ptr);
-	ft_dprintf(2, "%s: %s: %s\n", __MINISHELL, *cmd, strerror(errno));
+	ft_dprintf(STDERR_FILENO, __ERR, __MINISHELL, *cmd, strerror(errno));
 	free(cmd_path);
 	return (126);
 }

@@ -3,21 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init_shlvl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:17:51 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/21 13:31:25 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:47:57 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 
 #include "minishelldef.h"
 #include "env.h"
-#include "libft.h"
-
-#include <stdlib.h>
-
-# include <stdio.h>
 
 static int	get_shlvl(t_vector *env)
 {

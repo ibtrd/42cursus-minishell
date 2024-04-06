@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 16:10:26 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:32:23 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <readline/readline.h>
 #include <unistd.h>
 #include <errno.h>
-#include <stdlib.h>
 
 #include "parsing.h"
 #include "env.h"
@@ -63,8 +62,10 @@ static int	minishell_routine(t_minishell *minishell, void *color_flag)
 
 	error = get_input(minishell, &input, color_flag);
 	if (error)
-		return (error == FAILURE);
+		return (error == EOF);
 	root = commandline_parser(input);
+	if (!root)
+		return (0);
 	if (create_here_documents(root))
 	{
 		free_ast(root);

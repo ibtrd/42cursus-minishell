@@ -12,23 +12,15 @@
 
 #include "lexer.h"
 
-#include <stdio.h> //REMOVE
-
 int	lexer_close_bracket(t_vector *vector, size_t index)
 {
 	const t_lexer_token	*ptr = ft_vector_get(vector, index);
 
-	#ifdef DEBUG
-	printf("Inner parentheis closed!\n");
-	#endif
 	if (ptr->type == _UNSUPPORTED_TOK)
 		return (unsupported_error(ptr->value));
 	if (ptr->type == _CMD_TOK || ptr->type == _OPEN_BRACKETS_TOK)
 		return (syntax_error(ptr->value));
 	if (ptr->type >= _REDIR_INPUT_TOK && ptr->type <= _REDIR_APPEND_TOK)
-		return(lexer_redirection_tok(vector, index + 1, _CLOSED));
-	#ifdef DEBUG
-	printf("Parenthesis returning index %zu\n", index);
-	#endif
+		return (lexer_redirection_tok(vector, index + 1, _CLOSED));
 	return (index);
 }

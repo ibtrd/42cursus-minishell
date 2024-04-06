@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:34:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/21 18:50:03 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 16:41:21 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-#include "executor.h"
-#include "libft.h"
+# include "executor.h"
+# include "libft.h"
 
 typedef struct s_env_var
 {

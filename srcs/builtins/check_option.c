@@ -6,11 +6,11 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:30:28 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/02 18:09:52 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:16:48 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stddef.h>
 
 static int	isoption(char c, char *charset)
 {

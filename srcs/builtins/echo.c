@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:00:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/05 20:00:57 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:16:24 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <unistd.h>
+
 #include "builtins.h"
-#include "executor.h"
+#include "libft.h"
 
 int	builtin_echo(t_executor *exec, char **argv)
 {
@@ -31,7 +31,7 @@ int	builtin_echo(t_executor *exec, char **argv)
 	}
 	while (*argv)
 	{
-		if (write(1, *argv, ft_strlen(*argv)) == -1)
+		if (write(STDOUT_FILENO, *argv, ft_strlen(*argv)) == -1)
 			return (1);
 		if (*(argv + 1))
 			if (write(1, " ", 1) == -1)
@@ -39,7 +39,7 @@ int	builtin_echo(t_executor *exec, char **argv)
 		argv++;
 	}
 	if (!(options & 1))
-		if (write(1, "\n", 1) == -1)
+		if (write(STDOUT_FILENO, "\n", 1) == -1)
 			return (1);
 	return (0);
 }

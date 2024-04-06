@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_setup_input.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:52:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/03 17:11:49 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 09:36:48 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	signal_setup_input(void)
 	act = (struct sigaction){0};
 	act.sa_handler = &input_int_handler;
 	sigaction(SIGINT, &act, NULL);
-	rl_event_hook=&ft_rl_event;
+	rl_event_hook = &ft_rl_event;
 }

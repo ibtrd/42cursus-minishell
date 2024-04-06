@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:16:43 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:10:11 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:40:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	revert_redirections(t_executor *exec)
 					STDOUT_FILENO) == FAILURE;
 	}
 	if (ret)
-		ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
+		ft_dprintf(STDERR_FILENO, "%s: %s\n", __MINISHELL, strerror(errno));
 	return (ret);
 }
 

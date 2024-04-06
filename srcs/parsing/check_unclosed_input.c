@@ -1,21 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_unclosed_input.c                                   :+:      :+:    :+:   */
+/*   check_unclosed_input.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:41:40 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/18 04:33:17 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 11:43:53 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stddef.h>
-
-#include "libft.h"
-
-#include "minishelldef.h"
 #include "parsing.h"
 
 static int	check_parentheses(char *cmdline);
@@ -87,4 +81,3 @@ static int	check_parentheses(char *cmdline)
 		return (FAILURE);
 	return (SUCCESS);
 }
-

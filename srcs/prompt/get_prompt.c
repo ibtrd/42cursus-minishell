@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:14:29 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 16:08:20 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:43:14 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,25 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static int    user_dir(t_vector *env, char **cwd)
+static int	user_dir(t_vector *env, char **cwd)
 {
-    char    *home;
-    size_t    len;
+	char	*home;
+	size_t	len;
 
-    home = ft_getenv(env, "HOME");
-    if (!home)
+	home = ft_getenv(env, "HOME");
+	if (!home)
 	{
-        return (0);
+		return (0);
 	}
-    len = ft_strlen(home);
-    if (!ft_strncmp(*cwd, home, len) && !(*cwd)[len])
-    {
-        free(*cwd);
-        *cwd = ft_strdup("~");
-        if (!*cwd)
-            return (1);
-    }
-    return (0);
+	len = ft_strlen(home);
+	if (!ft_strncmp(*cwd, home, len) && !(*cwd)[len])
+	{
+		free(*cwd);
+		*cwd = ft_strdup("~");
+		if (!*cwd)
+			return (1);
+	}
+	return (0);
 }
 
 static int	resolve_cwd(t_vector *env, char **cwd)

@@ -3,41 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:34:06 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 12:40:32 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:53:19 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
 #include "env.h"
 #include "minishelldef.h"
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-
-int    builtin_pwd(t_executor *exec, char **argv)
+int	builtin_pwd(t_executor *exec, char **argv)
 {
-    char    *pwd;
+	char	*pwd;
 
-    (void)argv;
-    (void)exec;
-    pwd = ft_getenv(exec->env, "PWD");
-    if (pwd)
-    {
-        printf("%s\n", pwd);
-        return (0);
-    }
-    pwd = getcwd(NULL, 0);
-    if (!pwd)
-    {
-        ft_dprintf(2, "%s: pwd: %s\n", __MINISHELL, strerror(errno));
-        return (1);
-    }
-    printf("%s\n", pwd);
-    free(pwd);
-    return (0);
+	(void)argv;
+	(void)exec;
+	pwd = ft_getenv(exec->env, "PWD");
+	if (pwd)
+	{
+		printf("%s\n", pwd);
+		return (0);
+	}
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+	{
+		ft_dprintf(STDERR_FILENO, __PWD_ERR, __MINISHELL, strerror(errno));
+		return (1);
+	}
+	printf("%s\n", pwd);
+	free(pwd);
+	return (0);
 }

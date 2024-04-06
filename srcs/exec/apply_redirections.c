@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_redirections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:36:55 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 16:46:25 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:40:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	apply_redirections(t_executor *exec)
 		fd = *(int *)ft_vector_get(&exec->infd, exec->infd.total - 1);
 		if (dup2(fd, STDIN_FILENO) == -1)
 		{
-			ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
+			ft_dprintf(STDERR_FILENO, "%s: %s\n", __MINISHELL, strerror(errno));
 			return (1);
 		}
 	}
@@ -36,7 +36,7 @@ int	apply_redirections(t_executor *exec)
 		fd = *(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1);
 		if (dup2(fd, STDOUT_FILENO) == -1)
 		{
-			ft_dprintf(2, "%s: %s\n", __MINISHELL, strerror(errno));
+			ft_dprintf(STDERR_FILENO, "%s: %s\n", __MINISHELL, strerror(errno));
 			return (1);
 		}
 	}

@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishelldef.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 16:09:26 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:56:32 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELLDEF_H
 # define MINISHELLDEF_H
-
-// # define __PRGM_NAME "minishell"
-// # define __PRGM_NAME_LEN 9 //REMOVE
 
 # define __GLOBAL_HISTORY ".minishell_history"
 
@@ -92,17 +89,40 @@
 
 //PRINT
 # define __MINISHELL "minishell"
-# define __UNEXPECTED_EOF "unexpected EOF while looking for matching `"
+# define __ERR "%s: %s: %s\n"
+# define __UNEXPECTED_EOF "%s: unexpected EOF while looking for matching `%c'\n"
 # define __UNCLOSED_ERROR "syntax error: unclosed"
 # define __SYNTAX_ERROR "syntax error near unexpected token"
 # define __UNSUPPORTED_ERROR "unsupported operator"
-# define __AST_ERROR "AST building failed"
 # define __CMD_NOT_FOUND "command not found"
 # define __IS_DIR "Is a directory"
 # define __NO_FILE "No such file or directory"
 # define __HEREDOC_EOF "%s: warning: here-document delimited by end-of-file \
 (wanted `%s')\n"
 # define __NOT_A_TTY "%s: %d: Not a tty\n"
-# define __INIT_ERROR "%s: Initialisation failed: %s\n"
+# define __INIT_ERROR "%s: Initialisation failure: %s\n"
+# define __PARSING_ERROR "%s: Parsing failure: %s\n"
+# define __HIGH_SHLVL "%s: warning: shell level (%d) too high, resetting to 1\n"
+# define __AMBIGUOUS "%s: %s: ambiguous redirect\n"
+
+//EXIT
+# define __MINISHELL_EXIT "exit\n"
+# define __EXIT_NUMERIC_ERR "%s: exit: too many arguments\n"
+# define __EXIT_ARGS_ERR "%s: exit: %s: numeric argument required\n"
+
+//EXPORT
+# define __INVALID_IDENTIFIER "%s: export: `%s': not a valid identifier\n"
+
+//CD
+# define __CD_NOT_SET "%s: cd: %s not set\n"
+# define __CD_ARGS "%s: cd: too many arguments\n"
+# define __CD_ERR "%s: cd: %s: %s\n"
+
+//HISTORY
+# define __HISTORY_USAGE "history: usage: history [-c]\n"
+# define __HISTORY_INVAL "%s: history: %s: invalid option\n"
+
+//PWD
+# define __PWD_ERR "%s: pwd: %s\n"
 
 #endif //MINISHELLDEF_H

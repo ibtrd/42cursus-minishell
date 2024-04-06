@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmp_pattern.c                                         :+:      :+:    :+:   */
+/*   is_match.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 00:31:46 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/18 00:48:18 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/04/06 11:41:42 by ibertran          #+#    #+#             */
+/*   Updated: 2024/04/06 11:42:05 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "libft.h"
-
-#include "minishelldef.h"
 #include "expander.h"
-#include "mask.h"
+#include "libft.h"
+#include "minishelldef.h"
 
 static int	cmp_pattern(char *str, t_mask *pat, size_t si, size_t pi);
 static int	is_wildcard(t_mask *mask, char wildcard);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:24:25 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 17:55:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	open_input(t_executor *exec)
 	fd = open(*(char **)ft_vector_get(exec->node->args, 0), O_RDONLY);
 	if (fd == -1)
 	{
-		ft_dprintf(2, "%s: %s: %s\n",
+		ft_dprintf(STDERR_FILENO, __ERR,
 			__MINISHELL,
 			*(char **)ft_vector_get(exec->node->args, 0),
 			strerror(errno));
