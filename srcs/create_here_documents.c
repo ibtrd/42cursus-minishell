@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 09:55:50 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 09:56:47 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 static int	build_heredoc(t_vector **args);
 static int	read_heredoc(t_vector *buffer, char *delimiter);
-static	int	set_config(t_vector *arg, char **delimiter, int *expand);
+static int	set_config(t_vector *arg, char **delimiter, int *expand);
 
 /*
 	DESCRIPTION
