@@ -10,14 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "executor.h"
 #include "minishelldef.h"
 #include "env.h"
-#include "minishell.h"
 #include "signals.h"
 
-#include <sys/wait.h>
 #include <errno.h>
 #include <unistd.h>
 #include <stdlib.h>
