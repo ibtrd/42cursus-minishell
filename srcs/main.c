@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/05 21:50:09 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 16:10:26 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static int	init_minishell(t_minishell *minishell,
 	return (0);
 }
 
-static int	minishell_routine(t_minishell *minishell)
+static int	minishell_routine(t_minishell *minishell, void *color_flag)
 {
 	char		*input;
 	t_astnode	*root;
 	int			error;
 
-	error = get_input(minishell, &input);
+	error = get_input(minishell, &input, color_flag);
 	if (error)
 		return (error == FAILURE);
 	root = commandline_parser(input);
@@ -90,7 +90,7 @@ int	main(int ac, char **av, char **env)
 		ft_dprintf(STDERR_FILENO, __INIT_ERROR, __MINISHELL, strerror(errno));
 		return (1);
 	}
-	while (!minishell_routine(&minishell))
+	while (!minishell_routine(&minishell, *env))
 		;
 	ft_vector_free(&minishell.env);
 	rl_clear_history();

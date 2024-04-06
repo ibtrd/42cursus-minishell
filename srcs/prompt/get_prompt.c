@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:14:29 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 14:58:59 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 16:08:20 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,28 @@ static int	resolve_cwd(t_vector *env, char **cwd)
 	return (!*cwd || user_dir(env, cwd));
 }
 
-int	get_prompt(t_minishell *minishell, char **prompt)
+static void	prompt_assemble(int exit_status, char **prompt, void *color_flag)
+{
+	char	*color;
+	char	*status;
+
+	if (exit_status)
+	{
+		color = P_RED;
+		status = "+";
+	}
+	else
+	{
+		color = P_GREEN;
+		status = "-";
+	}
+	if (color_flag)
+		*prompt = ft_sprintf(__PROMPT, color, *prompt);
+	else
+		*prompt = ft_sprintf("%s %s ", status, *prompt);
+}
+
+int	get_prompt(t_minishell *minishell, char **prompt, void *color_flag)
 {
 	char	*cwd;
 	char	*tmp;
@@ -66,13 +87,10 @@ int	get_prompt(t_minishell *minishell, char **prompt)
 		*prompt = ft_strrchr(tmp, '/') + 1;
 	else
 		*prompt = tmp;
-	if (minishell->sp_params.exit_status)
-		*prompt = ft_sprintf(__PROMPT, P_RED, *prompt);
-	else
-		*prompt = ft_sprintf(__PROMPT, P_GREEN, *prompt);
+	prompt_assemble(minishell->sp_params.exit_status, prompt, color_flag);
 	free(cwd);
 	if (!*prompt)
 		return (1);
-	add_git(&minishell->env, prompt);
+	add_git(&minishell->env, prompt, color_flag);
 	return (!*prompt);
 }
