@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rl_event.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:23:28 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 14:24:13 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 09:28:29 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <readline/readline.h>
 
-int ft_rl_event(void)
+int	ft_rl_event(void)
 {
 	return (0);
 }

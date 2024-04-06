@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_here_documents.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 17:09:34 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 09:39:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,23 @@ static int	build_heredoc(t_vector **args)
 	expand = 0;
 	if (ft_vector_alloc(&buffer, (t_vinfos){sizeof(char), 0, NULL}, 1))
 		return (FAILURE);
-	set_config(ft_vector_get(*args, 0), &delimiter, &expand);
+	if (set_config(ft_vector_get(*args, 0), &delimiter, &expand))
+	{
+		ft_vector_dealloc(&buffer, 1);
+		return (FAILURE);
+	}
 	signal_setup_input();
 	if (read_heredoc(buffer, delimiter))
 	{
+		signal_setup_main();
 		free(delimiter);
 		ft_vector_dealloc(&buffer, 1);
-		signal_setup_main();
 		return (FAILURE);
 	}
+	signal_setup_main();
 	free(delimiter);
 	ft_vector_dealloc(args, 1);
 	*args = buffer;
-	signal_setup_main();
 	return (SUCCESS);
 }
 
