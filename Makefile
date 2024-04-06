@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/05 21:48:34 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/06 21:02:39 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,19 @@ OBJS = $(patsubst %.c,$(BUILD_DIR)%.o,$(SRCS))
 DEPS = $(patsubst %.o,%.d,$(OBJS))
 
 SRC = \
-	get_input \
 	main \
-	search_path \
-	create_here_documents \
+	interpreter_routine \
+
+# ********** INIT ********** #
+
+SRC += $(addprefix $(INIT_DIR),$(INIT_SRC))
+
+INIT_DIR = init/
+INIT_SRC = \
+	get_input \
 	minishell_history \
-	$(addprefix $(DEBUG_DIR),$(DEBUG_SRC)) ##REMOVE DEBUG
+	check_ttys \
+	init_minishell \
 
 # ********** PARSING ********** #
 
@@ -41,6 +48,7 @@ PARSING_SRC = \
 	escape_utils \
 	check_unclosed_input \
 	commandline_parser \
+	create_here_documents \
 
 #		# ***** LEXER ***** #
 
@@ -116,6 +124,7 @@ EXECUTION_SRC = \
 	executor \
 	node_exec \
 	retrieve_status \
+	search_path \
 
 #		# ******* BRANCH ******* #
 
@@ -261,7 +270,7 @@ endif
 
 LOGFILE = $(MAKE_DIR).mklog
 
-LOADING_BAR_SIZE = 35
+LOADING_BAR_SIZE = 40
 
 # *** TARGETS **************************************************************** #
 

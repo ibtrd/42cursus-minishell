@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   check_ttys.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 16:58:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 21:05:28 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/04/06 20:41:24 by ibertran          #+#    #+#             */
+/*   Updated: 2024/04/06 20:45:05 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <unistd.h>
 
-# include "ft_vector.h"
-# include "ast.h"
+#include "minishelldef.h"
+#include "libft.h"
 
-extern int	g_signal;
-
-typedef struct s_minishell
+int	check_ttys(void)
 {
-	t_vector	env;
-	struct s_special_params
-	{
-		int		exit_status;
-		char	*sh_name;
-	} sp_params;
-}	t_minishell;
+	int	in;
+	int	out;
 
-int	get_input(t_minishell *minishell, char **input, void *color_flag);
-int	interpreter_routine(t_minishell *minishell, void *color_flag);
-
-#endif
+	in = !isatty(STDIN_FILENO);
+	if (in)
+		ft_dprintf(STDERR_FILENO, __NOT_A_TTY, __MINISHELL, STDIN_FILENO);
+	out = !isatty(STDOUT_FILENO);
+	if (out)
+		ft_dprintf(STDERR_FILENO, __NOT_A_TTY, __MINISHELL, STDOUT_FILENO);
+	return (in || out);
+}

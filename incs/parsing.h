@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/02 18:07:28 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 20:54:36 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include <stdbool.h>
 
-# include "ft_vector.h"
-
-# include "minishell.h"
 # include "ast.h"
 
 enum e_quote
@@ -35,13 +32,12 @@ typedef struct s_escape
 }	t_escape;
 
 //PARSER
-t_astnode	*commandline_parser(char *input);
-t_astnode	*ast_build(t_vector *lexer);
-
+char		*cmdline_tokenizer(char *cmdline);
 int			check_quotes(char *cmdline);
 int			check_unclosed_input(char *cmdline);
 int			cmdline_addspace(char *cmdline, char **dup);
-char		*cmdline_tokenizer(char *cmdline);
+t_astnode	*ast_build(t_vector *lexer);
+t_astnode	*commandline_parser(char *input);
 
 //LEXER
 int			lexer_build(char *cmdline, t_vector *vector);
@@ -52,6 +48,6 @@ void		lexer_set_args(t_vector *lexer);
 void		set_escape_mode(t_escape *escape, char c);
 void		init_escape(t_escape *escape);
 
-//EXPANDER
+int			create_here_documents(t_astnode *root);
 
 #endif //PARSING_H
