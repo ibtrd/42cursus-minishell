@@ -6,18 +6,18 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:33:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 18:25:31 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:39:46 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishelldef.h"
-#include "env.h"
 #include "builtins.h"
+#include "env.h"
+#include "minishelldef.h"
 
 #include <errno.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 static int	get_dir(char **dir, t_vector *env, char *name)
 {

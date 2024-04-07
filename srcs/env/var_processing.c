@@ -6,15 +6,15 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:16:35 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:51:38 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:43:59 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-#include "minishelldef.h"
 #include "env.h"
+#include "minishelldef.h"
 
 int	var_processing(t_env_var *var)
 {

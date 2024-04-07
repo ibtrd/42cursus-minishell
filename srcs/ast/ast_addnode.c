@@ -6,13 +6,11 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:40:02 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 03:07:33 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:38:47 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
-
-#include <stdio.h> //REMOVE
 
 static t_astnode	*addto_command(t_astnode *root, t_astnode *new);
 static t_astnode	*addto_redirection(t_astnode *root, t_astnode *new);
@@ -53,20 +51,14 @@ static t_astnode	*addto_redirection(t_astnode *root, t_astnode *new)
 {
 	if (new->type <= _PIPE)
 		return (ast_growleft(root, new));
-	if ((new->type >= _INPUT && new->type <= _APPEND) || new->type == _CMD)
-		return (ast_addright(root, new));
-	printf("ADD_ON_REDIR FAILED!\n");
-	return (NULL);
+	return (ast_addright(root, new));
 }
 
 static t_astnode	*addto_pipe(t_astnode *root, t_astnode *new)
 {
 	if (new->type <= _PIPE)
 		return (ast_growleft(root, new));
-	if (new->type <= _APPEND || new->type == _CMD)
-		return (ast_addright(root, new));
-	printf("ADD_ON_PIPE FAILED!\n");
-	return (NULL);
+	return (ast_addright(root, new));
 }
 
 static t_astnode	*addto_logicaloperator(t_astnode *root, t_astnode *new)

@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishelldef.h"
-#include "env.h"
 #include "libft.h"
 
 int	add_var(t_vector *envv, char *var)

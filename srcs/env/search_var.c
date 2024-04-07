@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   search_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 17:10:26 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/21 13:21:35 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:43:18 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishelldef.h"
-#include "env.h"
 #include "libft.h"
-
-#include <stdlib.h>
 
 char	**search_var(t_vector *envv, char *name, size_t *index)
 {

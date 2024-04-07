@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:58:16 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/21 13:35:52 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:41:28 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishelldef.h"
 #include "env.h"
-#include "libft.h"
 
 #include <stdlib.h>
 
