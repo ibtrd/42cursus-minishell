@@ -6,16 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 08:05:29 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 17:53:39 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 18:29:05 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-#include "minishelldef.h"
 #include "ast.h"
+#include "expander.h"
 #include "interpreter.h"
-#include "mask.h"
+#include "libft.h"
 
 static int	build_mask(t_vector *arg, char *str);
 

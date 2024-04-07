@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:34:06 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:53:19 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 18:26:39 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 #include "env.h"
 #include "minishelldef.h"
+#include "builtins.h"
 
 int	builtin_pwd(t_executor *exec, char **argv)
 {
