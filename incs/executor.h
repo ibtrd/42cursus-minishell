@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 21:05:58 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 15:24:55 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int		branch_pipe(t_executor *exec);
 int		branch_redirection(t_executor *exec);
 int		exec_builtins(t_executor *exec, int index);
 int		exec_cleanup(t_executor *exec, int ret);
-int		executor(t_astnode *root, t_minishell *minishell);
 int		expand_node(t_astnode *node, t_minishell *env);
 int		node_exec(t_executor *exec);
 int		open_append(t_executor *exec);

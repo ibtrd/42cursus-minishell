@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:42:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 14:42:10 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 15:26:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "executor.h"
 #include "history.h"
+#include "minishell.h"
 #include "minishelldef.h"
 #include "parsing.h"
 #include "prompt.h"
