@@ -6,18 +6,18 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:55:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:47:27 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
-#include "minishelldef.h"
 #include "libft.h"
+#include "minishelldef.h"
 
-#include <unistd.h>
-#include <fcntl.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <string.h>
+#include <unistd.h>
 
 int	open_output(t_executor *exec)
 {

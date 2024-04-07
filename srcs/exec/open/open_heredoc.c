@@ -6,19 +6,19 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:40:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:46:52 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
-#include "minishelldef.h"
 #include "libft.h"
+#include "minishelldef.h"
 
-#include <unistd.h>
-#include <fcntl.h>
 #include <errno.h>
-#include <string.h>
+#include <fcntl.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 static int	get_heredoc(t_executor *exec)
 {

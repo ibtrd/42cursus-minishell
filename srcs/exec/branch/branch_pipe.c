@@ -3,23 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   branch_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/05 20:01:47 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:46:06 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
-#include "minishelldef.h"
-#include "libft.h"
 #include "signals.h"
 
-#include <sys/wait.h>
-#include <errno.h>
-#include <unistd.h>
 #include <stdlib.h>
-#include <string.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 static int	piping(t_executor *exec, int wait, int pipe[2])
 {

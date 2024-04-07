@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:17:41 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:48:26 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 #include "signals.h"
 
-#include <unistd.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 int	exec_init(t_executor *exec, t_astnode *root, t_minishell *minishell)
 {
