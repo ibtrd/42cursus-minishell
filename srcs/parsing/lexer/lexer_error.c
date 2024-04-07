@@ -12,6 +12,7 @@
 
 #include <unistd.h>
 
+#include "lexer.h"
 #include "libft.h"
 #include "minishelldef.h"
 
@@ -26,18 +27,12 @@
 
 int	syntax_error(const char *token)
 {
-	ft_dprintf(STDERR_FILENO, "%s: %s: `%s'\n",
-		__MINISHELL,
-		__SYNTAX_ERROR,
-		token);
+	ft_dprintf(STDERR_FILENO, __SYNTAX_ERROR, __MINISHELL, token);
 	return (FAILURE);
 }
 
 int	unsupported_error(const char *token)
 {
-	ft_dprintf(STDERR_FILENO, "%s: %s: `%s'\n",
-		__MINISHELL,
-		__UNSUPPORTED_ERROR,
-		token);
+	ft_dprintf(STDERR_FILENO, __UNSUPPORTED_ERROR, __MINISHELL, token);
 	return (FAILURE);
 }

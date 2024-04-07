@@ -14,7 +14,6 @@
 
 #include "expander.h"
 #include "libft.h"
-#include "minishelldef.h"
 #include "parsing.h"
 
 static int	cmp_pattern(char *str, t_mask *pat, size_t si, size_t pi);

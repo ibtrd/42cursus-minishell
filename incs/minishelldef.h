@@ -6,55 +6,17 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 19:14:16 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 20:47:03 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELLDEF_H
 # define MINISHELLDEF_H
 
-# define __GLOBAL_HISTORY ".minishell_history"
-
-//STATUS
-# define SUCCESS 0
-# define FAILURE -1
-# define REMOVAL 1
-# define MATCH 1
-# define NO_MATCH 0
-
-//PROMPT
-# define __DEFAULT_PROMPT "\001\e[36;1m\002minishell\001\e[0m\002 "
-# define __PROMPT "\001\e[1m\002%s\001\xE2\x86\002\xAA \
-\001\e[33m\002%s\001\e[0m\002 "
-# define __GIT_PROMPT "%s\001\e[34m\002[%s%s\001\e[34m\002]\001\e[0m\002"
-# define __SECONDARY_PROMPT " \001\e[33;1m\002>\001\e[0m\002 "
-
-# define P_WHITE "\001\e[37m\002"
-# define P_CYAN "\001\e[36m\002"
-# define P_BLUE "\001\e[34m\002"
-# define P_YELLOW "\001\e[33m\002"
-# define P_GREEN "\001\e[32m\002"
-# define P_RED "\001\e[31m\002"	
-# define P_BOLD "\001\e[1m\002"
-# define P_RESET "\001\e[0m\002"
-
-//PRINT
 # define __MINISHELL "minishell"
 # define __MINISHELL_EXIT "exit\n"
+
 # define __ERR "%s: %s: %s\n"
-# define __UNEXPECTED_EOF "%s: unexpected EOF while looking for matching `%c'\n"
-# define __UNCLOSED_ERROR "syntax error: unclosed"
-# define __SYNTAX_ERROR "syntax error near unexpected token"
-# define __UNSUPPORTED_ERROR "unsupported operator"
-# define __CMD_NOT_FOUND "command not found"
-# define __IS_DIR "Is a directory"
-# define __NO_FILE "No such file or directory"
-# define __HEREDOC_EOF "%s: warning: here-document delimited by end-of-file \
-(wanted `%s')\n"
-# define __NOT_A_TTY "%s: %d: Not a tty\n"
-# define __INIT_ERROR "%s: Initialisation failure: %s\n"
-# define __PARSING_ERROR "%s: Parsing failure: %s\n"
-# define __HIGH_SHLVL "%s: warning: shell level (%d) too high, resetting to 1\n"
-# define __AMBIGUOUS "%s: %s: ambiguous redirect\n"
+# define __CMD_NOT_FOUND "%s: command not found\n"
 
 #endif //MINISHELLDEF_H

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:45:28 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 20:52:58 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 			*cmd_path = ft_strdup(cmd);
 			return (!*cmd_path);
 		}
-		ft_dprintf(STDERR_FILENO, __ERR, __MINISHELL, cmd, __NO_FILE);
+		ft_dprintf(STDERR_FILENO, __ERR, __MINISHELL, cmd, strerror(ENOENT));
 		return (127);
 	}
 	if (!search_path(cmd, cmd_path, path))
 		return (0);
 	if (path && *path && !*cmd_path)
-		ft_dprintf(STDERR_FILENO, "%s: %s\n", cmd, __CMD_NOT_FOUND);
+		ft_dprintf(STDERR_FILENO, __CMD_NOT_FOUND, cmd);
 	if (!path || !*path)
-		ft_dprintf(STDERR_FILENO, __ERR, __MINISHELL, cmd, __NO_FILE);
+		ft_dprintf(STDERR_FILENO, __ERR, __MINISHELL, cmd, strerror(ENOENT));
 	return (127);
 }
 
@@ -56,7 +56,7 @@ static int	is_dir(char *path)
 	}
 	if (S_ISDIR(buf.st_mode))
 	{
-		ft_dprintf(STDERR_FILENO, __ERR, __MINISHELL, path, __IS_DIR);
+		ft_dprintf(STDERR_FILENO, __ERR, __MINISHELL, path, strerror(EISDIR));
 		free(path);
 		return (1);
 	}
@@ -127,7 +127,7 @@ int	branch_command(t_executor *exec)
 	if (ret > 128)
 	{
 		if (ret == 131)
-			printf("Quit");
+			printf(__QUIT);
 		printf("\n");
 		return (ret);
 	}

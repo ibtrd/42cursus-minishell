@@ -13,7 +13,6 @@
 #include <dirent.h>
 #include <errno.h>
 
-#include "minishelldef.h"
 #include "expander.h"
 
 static int	scan_directory(DIR *dir, t_vector *pattern, t_vector *matches);

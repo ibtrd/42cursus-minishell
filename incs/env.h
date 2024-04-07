@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:34:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:14:21 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 20:46:52 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 # define __MAX_SHLVL 1000
 # define __DEFAULT_PATH "/usr/bin:/bin:/usr/sbin:/sbin"
+
+# define __HIGH_SHLVL "%s: warning: shell level (%d) too high, resetting to 1\n"
+
 
 typedef struct s_env_var
 {

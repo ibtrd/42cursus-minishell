@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 18:51:28 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 20:45:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@
 # define __QUOTES "\"\'"
 
 # define __SYNTAX_ERROR_STATUS 2
+
+# define __UNEXPECTED_EOF "%s: unexpected EOF while looking for matching `%c'\n"
+# define __PARSING_ERROR "%s: Parsing failure: %s\n"
 
 //PARSER
 char		*cmdline_tokenizer(char *cmdline);

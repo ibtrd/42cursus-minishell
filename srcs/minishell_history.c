@@ -17,7 +17,6 @@
 
 #include "history.h"
 #include "libft.h"
-#include "minishelldef.h"
 
 void	add_minishell_history(char *str)
 {

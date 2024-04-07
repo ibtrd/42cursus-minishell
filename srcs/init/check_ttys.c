@@ -6,14 +6,15 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:41:24 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 20:45:05 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 20:45:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-#include "minishelldef.h"
+#include "init.h"
 #include "libft.h"
+#include "minishelldef.h"
 
 int	check_ttys(void)
 {
