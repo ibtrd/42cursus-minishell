@@ -6,12 +6,12 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:15:50 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:27:15 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 20:13:57 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-#include "minishelldef.h"
+#include "prompt.h"
 
 #include <errno.h>
 #include <fcntl.h>

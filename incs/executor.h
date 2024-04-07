@@ -6,17 +6,18 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 15:24:55 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 20:47:21 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
 
-# include "ast.h"
 # include "minishell.h"
 
 # include <sys/types.h>
+
+# define __AMBIGUOUS "%s: %s: ambiguous redirect\n"
 
 typedef struct s_executor
 {

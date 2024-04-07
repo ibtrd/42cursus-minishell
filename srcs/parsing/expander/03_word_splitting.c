@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "expander.h"
-#include "minishelldef.h"
 
 static int	search_words(t_vector *args, t_vector *str, size_t *index);
 static int	split_word(t_vector *split, t_vector *str, size_t *start);
