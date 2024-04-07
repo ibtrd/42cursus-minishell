@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 21:05:28 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 14:41:23 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_minishell
 	} sp_params;
 }	t_minishell;
 
-int	get_input(t_minishell *minishell, char **input, void *color_flag);
 int	interpreter_routine(t_minishell *minishell, void *color_flag);
 
 #endif

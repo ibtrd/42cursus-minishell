@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 17:28:48 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/03 14:59:27 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 15:02:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 #include <readline/history.h>
 
 #include <libft.h>
-
 #include "minishelldef.h"
 #include "history.h"
 
-void	minishell_add_history(char *str)
+void	add_minishell_history(char *str)
 {
 	char	*history_file;
 	int		fd;

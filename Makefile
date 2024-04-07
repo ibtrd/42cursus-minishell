@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/06 21:02:39 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/04/07 15:10:50 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ DEPS = $(patsubst %.o,%.d,$(OBJS))
 SRC = \
 	main \
 	interpreter_routine \
+	minishell_history \
 
 # ********** INIT ********** #
 
@@ -34,8 +35,6 @@ SRC += $(addprefix $(INIT_DIR),$(INIT_SRC))
 
 INIT_DIR = init/
 INIT_SRC = \
-	get_input \
-	minishell_history \
 	check_ttys \
 	init_minishell \
 
@@ -270,7 +269,7 @@ endif
 
 LOGFILE = $(MAKE_DIR).mklog
 
-LOADING_BAR_SIZE = 40
+LOADING_BAR_SIZE = 48
 
 # *** TARGETS **************************************************************** #
 
@@ -282,12 +281,7 @@ $(NAME) : $(LIBS_PATH) $(OBJS) | PREMAKE
 	@echo "$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)" >> $(LOGFILE)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "$(MODE)" > $(MODE_TRACE)
-ifneq ($(MODE),)
-	@printf "\n$(BOLD)$(GREEN)$(NAME)($(MODE)) compiled!$(RESET)\n"
-else
-	@printf "\n$(BOLD)$(GREEN)$(NAME) compiled!$(RESET)\n"
-endif
-	@printf "$(BOLD)\
+	@printf "\n$(BOLD)\
      88     888b     d888 d8b          d8b          888               888 888\n\
  .d88888b.  8888b   d8888 Y8P          Y8P          888               888 888\n\
 d88P 88\"88b 88888b.d88888                           888               888 888\n\
