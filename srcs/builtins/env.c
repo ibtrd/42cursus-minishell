@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:30:06 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:37:50 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:17:56 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	builtin_env(t_executor *exec, char **argv)
 	var = (char **)ft_vector_get(exec->env, i);
 	while (var && *var)
 	{
-		printf("%s\n", *var);
+		if (printf("%s\n", *var) == -1)
+			return (1);
 		i++;
 		var = (char **)ft_vector_get(exec->env, i);
 	}

@@ -10,10 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
 #include "minishelldef.h"
 #include "env.h"
-#include "libft.h"
 #include "builtins.h"
 
 #include <errno.h>

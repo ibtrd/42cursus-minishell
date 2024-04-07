@@ -6,14 +6,12 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 20:24:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 19:33:48 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:25:20 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishelldef.h"
-#include "parsing.h"
-#include "lexer.h"
 #include "libft.h"
+#include "parsing.h"
 
 static int	compare_operators(char *tok);
 static int	is_invalid_operator(char *tok);

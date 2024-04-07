@@ -6,11 +6,9 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 14:23:28 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 09:28:29 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:28:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <readline/readline.h>
 
 int	ft_rl_event(void)
 {

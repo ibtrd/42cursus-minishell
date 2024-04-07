@@ -6,17 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 22:47:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/01 20:52:05 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:24:58 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
 #include "libft.h"
-
-#include "minishell.h"
-#include "minishelldef.h"
-#include "mask.h"
 #include "expander.h"
 
 static int	expand_special_param(t_vector *str, size_t index, char *param);

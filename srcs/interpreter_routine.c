@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:42:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 15:26:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 18:38:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <unistd.h>
 
 #include "history.h"
-#include "minishell.h"
 #include "minishelldef.h"
 #include "parsing.h"
 #include "prompt.h"
@@ -101,7 +100,7 @@ int	interpreter_routine(t_minishell *minishell, void *color_flag)
 	error = get_input(minishell, &input, color_flag);
 	if (error)
 		return (error == EOF);
-	root = commandline_parser(input);
+	root = commandline_parser(input, &minishell->sp_params.exit_status);
 	if (!root)
 		return (0);
 	if (create_here_documents(root))

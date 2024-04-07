@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 21:04:10 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:26:41 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "expander.h"
 #include "libft.h"
 #include "minishelldef.h"
+#include "parsing.h"
 #include "signals.h"
 
 static int	build_heredoc(t_vector **args);
