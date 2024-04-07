@@ -6,19 +6,17 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:16:43 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:40:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:47:52 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "executor.h"
-#include "minishelldef.h"
-#include "env.h"
 #include "builtins.h"
+#include "libft.h"
+#include "minishelldef.h"
 
-#include <unistd.h>
 #include <errno.h>
 #include <string.h>
+#include <unistd.h>
 
 static int	revert_redirections(t_executor *exec)
 {

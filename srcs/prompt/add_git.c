@@ -6,20 +6,18 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:15:50 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:47:14 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:27:15 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "minishelldef.h"
 #include "env.h"
-#include "minishell.h"
+#include "minishelldef.h"
 
-#include <sys/wait.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 static int	get_git_path(char *cmd, char **cmd_path, char *path)
 {

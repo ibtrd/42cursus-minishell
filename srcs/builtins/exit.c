@@ -6,14 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:34:10 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 18:26:01 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:40:26 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#include "builtins.h"
 #include "libft.h"
 #include "minishelldef.h"
-#include "builtins.h"
 
 #include <stdlib.h>
 #include <unistd.h>

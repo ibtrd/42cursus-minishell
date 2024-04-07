@@ -6,14 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 19:55:22 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/05 18:42:15 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:24:35 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
 #include "libft.h"
-
 #include "mask.h"
 
 t_mask	*str_to_mask(char *str, char mask_value)

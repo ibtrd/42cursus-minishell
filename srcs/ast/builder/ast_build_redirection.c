@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 #include "ast.h"
 
 int	build_redirection(t_vector **file_v, t_lexer_token *tok, t_astnode **root)

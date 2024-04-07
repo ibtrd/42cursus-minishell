@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   branch_logicaloperator.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 18:56:07 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:45:55 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
-#include "minishelldef.h"
-#include <sys/wait.h>
-#include <errno.h>
-#include <unistd.h>
-#include <stdlib.h>
 
 int	branch_logicaloperator(t_executor *exec)
 {

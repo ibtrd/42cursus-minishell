@@ -6,21 +6,21 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 18:24:54 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:45:28 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishelldef.h"
-#include "env.h"
-#include "signals.h"
 #include "builtins.h"
+#include "env.h"
+#include "minishelldef.h"
+#include "signals.h"
 
 #include <errno.h>
-#include <unistd.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include <stdio.h>
+#include <unistd.h>
 
 static int	get_cmd_path(char *cmd, char **cmd_path, char *path)
 {

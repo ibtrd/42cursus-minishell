@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "minishell.h"
 #include "minishelldef.h"
 #include "env.h"
 #include "signals.h"

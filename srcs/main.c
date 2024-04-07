@@ -6,13 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:31:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 14:33:43 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:31:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <readline/readline.h>
 #include <unistd.h>
-#include <errno.h>
 
 #include "env.h"
 #include "init.h"

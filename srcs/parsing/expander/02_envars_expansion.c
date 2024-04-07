@@ -6,18 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:46:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/19 23:01:39 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:23:31 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "libft.h"
-
-#include "minishelldef.h"
 #include "expander.h"
 #include "env.h"
-#include "mask.h"
 
 static int	search_envars(t_vector *str, size_t index, t_minishell *env);
 static char	*get_var_name(t_vector *arg, size_t index);

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   search_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 18:08:34 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 16:28:12 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:49:10 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 static int	search_here(const char *cmd, char **path)
 {

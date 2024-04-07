@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 18:27:23 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:14:16 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@
 # define REMOVAL 1
 # define MATCH 1
 # define NO_MATCH 0
-
-//ENV
-# define __MAX_SHLVL 1000
-# define __DEFAULT_PATH "/usr/bin:/bin:/usr/sbin:/sbin"
 
 //PROMPT
 # define __DEFAULT_PROMPT "\001\e[36;1m\002minishell\001\e[0m\002 "
@@ -41,30 +37,6 @@
 # define P_RED "\001\e[31m\002"	
 # define P_BOLD "\001\e[1m\002"
 # define P_RESET "\001\e[0m\002"
-
-
-//OPERATORS
-# define __AND "&&"
-# define __OR "||"
-# define __PIPE "|"
-# define __REDIR_INPUT "<"
-# define __REDIR_OUTPUT ">"
-# define __REDIR_HEREDOC "<<"
-# define __REDIR_APPEND ">>"
-# define __OPEN_RBRACKET "("
-# define __CLOSE_RBRACKET ")"
-# define __NEXT_CMD ";"
-
-# define __UNSUPPORTED_OPERATOR1 "<<<"
-# define __UNSUPPORTED_OPERATOR2 "<>"
-# define __UNSUPPORTED_OPERATOR3 "&"
-# define __UNSUPPORTED_OPERATOR4 ";"
-
-//PARSING CHARSETS
-# define __DEFAULT_IFS " \t\n"
-# define __METACHARACTER "&|<>();"
-# define __INTERPRETERS "\"\'$*?~"
-# define __QUOTES "\"\'"
 
 //PRINT
 # define __MINISHELL "minishell"

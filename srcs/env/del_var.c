@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "minishelldef.h"
 #include "env.h"
 
 int	del_var(t_vector *envv, char *name)

@@ -6,18 +6,18 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 17:28:48 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 15:02:44 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:32:09 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <fcntl.h>
-#include <stdlib.h>
 #include <readline/history.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-#include <libft.h>
-#include "minishelldef.h"
 #include "history.h"
+#include "libft.h"
+#include "minishelldef.h"
 
 void	add_minishell_history(char *str)
 {

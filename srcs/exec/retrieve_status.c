@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   retrieve_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 18:32:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/05 13:49:08 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:48:53 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/wait.h>
 #include <errno.h>
+#include <sys/wait.h>
 
 int	retrieve_status(pid_t pid)
 {

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:06:16 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 20:54:36 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 18:51:28 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,31 @@
 
 # include <stdbool.h>
 
+# include "interpreter.h"
 # include "ast.h"
 
-enum e_quote
-{
-	_NONE,
-	_SINGLE,
-	_DOUBLE
-};
+# define __AND "&&"
+# define __OR "||"
+# define __PIPE "|"
+# define __REDIR_INPUT "<"
+# define __REDIR_OUTPUT ">"
+# define __REDIR_HEREDOC "<<"
+# define __REDIR_APPEND ">>"
+# define __OPEN_RBRACKET "("
+# define __CLOSE_RBRACKET ")"
+# define __NEXT_CMD ";"
 
-typedef struct s_escape
-{
-	enum e_quote	mode;
-	bool			single_quote;
-	bool			double_quote;
-}	t_escape;
+# define __UNSUPPORTED_OPERATOR1 "<<<"
+# define __UNSUPPORTED_OPERATOR2 "<>"
+# define __UNSUPPORTED_OPERATOR3 "&"
+# define __UNSUPPORTED_OPERATOR4 ";"
+
+# define __DEFAULT_IFS " \t\n"
+# define __METACHARACTER "&|<>();"
+# define __INTERPRETERS "\"\'$*?~"
+# define __QUOTES "\"\'"
+
+# define __SYNTAX_ERROR_STATUS 2
 
 //PARSER
 char		*cmdline_tokenizer(char *cmdline);
@@ -37,7 +47,7 @@ int			check_quotes(char *cmdline);
 int			check_unclosed_input(char *cmdline);
 int			cmdline_addspace(char *cmdline, char **dup);
 t_astnode	*ast_build(t_vector *lexer);
-t_astnode	*commandline_parser(char *input);
+t_astnode	*commandline_parser(char *input, int *exit_status);
 
 //LEXER
 int			lexer_build(char *cmdline, t_vector *vector);

@@ -6,11 +6,9 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 05:10:14 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/05 18:34:50 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:24:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 #include "expander.h"
 #include "minishelldef.h"

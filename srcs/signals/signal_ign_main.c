@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   signal_ign_main.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:59:37 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 14:33:30 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:30:16 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "signals.h"
 
 #include <signal.h>
 #include <stddef.h>
