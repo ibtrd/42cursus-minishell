@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 17:56:32 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/06 20:32:00 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,6 @@
 # define __CD_NOT_SET "%s: cd: %s not set\n"
 # define __CD_ARGS "%s: cd: too many arguments\n"
 # define __CD_ERR "%s: cd: %s: %s\n"
-
-//HISTORY
-# define __HISTORY_USAGE "history: usage: history [-c]\n"
-# define __HISTORY_INVAL "%s: history: %s: invalid option\n"
 
 //PWD
 # define __PWD_ERR "%s: pwd: %s\n"

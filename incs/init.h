@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 16:58:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 15:25:10 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/04/06 20:44:16 by ibertran          #+#    #+#             */
+/*   Updated: 2024/04/07 14:38:53 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef INIT_H
+# define INIT_H
 
-# include "ft_vector.h"
-# include "ast.h"
+# include "minishell.h"
 
-extern int	g_signal;
-
-typedef struct s_minishell
-{
-	t_vector	env;
-	struct s_special_params
-	{
-		int		exit_status;
-		char	*sh_name;
-	} sp_params;
-}	t_minishell;
-
-int		interpreter_routine(t_minishell *minishell, void *color_flag);
-int		executor(t_astnode *root, t_minishell *minishell);
+int	check_ttys(void);
+int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name);
 
 #endif
