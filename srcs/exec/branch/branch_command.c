@@ -6,13 +6,14 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:55:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 18:24:54 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishelldef.h"
 #include "env.h"
 #include "signals.h"
+#include "builtins.h"
 
 #include <errno.h>
 #include <unistd.h>
@@ -111,8 +112,9 @@ static int	command_fork(t_executor *exec)
 int	branch_command(t_executor *exec)
 {
 	int			ret;
-	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env",
-		"exit", "history", NULL};
+	const char	*builtins[] = {
+		__ECHO, __CD, __PWD, __EXPORT, __UNSET, __ENV, __EXIT, __HISTORY, NULL
+	};
 
 	if (expand_node(exec->node, exec->minishell))
 		return (1);

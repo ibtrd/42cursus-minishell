@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:17:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:17:21 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 18:26:18 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "env.h"
 #include "minishelldef.h"
+#include "builtins.h"
 
 static int	check_var_name(char *var)
 {

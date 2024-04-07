@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:33:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:02:24 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 18:25:31 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "minishelldef.h"
 #include "env.h"
 #include "libft.h"
+#include "builtins.h"
 
 #include <errno.h>
 #include <string.h>

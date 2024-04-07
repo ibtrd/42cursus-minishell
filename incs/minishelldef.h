@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:01:05 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 20:32:00 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 18:27:23 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,6 @@
 # define P_BOLD "\001\e[1m\002"
 # define P_RESET "\001\e[0m\002"
 
-//BUILTIN
-# define __ECHO "echo"
-# define __CD "cd"
-# define __PWD "pwd"
-# define __EXPORT "export"
-# define __UNSET "unset"
-# define __ENV "env"
-# define __EXIT "exit"
 
 //OPERATORS
 # define __AND "&&"
@@ -74,21 +66,9 @@
 # define __INTERPRETERS "\"\'$*?~"
 # define __QUOTES "\"\'"
 
-//EXPANDER
-# define __HOME_ENVAR "$HOME"
-# define __PWD_ENVAR "$PWD"
-# define __OLDPWD_ENVAR "$OLDPWD"
-
-# define __NO_MASK 0x0
-# define __DQUOTE_MASK 0x1
-# define __SQUOTE_MASK 0x2
-# define __ENVAR_MASK 0x4
-# define __FILE_MASK 0x8
-
-# define __WORKING_DIRECTORY "."
-
 //PRINT
 # define __MINISHELL "minishell"
+# define __MINISHELL_EXIT "exit\n"
 # define __ERR "%s: %s: %s\n"
 # define __UNEXPECTED_EOF "%s: unexpected EOF while looking for matching `%c'\n"
 # define __UNCLOSED_ERROR "syntax error: unclosed"
@@ -104,21 +84,5 @@
 # define __PARSING_ERROR "%s: Parsing failure: %s\n"
 # define __HIGH_SHLVL "%s: warning: shell level (%d) too high, resetting to 1\n"
 # define __AMBIGUOUS "%s: %s: ambiguous redirect\n"
-
-//EXIT
-# define __MINISHELL_EXIT "exit\n"
-# define __EXIT_NUMERIC_ERR "%s: exit: too many arguments\n"
-# define __EXIT_ARGS_ERR "%s: exit: %s: numeric argument required\n"
-
-//EXPORT
-# define __INVALID_IDENTIFIER "%s: export: `%s': not a valid identifier\n"
-
-//CD
-# define __CD_NOT_SET "%s: cd: %s not set\n"
-# define __CD_ARGS "%s: cd: too many arguments\n"
-# define __CD_ERR "%s: cd: %s: %s\n"
-
-//PWD
-# define __PWD_ERR "%s: pwd: %s\n"
 
 #endif //MINISHELLDEF_H
