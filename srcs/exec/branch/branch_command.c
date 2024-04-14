@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   branch_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 20:52:58 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 13:59:17 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,12 @@ int	branch_command(t_executor *exec)
 	if (ret != -1)
 		return (exec_builtins(exec, ret));
 	ret = command_fork(exec);
-	if (ret > 128)
-	{
-		if (ret == 131)
-			printf(__QUIT);
-		printf("\n");
-		return (ret);
-	}
+	// if (ret > 128)
+	// {
+	// 	if (ret == 131)
+	// 		printf(__QUIT);
+	// 	printf("\n");
+	// 	return (ret);
+	// }
 	return (ret);
 }
