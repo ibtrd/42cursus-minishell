@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:34:10 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/14 14:43:10 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 19:34:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	builtin_exit(t_executor *exec, char **argv)
 {
 	int	status;
 
-	ft_dprintf(STDERR_FILENO, __MINISHELL_EXIT);
+	if (isatty(0))
+		ft_dprintf(STDERR_FILENO, __MINISHELL_EXIT);
 	if (!argv || !argv[0])
 		status = exec->minishell->sp_params.exit_status;
 	else if (!ft_isnumber(argv[0]))
