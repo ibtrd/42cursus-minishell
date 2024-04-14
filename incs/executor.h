@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 20:47:21 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 18:28:38 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/types.h>
 
 # define __AMBIGUOUS "%s: %s: ambiguous redirect\n"
+# define __ERRTERMIOS "%s: termios manipulation failed: %s\n"
 
 typedef struct s_executor
 {
@@ -42,6 +43,7 @@ int		branch_redirection(t_executor *exec);
 int		exec_builtins(t_executor *exec, int index);
 int		exec_cleanup(t_executor *exec, int ret);
 int		expand_node(t_astnode *node, t_minishell *env);
+int		get_col(void);
 int		node_exec(t_executor *exec);
 int		open_append(t_executor *exec);
 int		open_heredoc(t_executor *exec);
