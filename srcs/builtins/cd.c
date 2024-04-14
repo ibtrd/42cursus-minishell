@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:33:54 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:39:46 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 21:40:12 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	builtin_cd(t_executor *exec, char **argv)
 	dir = NULL;
 	if (resolve_dir(&dir, exec->env, argv))
 		return (1);
+	if (dir && !*dir)
+		return (0);
 	oldpwd = getcwd(NULL, 0);
 	if (chdir(dir) == -1)
 	{
