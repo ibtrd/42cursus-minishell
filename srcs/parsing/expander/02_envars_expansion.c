@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:46:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 19:23:31 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 20:45:21 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ int	envars_expansion(t_vector *str, t_minishell *env)
 	while (i < str->total)
 	{
 		mask = ft_vector_get(str, i);
-		if (mask->c == '$' && !(mask->m & (__SQUOTE_MASK | __ENVAR_MASK))
-			&& search_envars(str, i, env))
-			return (FAILURE);
-		i++;
+		ft_dprintf(2, "%c ", mask->c);
+		if (mask->c == '$' && !(mask->m & (__SQUOTE_MASK | __ENVAR_MASK)))
+		{
+			if (search_envars(str, i, env))
+				return (FAILURE);
+		}
+		else
+			i++;
 	}
 	return (SUCCESS);
 }
@@ -46,7 +50,7 @@ static int	search_envars(t_vector *str, size_t index, t_minishell *env)
 	mask = ft_vector_get(str, index + 1);
 	if (!mask)
 		return (SUCCESS);
-	if ((!ft_isalnum(mask->c) && mask->c != '_') || mask->c == '0')
+	if ((!ft_isalpha(mask->c) && mask->c != '_'))
 		return (is_special_param(str, index, mask->c, env));
 	name = get_var_name(str, index);
 	if (!name)
