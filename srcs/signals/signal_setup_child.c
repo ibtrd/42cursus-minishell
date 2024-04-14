@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_setup_child.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:54:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/14 14:23:38 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 19:30:12 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

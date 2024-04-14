@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/14 18:10:20 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/14 19:30:44 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -211,6 +211,7 @@ SIGNAL_SRC = \
 	signal_setup_child \
 	signal_setup_exec \
 	signal_setup_main \
+	signal_setup_pipe \
 
 # *** LIBRARIES && INCLUDES  ************************************************* #
 
