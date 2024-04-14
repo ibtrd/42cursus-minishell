@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/14 14:27:56 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/04/14 18:10:20 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,6 +121,7 @@ EXECUTION_SRC = \
 	exec_builtins \
 	exec_cleanup \
 	executor \
+	get_col \
 	node_exec \
 	retrieve_status \
 	search_path \

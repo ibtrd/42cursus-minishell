@@ -3,22 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/14 14:07:49 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 18:38:15 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 #include "signals.h"
+#include "minishelldef.h"
+#include "libft.h"
 
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <signal.h>
+#include <errno.h>
+#include <string.h>
 
-int	exec_init(t_executor *exec, t_astnode *root, t_minishell *minishell)
+static int	exec_init(t_executor *exec, t_astnode *root, t_minishell *minishell)
 {
 	int	fd;
 
@@ -75,6 +79,28 @@ static int	reopen_std(void)
 	return (-1);
 }
 
+static int	signal_ouput(void)
+{
+	int	ret;
+
+	if (!g_signal)
+		return (0);
+	ret = get_col();
+	if (ret == -1)
+	{
+		ft_dprintf(STDERR_FILENO, __ERRTERMIOS, __MINISHELL, strerror(errno));
+		return (SUCCESS);
+	}
+	if (ret < -1)
+		return (FAILURE);
+	if (ret == 1)
+		return (SUCCESS);
+	if (g_signal == SIGQUIT)
+		printf(__QUIT);
+	printf("\n");
+	return (SUCCESS);
+}
+
 int	executor(t_astnode *root, t_minishell *minishell)
 {
 	t_executor	exec;
@@ -90,12 +116,7 @@ int	executor(t_astnode *root, t_minishell *minishell)
 	minishell->sp_params.exit_status = ret;
 	if (ret == -1)
 		minishell->sp_params.exit_status = 1;
-	if (g_signal)
-	{
-		if (g_signal == SIGQUIT)
-			printf(__QUIT);
-		printf("\n");
-	}
+	ret = signal_ouput();
 	ft_vector_free(&exec.infd);
 	ft_vector_free(&exec.outfd);
 	free_ast(root);
