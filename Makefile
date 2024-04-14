@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/14 14:16:12 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/04/14 14:27:56 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -204,12 +204,11 @@ SRC += $(addprefix $(SIGNAL_DIR),$(SIGNAL_SRC))
 
 SIGNAL_DIR = signals/
 SIGNAL_SRC = \
-	child_int_handler \
-	child_quit_handler \
+	exec_handler \
 	ft_rl_event \
 	main_int_handler \
-	signal_ign_main \
 	signal_setup_child \
+	signal_setup_exec \
 	signal_setup_main \
 
 # *** LIBRARIES && INCLUDES  ************************************************* #
