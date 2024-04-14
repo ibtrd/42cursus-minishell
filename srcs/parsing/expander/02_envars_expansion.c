@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:46:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/14 20:45:21 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 21:00:02 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	envars_expansion(t_vector *str, t_minishell *env)
 	while (i < str->total)
 	{
 		mask = ft_vector_get(str, i);
-		ft_dprintf(2, "%c ", mask->c);
 		if (mask->c == '$' && !(mask->m & (__SQUOTE_MASK | __ENVAR_MASK)))
 		{
 			if (search_envars(str, i, env))
