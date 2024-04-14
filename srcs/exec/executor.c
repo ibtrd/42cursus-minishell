@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/14 18:23:11 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 18:38:15 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static int	signal_ouput(void)
 		ft_dprintf(STDERR_FILENO, __ERRTERMIOS, __MINISHELL, strerror(errno));
 		return (SUCCESS);
 	}
-	if (ret == -2)
+	if (ret < -1)
 		return (FAILURE);
 	if (ret == 1)
 		return (SUCCESS);
