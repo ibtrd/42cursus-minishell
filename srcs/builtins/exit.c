@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:34:10 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/14 19:34:44 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 22:00:44 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>
 
 int	builtin_exit(t_executor *exec, char **argv)
 {
@@ -23,9 +24,11 @@ int	builtin_exit(t_executor *exec, char **argv)
 
 	if (isatty(0))
 		ft_dprintf(STDERR_FILENO, __MINISHELL_EXIT);
+	if (argv && argv[0])
+		status = (unsigned char)ft_strtol(argv[0], NULL);
 	if (!argv || !argv[0])
 		status = exec->minishell->sp_params.exit_status;
-	else if (!ft_isnumber(argv[0]))
+	else if (!ft_isnumber(argv[0]) || errno == ERANGE)
 	{
 		ft_dprintf(STDERR_FILENO, __EXIT_ARGS_ERR, __MINISHELL, argv[0]);
 		status = 2;
@@ -35,8 +38,6 @@ int	builtin_exit(t_executor *exec, char **argv)
 		ft_dprintf(STDERR_FILENO, __EXIT_NUMERIC_ERR, __MINISHELL);
 		return (1);
 	}
-	else
-		status = (unsigned char)ft_strtol(argv[0], NULL);
 	exec_cleanup(exec, 0);
 	exit(status);
 	return (0);
