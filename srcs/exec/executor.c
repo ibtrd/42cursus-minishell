@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:48:26 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 14:07:49 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <signal.h>
 
 int	exec_init(t_executor *exec, t_astnode *root, t_minishell *minishell)
 {
@@ -78,8 +80,9 @@ int	executor(t_astnode *root, t_minishell *minishell)
 	t_executor	exec;
 	int			ret;
 
+	g_signal = 0;
 	ret = 1;
-	signal_ign_main();
+	signal_setup_exec();
 	if (!exec_init(&exec, root, minishell))
 		ret = node_exec(&exec);
 	if (ret == 257)
@@ -87,6 +90,12 @@ int	executor(t_astnode *root, t_minishell *minishell)
 	minishell->sp_params.exit_status = ret;
 	if (ret == -1)
 		minishell->sp_params.exit_status = 1;
+	if (g_signal)
+	{
+		if (g_signal == SIGQUIT)
+			printf(__QUIT);
+		printf("\n");
+	}
 	ft_vector_free(&exec.infd);
 	ft_vector_free(&exec.outfd);
 	free_ast(root);

@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child_quit_handler.c                               :+:      :+:    :+:   */
+/*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 16:01:24 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:28:07 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/04/14 13:53:11 by kchillon          #+#    #+#             */
+/*   Updated: 2024/04/14 13:54:43 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
+#include <readline/readline.h>
 #include <signal.h>
-#include <stdio.h>
 
-void	child_quit_handler(int sig)
+void	exec_handler(int sig)
 {
-	struct sigaction	act;
-
-	(void)sig;
-	act.sa_handler = SIG_DFL;
-	act.sa_flags = SA_RESTART;
-	printf("Quit\n");
-	sigaction(SIGQUIT, &act, NULL);
-	kill(0, SIGQUIT);
+	g_signal = sig;
 }
