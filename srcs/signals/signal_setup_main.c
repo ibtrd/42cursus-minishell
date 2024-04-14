@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_setup_main.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:54:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 14:33:51 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 13:32:54 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	signal_setup_main(void)
 	act.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &act, NULL);
 	sigaction(SIGTERM, &act, NULL);
-	rl_event_hook = NULL;
+	rl_event_hook = &ft_rl_event;
 }

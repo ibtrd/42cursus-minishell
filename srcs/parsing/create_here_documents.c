@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 20:13:38 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 14:17:15 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ static int	build_heredoc(t_vector **args)
 		ft_vector_dealloc(&buffer, 1);
 		return (FAILURE);
 	}
-	signal_setup_input();
 	status = read_heredoc(buffer, delimiter);
-	signal_setup_main();
 	free(delimiter);
 	if (status)
 		ft_vector_dealloc(&buffer, 1);

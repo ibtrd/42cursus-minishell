@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:42:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 18:38:34 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 14:16:55 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static int	get_input(t_minishell *minishell, char **input, void *color_flag)
 	char	*prompt;
 	int		error;
 
+	g_signal = 0;
 	if (get_prompt(minishell, &prompt, color_flag))
 		*input = readline(__DEFAULT_PROMPT);
 	else
@@ -79,14 +80,17 @@ static int	get_input(t_minishell *minishell, char **input, void *color_flag)
 	if (!*input)
 		return (EOF);
 	error = SUCCESS;
-	signal_setup_input();
+	if (g_signal)
+	{
+		free(*input);
+		return (error);
+	}
 	while (check_unclosed_input(*input))
 	{
 		error = complete_input(input);
 		if (error)
 			break ;
 	}
-	signal_setup_main();
 	input_error_handler(input, error, &minishell->sp_params.exit_status);
 	return (error);
 }
@@ -100,6 +104,11 @@ int	interpreter_routine(t_minishell *minishell, void *color_flag)
 	error = get_input(minishell, &input, color_flag);
 	if (error)
 		return (error == EOF);
+	if (g_signal)
+	{
+		minishell->sp_params.exit_status = g_signal + 128;
+		return (0);
+	}
 	root = commandline_parser(input, &minishell->sp_params.exit_status);
 	if (!root)
 		return (0);
