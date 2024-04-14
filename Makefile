@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/14 14:08:40 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/14 14:27:56 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -206,11 +206,9 @@ SIGNAL_DIR = signals/
 SIGNAL_SRC = \
 	exec_handler \
 	ft_rl_event \
-	input_int_handler \
 	main_int_handler \
 	signal_setup_child \
 	signal_setup_exec \
-	signal_setup_input \
 	signal_setup_main \
 
 # *** LIBRARIES && INCLUDES  ************************************************* #

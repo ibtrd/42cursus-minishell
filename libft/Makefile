@@ -6,7 +6,7 @@
 #    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/07 15:13:37 by ibertran         ###   ########lyon.fr    #
+#    Updated: 2024/04/14 14:15:48 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,17 +87,7 @@ $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count PREMAKE
 	$(eval LOADING_COMPLETED := $(shell echo "$(COUNT_DONE) * $(LOADING_BAR_SIZE) / $(COUNT_TOTAL)" | bc 2> /dev/null))
 	@mkdir -p $(@D)
 	@echo "$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@" >> $(LOGFILE)
-	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-	@printf "$(ERASE)$(BOLD)$(CC) $(BLUE)$(CFLAGS) $(YELLOW)$(patsubst $(MAKE_DIR)%, %, $(basename $@))$(RESET)\n"
-	@printf "🔧 $(BOLD)$(CYAN)Compiling sources: $(WHITE)["
-	@for i in $(shell seq 1 $(LOADING_COMPLETED)); do printf "="; done 
-	@for i in $(shell seq 1 $(shell echo "$(LOADING_BAR_SIZE) - $(LOADING_COMPLETED)" | bc 2> /dev/null)); do printf " "; done
-	@printf "] $(shell echo "$(COUNT_DONE) * 100 / $(COUNT_TOTAL)" | bc 2> /dev/null)%%$(RESET)"
-
-.PHONY : clean
-clean :
-	rm -rf $(BUILD_DIR)
-	@printf "$(BOLD)(╯°□°)╯︵ ┻━┻ $(NAME) building files removed!$(RESET)\n"
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@in files removed!$(RESET)\n"
 
 .PHONY : fclean
 fclean :
