@@ -6,16 +6,16 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:34:10 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:03:51 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 20:57:37 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#include "builtins.h"
 #include "libft.h"
 #include "minishelldef.h"
 
-#include <stdlib.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 int	builtin_exit(t_executor *exec, char **argv)
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_input.c                                        :+:      :+:    :+:   */
+/*   interpreter_routine.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 17:22:11 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:32:29 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/04/06 20:42:59 by ibertran          #+#    #+#             */
+/*   Updated: 2024/04/07 18:38:34 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	input_error_handler(char **input, int error, int *exit_status)
 	int	quote;
 
 	if (error != FAILURE && *input && **input)
-		minishell_add_history(*input);
+		add_minishell_history(*input);
 	if (error == 2)
 	{
 		quote = check_quotes(*input);
@@ -66,7 +66,7 @@ static void	input_error_handler(char **input, int error, int *exit_status)
 	}
 }
 
-int	get_input(t_minishell *minishell, char **input, void *color_flag)
+static int	get_input(t_minishell *minishell, char **input, void *color_flag)
 {
 	char	*prompt;
 	int		error;
@@ -89,4 +89,28 @@ int	get_input(t_minishell *minishell, char **input, void *color_flag)
 	signal_setup_main();
 	input_error_handler(input, error, &minishell->sp_params.exit_status);
 	return (error);
+}
+
+int	interpreter_routine(t_minishell *minishell, void *color_flag)
+{
+	char		*input;
+	t_astnode	*root;
+	int			error;
+
+	error = get_input(minishell, &input, color_flag);
+	if (error)
+		return (error == EOF);
+	root = commandline_parser(input, &minishell->sp_params.exit_status);
+	if (!root)
+		return (0);
+	if (create_here_documents(root))
+	{
+		free_ast(root);
+		if (g_signal)
+			minishell->sp_params.exit_status = g_signal + 128;
+		else
+			minishell->sp_params.exit_status = 1;
+		return (0);
+	}
+	return (executor(root, minishell));
 }

@@ -6,16 +6,11 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/14 13:14:58 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 13:18:22 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
-#include "minishelldef.h"
-#include <sys/wait.h>
-#include <errno.h>
-#include <unistd.h>
-#include <stdlib.h>
 
 int	branch_logicaloperator(t_executor *exec)
 {

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:34:06 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:53:19 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:41:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "builtins.h"
 #include "env.h"
 #include "minishelldef.h"
 

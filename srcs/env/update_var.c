@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   update_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:34:43 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/22 15:44:08 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:43:49 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishelldef.h"
 #include "env.h"
-#include "libft.h"
-#include "executor.h"
-
-#include <unistd.h>
 
 int	update_var(t_vector *env, char *arg)
 {

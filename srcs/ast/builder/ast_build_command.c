@@ -10,11 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-#include "libft.h"
-
-#include "minishelldef.h"
 #include "ast.h"
 
 int	build_command(t_vector **arg_v, t_lexer_token *tok, t_astnode **root)

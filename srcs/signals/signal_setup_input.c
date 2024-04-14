@@ -6,13 +6,12 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:52:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 09:36:48 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:31:03 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <stddef.h>
 #include <readline/readline.h>
+#include <signal.h>
 
 #include "signals.h"
 

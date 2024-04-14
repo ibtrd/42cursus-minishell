@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_build_brackets.c                                      :+:      :+:    :+:   */
+/*   ast_build_brackets.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 00:13:10 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/08 00:38:00 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/04/07 15:52:09 by ibertran          #+#    #+#             */
+/*   Updated: 2024/04/07 17:53:22 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 
-static t_astnode	*close_bracket(t_vector *lexer, int *index, \
-															t_astnode *subroot);
+static t_astnode	*close_bracket(t_vector *lexer, int *index,
+						t_astnode *subroot);
 static t_astnode	*link_roots(t_astnode *root, t_astnode *subroot);
 static t_astnode	*link_branch(t_astnode *link, t_astnode *subroot);
 
@@ -44,35 +44,37 @@ t_astnode	*ast_build_brackets(t_astnode *root, t_vector *lexer, int *index)
 		{
 			subroot = ast_build_brackets(subroot, lexer, index);
 			if (!subroot)
-				return (NULL); //CHECK PROTECTION
+				return (ast_builderror(root));
 		}
 		else if (build_from_token(tok, &subroot))
 		{
-			free_ast(root);
-			return (ast_builderror(subroot));
+			free_ast(subroot);
+			return (ast_builderror(root));
 		}
 		tok = ft_vector_get(lexer, ++(*index));
 	}
-	subroot = close_bracket(lexer, index, subroot); //PROTECTION
+	subroot = close_bracket(lexer, index, subroot);
 	if (!subroot)
 		return (ast_builderror(root));
-	return(link_roots(root, subroot));
+	return (link_roots(root, subroot));
 }
 
-static t_astnode	*close_bracket(t_vector *lexer, int *index, t_astnode *subroot)
+static t_astnode	*close_bracket(t_vector *lexer, int *index,
+						t_astnode *subroot)
 {
 	t_astnode		*branch;
 	t_lexer_token	*tok;
 
 	branch = NULL;
 	tok = ft_vector_get(lexer, ++(*index));
-	while (tok->type != _END_TOK && tok->type != _CLOSE_BRACKETS_TOK
+	while (tok->type != _END_TOK
+		&& tok->type != _CLOSE_BRACKETS_TOK
 		&& tok->type > _OR_TOK)
 	{
 		if (build_from_token(tok, &branch))
 		{
-			free_ast(subroot);
-			return (ast_builderror(branch));
+			free_ast(branch);
+			return (ast_builderror(subroot));
 		}
 		if (tok->type == _PIPE_TOK)
 			return (link_branch(branch, subroot));

@@ -6,15 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 23:12:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/20 18:31:40 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:22:36 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
 #include "libft.h"
-
-#include "minishelldef.h"
 #include "expander.h"
 
 static int	lone_tilde(t_vector *str);

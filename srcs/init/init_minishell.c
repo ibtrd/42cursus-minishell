@@ -1,41 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_input.c                                       :+:      :+:    :+:   */
+/*   init_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 14:27:36 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:47:10 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/04/06 20:39:49 by ibertran          #+#    #+#             */
+/*   Updated: 2024/04/06 20:47:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
-#include "libft.h"
 #include "minishelldef.h"
+#include "env.h"
+#include "signals.h"
+#include "history.h"
 
-#include <errno.h>
-#include <fcntl.h>
-#include <string.h>
-#include <unistd.h>
-
-int	open_input(t_executor *exec)
+int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name)
 {
-	int	fd;
+	t_vector	env;
 
-	fd = open(*(char **)ft_vector_get(exec->node->args, 0), O_RDONLY);
-	if (fd == -1)
-	{
-		ft_dprintf(STDERR_FILENO, __ERR,
-			__MINISHELL,
-			*(char **)ft_vector_get(exec->node->args, 0),
-			strerror(errno));
+	signal_setup_main();
+	load_global_history();
+	if (init_env(&env, old_env))
 		return (1);
-	}
-	if (ft_vector_add(&exec->infd, &fd))
-	{
-		close(fd);
-		return (1);
-	}
+	minishell->env = env;
+	minishell->sp_params.exit_status = 0;
+	if (sh_name)
+		minishell->sp_params.sh_name = sh_name;
+	else
+		minishell->sp_params.sh_name = __MINISHELL;
 	return (0);
 }

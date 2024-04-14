@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_var.c                                         :+:      :+:    :+:   */
+/*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 19:27:27 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:42:20 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/04/06 20:44:16 by ibertran          #+#    #+#             */
+/*   Updated: 2024/04/07 20:45:24 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#ifndef INIT_H
+# define INIT_H
 
-#include <stdlib.h>
+# include "minishell.h"
 
-void	free_var(void **var)
-{
-	t_env_var	*env_var;
+# define __NOT_A_TTY "%s: %d: Not a tty\n"
+# define __INIT_ERROR "%s: Initialisation failure: %s\n"
 
-	env_var = (t_env_var *)var;
-	free(env_var->name);
-	env_var->name = NULL;
-	free(env_var->value);
-	env_var->value = NULL;
-}
+int	check_ttys(void);
+int	init_minishell(t_minishell *minishell, char **old_env, char *sh_name);
+
+#endif

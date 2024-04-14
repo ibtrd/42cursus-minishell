@@ -6,14 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 21:24:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/10 19:32:04 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 18:41:33 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
 #include "parsing.h"
-#include "minishelldef.h"
 #include "libft.h"
 
 static int	add_metacharacters(char *cmdline, t_vector *vector, int *index);

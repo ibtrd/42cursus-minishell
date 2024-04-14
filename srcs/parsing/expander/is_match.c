@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 11:41:42 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 11:42:05 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:11:29 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "expander.h"
 #include "libft.h"
-#include "minishelldef.h"
+#include "parsing.h"
 
 static int	cmp_pattern(char *str, t_mask *pat, size_t si, size_t pi);
 static int	is_wildcard(t_mask *mask, char wildcard);

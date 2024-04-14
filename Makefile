@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/05 21:48:34 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/07 15:10:50 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,18 @@ OBJS = $(patsubst %.c,$(BUILD_DIR)%.o,$(SRCS))
 DEPS = $(patsubst %.o,%.d,$(OBJS))
 
 SRC = \
-	get_input \
 	main \
-	search_path \
-	create_here_documents \
+	interpreter_routine \
 	minishell_history \
-	$(addprefix $(DEBUG_DIR),$(DEBUG_SRC)) ##REMOVE DEBUG
+
+# ********** INIT ********** #
+
+SRC += $(addprefix $(INIT_DIR),$(INIT_SRC))
+
+INIT_DIR = init/
+INIT_SRC = \
+	check_ttys \
+	init_minishell \
 
 # ********** PARSING ********** #
 
@@ -41,6 +47,7 @@ PARSING_SRC = \
 	escape_utils \
 	check_unclosed_input \
 	commandline_parser \
+	create_here_documents \
 
 #		# ***** LEXER ***** #
 
@@ -116,6 +123,7 @@ EXECUTION_SRC = \
 	executor \
 	node_exec \
 	retrieve_status \
+	search_path \
 
 #		# ******* BRANCH ******* #
 
@@ -261,7 +269,7 @@ endif
 
 LOGFILE = $(MAKE_DIR).mklog
 
-LOADING_BAR_SIZE = 35
+LOADING_BAR_SIZE = 48
 
 # *** TARGETS **************************************************************** #
 
@@ -273,12 +281,7 @@ $(NAME) : $(LIBS_PATH) $(OBJS) | PREMAKE
 	@echo "$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)" >> $(LOGFILE)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	@echo "$(MODE)" > $(MODE_TRACE)
-ifneq ($(MODE),)
-	@printf "\n$(BOLD)$(GREEN)$(NAME)($(MODE)) compiled!$(RESET)\n"
-else
-	@printf "\n$(BOLD)$(GREEN)$(NAME) compiled!$(RESET)\n"
-endif
-	@printf "$(BOLD)\
+	@printf "\n$(BOLD)\
      88     888b     d888 d8b          d8b          888               888 888\n\
  .d88888b.  8888b   d8888 Y8P          Y8P          888               888 888\n\
 d88P 88\"88b 88888b.d88888                           888               888 888\n\

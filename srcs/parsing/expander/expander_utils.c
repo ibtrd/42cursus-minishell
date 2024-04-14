@@ -6,14 +6,13 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 06:16:41 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/23 16:10:43 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:15:48 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "expander.h"
 #include "libft.h"
-
-#include "minishelldef.h"
-#include "mask.h"
+#include "parsing.h"
 
 int	is_expandable(t_vector *arg, char *interpreters)
 {

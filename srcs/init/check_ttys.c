@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_var.c                                         :+:      :+:    :+:   */
+/*   check_ttys.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 19:27:27 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:42:20 by ibertran         ###   ########lyon.fr   */
+/*   Created: 2024/04/06 20:41:24 by ibertran          #+#    #+#             */
+/*   Updated: 2024/04/07 20:45:08 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include <unistd.h>
 
-#include <stdlib.h>
+#include "init.h"
+#include "libft.h"
+#include "minishelldef.h"
 
-void	free_var(void **var)
+int	check_ttys(void)
 {
-	t_env_var	*env_var;
+	int	in;
+	int	out;
 
-	env_var = (t_env_var *)var;
-	free(env_var->name);
-	env_var->name = NULL;
-	free(env_var->value);
-	env_var->value = NULL;
+	in = !isatty(STDIN_FILENO);
+	if (in)
+		ft_dprintf(STDERR_FILENO, __NOT_A_TTY, __MINISHELL, STDIN_FILENO);
+	out = !isatty(STDOUT_FILENO);
+	if (out)
+		ft_dprintf(STDERR_FILENO, __NOT_A_TTY, __MINISHELL, STDOUT_FILENO);
+	return (in || out);
 }

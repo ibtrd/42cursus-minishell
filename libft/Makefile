@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 11:21:32 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/05 15:15:53 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/07 15:13:37 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ endif
 
 LOGFILE = $(MAKE_DIR).mklog
 
-LOADING_BAR_SIZE = 35
+LOADING_BAR_SIZE = 48
 
 # *** TARGETS **************************************************************** #
 
@@ -72,14 +72,13 @@ LOADING_BAR_SIZE = 35
 all : $(NAME)
 
 $(NAME) : $(OBJS) | PREMAKE
-	@printf "\n📚$(BOLD)$(PURPLE) Creating $(NAME) archive...\n$(RESET)"
 	@echo "$(AR) $(ARFLAGS) $(NAME) $(OBJS)" >> $(LOGFILE)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 	@echo "$(MODE)" > $(MODE_TRACE)
 ifneq ($(MODE),)
-	@printf "$(BOLD)$(GREEN)$(NAME)($(MODE)) has been created!$(RESET)\n"
+	@printf "\n📚 $(BOLD)$(GREEN)$(NAME)($(MODE)) has been created!$(RESET)\n"
 else
-	@printf "$(BOLD)$(GREEN)$(NAME) has been created!$(RESET)\n"
+	@printf "\n📚 $(BOLD)$(GREEN)$(NAME) has been created!$(RESET)\n"
 endif
 
 $(BUILD_DIR)%.o : $(SRCS_DIR)%.c | count PREMAKE

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 19:37:35 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 17:40:37 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:37:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	dprint_ast(int fd, t_astnode *root, char *color)
 	else
 		dprintf(STDERR_FILENO, "\n");
 	print_next_node(fd, root, 0);
-	dprintf(STDERR_FILENO, "\e[0m\n---------------------------------------------\n");
+	dprintf(STDERR_FILENO,
+		"\e[0m\n---------------------------------------------\n");
 }
 
 static void	print_next_node(int fd, t_astnode *root, int space)
@@ -42,7 +43,6 @@ static void	print_next_node(int fd, t_astnode *root, int space)
 	printnode(fd, root);
 	print_next_node(fd, root->left, space);
 }
-
 
 static void	printnode(int fd, t_astnode *node)
 {

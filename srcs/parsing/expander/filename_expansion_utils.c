@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 23:08:15 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 17:55:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:24:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <unistd.h>
 
 #include "libft.h"
-
 #include "minishelldef.h"
 #include "mask.h"
 

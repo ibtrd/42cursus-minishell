@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   node_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 17:45:30 by kchillon          #+#    #+#             */
-/*   Updated: 2024/03/20 18:07:16 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:48:40 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
-#include "ast.h"
-#include "minishell.h"
 
 int	node_exec(t_executor *exec)
 {

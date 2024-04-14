@@ -6,13 +6,11 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 00:16:34 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 11:40:43 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:26:10 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
-#include <stdio.h> //REMOVE
 
 int	lexer_redirection_tok(t_vector *vector, size_t index, t_brackets mode)
 {

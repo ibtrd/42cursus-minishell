@@ -6,12 +6,12 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 11:46:01 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 18:51:39 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
-#include "minishelldef.h"
+#include "parsing.h"
 
 static int	expand_string(t_vector *args, size_t *index, t_minishell *env);
 

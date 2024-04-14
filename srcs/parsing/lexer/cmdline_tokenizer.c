@@ -6,16 +6,12 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 15:26:33 by ibertran          #+#    #+#             */
-/*   Updated: 2024/03/09 22:20:43 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:25:16 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-
 #include "libft.h"
-
-#include "minishelldef.h"
-#include "interpreter.h"
+#include "parsing.h"
 
 static int		tokenizer_init(char **str, char **last);
 static size_t	get_word_end(char *cmdline);

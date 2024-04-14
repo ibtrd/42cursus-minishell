@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   child_quit_handler.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:01:24 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/03 14:31:38 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 19:28:07 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <readline/readline.h>
 #include <signal.h>
+#include <stdio.h>
 
 void	child_quit_handler(int sig)
 {

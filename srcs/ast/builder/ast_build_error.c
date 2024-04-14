@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 02:20:06 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/06 10:25:34 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/07 20:46:00 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "ast.h"
 #include "libft.h"
 #include "minishelldef.h"
+#include "parsing.h"
 
 /*
 	DESCRIPTION
