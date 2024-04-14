@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:16:43 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:47:52 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 19:57:08 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,23 @@
 static int	revert_redirections(t_executor *exec)
 {
 	int	ret;
+	int	fd;
 
 	ret = 0;
 	if (exec->infd.total > 1)
 	{
 		ret = ft_vector_delete(&exec->infd, exec->infd.total - 1) == FAILURE;
+		fd = *(int *)ft_vector_get(&exec->infd, exec->infd.total - 1);
 		if (!ret)
-			ret = dup2(*(int *)(exec->infd.ptr + (exec->infd.total - 1)),
-					STDIN_FILENO) == FAILURE;
+			ret = dup2(fd, STDIN_FILENO) == FAILURE;
 	}
 	ret <<= 1;
 	if (exec->outfd.total > 1)
 	{
 		ret += ft_vector_delete(&exec->outfd, exec->outfd.total - 1) == FAILURE;
+		fd = *(int *)ft_vector_get(&exec->outfd, exec->outfd.total - 1);
 		if (!(ret & 1))
-			ret += dup2(*(int *)(exec->outfd.ptr + (exec->outfd.total - 1)),
-					STDOUT_FILENO) == FAILURE;
+			ret += dup2(fd, STDOUT_FILENO) == FAILURE;
 	}
 	if (ret)
 		ft_dprintf(STDERR_FILENO, "%s: %s\n", __MINISHELL, strerror(errno));
