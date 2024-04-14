@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   branch_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:46:06 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 19:30:25 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 	{
 		if (piping(exec, wait, pipe) == -1)
 			exit(exec_cleanup(exec, 1));
-		signal_setup_child();
+		signal_setup_pipe();
 		exec->node = node;
 		ret = node_exec(exec);
 		exit(exec_cleanup(exec, ret));
