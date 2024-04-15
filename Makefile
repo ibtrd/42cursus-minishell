@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/14 19:30:44 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/15 16:49:11 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,7 +121,6 @@ EXECUTION_SRC = \
 	exec_builtins \
 	exec_cleanup \
 	executor \
-	get_col \
 	node_exec \
 	retrieve_status \
 	search_path \
@@ -147,6 +146,16 @@ OPEN_SRC = \
 		open_heredoc \
 		open_input \
 		open_output \
+
+#		# ** STATUS_FEEDBACK *** #
+
+SRC += $(addprefix $(STATUS_FEEDBACK_DIR),$(STATUS_FEEDBACK_SRC))       
+
+STATUS_FEEDBACK_DIR = $(EXECUTION_DIR)status_feedback/
+STATUS_FEEDBACK_SRC = \
+		get_exit_status \
+		is_signal \
+		print_signal_msg \
 
 # ********** BUILTINS ********** #
 
