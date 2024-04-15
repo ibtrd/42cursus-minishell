@@ -6,21 +6,17 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/15 16:05:03 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/15 16:45:03 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 #include "signals.h"
 
-# include "libft.h"
-
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <signal.h>
-
-# include <stdio.h>
 
 static int	piping(t_executor *exec, int wait, int pipe[2])
 {
@@ -36,30 +32,35 @@ static int	piping(t_executor *exec, int wait, int pipe[2])
 	return (error);
 }
 
+static void	pipe_behaviour(t_executor *exec, t_astnode *node, int wait,
+	int pipe[2])
+{
+	int	ret;
+
+	exec->is_main = 0;
+	if (piping(exec, wait, pipe) == -1)
+		exit(exec_cleanup(exec, 1));
+	signal_setup_pipe();
+	exec->node = node;
+	ret = node_exec(exec);
+	exec_cleanup(exec, 0);
+	if (is_signal(ret))
+	{
+		signal_setup_child();
+		kill(0, get_exit_status(ret) - 128);
+	}
+	exit(ret);
+}
+
 static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 {
 	pid_t	pid;
-	int		ret;
 
 	pid = fork();
 	if (pid == -1)
 		return (1);
 	if (pid == 0)
-	{
-		exec->is_main = 0;
-		if (piping(exec, wait, pipe) == -1)
-			exit(exec_cleanup(exec, 1));
-		signal_setup_pipe();
-		exec->node = node;
-		ret = node_exec(exec);
-		exec_cleanup(exec, 0);
-		if (is_signal(ret))
-		{
-			signal_setup_child();
-			kill(0, get_exit_status(ret) - 128);
-		}
-		exit(ret);
-	}
+		pipe_behaviour(exec, node, wait, pipe);
 	if (!wait)
 	{
 		exec->pid = pid;
@@ -85,10 +86,6 @@ int	branch_pipe(t_executor *exec)
 	ret = pipe_fork(exec, node->right, 1, pipefd);
 	got_a_signal = retrieve_status(exec->pid);
 	if ((is_signal(ret) || got_a_signal) && exec->is_main)
-	{
-		if (g_signal == SIGQUIT)
-			printf(__QUIT);
-		printf("\n");
-	}
+		print_signal_msg();
 	return (ret);
 }

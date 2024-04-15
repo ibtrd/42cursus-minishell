@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/15 15:43:47 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/15 16:45:32 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,6 @@ int	branch_command(t_executor *exec)
 		return (exec_builtins(exec, ret));
 	ret = command_fork(exec);
 	if (is_signal(ret) && exec->is_main)
-	{
-		if (g_signal == SIGQUIT)
-			printf(__QUIT);
-		printf("\n");
-	}
+		print_signal_msg();
 	return (ret);
 }

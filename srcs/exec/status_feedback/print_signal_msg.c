@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   retrieve_status.c                                  :+:      :+:    :+:   */
+/*   print_signal_msg.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 18:32:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/15 16:10:03 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/04/15 16:12:14 by kchillon          #+#    #+#             */
+/*   Updated: 2024/04/15 16:47:06 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
-#include <sys/wait.h>
+#include "minishell.h"
+#include "signals.h"
+#include "libft.h"
 
-int	retrieve_status(pid_t pid)
+#include <signal.h>
+#include <unistd.h>
+
+void	print_signal_msg(void)
 {
-	int	status;
-
-	pid = waitpid(pid, &status, 0); // PROTECT
-	if (pid == -1 && errno != ECHILD)
-		return (1);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	if (WIFSIGNALED(status))
-		return (WTERMSIG(status) + 128 + 0x200);
-	return (1);
+	if (g_signal == SIGQUIT)
+		ft_dprintf(STDERR_FILENO, __QUIT);
+	ft_dprintf(STDERR_FILENO, "\n");
 }

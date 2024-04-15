@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/15 15:39:06 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/15 16:48:48 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int		branch_redirection(t_executor *exec);
 int		exec_builtins(t_executor *exec, int index);
 int		exec_cleanup(t_executor *exec, int ret);
 int		expand_node(t_astnode *node, t_minishell *env);
-int		get_col(void);
 int		get_exit_status(int status);
 int		is_signal(int status);
 int		node_exec(t_executor *exec);
@@ -54,5 +53,6 @@ int		open_input(t_executor *exec);
 int		open_output(t_executor *exec);
 int		retrieve_status(pid_t pid);
 int		search_path(const char *cmd, char **cmd_path, char *path);
+void	print_signal_msg(void);
 
 #endif
