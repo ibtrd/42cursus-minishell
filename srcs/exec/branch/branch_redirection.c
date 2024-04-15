@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/15 17:12:11 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/15 17:16:13 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	branch_redirection(t_executor *exec)
 	}
 	if (!ret)
 		ret = open_redirect(exec, no_expand);
-	free(no_expand); // BUG: no_expand is freed here, but it is used later in open_redirect
+	free(no_expand);
 	if (ret)
 		return (1);
 	node = exec->node;
