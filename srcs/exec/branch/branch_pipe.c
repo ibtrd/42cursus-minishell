@@ -6,12 +6,14 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/14 19:30:25 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/15 15:32:08 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 #include "signals.h"
+
+# include "libft.h"
 
 #include <stdlib.h>
 #include <sys/wait.h>
@@ -46,7 +48,13 @@ static int	pipe_fork(t_executor *exec, t_astnode *node, int wait, int pipe[2])
 		signal_setup_pipe();
 		exec->node = node;
 		ret = node_exec(exec);
-		exit(exec_cleanup(exec, ret));
+		exec_cleanup(exec, 0);
+		if (is_signal(ret))
+		{
+			signal_setup_child();
+			kill(0, get_exit_status(ret) - 128);
+		}
+		exit(ret);
 	}
 	if (!wait)
 	{

@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/14 18:28:38 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/14 22:27:31 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		exec_builtins(t_executor *exec, int index);
 int		exec_cleanup(t_executor *exec, int ret);
 int		expand_node(t_astnode *node, t_minishell *env);
 int		get_col(void);
+int		get_exit_status(int status);
+int		is_signal(int status);
 int		node_exec(t_executor *exec);
 int		open_append(t_executor *exec);
 int		open_heredoc(t_executor *exec);

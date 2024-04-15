@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   retrieve_status.c                                  :+:      :+:    :+:   */
+/*   get_exit_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 18:32:47 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/15 14:50:07 by kchillon         ###   ########lyon.fr   */
+/*   Created: 2024/04/14 22:25:06 by kchillon          #+#    #+#             */
+/*   Updated: 2024/04/15 15:04:17 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
-#include <sys/wait.h>
-
-int	retrieve_status(pid_t pid)
+int	get_exit_status(int status)
 {
-	int	status;
-
-	pid = waitpid(pid, &status, 0);
-	if (pid == -1 && errno != ECHILD)
-		return (1);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	if (WIFSIGNALED(status))
-		return (WTERMSIG(status) + 128 + 0x200);
-	return (1);
+	return (status & 0xFF);
 }

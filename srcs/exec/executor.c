@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:58 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/14 18:38:15 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/15 15:35:20 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,9 @@ int	executor(t_astnode *root, t_minishell *minishell)
 	signal_setup_exec();
 	if (!exec_init(&exec, root, minishell))
 		ret = node_exec(&exec);
-	if (ret == 257)
+	if (ret & 0x100)
 		ret = reopen_std();
-	minishell->sp_params.exit_status = ret;
+	minishell->sp_params.exit_status = get_exit_status(ret);
 	if (ret == -1)
 		minishell->sp_params.exit_status = 1;
 	ret = signal_ouput();

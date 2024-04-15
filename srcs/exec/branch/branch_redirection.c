@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   branch_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:46:22 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/15 14:57:43 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	branch_redirection(t_executor *exec)
 		if (!no_expand)
 			return (1);
 		ret = expand_node(exec->node, exec->minishell);
-		free(no_expand);
+		free(no_expand); // BUG: no_expand is freed here, but it is used later in open_redirect
 		if (ret)
 			return (1);
 	}
