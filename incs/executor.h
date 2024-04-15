@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/14 22:27:31 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/15 15:39:06 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_executor
 	t_astnode	*root;
 	t_vector	infd;
 	t_vector	outfd;
+	int			is_main;
 }	t_executor;
 
 typedef int	(*t_branching)(t_executor *exec);

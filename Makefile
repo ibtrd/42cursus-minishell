@@ -6,7 +6,7 @@
 #    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/15 15:03:48 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/15 16:07:29 by kchillon         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,15 +137,6 @@ BRANCH_SRC = \
 		branch_pipe \
 		branch_redirection \
 
-#		# **** EXIT_STATUS ***** #
-
-SRC += $(addprefix $(EXIT_STATUS_DIR),$(EXIT_STATUS_SRC))       
-
-EXIT_STATUS_DIR = $(EXECUTION_DIR)exit_status/
-EXIT_STATUS_SRC = \
-		get_exit_status \
-		is_signal \
-
 #		# ******** OPEN ******** #
 
 SRC += $(addprefix $(OPEN_DIR),$(OPEN_SRC))
@@ -156,6 +147,15 @@ OPEN_SRC = \
 		open_heredoc \
 		open_input \
 		open_output \
+
+#		# ** STATUS_FEEDBACK *** #
+
+SRC += $(addprefix $(STATUS_FEEDBACK_DIR),$(STATUS_FEEDBACK_SRC))       
+
+STATUS_FEEDBACK_DIR = $(EXECUTION_DIR)status_feedback/
+STATUS_FEEDBACK_SRC = \
+		get_exit_status \
+		is_signal \
 
 # ********** BUILTINS ********** #
 
