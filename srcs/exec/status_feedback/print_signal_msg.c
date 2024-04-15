@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 16:12:14 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/15 16:47:06 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/15 17:40:51 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void	print_signal_msg(void)
 {
 	if (g_signal == SIGQUIT)
 		ft_dprintf(STDERR_FILENO, __QUIT);
-	ft_dprintf(STDERR_FILENO, "\n");
+	else if (g_signal == SIGINT)
+		ft_dprintf(STDERR_FILENO, "\n");
 }
