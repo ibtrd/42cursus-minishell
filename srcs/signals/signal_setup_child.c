@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:54:25 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/14 19:30:12 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/15 18:08:56 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	signal_setup_child(void)
 	sigaction(SIGINT, &act, NULL);
 	sigaction(SIGQUIT, &act, NULL);
 	sigaction(SIGTERM, &act, NULL);
+	sigaction(SIGPIPE, &act, NULL);
 }
