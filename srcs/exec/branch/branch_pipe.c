@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/16 14:31:42 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/16 14:36:03 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ int	branch_pipe(t_executor *exec)
 	ret = pipe_fork(exec, node->right, 1, pipefd);
 	got_a_signal = retrieve_status(exec->pid);
 	if ((is_signal(ret) || got_a_signal) && exec->is_main)
-		print_signal_msg();
+		display_signal_msg();
 	return (ret);
 }
