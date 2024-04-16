@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   branch_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:08:56 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/16 14:31:09 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/16 14:36:03 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static void	pipe_behaviour(t_executor *exec, t_astnode *node, int wait,
 	exec->node = node;
 	ret = node_exec(exec);
 	exec_cleanup(exec, 0);
-	if (is_signal(ret) && ((get_exit_status(ret) == SIGINT)
-			|| (get_exit_status(ret) == SIGQUIT)))
+	if (is_signal(ret) && ((get_exit_status(ret) == SIGINT + 128)
+			|| (get_exit_status(ret) == SIGQUIT + 128)))
 	{
 		signal_setup_child();
 		kill(0, get_exit_status(ret) - 128);
