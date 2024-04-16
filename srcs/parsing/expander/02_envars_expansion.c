@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 01:46:00 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/14 21:00:02 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/16 15:45:38 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "expander.h"
 #include "env.h"
 
-static int	search_envars(t_vector *str, size_t index, t_minishell *env);
+static int	search_envars(t_vector *str, size_t *index, t_minishell *env);
 static char	*get_var_name(t_vector *arg, size_t index);
 static int	expand_var(t_vector *str, size_t index, char *name, char *value);
 static int	var_not_found(t_vector *str, size_t index, char *name);
@@ -31,7 +31,7 @@ int	envars_expansion(t_vector *str, t_minishell *env)
 		mask = ft_vector_get(str, i);
 		if (mask->c == '$' && !(mask->m & (__SQUOTE_MASK | __ENVAR_MASK)))
 		{
-			if (search_envars(str, i, env))
+			if (search_envars(str, &i, env))
 				return (FAILURE);
 		}
 		else
@@ -40,24 +40,24 @@ int	envars_expansion(t_vector *str, t_minishell *env)
 	return (SUCCESS);
 }
 
-static int	search_envars(t_vector *str, size_t index, t_minishell *env)
+static int	search_envars(t_vector *str, size_t *index, t_minishell *env)
 {
 	char	*name;
 	char	*value;
 	t_mask	*mask;
 
-	mask = ft_vector_get(str, index + 1);
+	mask = ft_vector_get(str, *index + 1);
 	if (!mask)
 		return (SUCCESS);
 	if ((!ft_isalpha(mask->c) && mask->c != '_'))
 		return (is_special_param(str, index, mask->c, env));
-	name = get_var_name(str, index);
+	name = get_var_name(str, *index);
 	if (!name)
 		return (FAILURE);
 	value = ft_getenv(&env->env, name);
 	if (!value)
-		return (var_not_found(str, index, name));
-	return (expand_var(str, index, name, value));
+		return (var_not_found(str, *index, name));
+	return (expand_var(str, *index, name, value));
 }
 
 static char	*get_var_name(t_vector *arg, size_t index)
