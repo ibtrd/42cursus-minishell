@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:12:59 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 20:44:24 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/16 15:40:49 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		filemame_expansion(t_vector *args, size_t *index);
 int		quote_removal(t_vector *str);
 
 //ENVARS
-int		is_special_param(t_vector *str, size_t index, char param,
+int		is_special_param(t_vector *str, size_t *index, char param,
 			t_minishell *env);
 
 //WORD_SPLITTING
