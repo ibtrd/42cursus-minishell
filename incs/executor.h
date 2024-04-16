@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:43:52 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/15 16:48:48 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/16 14:31:09 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int		open_input(t_executor *exec);
 int		open_output(t_executor *exec);
 int		retrieve_status(pid_t pid);
 int		search_path(const char *cmd, char **cmd_path, char *path);
-void	print_signal_msg(void);
+void	display_signal_msg(void);
 
 #endif

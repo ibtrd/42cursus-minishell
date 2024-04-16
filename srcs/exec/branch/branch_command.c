@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   branch_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/15 16:45:32 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/16 14:31:09 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,6 @@ int	branch_command(t_executor *exec)
 		return (exec_builtins(exec, ret));
 	ret = command_fork(exec);
 	if (is_signal(ret) && exec->is_main)
-		print_signal_msg();
+		display_signal_msg();
 	return (ret);
 }
