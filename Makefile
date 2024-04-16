@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 22:03:24 by ibertran          #+#    #+#              #
-#    Updated: 2024/04/15 16:49:11 by kchillon         ###   ########lyon.fr    #
+#    Updated: 2024/04/16 14:30:22 by ibertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,6 @@ SRC += $(addprefix $(AST_DIR),$(AST_SRC))
 AST_DIR = ast/
 AST_SRC = \
 	ast_utils \
-	ast_print \
 	ast_addnode \
 	ast_addnode_utils \
 
@@ -155,7 +154,7 @@ STATUS_FEEDBACK_DIR = $(EXECUTION_DIR)status_feedback/
 STATUS_FEEDBACK_SRC = \
 		get_exit_status \
 		is_signal \
-		print_signal_msg \
+		display_signal_msg \
 
 # ********** BUILTINS ********** #
 

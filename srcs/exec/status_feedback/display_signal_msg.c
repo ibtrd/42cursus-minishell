@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_signal_msg.c                                 :+:      :+:    :+:   */
+/*   display_signal_msg.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 16:12:14 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/15 17:40:51 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/16 14:32:10 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-void	print_signal_msg(void)
+void	display_signal_msg(void)
 {
 	if (g_signal == SIGQUIT)
 		ft_dprintf(STDERR_FILENO, __QUIT);
