@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:30:07 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/16 15:00:59 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/16 15:08:01 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include "minishelldef.h"
 #include "parsing.h"
 #include "prompt.h"
-#include "signals.h"
 
 static int	build_heredoc(t_vector **args);
 static int	read_heredoc(t_vector *buffer, char *delimiter);
@@ -28,7 +27,7 @@ static int	set_config(t_vector *arg, char **delimiter);
 	DESCRIPTION
 	The create_here_documents() traverses the tree pointed to by root,
 	for each node of _HEREDOC type encoutered, it replaces the args vector
-	for a new one build from the content of consecutive readline() calls
+	for a new one built from the content of consecutive readline() calls
 	up until a string equal to the here document delimiter or an end-of-file
 	is encountered.
 	
