@@ -6,13 +6,15 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:17:51 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/07 19:41:41 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/19 23:30:32 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "env.h"
+#include "minishelldef.h"
 
 static int	get_shlvl(t_vector *env)
 {
@@ -23,8 +25,13 @@ static int	get_shlvl(t_vector *env)
 	if (!shlvl)
 		return (0);
 	shlvl_int = ft_atoi(shlvl);
-	if (shlvl_int <= 0 || shlvl_int + 1 >= __MAX_SHLVL)
+	if (shlvl_int <= 0)
 		return (0);
+	if (shlvl_int + 1 >= __MAX_SHLVL)
+	{
+		ft_dprintf(STDERR_FILENO, __HIGH_SHLVL, __MINISHELL, shlvl_int + 1);
+		return (0);
+	}
 	return (shlvl_int);
 }
 
