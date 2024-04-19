@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/16 14:31:09 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/19 15:14:40 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ static int	is_dir(char *path)
 
 	if (stat(path, &buf))
 	{
-		ft_dprintf(STDERR_FILENO, __ERR,
-			__MINISHELL, path, strerror(errno));
+		ft_dprintf(STDERR_FILENO, __ERR, __MINISHELL, path, strerror(errno));
 		free(path);
 		return (1);
 	}
