@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:00:32 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:16:24 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/19 14:50:44 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	builtin_echo(t_executor *exec, char **argv)
 	if (!argv)
 		return (1);
 	options = 0;
-	while (*argv && **argv == '-')
+	while (*argv && **argv == '-' && *(*argv + 1))
 	{
 		if (check_option((*argv) + 1, &options, "n"))
 			break ;
