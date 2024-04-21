@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:20:50 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 18:51:39 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/21 22:11:58 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	expand_node(t_astnode *node, t_minishell *env)
 
 	if (node->type == _HEREDOC)
 		return (SUCCESS);
+	g_signal = 0;
 	i = 0;
 	while (i < node->args->total)
 	{
@@ -53,5 +54,5 @@ static int	expand_string(t_vector *args, size_t *index, t_minishell *env)
 		return (status == FAILURE);
 	if (quote_removal(str))
 		return (FAILURE);
-	return (SUCCESS);
+	return (g_signal != 0);
 }

@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:01:09 by kchillon          #+#    #+#             */
-/*   Updated: 2024/04/16 14:31:09 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/21 22:09:03 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,14 @@ int	branch_command(t_executor *exec)
 	};
 
 	if (expand_node(exec->node, exec->minishell))
+	{
+		if (g_signal)
+		{
+			ft_dprintf(STDERR_FILENO, "\n");
+			return (128 + g_signal);
+		}
 		return (1);
+	}
 	if (exec->node->args->total == 1)
 		return (0);
 	ret = ft_str_in_array(*(char **)exec->node->args->ptr, builtins);

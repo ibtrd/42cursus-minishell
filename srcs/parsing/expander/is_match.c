@@ -6,10 +6,11 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 11:41:42 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 19:11:29 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/21 22:12:13 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
 #include <stdlib.h>
 
 #include "expander.h"
@@ -49,6 +50,8 @@ int	is_match_dir(char *str, t_mask *pat, t_vector *matches)
 
 static int	cmp_pattern(char *str, t_mask *pat, size_t si, size_t pi)
 {
+	if (g_signal)
+		return (NO_MATCH);
 	if (!str[si] && !pat[pi].c)
 		return (MATCH);
 	if (pat[pi].c && ft_ischarset(pat[pi].c, __QUOTES))
