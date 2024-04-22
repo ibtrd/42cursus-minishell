@@ -66,7 +66,7 @@ void	*ft_vector_get(t_vector *v, size_t index);
 void	*ft_vector_search(t_vector *v, const void *item);
 int		ft_vector_sort(t_vector *v, int (*cmp)(void *, void *));
 
-// UTILITY
+//UTILITY
 void	ft_vclose(void **var);
 void	ft_vfree(void **var);
 void	ft_vvector_free(void	**ptr);
@@ -81,4 +81,4 @@ int		ft_vector_printi(t_vector *v, void (*print)(void *, size_t), char *msg);
 int		ft_vector_print(t_vector *v, void (*print)(void *, size_t), char *msg);
 int		ft_vector_printv(t_vector *v, void (*print)(void *, size_t), char *msg);
 
-#endif
+#endif //FT_VECTOR_H
