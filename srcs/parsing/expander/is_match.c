@@ -56,7 +56,7 @@ static int	cmp_pattern(char *str, t_mask *pat, size_t si, size_t pi)
 	if (pat[pi].c && is_wildcard(pat + pi, '*'))
 	{
 		if (cmp_pattern(str, pat, si, pi + 1))
-			return (MATCH); 
+			return (MATCH);
 		if (str[si])
 			return (cmp_pattern(str, pat, si + 1, pi));
 	}
