@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 23:08:15 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 19:24:44 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/19 19:00:12 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@
 
 int	opendir_error(char *dirname)
 {
-	ft_dprintf(STDERR_FILENO, __ERR,
-		__MINISHELL,
-		dirname,
-		strerror(errno));
+	ft_dprintf(STDERR_FILENO, __ERR,__MINISHELL, dirname, strerror(errno));
 	return (FAILURE);
 }
 
