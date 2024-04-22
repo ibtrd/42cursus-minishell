@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_match.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 11:41:42 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/22 17:44:40 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/22 17:52:10 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,12 @@ static int	cmp_pattern(char *str, t_mask *pat, size_t si, size_t pi)
 {
 	if (!str[si] && !pat[pi].c)
 		return (MATCH);
-	while (pat[pi].c && is_wildcard(pat + pi, '*')
-		&& is_wildcard(pat + pi + 1, '*'))
-		pi++;
 	if (pat[pi].c && ft_ischarset(pat[pi].c, __QUOTES))
 		return (cmp_pattern(str, pat, si, pi + 1));
 	if (pat[pi].c && is_wildcard(pat + pi, '*'))
 	{
+		while (is_wildcard(pat + pi + 1, '*'))
+			pi++;
 		if (cmp_pattern(str, pat, si, pi + 1))
 			return (MATCH);
 		if (str[si])
