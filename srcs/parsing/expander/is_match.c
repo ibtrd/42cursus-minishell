@@ -6,7 +6,7 @@
 /*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 11:41:42 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/07 19:11:29 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/19 18:57:47 by ibertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	cmp_pattern(char *str, t_mask *pat, size_t si, size_t pi)
 
 static int	is_wildcard(t_mask *mask, char wildcard)
 {
-	return (mask->c == wildcard && !mask->m);
+	return (mask->c == wildcard && !(mask->m & __DQUOTE_MASK & __SQUOTE_MASK));
 }
 
 static int	add_match(char *file, t_vector *matches)
