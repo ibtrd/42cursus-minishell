@@ -6,7 +6,7 @@
 /*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 11:41:42 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/22 17:39:31 by kchillon         ###   ########lyon.fr   */
+/*   Updated: 2024/04/22 17:44:40 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	is_match_dir(char *str, t_mask *pat, t_vector *matches)
 
 static int	cmp_pattern(char *str, t_mask *pat, size_t si, size_t pi)
 {
-
 	if (!str[si] && !pat[pi].c)
 		return (MATCH);
 	while (pat[pi].c && is_wildcard(pat + pi, '*')
