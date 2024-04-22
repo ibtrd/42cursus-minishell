@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   is_match.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibertran <ibertran@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: kchillon <kchillon@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 11:41:42 by ibertran          #+#    #+#             */
-/*   Updated: 2024/04/19 18:57:47 by ibertran         ###   ########lyon.fr   */
+/*   Updated: 2024/04/22 17:39:31 by kchillon         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
 #include <stdlib.h>
 
 #include "expander.h"
@@ -49,8 +50,12 @@ int	is_match_dir(char *str, t_mask *pat, t_vector *matches)
 
 static int	cmp_pattern(char *str, t_mask *pat, size_t si, size_t pi)
 {
+
 	if (!str[si] && !pat[pi].c)
 		return (MATCH);
+	while (pat[pi].c && is_wildcard(pat + pi, '*')
+		&& is_wildcard(pat + pi + 1, '*'))
+		pi++;
 	if (pat[pi].c && ft_ischarset(pat[pi].c, __QUOTES))
 		return (cmp_pattern(str, pat, si, pi + 1));
 	if (pat[pi].c && is_wildcard(pat + pi, '*'))
